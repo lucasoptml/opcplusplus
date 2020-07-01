@@ -1,0 +1,60 @@
+%% ******************************************
+%% MANUAL
+%%
+%% Author:  Kevin Depue && Lucas Ellis (2007)
+%% Purpose: opCPP Manual - base .tex file
+%% ******************************************
+
+%% DOCUMENT CLASS
+\documentclass[12pt,letterpaper,oneside,fancyhdr]{book}
+
+\usepackage{opcpp}
+
+\begin{document}
+
+%% TITLE
+\input{title.tex}
+\clearpage
+\pagebreak
+
+%% TABLE OF CONTENTS
+\tableofcontents
+\clearpage
+\pagebreak
+
+%% INTRODUCTION
+\input{introduction.tex}
+\clearpage
+\pagebreak
+
+%% CONCEPTS
+\input{concepts.tex}
+\clearpage
+\pagebreak
+
+%% opC++ LANGUAGE
+\input{std_dialect.tex}
+\clearpage
+\pagebreak
+
+%% REFLECTION
+\input{reflection.tex}
+\clearpage
+\pagebreak
+
+%% SERIALIZATION
+\input{serialization.tex}
+\clearpage
+\pagebreak
+
+%% A NEW PREPROCESSOR
+\input{preprocessor.tex}
+\clearpage
+\pagebreak
+
+%% BIBLIOGRAPHY
+\addcontentsline{toc}{chapter}{References}
+\bibliographystyle{plain}
+\bibliography{manual}
+
+\end{document}

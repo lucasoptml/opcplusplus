@@ -1,0 +1,478 @@
+
+
+
+
+opclass TestClass3// : public Actor, virtual private Wooho
+{
+	//visibility labels
+public:
+private:
+protected:
+	
+	version(1.0) int health;
+
+	TestClass3() 
+	{
+		//constructor
+	};
+	
+	TestClass3() : init(1)
+	{
+		//with initializer
+	}
+	
+	~TestClass3()
+	{
+
+	}
+
+	//constructor prototype
+	//TestClass3(int a);
+	
+	//scoped data statement
+	A::B::c x;
+	
+	//friend statement
+	friend Girth;
+	
+	//typedef statement
+	typedef aa[5] name;
+
+	typedef booga::boo[5] name;
+	
+	//opstatic statements (w/ modifiers)
+//	opstatic const float yeehaw;
+//	opstatic int x = woot;
+	
+	//visibility modifier, function pointer statement
+	
+	//pointer data statement
+	Actor* blah;
+	
+	//template data statement
+	Actor<bleh> bleh;
+	
+private:
+	
+	//modified data statement
+	native Actor<bleh>* blergh;
+	
+	//modified data statement
+	protected const transient static Actor* const testconst;
+	
+	//reference data statement
+	Actor& reference;
+	
+	//array data statement
+	public const int singlearray[5];
+	
+	//multi dimensional array data statement
+	INT multiarray[5] [5];
+	
+	//function prototype
+	void explode(float x);
+	
+	//inline modified function prototype
+	inline static void explode(float x) const;
+	
+	//modified function prototype
+	void explode2(float x) const;
+	
+	//modified function definition
+	uninline static inline void implode(float debris)
+	{
+		//definition
+	}
+	
+	//modified function definition with default argument
+	static void blowup(float radius, float boom = 1337)
+	{
+		if(radius > 1.0)
+		{	
+			return;
+		}
+		
+		float value = radius * 15.0;
+		implode(value);
+	}
+		
+	//delegate modified function definition
+	void OnClicked()
+	{
+		MeWasClicked();
+	}
+	
+	//cast operator definition
+	//NOTE: not sure about the return type??
+	inline private void operator RefCast& () {};
+	
+	//operator prototypes
+	void operator * ();
+	void operator % ();
+	void operator ->* ();
+	void operator [] ();
+	void operator () ();
+	
+};
+
+
+opclass opTestActor : public Actor
+{
+public:
+
+	opstruct hhh
+	{
+		float a;
+		float b;
+	};
+
+	openum blah
+	{
+		woot
+	}
+
+	opclass woot
+	{
+		int a;
+	}
+
+	float* c;
+	float** x;
+};
+
+opdefine Hello(name)
+{
+	void Render()
+	{
+
+	}
+}
+
+opdefine There
+{
+	int x;
+}
+
+opdefine DEFAULT_COLOR
+{
+	BLUE
+}
+
+openum Colors
+{
+	RED,
+};
+
+opclass X 
+{
+}
+
+opmacro Man(type, name)
+{
+	opdefine type##_##name
+	{
+		x = 4;
+	}
+}
+
+expand Man(OPCLASS,NATIVE)
+
+opmacro build_dialect_option(option_name,option_args,body) /**** hello ***/
+{
+ 	opmacro option_name option_args
+	{	
+		body
+	}
+
+	opdefine option_name option_args
+	{
+		body
+	}
+}
+
+opmacro dialect_macro_body
+{
+	dialect_macro_body here
+	woot woot
+	end
+}
+
+expand build_dialect_option(DIALECT_MACRO,(scopednamething,namething), expand dialect_macro_body)
+
+expand DIALECT_MACRO(foo::bar,this_is_a_variable)
+
+//opinclude "Oh/good.oh"
+
+//expand default_dialect(OPCLASS)
+
+// some decimals
+3.
+3.0
+3.f
+3.F
+3.0f
+3.0F
+3.l
+3.L
+3.0l
+3.0F
+
+// some exponentials
+3e40
+3.e40
+3.0e40
+
+// some signed exponentials
+3e+40
+3.e+40
+3.0e+40
+3e-40
+3.e-40
+3.0e-40
+
+// some exponentials (big E)
+3E40
+3.E40
+3.0E40
+
+// some signed exponentials (big E)
+3E+40
+3.E+40
+3.0E+40
+3E-40
+3.E-40
+3.0E-40
+
+// wide strings
+L"this is a wide string"
+
+// ISO standard basic types
+int
+short
+void
+long
+char
+bool
+long long
+double
+long double
+wchar_t
+
+// microsoft additional basic types
+__int8
+__int16
+__int32
+__int64
+__wchar_t
+
+// signed/unsigned
+opclass SignedUnsignedTest
+{
+	// signed - all valid
+	signed char    a;
+	signed short   b;
+	signed long    c;
+	signed int     d;
+	signed __int8  e;
+	signed __int16 f;
+	signed __int32 g;
+	signed __int64 h;
+
+	// unsigned - all valid
+	unsigned char    a;
+	unsigned short   b;
+	unsigned long    c;
+	unsigned int     d;
+	unsigned __int8  e;
+	unsigned __int16 f;
+	unsigned __int32 g;
+	unsigned __int64 h;
+
+	unsigned long Function(unsigned short x)
+	{
+		return 1;
+	}
+
+	/*unsigned short Hello(signed Actor girth)
+	{
+
+	}*/
+
+	// invalid 
+	/*signed bool      a;
+	signed float     b;
+	signed double    c;
+	signed wchar_t   d;
+	signed void      e;
+	signed __wchar_t f;
+
+	signed   Actor     blah;
+	unsigned LameActor blahgirth;*/
+}
+
+// hexadecimals
+0x123456789
+0xabcdef
+0xABCDEF
+
+0X123456789
+0Xabcdef
+0XABCDEF
+
+// T_NUMBER + integer suffix
+3000u
+3000l
+3000ul
+3000lu
+3000U
+3000L
+3000UL
+3000LU
+3000uL
+3000Ul
+3000lU
+3000Lu
+3000LL
+3000ll
+3000i64
+3000ui64
+3000ull
+3000uLL
+3000Ull
+3000ULL
+
+// T_HEXADECIMAL + integer suffix
+0x0ABFEE4u
+0x0ABFEE4l
+0x0ABFEE4ul
+0x0ABFEE4lu
+0x0ABFEE4U
+0x0ABFEE4L
+0x0ABFEE4UL
+0x0ABFEE4LU
+0x0ABFEE4uL
+0x0ABFEE4Ul
+0x0ABFEE4lU
+0x0ABFEE4Lu
+0x0ABFEE4LL
+0x0ABFEE4ll
+0x0ABFEE4i64
+0x0ABFEE4ui64
+0x0ABFEE4ull
+0x0ABFEE4uLL
+0x0ABFEE4Ull
+0x0ABFEE4ULL
+
+namespace opcpp {}
+
+//severe bugs below:
+opclass A
+{
+	int *a;
+};
+
+opclass A
+{
+//	long
+};
+
+//opclass #define WOOBLE(a, b) (a + b + 2 * a + 2 * b) / (a - b)
+
+/*opclass #define FRIN(x, y)	\
+	girth.frin = splig;		\
+	girth.garp = splig;		\
+	girth.brob = WOOBLE;*/
+
+opclass B
+{
+	int x;
+	friend ostream& operator << (ostream& o, const B& b);
+
+	void Frin()
+	{
+
+	}
+};
+
+using namespace std::wee;
+using A::B;
+
+opclass C
+{
+	int* a;
+	int** a;
+	int * const a;
+	int * volatile * const a;
+	volatile int a;
+	const int a;
+	public mutable int a;
+	private mutable int a;
+	
+	static int bit:1 = 1000;
+
+	virtual void A() = NULL;
+	
+	::B wee;
+
+	~C()
+	{
+
+	}
+
+	virtual ~C()
+	{
+
+	}
+	
+	using B::C;
+	
+	int A::* ptr_to_member;
+
+	int (* blah)();
+
+	int (A::* blah)();
+
+}
+
+namespace opcpp
+{
+	namespace blah
+	{
+		opclass Apple
+		{
+			version(1) int a;
+		};
+	}
+}
+
+namespace opcppblah = opcpp::blah;
+
+opclass G
+{
+	friend class WOob;
+	using std::cout;
+
+//	version(|) int x;
+	//const volatile int no_cv;
+
+	int m_counter;
+
+	//int a = 1;
+};
+
+//using namespace Frin::WOOBLE::Garp::Mung::Flarg::Fark::Spluzicle
+
+//using namespace opclass Frin {};
+
+//opclass #define frin 34234234
+
+openum Colors
+{
+	A = 1 + 1,
+	B,
+};
+
+myenum wee
+{
+	a,
+};

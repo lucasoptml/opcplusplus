@@ -1,0 +1,157 @@
+%% *********
+%% MODIFIERS
+%% *********
+
+% modifiers
+\chapter{Modifiers}
+\label{chap:modifiers}
+
+Modifiers are new keywords that can appear in front of data members and functions inside {\tt opobject}s (see Section \ref{sec:opobject}).  Modifiers imply that code is generated for them - however by default they do not generate any code on their own.  There are a number of built in modifiers which serve some special purpose - generally they imply special transformations by the compiler.  Modifiers are not a free form type of meta-data like run-time attributes.  Instead, they are strictly checked for correctness and only enabled by dialects.
+
+%% DATA MODIFIERS
+\section{Data Modifiers}
+
+Data modifiers are keywords on the front of a data member declaration.  They imply that code should be mapped to a particular variable.  The underlying meaning of modifiers is dependant upon the dialect used.  Multiple modifiers may be applied to a single data member, though applying duplicate modifiers to a single variable results in an error.  The meaning of modifiers may also be dependent upon the opobject category type and dialect.  Figure \ref{fig:datamodifier1} shows an \opcppK{opclass} that uses all of the data modifiers introduced in this section.
+
+% fig:datamodifier1
+\begin{opcpp}[label={fig:datamodifier1},caption={An \opcppK{opclass} that uses all the data modifiers introduced in this section.}]
+// An opclass with data modifiers.
+opclass SomeClass
+{
+	// Here, x is protected and native.
+	protected native int x;
+
+	// Here, y is public and transient.
+	public transient int y;
+
+	// Here, z is private, serialized and mapped.
+	private int z;
+};
+\end{opcpp}
+
+\subsection{{\tt native}}
+
+The \opcppK{native} data modifier implies that the data member is not mapped and not serialized.  The exact underlying meaning of mapped and serialized is dependant on the dialect.  Generally, the reason you want a mapped variable is for reflection, while serialized variables are a smaller subset - e.g., writing variables to a file or network stream.  Though declaring a variable \opcppK{native} means that it is not mapped or serialized, you may still link code to \opcppK{native} variables.  You may also disable the \opcppK{native} modifier; this is covered in Section \ref{}.  
+
+\subsection{{\tt transient}}
+
+The \opcppK{transient} data modifier implies that the data member is mapped but not serialized.  You may disable the \opcppK{transient} modifier; this is covered in Section \ref{}.
+
+\subsection{no modifier}
+
+When a data member is declared without a native or transient modifier, it is mapped and serialized.
+
+\subsection{user-defined modifiers}
+
+The real advantage of data modifiers comes from user-defined modifiers.  This makes them similar to attributes in other languages, except the exact context for a modifier must be valid, and they imply behavior at compile time.  The validation aspect of modifiers and modifier combinations will be explored in the future.  The method to enable user defined data modifiers is covered in Section \ref{}.  Figure \ref{fig:datamodifier2} shows some possible user-defined data modifiers within an \opcppK{opclass}.
+
+% fig:datamodifier2
+\begin{opcpp}[label={fig:datamodifier2},caption={Some possible user-defined data modifiers.}]
+// An opclass definition.
+opclass ClassName
+{
+	// User-defined modifiers (reliable, unreliable,
+	// server, client).
+	reliable server float health;
+	unreliable client string message;
+};
+
+// An opstruct definition.
+opstruct StructName
+{
+	// User-defined modifier (compressed).
+	float x;
+	float y;
+	compressed float z; 
+}
+
+\end{opcpp}
+
+%% FUNCTION MODIFIERS
+\section{Function Modifiers}
+
+Function modifiers are a concept similar to data modifiers.  They are in the form of keywords on the front of member function declarations and definitions.  While not so useful for serialization, they may be useful for instrumenting code or for providing reflection meta-data about functions.
+
+\subsection{{\tt delegate}}
+
+The \opcppK{delegate} modifier is a special modifier handled in \opCPP.  It allows you to generate code for a delegate handler, while linking a default function definition to the handler.  The \opcppK{delegate} modifier is only valid on function definitions, and not prototypes.  Figure \ref{fig:delegate1} shows an example of this.
+
+% fig:delegate1
+\begin{opcpp}[label={fig:delegate1},caption={the delegate function modifier in \opCPP.}]
+// An opclass definition.
+opclass ClassName
+{
+	// A delegate definition.
+	delegate void onclick()
+	{
+		// do default click stuff
+	}
+};
+\end{opcpp}
+
+\subsection{{\tt inline}, {\tt uninline}}
+
+Function inlining in \opCPP\ is slightly different than in normal \cpp.  In major \cpp\ compilers, member functions declared in headers are inlined by default, or else the \opcppK{inline} keyword can be used to indicate this.  In \opCPP\ you can also \opcppK{uninline} functions, which removes them from the headers and places them in a single source compilation unit.  In \opCPP, the default is to \opcppK{uninline} functions, meaning major compilers will generally not \opcppK{inline} the functions.  The reasoning behind this is that functions should only be inlined when a profiler tells you to - this is common \cpp\ advice to prevent code bloat.  This behavior can be switched back to the \cpp\ defaults while preserving the \opcppK{uninline} keyword via a command-line option.  Figure \ref{fig:inline1} shows an example of using the \opcppK{inline} and \opcppK{uninline} keywords.
+
+% fig:inline1
+\begin{opcpp}[label={fig:inline1},caption={Using the \opcppK{inline} and \opcppK{uninline} keywords in \opCPP.}]
+// An opclass definition.
+opclass ClassName
+{
+	// An inline function definition.
+	inline float squared(float x)
+	{
+		return x * x;
+	}
+
+	// An uninlined function definition.
+	uninline float squaredsquared(float x)
+	{
+		return squared(squared(x));
+	}
+
+	// Uninlined by default!
+	void function()
+	{
+		// do stuff
+	}
+};
+\end{opcpp}
+
+\pagebreak
+
+\subsection{{\tt user defined}}
+
+You can also create and use user-defined function modifiers in \opCPP.  While less useful than data modifiers, they can provide instrumentation and reflection for binding other languages to function calls.  Figure \ref{fig:userfunctionmodifiers1} shows a possible user-defined function modifier in \opCPP.
+
+% fig:functionmodifiers1
+\begin{opcpp}[label={fig:userfunctionmodifiers1},caption={User-defined function modifiers in \opCPP.}]
+// An opclass definition.
+opclass ClassName
+{
+	// Here a user defined modifier is used (event).
+	event void incoming(string message);
+
+	// You can mix C++ and opC++ modifiers together.
+	static native void outgoing(string message);
+};
+\end{opcpp}
+
+%% OTHER MODIFIERS
+\section{Other Modifiers}
+
+\subsection{{\tt public}, {\tt private}, {\tt protected}}
+
+Some of the most useful modifiers are the visibility modifiers \opcppK{public}, \opcppK{private} and \opcppK{protected}.  These can be applied to both functions and data members in opobjects.  They do the same thing as the normal \cpp\ visibility labels, but only apply to a single member at a time.  They are aware of the default visibility and can be used together with normal \cpp\ visibility labels.  Figure \ref{fig:vismodifiers1} shows an example of this.
+
+% fig:vismodifiers1
+\begin{opcpp}[label={fig:vismodifiers1},caption={Visibility modifiers \opcppK{public}, \opcppK{private} and \opcppK{protected} in \opCPP.}]
+// An opclass definition.
+opclass ClassName
+{
+private:
+	public    int publicmember;
+	protected int protectedmember;
+	          int privatemember;
+};
+\end{opcpp}

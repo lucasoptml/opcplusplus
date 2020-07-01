@@ -1,0 +1,435 @@
+
+//
+// Actor Class Flag Definitions
+//
+
+//Base class flags
+
+typedef bool (Actor::*ActorMessageFcn)( Actor*, float& );
+typedef void (Actor::*APropagateMessageFcn)( Actor*, float, bool (Actor::*InFcn)(Actor*,float&) );
+
+//
+// Actor Class
+//
+
+#define MAP_ACTOR(varname) MAP_CONTENT(varname)
+
+#define DECLARE_ACTORCLASS(InClass,InSuperClass) \
+	DECLARE_CLASS(InClass,InSuperClass);
+
+DECLARE_CONTENT_TYPE(GAME_API,Actor,PuzzleEngine);
+
+ALIGNCLASS class GAME_API Actor : public ActorContentType, public SoundSupport
+{
+public:
+	DECLARE_ACTORCLASS(Actor,ActorContentType);
+
+	Level* Level;
+
+	//Actor Data
+	float DrawScale;
+	opFloatColor DrawColor;
+	
+#ifndef USE_SPRITES
+	opRef<opMesh> Mesh;			//mesh content
+	opRef<opMaterial> Texture;	//mesh texture
+#endif
+
+#ifdef USE_SPRITES
+//	union
+//	{
+//		opRef<opMaterial> Sprite; //wish I could do this
+		opRef<opMaterial> Texture;
+//	};
+
+	float SpriteRotation; //in radians
+#endif
+
+#ifdef USE_MESHES
+	bool bRenderSprite;	//allow usage of sprites in mesh builds via this
+#endif
+
+	void SetLocation(const opVector& InLoc);
+
+	opVector GetLocation()
+	{
+		return Location;
+	}
+
+	void UpdateVisualOffset();
+
+	void SetVisualLocation(const opVector& InLoc)
+	{
+		if(InLoc != Location)
+		{	
+			bLocationRotationChanged = true;
+			Location = InLoc;
+		}
+	}
+
+	void SetRotation(const opQuat& InRot)
+	{
+		Rotation = InRot;
+		bLocationRotationChanged = true;
+	}
+
+	void AddForce(opVector& inforce)
+	{
+		if(Mass)
+			AddVelocity(inforce/Mass);
+	}
+
+	opQuat GetRotation()
+	{
+		return Rotation;
+	}
+
+	// Kevin: added this..
+	void SetCollisionRadius(float fCollisionRadius);
+
+	bool GetHidden()
+	{ 
+		return bHidden; 
+	}
+
+	void SetHidden(bool bHIDDEN)
+	{ 
+		bHidden = bHIDDEN; 
+	}
+
+private:
+	opVector Location;
+	opQuat Rotation;
+
+	bool bLocationRotationChanged;
+	opMatrix ToWorldMx;
+public:
+	//TODO: protect location and rotation & cache matrix changes
+	//set a flag, if flagged, re-calc on pre-render
+
+	//visual changes..(purely visual)
+	opVector VisualOffset;
+	opQuat VisualRotation;
+	opMatrix VisualOffsetMx;
+	bool bUseVisualOffsetMx;
+
+	//Rotation somehow (Quat probably)
+	//OldRotation if above
+	//Matrix probably (can check oldlocation/location etc to verify
+
+	float Mass;
+	float CollisionRadius;
+	float Restitution;
+	
+	opArray<opLight*> Lights;
+
+	virtual void Cleanup();
+	virtual void Destroy();
+
+	virtual void Initialize()
+	{
+		//Initialize this class in C++ for speed
+		Mass = 1.0f;
+		CollisionRadius = 1.0f;
+		Restitution = 1.0f;
+		DrawScale = 1.0f;
+
+		//effect defaults
+		EffectBind = INDEX_NONE;
+		DrawColor = opFloatColor(1,1,1,1);
+
+		bLocationRotationChanged = true;
+		bHidden = false;
+	}
+
+	virtual void Created();
+
+	void VerifyOwned();
+
+	//serialize all data
+	virtual void Serialize(opArchiver& Ar);
+
+	//load a actor reference
+	static void LoadSerialize(opArchiver& Ar, const char* InName, Actor** Reference);
+
+	//Rendering
+	virtual void Render(opRenderer* Renderer);
+
+	//NOTE: should use GetRenderBoundingSphere() when at all possible!
+	//	 	sphere doesn't require transforms, though may be less accurate
+	virtual bool GetRenderBoundingBox(opBox&);
+	//virtual opSphere GetRenderBoundingSphere();
+
+	//Actor was offscreen & not rendered
+	virtual void Offscreen()
+	{
+	}
+
+	virtual bool IsSolid()
+	{
+		if(DrawColor.A < 1.f)
+			return false;
+
+		if(!Texture->IsSolid())
+			return false;
+
+		return true;
+	}
+	virtual bool IsTransparent()
+	{
+		return !IsSolid();
+	}
+
+	opMaterial* GetMaterial()
+	{
+		return Texture;
+	}
+
+	//AI related
+	opRotation GetFacingRotation(const opVector& loc);
+
+
+	//Updating
+	virtual void Tick(float deltatime);
+
+	virtual void PreLevel();//pre level load & actor property load
+	virtual void InLevel();
+
+	//Collision Events
+	virtual void Collided(Collider& MyCollider, Collider* Other) {}
+	virtual void HitWall(Collider& MyCollider, const opVector& HitNormal) {}
+
+	void SetColliderFlags(DWORD InFlags);
+	void SetPhysicsFlags(DWORD InFlags);
+	void SetColliderRestitution(float InR);
+	void MultiplyColliderRadius(float InM);
+
+	//Override Collision?
+	virtual bool Collide( Collider* MyCollider, Collider* Other ) {return false;}
+
+	opArray<Collider*> Colliders;
+
+	//default collider accessor
+	Collider* GetCollider()
+	{ 
+		if(Colliders.Num())	
+			return Colliders(0); 
+		return NULL;
+	}
+	void SetVelocity(const opVector& InVel);
+	void AddVelocity(const opVector& InVel);
+	opVector GetVelocity();
+
+	virtual void SetMass(float newmass);
+
+	//get orientation
+	inline const opMatrix& ToWorldMatrix();
+	inline opMatrix ToLocalMatrix();
+
+	//Utilities
+	//Debug Rendering
+	static void RenderColliders(opRenderer* Renderer, const opArray<Collider*>& InColliders);
+	static void RenderBounds(opRenderer* Renderer,const opArray<Actor*>& InActors);
+
+
+	//Actor Creation
+	void AddActor(Actor* InActor) { Level->AddActor(InActor); }
+	Actor* AddActor(const char* classname, const opVector& InLocation = opVector(0,0,0))
+	{ 
+		return Level->AddActor(classname,InLocation);
+	}
+
+	//Owner
+	virtual void TickOwned(float deltatime);
+	virtual void CollideOwned(float deltatime);
+	Actor* GetOwner() { return Owner; }
+	int GetOwnedNum() { return Owned.Num(); }
+	void SetOwner(Actor* NewOwner);
+	void DestroyOwned();
+
+	void CollideOwnedUpdate(float deltatime, const opVector& gravity, float dampfactor);
+	void CollideOwnedWithin(float sphereRadius);
+	void CollideOwnedTogether();
+	void CollideOwnedWithin(const opBox& insidebox);
+
+	// kevin: added
+	Actor* GetOwned(int iIndex) { return Owned(iIndex); }
+
+	//actor messages
+	void ActorMessage( Actor* Originator, float Value, ActorMessageFcn MessageFcn, APropagateMessageFcn PropagateFcn);
+	void RadiusPropagate( Actor* Originator, float Value, ActorMessageFcn MessageFcn);
+
+	void ApplyRotationRate(const opQuat& r, float deltatime);
+
+	static int NewBalloonMessage()
+	{
+		return ++AMessageId;
+	}
+
+	static int GetBalloonMessageId()
+	{
+		return AMessageId;
+	}
+
+	int GetLastMessageId()
+	{
+		return ALastMessage;
+	}
+
+	bool IsDestroyed() { return bDestroyed; }
+
+	//sound support
+	virtual void GetSoundPosition(opVector& InPosition, opVector& InVelocity);
+
+	//effect support
+	void SetEffect(opEffect* neweffect)
+	{
+		DrawEffect = neweffect;
+		if(neweffect)
+			EffectBind = DrawEffect->BindClass(this);
+		else
+			EffectBind = INDEX_NONE;
+	}
+
+	opEffect* GetEffect()
+	{
+		return DrawEffect;
+	}
+
+	EffectBinding GetEffectBind()
+	{
+		return EffectBind;
+	}
+	
+	EffectBinding& GetEffectBindRef()
+	{
+		return EffectBind;
+	}
+
+protected:
+	bool bHidden;
+
+private:
+	//effect support
+	opEffect* DrawEffect;
+	EffectBinding EffectBind;
+
+	//message data
+	int ALastMessage;
+	static int AMessageId;
+
+	bool bDestroyed;
+	
+	Actor* Owner;
+	opArray<Actor*> Owned;
+};
+
+inline opRotation Actor::GetFacingRotation(const opVector& loc)
+{
+	//this function is bad in general.
+	return ((loc - Location).Normal()).Rotation();
+}
+
+inline const opMatrix& Actor::ToWorldMatrix()
+{
+	if(bLocationRotationChanged)
+		ToWorldMx = opMatrix(Rotation) * opMatrixScaling(DrawScale,DrawScale,DrawScale) * opMatrixTranslation(Location);
+	return ToWorldMx;
+}
+
+inline opMatrix Actor::ToLocalMatrix()
+{
+	return ToWorldMatrix().Inverse();
+}
+
+enum MoverAnimType
+{
+	Once = 0,
+	Loop,
+	Repeat
+};
+
+struct GAME_API MoverKeyFrame
+{
+	MoverKeyFrame() : Time(0), Offset(0,0,0) {}
+	
+	opVector Offset;
+	opQuat Rotation;
+	float Time;
+
+	//Lucas: added serialize
+	inline void Serialize(class opArchiver& Ar, const char* Name);
+};
+
+ALIGNCLASS class GAME_API Mover : public Actor
+{
+public:	
+	DECLARE_ACTORCLASS(Mover,Actor);
+
+	//variables
+	opVector BaseLocation;
+	opQuat BaseRotation;
+
+	float LastKeyTime;
+
+	//for non keyframe animation
+	opQuat RotationRate;
+
+	MoverAnimType AnimType;
+
+	float AnimAlpha;
+	int AnimKey;
+	bool AnimBackwards;
+	
+	opArray<MoverKeyFrame> KeyFrames;
+
+	//methods
+	virtual void InLevel();
+
+	virtual void Serialize(opArchiver& Ar);
+
+	virtual void Tick(float deltatime);
+
+	void Animate(float deltatime);
+
+	void Initialize()
+	{
+		Super::Initialize();
+
+		CollisionRadius = 0;
+	}
+
+};
+
+// Kevin: added this actor subclass
+// actor anchored to a fixed collider by a spring
+ALIGNCLASS class GAME_API AnchoredActor : public Actor
+{
+public:
+	DECLARE_ACTORCLASS(AnchoredActor,Actor);
+
+	// overrides
+	virtual void Created();
+	virtual void Serialize(opArchiver& Ar);
+
+private:
+	Collider* anchor;
+
+protected:
+	float     Damping;
+	float     RestSize;
+};
+
+ALIGNCLASS class GAME_API Deco : public Actor
+{
+public:
+	DECLARE_ACTORCLASS(Deco,Actor);
+
+	virtual void Initialize()
+	{
+		Super::Initialize();
+
+		CollisionRadius = 0;
+	}
+
+};

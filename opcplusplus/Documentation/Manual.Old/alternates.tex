@@ -1,0 +1,75 @@
+%% **********
+%% ALTERNATES
+%% **********
+
+\chapter{Alternates}
+\label{chap:alternates}
+
+\section{{\tt opinclude}}
+
+The \opcppK{opinclude} keyword is similar to the \opcppK{#include} keyword in \cpp, except that it is used to include {\tt .oh} files.  \opCPP\ ignores the \opcppK{#include} command, but if the \opcppK{opinclude} keyword is hit, it will load and parse the file specified.  Figure \ref{fig:opinclude1} shows how to use \opcppK{opinclude}.  \opCPP\ will look for the file to be included in every directory specified on the command line and in the current working directory.
+
+% fig:opinclude1
+\begin{opcpp}[label={fig:opinclude1},caption={The \opcppK{opinclude} keyword.}]
+opinclude "SomeFile.oh"
+\end{opcpp}
+
+\section{{\tt opdefine}}
+
+See Section \ref{sec:opdefine}.
+
+\section{{\tt opstatic}}
+
+The \opcppK{opstatic} keyword is an {\tt opobject}-specific keyword that makes it easier to initialize static class members.  In standard \cpp, you must declare a static variable in the header file and initilize its default value in the source file.  The \opcppK{opstatic} keyword allows you to declare a static variable in the header file and initialize it in place.  Figure \ref{fig:opstatic1} shows an example of this.  Unlike modifiers (see Section \ref{chap:modifiers}), the order of keywords in an \opcppK{opstatic} declaration matters.  The \opcppK{opstatic} keyword must be the first keyword in the declaration - this may be changed in the future.  Figure \ref{fig:opstatic2} makes this clear.  Finally, it is not necessary to set an \opcppK{opstatic} variable to a value.  You can simply declare the variable as \opcppK{opstatic}, as shown in Figure \ref{fig:opstatic3}.
+
+% fig:opstatic1
+\begin{opcpp}[label={fig:opstatic1},caption={The \opcppK{opstatic} keyword.}]
+/**** The static keyword in normal C++. ****/
+
+// Header file.
+class Actor
+{
+private:
+	static bool bRenderable;
+};
+
+// Source file.
+bool Actor::bRenderable = true;
+
+/**** The opstatic replacement keyword in opC++. ****/ 
+
+// Header file.
+opclass Actor
+{
+private:
+	opstatic bool bRenderable = true;
+};
+\end{opcpp}
+
+% fig:opstatic2
+\begin{opcpp}[label={fig:opstatic2},caption={The \opcppK{opstatic} keyword must come first in an \opcppK{opstatic} declaration.}]
+// Invalid syntax (opstatic is not the first keyword).
+opclass A
+{
+private:
+	public opstatic int x = 3;
+};
+
+// Valid syntax (opstatic is the first keyword).
+opclass A
+{
+private:
+	opstatic public int x = 3;
+};
+\end{opcpp}
+
+% fig:opstatic3
+\begin{opcpp}[label={fig:opstatic3},caption={Declaring a variable \opcppK{opstatic} without initializing it.}]
+// opstatic variable without initialization.
+opclass A
+{
+private:
+	opstatic public int x;
+};
+\end{opcpp}
+

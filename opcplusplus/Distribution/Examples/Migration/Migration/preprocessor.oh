@@ -1,0 +1,57 @@
+
+
+// In this example, we add several functions to two classes
+// A and B.  Assume in this example that A and B are not 
+// related.  In other words, they do not inherit from a common
+// base, and cannot just inherit the same methods.  In this
+// example, we use a macro to reduce the code duplication.
+
+#define ADD_CODE(class_name) 				\
+											\
+public:										\
+											\
+	const char* GetClassName()				\
+	{										\
+		return #class_name;					\
+	}										\
+											\
+	size_t GetClassSize()					\
+	{										\
+		return sizeof(class_name);			\
+	}										\
+											\
+private:									\
+											\
+static void* operator new(size_t size)		\
+{											\
+	return NULL;							\
+}											\
+											\
+static void operator delete(void* object)	\
+{											\
+											\
+}									
+
+namespace preprocessor
+{
+	class A
+	{
+		ADD_CODE(A);
+	};
+
+	class B
+	{
+		ADD_CODE(B);
+	};
+}
+
+/*=== notes on using c++ macros ===*/
+
+// Pros
+// 1) We have reduced code duplication and redundancy.
+
+// Cons
+// 1) The methods added via the macros are not debuggable.
+// 2) You cannot insert comments into the macro code.
+// 3) We have to add a macro call to every class.
+// 4) It looks terrible.

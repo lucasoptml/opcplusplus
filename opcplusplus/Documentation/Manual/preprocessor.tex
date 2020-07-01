@@ -1,0 +1,327 @@
+%% ******************************************
+%% PREPROCESSOR
+%%
+%% Author:  Kevin Depue && Lucas Ellis (2007)
+%% Purpose: Introduces new opC++ preprocessor
+%%          syntax such as opmacro, opdefine, 
+%%          etc.
+%% ******************************************
+
+\chapter{\opCPP\ Preprocessor}
+\label{chap:opcpp_preprocessor}
+
+The \opCPP\ compiler does not parse standard \cpp\ preprocessor directives.  It just ignores them.  However, \opCPP\ comes with a powerful new preprocessor.  The default \cpp\ preprocessor is often used for code generation and conditional compilation.  However, when writing \cpp\ macros, the existing \cpp\ preprocessor is limiting and often very ugly.  The new \opCPP\ preprocessor introduces new syntax that allows for much cleaner/more powerful code.  The following sections introduce these new language features and their syntax.
+
+%%----------
+%% opinclude
+%%----------
+\section{A {\tt \#include}-Like Construct: {\tt opinclude}}
+\label{sec:opinclude}
+
+When writing \opCPP\ code, you usually put the code in a file with the {\tt .oh} extension.  However, since the \opCPP\ compiler ignores \cpp\ preprocessor directives, we sometimes need a way to include other {\tt .oh} files from within an {\tt .oh} file.  To do this, we introduce the \opcppk{opinclude} syntax.  The syntax is shown in Figure \ref{fig:opinclude:grammar}.  The filename need not have the {\tt .oh} extension, but it is encouraged.
+
+\begin{opcpp}[label={fig:opinclude:grammar},caption={Using the \opcppk{opinclude} syntax.}]
+opinclude "Filename.oh"
+\end{opcpp}
+
+Usually, \opcppk{opinclude}-ing a file is not necessary as the \opCPP\ compiler generates a lot of forward declarations.  However, it is sometimes necessary to force the \opCPP\ compiler to compile your \opCPP\ code in a certain order. 
+
+%%---------
+%% opdefine
+%%---------
+\section{A Replacement For {\tt \#define}}
+\label{sec:opdefine}
+
+In \cpp, the \opcppk{#define} keyword can be used to declare constants and macros.  For example, Figure \ref{fig:opdefine:ugly_macro} shows a simple multi-line macro in \cpp.  The code in Figure \ref{fig:opdefine:ugly_macro} looks very ugly and can be difficult to read.  \opCPP\ introduces the \opcppk{opdefine} keyword to declare \cpp\ macros more nicely.  Figure \ref{fig:opdefine:examples} shows some example \opcppk{opdefine} declarations.  Note that an \opcppk{opdefine} can be declared with or without arguments, just as a regular \opcppk{#define}.  
+
+\begin{opcpp}[label={fig:opdefine:ugly_macro},caption={A simple multi-line \cpp\ macro.}]
+// A macro to clean up dynamically allocated memory.
+#define Cleanup(p) \
+   if (p)          \
+      delete (p);  \
+                   \
+   (p) = NULL;
+\end{opcpp}
+
+\begin{opcpp}[label={fig:opdefine:examples},caption={Example \opcppk{opdefine} declarations.}]
+// A macro to clean up dynamically allocated memory.
+// Note that this opdefine has arguments.
+opdefine Cleanup(p)
+{
+   if (p)
+      delete (p);
+
+   (p) = NULL;
+}
+
+// A macro to halt execution.
+// Note that this opdefine does not have any arguments.
+opdefine HaltExecution
+{ 
+    assert(0); 
+}
+\end{opcpp}
+
+The \opCPP\ compiler translates an \opcppk{opdefine} declaration to a \cpp\ \opcppk{#define} statement in the generated code.  It also automatically calls \opcppk{#undef} on the name of the \opcppk{opdefine} before generating the \opcppk{#define}.  Using an \opcppk{opdefine} over a \opcppk{#define} improves readability because it looks like a function.  Also, unlike regular \cpp\ \opcppk{#define}'s, you can put comments in them!  For example, the code in Figure \ref{fig:opdefine:not_allowed} is not allowed in regular \cpp.  The reason this is not allowed is that \cpp\ relies on the \opcppk{\} continuation character to specify the body of the macro, which when commented causes problems.  Figure \ref{fig:opdefine:comments_allowed} shows the \opcppk{opdefine} version of the macro with comments.
+
+\begin{opcpp}[label={fig:opdefine:not_allowed},caption={Comments are not allowed in regular \cpp\ macros.}]
+#define AddClassName(name)               \
+    // This adds the name of the class.  \
+    const static char* ClassName = name; 
+\end{opcpp}
+
+\begin{opcpp}[label={fig:opdefine:comments_allowed},caption={Comments are allowed in \opcppk{opdefine} statements.}]
+opdefine AddClassName(name)
+{
+    // This adds the name of the class.
+    const static char* ClassName = name;
+
+    /* Note: C-Style comments are allowed too! */
+}
+\end{opcpp}
+
+Just as \opcppk{#define}'s in \cpp, \opcppk{opdefine}'s cannot be nested.  In other words, you cannot put an \opcppk{opdefine} inside another \opcppk{opdefine}.  For coding of this kind, we introduce the \opcppk{opmacro} construct in Section \ref{sec:opmacro}.
+
+%%-------------------------------------------
+%% The c++ { ... } syntax.
+%%-------------------------------------------
+
+\section{The {\tt c++ \{ ... \}} syntax.}
+\label{sec:cppsyntax}
+
+When the \opCPP\ compiler parses categories such as \opcppk{opstruct} and \opcppk{opclass}, it does not have information about regular \cpp\ macros, and hence does not perform \cpp\ macro replacement.  You will almost always use \opCPP's code generation platform to automate \cpp\ macros.  However, if you want to use a \cpp\ macro, it is possible.
+
+In Figure \ref{fig:cppsyntax:macrounparsed}, the user is trying to use an existing \cpp\ macro to generate some code instead of using \opCPP's code generation platform.  This will throw an error because the \opCPP\ compiler does not do \cpp\ macro replacement.  To the compiler, the {\tt DECLARE\_CLASS(Actor)} line of code looks like a function declaration that's missing it's return type.  To resolve these ambiguities, we introduce the {\tt c++ \{ ... \}} syntax.
+
+\begin{opcpp}[label={fig:cppsyntax:macrounparsed},caption={The problem of using \cpp\ macros inside category declarations.}]
+opclass Actor
+{
+    // This line of code will cause the opC++ compiler to throw an error.
+    DECLARE_CLASS(Actor)
+
+    ...
+}
+\end{opcpp}
+
+The {\tt c++ \{ ... \}} syntax passes whatever is in the braces as-is to the backend \cpp\ compiler.  In this way the macro replacement will happen correctly.  It is only valid inside category declarations such as \opcppk{opstruct} and \opcppk{opclass}.  It is also only available in certain places within these declarations.  It can be either put in the modifier list of a data or function statement, or standalone as is desired in Figure \ref{fig:cppsyntax:macrounparsed}.  If it is to be standalone, it should be terminated with a semicolon.  Figure \ref{fig:cppsyntax:fixedmacro} shows examples of each.
+
+\begin{opcpp}[label={fig:cppsyntax:fixedmacro},caption={Using the {\tt c++ \{ ... \}} syntax correctly.}]
+opclass Actor
+{
+    // Note that since this C++ macro is to be standalone, that we terminate the 
+    // c++ { ... } block with a semicolon.
+    c++ { DECLARE_CLASS(Actor) };
+
+    // Here we are using the c++ { ... } syntax in the modifier list of a data statement.
+    private c++ { CONSTNESS } int x;
+
+    ...
+}
+\end{opcpp}
+
+%%--------
+%% opmacro
+%%--------
+\section{A New Preprocessor Construct: {\tt opmacro}}
+\label{sec:opmacro}
+
+In Section \ref{sec:opdefine} we introduced the \opcppk{opdefine} syntax, a replacement for \opcppk{#define}, and noted that it is a bit limited.  In \opCPP\ we've introduced a powerful new macro syntax called the \opcppk{opmacro}.  It shares several characteristics with regular \cpp\ macros, including:
+
+\begin{itemize}
+\item A concatenation operator.
+\item Stringize operators.
+\end{itemize}
+
+However, \opcppk{opmacro}s are much more powerful, and support the following new features:
+
+\begin{itemize}
+\item They are fully debuggable.
+\item They can generate and expand other \opcppk{opmacro}s.
+\end{itemize}
+
+%% simple macros
+\subsection{Simple {\tt opmacro}s}
+\label{subsec:simpleopmacros}
+
+Figure \ref{fig:opmacro:examples} shows the \opcppk{opmacro} equivalents of the \opcppk{opdefine}s from Figure \ref{fig:opdefine:examples}.  Notice that the \opcppk{opmacro}s look identical to \opcppk{opdefine}s except that the \opcppk{opmacro} keyword is used.  Like \opcppk{opdefine}s, they can be written with or without arguments, and can contain both C and \cpp-style comments.
+
+\begin{opcpp}[label={fig:opmacro:examples},caption={Example \opcppk{opmacro} declarations.}]
+// A macro to clean up dynamically allocated memory.
+// Note that this opmacro has arguments.
+opmacro Cleanup(p)
+{
+   if (p)
+      delete (p);
+
+   (p) = NULL;
+}
+
+// A macro to halt execution.
+// Note that this opmacro does not have any arguments.
+opdefine HaltExecution
+{ 
+    assert(0); 
+} 
+\end{opcpp}
+
+Using \opcppk{opmacro}s is a bit different than using an \opcppk{opdefine}.  The reason is because \opcppk{opmacro}s are expanded \textit{before} any \opCPP\ code is parsed.  This means that you can use \opcppk{opmacro}s to generate \opCPP\ code, or even other \opcppk{opmacro}s.  They are also extensively used in most \opCPP\ dialects. \\ 
+
+\opcppk{opmacro}s can only be declared inside the global context (i.e., not inside of another construct such as an \opcppk{opclass} or a \opcppk{class}, etc.).  However, \opcppk{opmacro}s can be expanded anywhere. \\
+
+If you want to make use of an existing \opcppk{opmacro}, you can expand it via the \opcppk{expand} syntax.  Figure \ref{fig:opmacro:expandsyntax} shows how to expand the \opcppk{opmacro}s from Figure \ref{fig:opmacro:examples}.
+
+\begin{opcpp}[label={fig:opmacro:expandsyntax},caption={Expanding \opcppk{opmacro}s via the \opcppk{expand} syntax.}]
+// Expand the Cleanup macro.
+expand Cleanup(ptr)
+
+// Expand the HaltExecution macro.
+expand HaltExecution
+\end{opcpp}
+
+%% special operators
+\subsection{Special Operators}
+\label{subsec:special_operators}
+
+As aforementioned, \opcppk{opmacro}s have concatenation and stringize operators.  The concatenation operator is the {\tt @} symbol.  It will concatenate two adjacent ids when the \opcppk{opmacro} is expanded.  Figure \ref{fig:opmacro:concatenation} shows an example of the concatenation operator.
+
+\begin{opcpp}[label={fig:opmacro:concatenation},caption={The \opcppk{opmacro} concatenation operator.}]
+opmacro GenerateDummyNamespace(a, b)
+{
+    // Generate a dummy namespace whose name  
+    // is the concatenation of a and b. 
+    namespace a@b
+    {
+
+    }
+}
+\end{opcpp}
+
+There are two stringize operators, one for characters and one for strings.  Surrounding something with a single accent character \`{} will transform the value to a character, and surrounding something with two accent characters \`{}\`{} will transform the value to a string.  Figure \ref{fig:opmacro:stringize} shows examples of both stringize operators.  Do not confuse the accent character with an apostrophe.  In the figure, the accent characters resemble apostrophes, but this is an artifact of the figure package.
+
+\begin{opcpp}[label={fig:opmacro:stringize},caption={The \opcppk{opmacro} stringize operators.}]
+opmacro GenerateSomeStrings(a, b)
+{
+    // This will generate 'a'.
+    char x = `a`;
+
+    // This will generate "b".
+    char* y = ``b``;
+}
+\end{opcpp}
+
+Of course, the concatenation and stringize operators can also be used together, as in Figure \ref{fig:opmacro:bothoperators}.  Concatenation is always performed first, then stringize.
+
+\begin{opcpp}[label={fig:opmacro:bothoperators},caption={Using the concatenation and stringize operators together.}]
+opmacro ToConcatenatedString(a, b)
+{
+    // This will generate "ab".    
+    char* x = ``a@b``;
+}
+\end{opcpp}
+
+%% advanced macros
+\subsection{Advanced {\tt opmacro}s}
+\label{subsec:advancedopmacros}
+
+In the beginning of this section we noted that \opcppk{opmacro}s can expand other \opcppk{opmacro}s.  For example, in Figure \ref{fig:opmacro:expandothermacros}, we use an \opcppk{opmacro} to expand several other \opcppk{opmacro}s inside a regular \cpp\ class.  This works because \opcppk{opmacro}s can be expanded anywhere.  However, if this were an \opCPP\ category, we would just automate this using the \opCPP\ code generation platform.
+
+\begin{opcpp}[label={fig:opmacro:expandothermacros},caption={Using an \opcppk{opmacro} to expand other \opcppk{opmacro}s.}]
+// This opmacro will generate a "super" typedef.
+opmacro GenerateSuperTypedef(parent)
+{
+    typedef parent super;
+}
+
+// This opmacro will add a function that returns the name of the class.
+opmacro GenerateClassName(name)
+{
+    string get_class_name() const
+    {
+        return ``name``;
+    }
+}
+
+// This opmacro will expand the other two opmacros.
+opmacro DECLARE_CLASS(name, parent)
+{
+    expand GenerateSuperTypedef(parent)
+    expand GenerateClassName(name)
+}
+
+// Here we expand the DECLARE_CLASS opmacro in a regular C++ class.
+class fruit : public plant
+{
+    expand DECLARE_CLASS(fruit, plant)
+} 
+\end{opcpp}
+
+\opcppk{opmacro}s can also generate (and expand) other \opcppk{opmacro}s.  For example, in Figure \ref{fig:opmacro:genopmacros}, we use an \opcppk{opmacro} to generate another \opcppk{opmacro} and expand it.  An \opcppk{opmacro} cannot expand itself.
+
+\begin{opcpp}[label={fig:opmacro:genopmacros},caption={Using an \opcppk{opmacro} to generate other \opcppk{opmacro}s.}]
+// This opmacro generates an opmacro when expanded.
+opmacro GenerateMacro
+{
+    // This opmacro gets created when the outer opmacro is expanded.
+    opmacro FirstInner
+    {
+        opmacro SecondInner
+        {
+            int* Foo;
+            int* Bar;
+        }
+    }
+
+    // We can expand the opmacro that gets generated.
+    expand FirstInner
+}
+
+// Down here, we can expand the "GenerateMacro" opmacro.  This in
+// turn generates and expands the opmacro "FirstInner".  We then 
+// expand the opmacro it generates, which finally generates some 
+// integer pointers.
+expand GenerateMacro
+expand SecondInner
+\end{opcpp}
+
+%%---------------------
+%% other special syntax
+%%---------------------
+\section{Other Special Syntax}
+\label{sec:other_special_syntax}
+
+This section introduces some special syntax that can be used with \opcppk{opdefine}s and \opcppk{opmacro}s.  
+
+%% handling stray braces
+\subsection{Handling Stray Braces}
+\label{subsec:stray_braces}
+
+Some programmars may wonder why the \cpp\ preprocessor uses the \opcppk{\} character to format the body of macros.  The reason is so you can put solitary {\tt \{}'s and {\tt \}}'s in the body of the macro.  In \cpp, without the \opcppk{\} continuation character to determine the macro body, the stray {\tt \{}'s and {\tt \}}'s would make parsing brace blocks impossible, as you don't know where one brace ends and the next begins.  Figure \ref{fig:stray_braces:cppmacros} shows an example of such \cpp\ macros.  \\
+
+\begin{opcpp}[label={fig:stray_braces:cppmacros},caption={\cpp\ macros using solitary {\tt \{}'s and {\tt \}}'s in the macro body.}]
+// This macro begins the Init() function.
+#define InitFunctionStart \
+   void Init()            \
+   {
+
+// This macro ends the Init() function.
+#define InitFunctionEnd \
+   }
+\end{opcpp}
+
+To be able to use stray braces in an \opcppk{opdefine} or \opcppk{opmacro}, we introduce the special syntaxes {\tt +\{\}} and {\tt -\{\}} to represent a solitary {\tt \{} and {\}}, respectively.  This is much more readable than the \cpp\ equivalent.  Figure \ref{fig:stray_braces:opcppmacros} shows an example of this new syntax.
+
+\begin{opcpp}[label={fig:stray_braces:opcppmacros},caption={Using the special {\tt +\{\}} and {\tt -\{\}} syntax in \opcppk{opdefine}s and \opcppk{opmacro}s.}]
+// Start a namespace of a given name.
+opmacro BeginNamespace(name)
+{
+   namespace name
+   +{}
+}
+
+// End a namespace.
+opmacro EndNamespace
+{
+   -{}
+}
+\end{opcpp}
+

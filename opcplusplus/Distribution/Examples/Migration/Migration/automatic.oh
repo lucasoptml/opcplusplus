@@ -1,0 +1,38 @@
+
+// In this example, we add several functions to two myclasses
+// A and B.  Assume in this example that A and B are not 
+// related.  In other words, they do not inherit from a common
+// base, and cannot just inherit the same methods.  In this
+// example, we use a category to reduce the code duplication.
+namespace automatic
+{
+	myclass A
+	{
+	public:
+		int X;
+		int Y;
+		int Z;
+		volatile int blah;
+		
+		void function();
+		
+		int wooters() const;
+	};
+	
+	myclass B
+	{
+		
+	};
+}
+
+/*=== notes ===*/
+
+// Pros
+// 1) categories are fully debuggable!
+// 2) We have reduced code duplication and redundancy.
+// 3) We can put comments into the note definitions.
+// 4) It actually looks readable.
+// 5) After you write the dialect, everything is automatic.
+//    You never have to add code if you instantiate a myclass 
+//    instance.
+

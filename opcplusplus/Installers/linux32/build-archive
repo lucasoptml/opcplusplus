@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# make the directory
+mkdir opcpp
+mkdir opcpp/bin
+mkdir opcpp/bin/linux32
+mkdir opcpp/bin/linux32/release
+
+# copy the files
+cp -r ../../Distribution/Css opcpp/
+cp -r ../../Distribution/opcpp/ opcpp/
+cp -r ../../Distribution/bin/linux32/release/opcpp opcpp/bin/linux32/release/opcpp
+cp -r ../../Documentation/docs/ opcpp/
+cp LICENSE-$1 opcpp/LICENSE
+cp INSTALL opcpp/ 
+cp README opcpp/
+cp -r default opcpp/default
+
+cd opcpp
+
+# remove .svn directories
+find . -name .svn -type d -exec rm -fr {} \; > /dev/null
+
+# zip up the default project
+tar -czvf default.tgz default
+rm -fr default
+
+cd ..
+
+# zip up the archive
+tar -czvf ../builds/Linux-opC++$1.tgz opcpp/
+
+# remove the directory
+rm -fr opcpp/
+
+

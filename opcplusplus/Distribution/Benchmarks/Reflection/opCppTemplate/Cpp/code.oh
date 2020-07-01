@@ -1,0 +1,33 @@
+///****************************************************************
+/// Copyright (C) 2007 OP Games LLC - All Rights Reserved
+///
+/// Authors: Kevin Depue & Lucas Ellis
+///
+/// File: code.oh
+/// Date: 10/12/2007
+///
+/// Description:
+///
+/// code file
+///****************************************************************
+
+#include <string>
+using std::string;
+
+class MyObject
+{
+	/*=== data ===*/
+
+	public bool MyBool = false;
+	public int MyInt = 0;
+	public float MyFloat = 0;
+	public double MyDouble = 0;
+	public string MyString = "string";
+
+	/*=== virtuals ===*/
+
+	public virtual void Blah(const string& s)
+	{
+
+	}
+};

@@ -1,0 +1,40 @@
+// opC++ code
+
+#include <string>
+#include <map>
+#include <set>
+#include <deque>
+#include <list>
+#include <vector>
+#include <utility>
+
+using namespace std;
+
+/*=== come classes, etc. ===*/
+
+// opclass beef
+// {
+// 	int taco;
+// };
+// 
+// opclass steak : public beef
+// {
+// 	bool rare;
+// };
+// 
+// opclass ground : public beef
+// {
+// 	string hamburger;
+// }
+// 
+// opstruct Meat
+// {
+// 	int fat;
+// };
+// 
+// opstruct Steak : public Meat
+// {
+// 	int juice;
+// };
+
+

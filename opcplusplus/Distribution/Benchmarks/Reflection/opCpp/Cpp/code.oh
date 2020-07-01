@@ -1,0 +1,39 @@
+///****************************************************************
+/// Copyright (C) 2007 OP Games LLC - All Rights Reserved
+///
+/// Authors: Kevin Depue & Lucas Ellis
+///
+/// File: code.oh
+/// Date: 10/12/2007
+///
+/// Description:
+///
+/// code file
+///****************************************************************
+
+opclass MyObject
+{
+	/*=== data ===*/
+
+	public MyObject()
+	{
+		MyBool = false;
+		MyInt = 0;
+		MyFloat = 0.f;
+		MyDouble = 0.0;
+		MyString = "";
+	}
+	
+	public bool MyBool;
+	public int MyInt;
+	public float MyFloat;
+	public double MyDouble;
+	public string MyString;
+
+	/*=== virtuals ===*/
+
+	public virtual void Blah(const string& s)
+	{
+
+	}
+};

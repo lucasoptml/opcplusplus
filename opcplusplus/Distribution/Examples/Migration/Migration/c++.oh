@@ -1,0 +1,82 @@
+
+// In this example, we add several functions to two classes
+// A and B.  Assume in this example that A and B are not 
+// related.  In other words, they do not inherit from a common
+// base, and cannot just inherit the same methods.
+namespace cpp
+{
+	class A
+	{
+	public:
+
+		// Returns the class name.
+		const char* GetClassName()
+		{
+			return "A";
+		}
+
+		// Returns the size of A.
+		size_t GetClassSize()
+		{
+			return sizeof(A);
+		}
+
+	private:
+
+		// Make new and delete private so you can't  
+		// dynamically allocate an instance of A.
+		static void* operator new(size_t size)
+		{
+			return NULL;
+		}
+
+		static void operator delete(void* object)
+		{
+
+		}
+	};
+
+	class B
+	{
+	public:
+
+		// Returns the class name.
+		const char* GetClassName()
+		{
+			return "B";
+		}
+
+		// Returns the size of A.
+		size_t GetClassSize()
+		{
+			return sizeof(B);
+		}	
+
+	private:
+
+		// Make new and delete private so you can't  
+		// dynamically allocate an instance of A.
+		static void* operator new(size_t size)
+		{
+			return NULL;
+		}
+
+		static void operator delete(void* object)
+		{
+
+		}
+	};
+}
+
+/*=== notes on straight c++ code ===*/
+
+// Pros
+// 1) The methods are debuggable.
+// 2) You can use comments to document the methods.
+//
+// Cons
+// 1) The duplication of the methods in each class is redundant.
+// 2) The duplication is error-prone because you may accidentily
+//    incorrectly name a method or forget to declare a method.
+// 3) We have to write the code over and over.
+// 4) It's simply bad practice.

@@ -1,0 +1,1070 @@
+///****************************************************************
+/// Copyright (C) 2007 OP Games LLC - All Rights Reserved
+///
+/// Authors: Lucas Ellis
+///
+/// File: Collada.oh
+/// Date: 02/21/2007
+///
+/// Description:
+///
+/// Collada Importer
+///****************************************************************
+
+
+#include "../Inc/Highlighting.h"
+
+struct ColladaCleanup
+{
+	void CleanString(opString& s)
+	{
+		//FIXME: why doesnt this work? I'd like to know :I
+		//replace(s.begin(),s.end(),(char)9,' ');
+		//replace(s.begin(),s.end(),(char)10,' ');
+		size_t size = s.Length();
+		for(size_t i = 0; i < size; i++)
+			if(s[i] == (char)9 || s[i] == (char)10)
+				s[i] = ' ';
+	}
+
+	template<typename T>
+	void BuildArray(const opString& s, opArray<T>& array)
+	{
+		s.TokenizeOnWhitespace(array.Vector);
+	}
+
+};
+
+//
+// Collada Parsing Structs
+//
+
+struct ColladaUV
+{
+	ColladaUV() {}
+	ColladaUV(float inU, float inV)
+		: U(inU), V(inV)
+	{}
+
+	float U;
+	float V;
+};
+
+struct ColladaXYZ
+{
+	ColladaXYZ() {}
+
+	ColladaXYZ(float inX, float inY, float inZ)
+		: X(inX), Y(inY), Z(inZ)
+	{}
+
+	union
+	{
+		struct 
+		{
+			float X;
+			float Y;
+			float Z;
+		};
+		struct 
+		{
+			float floatarray[3];
+		};
+	};
+
+	void SetZero()
+	{
+		X = Y = Z = 0;
+	}
+};
+
+
+struct ColladaVertex
+{
+	void Set(const ColladaXYZ& position, const ColladaXYZ& normal, const ColladaUV& texcoord)
+	{
+		X = position.X;
+		Y = position.Y;
+		Z = position.Z;
+		normalX = normal.X;
+		normalY = normal.Y;
+		normalZ = normal.Z;
+		U = texcoord.U;
+		V = texcoord.V;
+	}
+	
+	float X;
+	float Y;
+	float Z;
+	float normalX;
+	float normalY;
+	float normalZ;
+	float U;
+	float V;
+};
+
+struct ColladaTriangle
+{
+	ColladaTriangle() {}
+	
+	ColladaTriangle(WORD index0,WORD index1,WORD index2)
+	{
+		index[0] = index0;
+		index[1] = index1;
+		index[2] = index2;
+	}
+	
+	WORD index[3];
+};
+
+//Collada Mesh Primitive
+struct ColladaMesh
+{
+	string name;
+	opArray<ColladaVertex> vertices;
+	opArray<ColladaTriangle> triangles;
+};
+
+
+struct ColladaMatrix
+{
+	union
+	{
+		struct 
+		{
+			float _11; float _12; float _13; float _14;
+			float _21; float _22; float _23; float _24;
+			float _31; float _32; float _33; float _34;
+			float _41; float _42; float _43; float _44;
+		};
+		struct
+		{
+			float floatarray[16];
+		};
+	};
+
+	void opMatrixConvert(opMatrix& mx)
+	{
+		mx._11 = _11;
+		mx._12 = _12;
+		mx._13 = _13;
+		mx._14 = _14;
+		mx._21 = _21;
+		mx._22 = _22;
+		mx._23 = _23;
+		mx._24 = _24;
+		mx._31 = _31;
+		mx._32 = _32;
+		mx._33 = _33;
+		mx._34 = _34;
+		mx._41 = _41;
+		mx._42 = _42;
+		mx._43 = _43;
+		mx._44 = _44;
+	}
+};
+
+struct ColladaRotationMatrix
+{
+	union
+	{
+		struct
+		{
+			float _11; float _12; float _13;
+			float _21; float _22; float _23;
+			float _31; float _32; float _33;
+		};
+		struct
+		{
+			ColladaXYZ x;
+			ColladaXYZ y;
+			ColladaXYZ z;
+		};
+		struct
+		{
+			float floatarray[9];
+		};
+	};
+	
+	void opMatrixConvert(opMatrix& mx)
+	{
+		//copy 3x3
+		mx._11 = _11;
+		mx._12 = _12;
+		mx._13 = _13;
+		mx._21 = _21;
+		mx._22 = _22;
+		mx._23 = _23;
+		mx._31 = _31;
+		mx._32 = _32;
+		mx._33 = _33;
+		
+		//reset unused
+		mx._14 = mx._24 = mx._34 = mx._41 = mx._42 = mx._43 = 0.f;
+		mx._44 = 1.f;
+	}
+	
+	void FromAxisAngle(float x, float y, float z, float angle);
+	
+	ColladaRotationMatrix Multiply(const ColladaRotationMatrix& mx);
+	
+	void SetZero()
+	{
+		for(int i = 0; i < 9; i++)
+			floatarray[i] = 0;
+	}
+	
+	void SetIdentity()
+	{
+		SetZero();
+		_11 = _22 = _33 = 1.f;
+	}
+};
+
+struct ColladaBone
+{
+	string name;
+	ColladaMatrix invbindmx;
+};
+
+struct ColladaBoneWeight
+{
+	int boneid;
+	float weight;
+};
+
+struct ColladaWeight
+{
+	opArray<ColladaBoneWeight> mappings;
+};
+
+//Collada Controller Primitive
+struct ColladaController
+{
+	//name
+	string geometryname;
+	
+	//stores per bone data
+	opArray<ColladaBone> bones;
+	
+	//corresponds to vertices
+	opArray<ColladaWeight> weights;
+};
+
+struct ColladaVectorKey
+{
+	float timecode;
+	ColladaXYZ data;
+};
+
+//in angles about axes
+struct ColladaRotation
+{
+	float X;
+	float Y;
+	float Z;
+
+	ColladaRotationMatrix ToColladaRotationMatrix();
+};
+
+struct ColladaRotationKey
+{
+	float timecode;
+	ColladaRotation data;
+};
+
+struct ColladaAnimationTarget
+{
+	string name;
+	
+	opArray<ColladaVectorKey>	positions;
+	opArray<ColladaRotationKey> rotations;
+	opArray<ColladaVectorKey>	scales;
+
+	void SetPositionX(opArray<float>& times, opArray<float>& values);
+	void SetPositionY(opArray<float>& times, opArray<float>& values);
+	void SetPositionZ(opArray<float>& times, opArray<float>& values);
+
+	void SetRotationX(opArray<float>& times, opArray<float>& values);
+	void SetRotationY(opArray<float>& times, opArray<float>& values);
+	void SetRotationZ(opArray<float>& times, opArray<float>& values);
+
+	void SetScaleX(opArray<float>& times, opArray<float>& values);
+	void SetScaleY(opArray<float>& times, opArray<float>& values);
+	void SetScaleZ(opArray<float>& times, opArray<float>& values);
+};
+
+//Collada Animation Primitive
+struct ColladaAnimation
+{
+	string name;
+	float start;
+	float end;
+	
+	opArray<ColladaAnimationTarget> targets;
+	
+	ColladaAnimationTarget* GetTarget(const string& name);
+};
+
+struct ColladaNode
+{
+	ColladaXYZ position;
+	ColladaRotationMatrix rotationmatrix;
+	ColladaXYZ scale;
+
+	string name;
+	string controllername;
+
+	opArray<ColladaNode> nodes;
+
+	void SetIdentity()
+	{
+		position.SetZero();
+		scale.X = scale.Y = scale.Z = 1.f;
+		//rotationmatrix.SetIdentity();
+	}
+};
+
+//Collada Scene Primitive
+struct ColladaScene
+{
+	ColladaNode rootnode;
+};
+
+opclass ColladaFile1_4_1 : public Utility
+{
+public:
+	
+	opstruct Library_geometries
+	{
+		opstruct Geometry
+		{
+			string id;
+			
+			opstruct Mesh
+			{
+				opstruct Source
+				{
+					opstruct Float_array : public ColladaCleanup
+					{
+						string id;
+						int count;
+						opString xml_text;
+						
+						transient opArray<float> data;
+						
+						void CleanupData();
+					};
+					Float_array float_array;
+					
+					opstruct Technique_common
+					{
+						opstruct Accessor
+						{
+							opstruct Param
+							{
+								string name;
+								string type;
+							};
+							
+							string source;
+							int count;
+							opArray<Param> param;
+						};
+						
+						Accessor accessor;
+					};
+					Technique_common technique_common;
+					
+					string id;
+					
+					void CleanupData()
+					{
+						float_array.CleanupData();
+					}
+				};
+				opArray<Source> source;
+				
+				opstruct Vertices
+				{
+					string id;
+					
+					opstruct Input
+					{
+						string semantic;
+						string source;
+					};
+					opArray<Input> input;
+					
+					Input* GetInput(const string& name);
+				};
+				Vertices vertices;
+				
+				opstruct Polylist : public ColladaCleanup
+				{
+					int count;
+					string material;
+					
+					opstruct Input
+					{
+						string semantic;
+						string source;
+						int offset;
+					};
+					opArray<Input> input;
+					
+					opString vcount;
+					opString p;
+					
+					transient opArray<int> vcountdata;
+					transient opArray<int> pdata;
+					
+					void CleanupData();
+					Input* GetInput(const string& semantic);
+				};
+				Polylist polylist;
+				
+				void CleanupData()
+				{
+					for(int i = 0; i < source.Num(); i++)
+						source(i).CleanupData();
+					polylist.CleanupData();
+				}
+				
+				void GetColladaGeometry(ColladaMesh& mesh);
+				Source* GetSource(const string& source);
+			};
+			Mesh mesh;
+			
+			void CleanupData()
+			{
+				mesh.CleanupData();
+			}
+		};
+		Geometry geometry;
+		
+		void CleanupData()
+		{
+			geometry.CleanupData();
+		}
+		
+		void GetColladaGeometries(opArray<ColladaMesh>& Meshes);
+	};
+	Library_geometries library_geometries;
+	
+	opstruct Library_controllers
+	{
+		opstruct Controller
+		{
+			string id;
+			opstruct Skin : public ColladaCleanup
+			{
+				string source;
+				
+				opString bind_shape_matrix;
+				transient ColladaMatrix bind_shape_matrixdata;
+				
+				opstruct Source
+				{
+					string id;
+					
+					opstruct IDREF_array_struct : public ColladaCleanup
+					{
+						int count;
+						string id;
+						opString xml_text;
+						
+						transient opArray<string> data;
+						
+						void CleanupData();
+					};
+					IDREF_array_struct IDREF_array;
+					
+					opstruct Float_array : public ColladaCleanup
+					{
+						string id;
+						int count;
+						opString xml_text;
+						
+						transient opArray<float> data;
+						
+						void CleanupData();
+					};
+					Float_array float_array;
+					
+					opstruct Techique_common
+					{
+						opstruct Accessor
+						{
+							int count;
+							int stride;
+							string source;
+
+							opstruct Param
+							{
+								string type;
+							};
+						};
+						Accessor accessor;
+					};
+					Techique_common technique_common;
+
+					void CleanupData()
+					{
+						IDREF_array.CleanupData();
+						float_array.CleanupData();
+					}
+				};
+				//workaround for tag & attribute "source" elements
+				xml("source") opArray<Source> source_elements;
+				
+				opstruct Joints
+				{
+					opstruct Input
+					{
+						string semantic;
+						string source;
+					};
+
+					opArray<Input> input;
+					
+					Input* GetInput(const string& semantic);
+				};
+				Joints joints;
+
+				opstruct Vertex_weights : public ColladaCleanup
+				{
+					int count;
+					
+					opstruct Input
+					{
+						string semantic;
+						string source;
+						int offset;
+					};
+
+					opArray<Input> input;
+					
+					opString vcount;
+					opString v;
+
+					transient opArray<int> vcountdata;
+					transient opArray<float> vdata;
+
+					void CleanupData();
+					Input* GetInput(const string& semantic);
+				};
+				Vertex_weights vertex_weights;
+
+				void CleanupData();
+				Source* GetSource(const string& id);
+			};
+			Skin skin;
+
+			void CleanupData()
+			{
+				skin.CleanupData();
+			}
+
+			void GetColladaController(ColladaController& controller);
+		};
+		Controller controller;
+
+		void CleanupData()
+		{
+			controller.CleanupData();
+		}
+
+		void GetColladaControllers(opArray<ColladaController>& controllers);
+	};
+	Library_controllers library_controllers;
+
+	opstruct Library_animation_clips
+	{
+		opstruct Animation_clip
+		{
+			float start;
+			float end;
+			string id;
+
+			opstruct Instance_animation
+			{
+				string url;
+			};
+			opArray<Instance_animation> instance_animation;
+
+			transient opArray<string> sources;
+
+			void CleanupData();
+		};
+		opArray<Animation_clip> animation_clip;
+
+		void CleanupData();
+	};
+	Library_animation_clips library_animation_clips;
+
+	opstruct Library_animations
+	{
+		opstruct Animation
+		{
+			string id;
+			
+			opstruct Source
+			{
+				string id;
+				
+				opstruct Float_array : public ColladaCleanup
+				{
+					int count;
+					int id;
+					opString xml_text;
+					
+					transient opArray<float> data;
+					
+					void CleanupData();
+				};
+				Float_array float_array;
+
+				opstruct Technique_common
+				{
+					opstruct Accessor
+					{
+						string source;
+						int count;
+						int stride;
+
+						opstruct Param
+						{
+							string name;
+							string type;
+						};
+						Param param;
+					};
+					Accessor accessor;
+				};
+				Technique_common technique_common;
+
+				void CleanupData()
+				{
+					float_array.CleanupData();
+				}
+			};
+			opArray<Source> source;
+			
+			opstruct Sampler
+			{
+				string id;
+				
+				opstruct Input
+				{
+					string semantic;
+					string source;
+				};
+				
+				opArray<Input> input;
+
+				Input* GetInput(const string& semantic);
+			};
+			Sampler sampler;
+			
+			opstruct Channel
+			{
+				string source;
+				string target;
+			};
+			Channel channel;
+			
+			void CleanupData()
+			{
+				for(int i = 0; i < source.Num(); i++)
+					source(i).CleanupData();
+			}
+
+			Source* GetSource(const string& name);
+			void FillData(ColladaAnimation& animation);
+		};
+		opArray<Animation> animation;
+		
+		void CleanupData()
+		{
+			for(int i = 0; i < animation.Num(); i++)
+				animation(i).CleanupData();
+		}
+
+		Animation* GetAnimation(const string& id);
+	};
+	Library_animations library_animations;
+
+	opstruct Library_visual_scenes
+	{
+		opstruct Visual_scene
+		{
+			string id;
+			string name;
+			
+			opstruct Node
+			{
+				string id;
+				
+				opstruct Translate : public ColladaCleanup
+				{
+					string sid;
+					opString xml_text;				
+					
+					transient opArray<float> data;
+
+					void CleanupData();
+				};
+				Translate translate;
+
+				opstruct Rotate : public ColladaCleanup
+				{
+					openum rotationid
+					{
+						invalid,
+						rotation_x,
+						rotation_y,
+						rotation_z,
+					};
+
+					rotationid sid;
+
+					opString xml_text;
+					
+					transient opArray<float> data;
+					
+					void CleanupData();
+				};
+				opArray<Rotate> rotate;
+
+				opstruct Scale : public ColladaCleanup
+				{
+					string sid;
+
+					opString xml_text;
+					
+					transient opArray<float> data;
+					
+					void CleanupData();
+				};
+				Scale scale;
+
+				opstruct Instance_controller
+				{
+					string url;
+				};
+				Instance_controller instance_controller;
+
+				opArray<Node> node;
+
+				void CleanupData();
+
+				void GetColladaNodes(ColladaNode& node);
+				Rotate* GetRotation(Rotate::rotationid sid);
+			};
+			opArray<Node> node;
+			
+			void CleanupData()
+			{
+				for(int i = 0; i < node.Num(); i++)
+					node(i).CleanupData();
+			}
+			
+			void GetColladaScene(ColladaScene& SceneNode);
+		};
+		Visual_scene visual_scene;
+		
+		void CleanupData()
+		{
+			visual_scene.CleanupData();
+		}
+		
+		Visual_scene* GetScene(const string& name);
+	};
+	Library_visual_scenes library_visual_scenes;
+
+	opstruct Scene
+	{
+		opstruct Instance_visual_scene
+		{
+			string url;
+		};
+		Instance_visual_scene instance_visual_scene;
+	};
+	Scene scene;
+
+	//cleanup imported Collada data/strings
+	void CleanupData()
+	{
+		library_geometries.CleanupData();
+		library_controllers.CleanupData();
+		library_animation_clips.CleanupData();
+		library_animations.CleanupData();
+		library_visual_scenes.CleanupData();
+	}
+	
+	//get collada geometries (arrayed)
+	void GetColladaGeometries(opArray<ColladaMesh>& Meshes);
+	
+	//get collada controllers (arrayed)
+	void GetColladaControllers(opArray<ColladaController>& Controllers);
+	
+	//get collada animations
+	//need the meshes and controllers so
+	//we can properly index them together (?)
+	void GetColladaAnimations(opArray<ColladaAnimation>& Animations);//,
+							  //const opArray<ColladaMesh>& Meshes,
+							  //const opArray<ColladaController>& Controllers);
+	
+	void GetColladaScene(ColladaScene& SceneNode);
+};
+
+opclass ColladaVersion : public Utility
+{
+	public string GetVersion()
+	{
+		return version;
+	}
+
+ 	private string version;
+};
+
+//
+// Cleanup Functions
+//
+
+inline void ColladaFile1_4_1::Library_geometries::Geometry::Mesh::Source::Float_array::CleanupData()
+{
+	CleanString(xml_text);
+	BuildArray(xml_text,data);
+}
+
+inline void ColladaFile1_4_1::Library_geometries::Geometry::Mesh::Polylist::CleanupData()
+{
+	CleanString(vcount);
+	CleanString(p);
+	BuildArray(vcount,vcountdata);
+	BuildArray(p,pdata);
+}
+
+inline void ColladaFile1_4_1::Library_controllers::Controller::Skin::Source::Float_array::CleanupData()
+{
+	CleanString(xml_text);
+	BuildArray(xml_text,data);
+}
+
+inline void ColladaFile1_4_1::Library_controllers::Controller::Skin::Source::IDREF_array_struct::CleanupData()
+{
+	CleanString(xml_text);
+	BuildArray(xml_text,data);
+}
+
+inline void ColladaFile1_4_1::Library_controllers::Controller::Skin::CleanupData()
+{
+	CleanString(bind_shape_matrix);
+	
+	opArray<float> bind_shape_matrix_floats;
+	BuildArray(bind_shape_matrix,bind_shape_matrix_floats);
+
+	//build the collada matrices
+	int num = bind_shape_matrix_floats.Num();
+	for(int i = 0; i < num; i++)
+	{
+		bind_shape_matrixdata.floatarray[i] = bind_shape_matrix_floats(i);
+	}
+
+	for(int i = 0; i < source_elements.Num(); i++)
+		source_elements(i).CleanupData();
+	vertex_weights.CleanupData();
+}
+
+inline void ColladaFile1_4_1::Library_animations::Animation::Source::Float_array::CleanupData()
+{
+	CleanString(xml_text);
+	BuildArray(xml_text,data);
+}
+
+inline void ColladaFile1_4_1::Library_visual_scenes::Visual_scene::Node::CleanupData()
+{
+	for(int i = 0; i < node.Num(); i++)
+		node(i).CleanupData();
+
+	translate.CleanupData();
+	for(int i = 0; i < rotate.Num(); i++)
+		rotate(i).CleanupData();
+	scale.CleanupData();
+}
+
+inline void ColladaFile1_4_1::Library_controllers::Controller::Skin::Vertex_weights::CleanupData()
+{
+	CleanString(v);
+	CleanString(vcount);
+	BuildArray(v,vdata);
+	BuildArray(vcount,vcountdata);
+}
+
+inline void ColladaFile1_4_1::Library_visual_scenes::Visual_scene::Node::Scale::CleanupData()
+{
+	CleanString(xml_text);
+	BuildArray(xml_text,data);
+}
+
+inline void ColladaFile1_4_1::Library_visual_scenes::Visual_scene::Node::Rotate::CleanupData()
+{
+	CleanString(xml_text);
+	BuildArray(xml_text,data);
+}
+
+inline void ColladaFile1_4_1::Library_visual_scenes::Visual_scene::Node::Translate::CleanupData()
+{
+	CleanString(xml_text);
+	BuildArray(xml_text,data);
+}
+
+inline void ColladaFile1_4_1::Library_animation_clips::CleanupData()
+{
+	for(int i = 0; i < animation_clip.Num(); i++)
+		animation_clip(i).CleanupData();
+}
+
+//
+// Inline Setter Functions
+//
+
+opmacro SetAnimationValue(valuetype,arrayname,component)
+{
+	int num = times.Num();
+	arrayname.Resize(num);
+	for(int i = 0; i < num; i++)
+	{
+		valuetype& key = arrayname(i);
+		key.timecode = times(i);
+		key.data.component = values(i);
+	}
+}
+
+inline void ColladaAnimationTarget::SetPositionX(opArray<float>& times, opArray<float>& values)
+{
+	expand SetAnimationValue(ColladaVectorKey,positions,X);
+}
+
+inline void ColladaAnimationTarget::SetPositionY(opArray<float>& times, opArray<float>& values)
+{
+	expand SetAnimationValue(ColladaVectorKey,positions,Y);
+}
+
+inline void ColladaAnimationTarget::SetPositionZ(opArray<float>& times, opArray<float>& values)
+{
+	expand SetAnimationValue(ColladaVectorKey,positions,Z);
+}
+
+inline void ColladaAnimationTarget::SetRotationX(opArray<float>& times, opArray<float>& values)
+{
+	expand SetAnimationValue(ColladaRotationKey,rotations,X);
+}
+
+inline void ColladaAnimationTarget::SetRotationY(opArray<float>& times, opArray<float>& values)
+{
+	expand SetAnimationValue(ColladaRotationKey,rotations,Y);
+}
+
+inline void ColladaAnimationTarget::SetRotationZ(opArray<float>& times, opArray<float>& values)
+{
+	expand SetAnimationValue(ColladaRotationKey,rotations,Z);
+}
+
+inline void ColladaAnimationTarget::SetScaleX(opArray<float>& times, opArray<float>& values)
+{
+	expand SetAnimationValue(ColladaVectorKey,scales,X);
+}
+
+inline void ColladaAnimationTarget::SetScaleY(opArray<float>& times, opArray<float>& values)
+{
+	expand SetAnimationValue(ColladaVectorKey,scales,Y);
+}
+
+inline void ColladaAnimationTarget::SetScaleZ(opArray<float>& times, opArray<float>& values)
+{
+	expand SetAnimationValue(ColladaVectorKey,scales,Z);
+
+}
+
+//
+// Other Inline Functions
+//
+
+inline
+ColladaFile1_4_1::Library_visual_scenes::Visual_scene::Node::Rotate*
+ColladaFile1_4_1::Library_visual_scenes::Visual_scene::Node::GetRotation(Rotate::rotationid sid)
+{
+	int num = rotate.Num();
+	for(int i = 0; i < num; i++)
+	{
+		if(rotate(i).sid == sid)
+			return &rotate(i);
+	}
+	return NULL;
+}
+
+//from martin bakers site
+inline void ColladaRotationMatrix::FromAxisAngle(float x, float y, float z, float angle)
+{
+	float c = cos(angle);
+	float s = sin(angle);
+	float t = 1.0 - c;
+	
+	_11 = c + x*x*t;
+	_22 = c + y*y*t;
+	_33 = c + z*z*t;
+	
+	float tmp1 = x*y*t;
+	float tmp2 = z*s;
+	
+	_21 = tmp1 + tmp2;
+	_12 = tmp1 - tmp2;
+	tmp1 = x*z*t;
+	tmp2 = y*s;
+	_31 = tmp1 - tmp2;
+	_13 = tmp1 + tmp2;
+	tmp1 = y*z*t;
+	tmp2 = x*s;
+	_32 = tmp1 + tmp2;
+	_23 = tmp1 - tmp2;
+}
+
+
+
+inline ColladaRotationMatrix ColladaRotationMatrix::Multiply(const ColladaRotationMatrix& mx)
+{
+	ColladaRotationMatrix outmx;
+	
+	outmx._11 = _11*mx._11 + _12*mx._21 + _13*mx._31;
+	outmx._12 = _11*mx._12 + _12*mx._22 + _13*mx._32;
+	outmx._13 = _11*mx._13 + _12*mx._23 + _13*mx._33;
+
+	outmx._21 = _21*mx._11 + _22*mx._21 + _23*mx._31;
+	outmx._22 = _21*mx._12 + _22*mx._22 + _23*mx._32;
+	outmx._23 = _21*mx._13 + _22*mx._23 + _23*mx._33;
+
+	outmx._31 = _31*mx._11 + _32*mx._21 + _33*mx._31;
+	outmx._32 = _31*mx._12 + _32*mx._22 + _33*mx._32;
+	outmx._33 = _31*mx._13 + _32*mx._23 + _33*mx._33;
+
+	return outmx;
+}
+
+inline ColladaRotationMatrix ColladaRotation::ToColladaRotationMatrix()
+{
+	ColladaRotationMatrix xmx;
+	ColladaRotationMatrix ymx;
+	ColladaRotationMatrix zmx;
+	
+	xmx.FromAxisAngle(1.f,0.f,0.f,X*(_PI/180.f));
+	ymx.FromAxisAngle(0.f,1.f,0.f,Y*(_PI/180.f));
+	zmx.FromAxisAngle(0.f,0.f,1.f,Z*(_PI/180.f));
+
+	//z*y*x?
+	ColladaRotationMatrix final = zmx.Multiply(ymx).Multiply(xmx);
+	return final;
+}
+

@@ -1,0 +1,133 @@
+// opC++ code
+
+#include <vector>
+#include <set>
+#include <map>
+#include <stack>
+
+using std::set;
+using std::vector;
+using std::string;
+using std::map;
+using std::stack;
+
+opstruct TestStruct
+{
+	public TestStruct()
+	{
+		testint = 1234;
+	}
+	
+	int testint;
+};
+
+opclass AClass
+{
+	public AClass()
+	{
+		X = 1.111f;
+		Y = 2.222f;
+	}
+
+	float X;
+	float Y;
+};
+
+openum TestEnum
+{	
+	Red,
+	Blue,
+	Green,
+};
+
+opclass TestClass
+{
+	public void Initialize()
+	{
+		Name = "woot";
+		Integer = 1337;
+		Bool = true;
+		
+		Ints.push_back(100);
+		
+		DoubleInts.push_back(Ints);
+		DoubleInts.push_back(Ints);
+		
+		TestStruct test;
+		Structs.push_back(test);
+		Structs.push_back(test);
+		
+		Enums.push_back(Red);
+		Enums.push_back(Green);
+		Enums.push_back(Blue);
+
+		AClass a;
+		Classes.push_back(a);
+		Classes.push_back(a);
+		Classes.push_back(a);
+		
+		NullPointer = NULL;
+		ValidPointer = new AClass();
+		
+		StructPointer = new TestStruct();
+		AnotherPointer = StructPointer;
+		
+		IntArray[0] = 133700;
+		IntArray[1] = 133701;
+		IntArray[2] = 133702;
+		IntArray[3] = 133703;
+		
+		for(int i = 0; i < 100; i++)
+		{
+			Pointers.push_back(ValidPointer);
+			Pointers.push_back(NULL);
+		}
+
+		for(int i = 0; i < 10; i++)
+		{
+			SetInts.insert(i);
+		}
+
+		MapIntStrings.insert( std::pair<int,string>(0,"zero") );
+		MapIntStrings.insert( std::pair<int,string>(1,"one") );
+		MapIntStrings.insert( std::pair<int,string>(2,"two") );
+
+		Unsigned = 99999;
+		Double = 13371337.00001337;
+	}
+	
+	string Name;
+	int    Integer;
+	bool   Bool;
+	
+	TestEnum Enum;
+	
+	vector< int >			Ints;
+	vector< vector< int > > DoubleInts;
+	
+	vector< TestStruct >	Structs;
+	
+	vector< TestEnum >		Enums;
+	
+	AClass				Class;
+	vector< AClass >	Classes;
+	
+	AClass*				NullPointer;
+	AClass*				ValidPointer;
+	TestStruct*			StructPointer;
+	TestStruct*			AnotherPointer;
+	
+	unsigned int		Unsigned;
+	
+	int					IntArray[4];
+	
+	vector< AClass* >	Pointers;
+
+	set<int>			SetInts;
+
+	map<int,string>		MapIntStrings;
+
+	stack<int>			Stack;
+
+	double				Double;
+};

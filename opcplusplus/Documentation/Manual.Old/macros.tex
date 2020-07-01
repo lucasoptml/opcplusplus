@@ -1,0 +1,149 @@
+%% ******
+%% MACROS
+%% ******
+
+% macros
+\chapter{Macros}
+\label{chap:macros}
+
+\opCPP\ improves the way in which you can write \cpp\ macros.  It also provides a new powerful preprocessor via the \opcppK{opmacro} keyword.
+
+\section{{\tt opdefine}}
+\label{sec:opdefine}
+
+\opcppK{opdefine} is a replacement for the \cpp\ \opcppK{#define} statement.  It's syntax is nicer, and it will automatically call \opcppK{#undef} on the symbol to be defined.  Figure \ref{fig:opdefine1} shows an example of a simple \cpp\ macro and the corresponding equivalent in \opCPP.  \opcppK{opdefine} can also be used for macros that have arguments.  Figure \ref{fig:opdefine2} shows an example of this.  \opcppK{opdefine} can have comments within them also, making them much easier to document than \cpp\ \opcppK{#define} statements.
+
+% fig:opdefine1
+\begin{opcpp}[label={fig:opdefine1},caption={Simple \cpp\ macro and corresponding equivalent in \opCPP.}]
+// A simple C++ macro with undef
+#undef SIMPLE
+#define SIMPLE void Render();
+
+// The opcpp equivalent.
+opdefine SIMPLE
+{
+	void Render();
+}
+\end{opcpp}
+
+% fig:opdefine2
+\begin{opcpp}[label={fig:opdefine2},caption={\opcppK{opdefine} example with arguments.}]
+// A simple C++ macro with arguments.
+#undef SAFE_DELETE
+#define SAFE_DELETE(p)  \
+	if (p)				\
+		delete (p);		\
+	(p) = NULL;
+
+// The opcpp equivalent.
+opdefine SAFE_DELETE(p)
+{
+	if (p)
+		delete (p);
+	(p) = NULL;
+}
+\end{opcpp}
+
+One thing to notice about the \opcppK{opmacro} keyword is that because its body is enclosed inside braces, you cannot use the {\tt \{} or {\tt \}} characters by themselves (without their matching brace) as this makes the code impossible to parse.  This is why standard \cpp\ macros use the line termination character \verb!\! for macros.  To get around this issue, we can use \opcppK{#define} to declare and use a single brace, as shown in Figure \ref{fig:opdefine3}.
+
+% fig:opdefine3
+\begin{opcpp}[label={fig:opdefine3},caption={Getting around the \opcppK{opdefine} brace issue.}]
+// Declare the left brace as a regular C++ macro.
+#define LB {
+
+// The opcpp equivalent.
+opdefine LOOP_START
+{
+	while (bKeepLooping)
+	LB
+		// ... add code here ...
+}
+\end{opcpp}
+
+\subsection{{\tt macro}}
+
+In order to use \cpp\ macros and \opcppK{opdefine} macros in opObject code, you must prefix the macro call with the \opcppK{macro} keyword.  This is to help resolve ambiguities when parsing.  For example, Figure \ref{fig:macro1} shows how to call the macros defined in Section \ref{sec:opdefine} in \opCPP.
+
+% fig:macro1
+\begin{opcpp}[label={fig:macro1},caption={How to correctly call the macros defined in Section \ref{sec:opdefine} in \opCPP.}]
+// Simple macro call.
+macro Simple
+
+// SAFE_DELETE macro call.
+SomeObject* x = new SomeObject();
+macro SAFE_DELETE(x)
+
+// ADD_FUNCTION macro call.
+macro ADD_FUNCTION
+\end{opcpp}
+
+\pagebreak
+\section{{\tt opmacro}}
+
+\opCPP\ introduces a new internal preprocessor and two new keywords: \opcppK{opmacro} and \opcppK{expand}.  \opcppK{opmacro}s are declared with a syntax similar to \opcppK{opdefine}s.  However, unlike \opcppK{opdefine}s, \opcppK{opmacro}s only have an effect in the \opCPP\ compiler.  They may be defined multiple times, with each new declaration replacing the last.  In addition, \opcppK{opmacro}s are matched by signature (the number of arguments in an \opcppK{opmacro}).  \opcppK{opmacro}s may only be declared in the global namespace.  Finally, \opcppK{opmacro}s may contain comments.  Figure \ref{fig:opmacro1} shows a simple \opcppK{opmacro} instantiation.
+
+% opmacro1 figure
+\begin{opcpp}[label={fig:opmacro1},caption={A simple \opcppK{opmacro} instantiation.}]
+// An opmacro definition.
+opmacro build_function(return_type,name,body)
+{
+	return_type name()
+	{
+		// Body will be replaced with the body argument passed in.
+		body
+	}
+}
+\end{opcpp}
+
+\opcppK{opmacro}s also define a small number of operators, similar to the way the \cpp\ preprocessor works.  These operators are stringize and paste.  The final syntax for these operators is currently undecided, but they will probably be different than the \cpp\ preprocessor operators for clarity.
+
+\subsection{{\tt expand}}
+
+\opcppK{expand} is an operator that allows you to expand \opcppK{opmacro} definitions.  \opcppK{opmacro}s are only useful when referenced by \opcppK{expand} calls.  \opcppK{expand} and \opcppK{opmacro} calls may also be combined to generate \opcppK{opmacro}s from \opcppK{opmacro}s, or \opcppK{opdefine}s from \opcppK{opmacro}s.  \opcppK{expand} calls may be used in any context, and will be verified against available \opcppK{opmacro}s (by name and signature).  \opcppK{expand} calling arguments may be empty, have one or more tokens, and may include line breaks and whitespace.  In addition, \opcppK{expand} calls are more useful than preprocessor definitions in that the expanded code is fully debuggable, and will point back to the original \opcppK{opmacro} definition via \opcppK{#line} redirection!  Figure \ref{fig:expand1} shows how to use \opcppK{expand} to instantiate the \opcppK{build_function} \opcppK{opmacro} defined in Figure \ref{fig:opmacro1}.
+
+% expand1 figure
+\begin{opcpp}[label={fig:expand1},caption={Using an \opcppK{expand} call to instantiate the \opcppK{build_function} \opcppK{opmacro} defined in Figure \ref{fig:opmacro1}.}]
+/**** Some expand calls. ****/
+
+// This builds a void function called nothing.
+expand build_function(void,nothing,/*do nothing*/)
+
+// This builds a float returning function called process, 
+// which returns sqrt(20);
+expand build_function(float,process,return sqrt(20);)
+\end{opcpp}
+
+Advanced uses for \opcppK{opmacro}s involve using them to build or \opcppK{expand} other \opcppK{opmacro}s or \opcppK{opdefine}s.  In such cases, special rules are used to make the expansions useful.  \opcppK{expand} calls within \opcppK{expand} calls are only called before the outer call is expanded.  \opcppK{expand} calls within \opcppK{opmacro}s are only expanded once the outer \opcppK{opmacro} is expanded.  An example of this is shown in Figure \ref{fig:expand2}.
+
+% expand2 figure
+\begin{opcpp}[label={fig:expand2},caption={Advanced use of \opcppK{expand} and \opcppK{opmacro} in \opCPP.}]
+// Note that the expand calls will not be called 
+// until this opmacro is expanded.
+opmacro build_macros(category)
+{
+	expand build_element_macros(category,int)
+	expand build_element_macros(category,float)
+	expand build_element_macros(category,bool)
+}
+
+// The order doesn't matter here as long as the 
+// expansion is done after opmacros are declared.
+opmacro build_element_macros(category,tag)
+{
+	// using the paste operator (##)
+	opdefine category##_##tag
+	{
+	}
+}
+
+// Expand for opclass.
+expand build_macros(opclass)
+
+// Expand for opstruct.
+expand build_macros(opstruct)
+
+// These expand calls will generate the following opdefines
+// (and in turn preprocessor #defines):
+// opclass_int, opclass_float, opclass_bool,
+// opstruct_int, opstruct_float, opstruct_bool.
+\end{opcpp}

@@ -1,0 +1,15 @@
+bin\vs2005opCpp.dll
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\vs2005opCpp.csproj.ResolveComReference.cache
+obj\Debug\vs2005opCpp.dll
+obj\Debug\vs2005opCpp.pdb
+obj\Release\ResolveAssemblyReference.cache
+obj\Release\vs2005opCpp.csproj.ResolveComReference.cache
+obj\Release\vs2005opCpp.dll
+obj\Debug\vs2005opCpp.Other_Files.CommandBar.resources
+obj\Debug\vs2005opCpp.csproj.GenerateResource.Cache
+obj\Release\vs2005opCpp.Other_Files.CommandBar.resources
+obj\Release\vs2005opCpp.csproj.GenerateResource.Cache
+obj\Release\vs2005opCpp.OptionsPage.resources
+bin\vs2005opCpp.pdb
+obj\Debug\vs2005opCpp.newOptionsPage.resources

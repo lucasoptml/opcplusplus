@@ -1,0 +1,8 @@
+opclass blah
+{
+	static char x = '\'';
+	static char y = '\\';
+	static char z = "\"";
+	static char a = "\\";
+
+};

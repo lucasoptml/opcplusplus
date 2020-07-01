@@ -1,0 +1,27 @@
+// opC++ code
+
+#include <vector>
+
+using namespace std;
+
+opclass Passenger
+{
+	private string Name;
+	private float  Weight;
+};
+
+opclass Vehicle
+{
+	private        string             Name;
+	private native int                Id;
+	private        int                NumWheels;
+	private        float              WeightInTons;	
+	private        vector<Passenger*> Passengers;
+};
+
+
+
+
+
+
+

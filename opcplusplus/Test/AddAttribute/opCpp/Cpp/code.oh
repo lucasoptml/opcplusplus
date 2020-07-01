@@ -1,0 +1,32 @@
+///****************************************************************
+/// Copyright (C) 2007 OP Games LLC - All Rights Reserved
+///
+/// Authors: Kevin Depue & Lucas Ellis
+///
+/// File: code.oh
+/// Date: 10/12/2007
+///
+/// Description:
+///
+/// code file
+///****************************************************************
+
+opclass XmlThing
+{
+	var("var attribute here") int a;
+	native("name") float b;
+	
+	xml("xmltagname") int taggy;
+
+	public opstruct TestStruct
+	{
+		int member;
+	}
+};
+
+
+
+
+
+
+

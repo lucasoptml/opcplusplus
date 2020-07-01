@@ -1,0 +1,60 @@
+// opC++ code
+
+//let's test using vectors and stuff
+
+//let's test using double vectors
+
+#include <vector>
+#include <deque>
+#include <list>
+#include <set>
+#include <map>
+
+using namespace std;
+
+opclass Object
+{
+	int		an_integer;
+	float	a_float;
+	string	a_string;
+};
+
+opclass Containers : public Object
+{
+	public Containers()
+	{
+		ints.push_back(0);
+		floats.push_back(0.f);
+
+		vectorints.resize(1);
+		vectorints[0].push_back(1);
+
+		dequeints.resize(1);
+		dequeints[0].push_back(1);
+
+		set<int> blah;
+		blah.insert(0);
+
+		setints.insert(blah);
+
+		list<int> listblah;
+		listblah.push_back(0);
+
+		listints.push_back(listblah);
+	}
+
+	public Containers(int i) {}
+	
+	vector<int>				ints;
+	vector<float>			floats;
+	
+	vector< vector< int > > vectorints;
+	deque<	deque< int > >	dequeints;
+	set<	set<int > >		setints;
+	list<	list<int> >		listints;
+};
+
+opclass Stuff
+{
+	vector<int*> intptrs;
+};

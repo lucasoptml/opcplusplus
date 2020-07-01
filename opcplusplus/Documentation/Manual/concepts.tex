@@ -1,0 +1,379 @@
+%% ******************************************
+%% CONCEPTS
+%%
+%% Author:  Kevin Depue && Lucas Ellis (2007)
+%% Purpose: Introduces opCpp concepts.
+%% ******************************************
+
+\chapter{Concepts}
+\label{chap:concepts}
+
+\begin{comment}
+note: the challenge here is to get the reader (and us) to think
+of these things not in terms of the implementation, but in terms 
+of concepts and new ways of thinking about code.
+\end{comment}
+
+\begin{comment}
+note: I think a good way of looking at opC++ concepts, is a widening
+of definitions to enable capturing features from other languages.
+Then look at it as giving you the ability to constrain these wide
+definitions into usable and specific constructs.  Yes this is what
+the approach should read like - I think we have a tendency to say
+that it captures all features - but it just enables capturing some
+features, and it will improve as the tool evolves.
+\end{comment}
+
+%%----------
+%% Overview
+%%----------
+\section{ Overview }
+\label{sec:concepts_overview}
+
+This chapter outlines the concepts found in opC++.  The
+first concept is a "category," a more general version
+of classes in OOP.  Second, opC++ adds an "enumeration" concept,
+which is a more general version of an enum.  Third, opC++
+adds a modifier concept - which is a compile time version of
+attributes/annotations found in other languages.  
+Last we look at the ability in opC++ to define language constraints.
+
+%%----------
+%% Category
+%%----------
+\section{ Category }
+\label{sec:concepts_category}
+
+A Category is an OOP class which captures any number of 
+language features.  We'll look at the possible features
+a category can capture in this section, and what useful
+features currently exist in other languages.  Specifically
+we'll look at what "class" means in C\#, C++, Java, and UnrealScript.
+Each of these languages target different uses - from the lower level
+uses of C++ to the game-specific language Unrealscript.
+
+Diagram of C\#, C++, Java, Unrealscript and a metaclass - the category.
+
+\paragraph{What are language features?}
+Language features add functionality at a built-in language level instead of
+relying solely on collections of code.  Features can make
+programming much easier - especially when specially designed for a purpose.  
+Often a language feature is something that was very difficult 
+to implement in a previous language.  These features do not come without costs however - if
+you add a feature at a class level, and it remains unused, 
+the feature can impose an unnecessary cost on the program.  Due
+to these costs languages like C++ have almost no hidden costs, but
+have fewer "nice" features.
+
+The features of a class are usually entirely specific to the language
+the class is implemented in.  When we describe features we usually refer
+to a language specifically - such as that 'C\# has attributes' or 'Java has reflection'.  
+With Categories we can pull the feature out of the language context and apply it instead to a particular
+named category.  We can state that 'the class category is private by default' or that 'the windowclass category supports windowing' - this lets us talk about features independent of language.
+
+Now we'll look at some of the features in common general purpose languages, and how they
+mesh with categorization.  We'll also examine a language with a more specific purpose, the game scripting language UnrealScript.  Looking at this range of languages is important to get a feel for how
+languages are becoming more project specific - we can see this with attributes in general purpose languages,
+and with custom project specific languages becoming more common.
+
+The current trend has been to move from general purpose languages to more specific languages, with
+language features becoming more project focused.  
+
+\paragraph{C++ class}
+C++ provides a no frills definition of a class. It's defined as an object oriented programming construct
+that encapsulates functions, data, and can inherit its type, functions and data from other classes.  C++ actually provides
+two types of classes, "class" and "struct".  The differences are technically confined to their default access specifiers.
+In practice you use class when working with heavy objects and struct when creating lightweight data structures.  We
+can view class and struct as categories with very minor differences.
+
+class and struct as categories.
+
+table showing differences.
+
+Other features in C++ classes include defining functions as polymorphic (virtual), abstract/pure-virtual, and defining them as inline.  C++ also gives good control over data layout, data sizes, and on certain compilers, data byte alignments - all useful when you need to work closely with hardware.
+
+Example showing polymorphism, declaring functions and data.
+
+C++ is a compile-time oriented language, so there are few dynamic typing features.  The one dynamic typing feature
+standard in the language, Run Time Type Information (RTTI), is considered to be slow in practice, and is only available if a type is polymorphic (has virtual functions).
+
+Example showing C++'s dynamic features.
+
+\paragraph{C\# class}
+Since C\# is a Just-in-time compiled language (JIT), it can do more things with its programs on demand, 
+versus a compiled language like C++.  C\# classes support a number of useful features, including
+attribute oriented programming, full reflection support, and some valuable new types.  Attribute oriented
+programming has been proven useful as it keeps any data relevant to a member written at the declaration location.  Attributes can be used to flag particular members, add extra data to a specific member (metadata) and can be extremely
+valuable when dealing with unknown classes in a library framework.
+
+Example of attribute oriented programming in C\#.
+
+Other design changes were made when adapting C++ like functionality into Microsofts .NET Framework.  C\#
+only supports single inheritance of classes - and instead provides an alternative construct, made
+popular in java, the "interface".  In general most things that are done as multiple inheritance
+in C++, can be done with a meaning closer to the actual intent with interfaces.  Practically, using
+interfaces means that you can attach behaviors to unrelated types, and discover whether a type implements
+a behavior using the interface casting mechanism in C\#.
+
+Example of interfaces in C\#, example of casting to an interface to discover implemented behavior.
+
+C\# also adds the delegate type to the language.  Delegates are a more general version of the 
+function pointer in C++, with much nicer syntax, and the ability to do multiple dispatch.
+
+Example of delegate use in C\# vs function pointers in C++.
+
+Table of important features in C\# classes.
+- run-time attributes
+- interfaces
+- delegate
+
+\paragraph{Java class}
+
+Since Java is an interpretted language, it's comparatively easy to
+change code after the code has been compiled.  This has made Java a popular
+language for experimenting with new language features - such as Aspect Oriented
+Programming (AspectJ).  As Java has evolved it has added support for attribute
+oriented programming, as well as code generation based on annotations.  Using
+the standard "Metadata Facility for Java" or the XDoclet project, you can generate code as 
+a byproduct of using attributes.
+
+Example of attributes and their possible implications in Java.
+
+Java adds a special keyword only for serialization, "transient".  This
+keyword tells the serialization runtime that a data member should not 
+be serialized.
+
+Table of important java class features
+- attributes
+- serialization support (transient)
+- code generation from attributes
+- hash
+- to string
+
+\paragraph{Unrealscript class}
+
+A common language in game development is the Unreal Engine scripting language "Unrealscript".
+Unlike a general programming language in a custom scripting language you always have to deal with
+the interface between your scripts and main application.  Because of this boundary it uses keywords like
+"event" for native-to-script transitions, and "native" for script-to-native communication.  Since
+it has a specific goal in mind - gameplay programming, it also contains specific keywords that only
+interact with the engine.  The "exec" keyword makes a function callable from the engine input console.
+It contains class attributes - such as "ini("inifile")" which alter where settings are stored.  
+It contains support for editor reflection on particular data members with another attribute syntax.
+
+Example of an unrealscript class w/ attributes.
+
+Unrealscript also deals with storing off default data values, which may be data or objects.  This default value
+data can be read statically by script code.
+
+Example of default instances.
+
+As a game language UnrealScript also pays particular attention to AI and time.  Unrealscript has
+support for sequenced execution of actions (latent functions), and state based switching
+of functions.
+
+Example of states in Unrealscript.
+
+Unrealscript is an example of a language written specifically for one project.  It's feature
+rich because of this, and although each feature can add a size or performance cost to the language, 
+they make the language much better.
+
+\paragraph{Abstract class}
+
+now generalize into a definition for a category.
+look at what features each language brings to the table.
+give example categories that might be useful to have.
+
+From the previous examples, we've seen that languages can differ 
+greatly in terms of language features.  We see that as a language
+gets more specific, it can add more features without unnecessary costs.
+Also, the language of a particular class determines its features.
+
+Table summarizing these languages and their features
+
+In opC++ we'll be dealing with a more abstract class called "categories" which
+can group language features beyond hardcoded class and struct identifiers.
+
+%% category members
+\subsection{ Declaring Members }
+\label{sec:concepts_members}
+
+what kind of members can you declare in categories?
+this should maybe do an overview of c++ even.
+
+this should have a table showing all the syntax valid within opC++ and C++
+
+this should have a table showing all syntax valid within C++ only
+
+this should have a table showing all syntax valid within opC++ only
+
+
+%% initialization
+\subsection{ initialization }
+\label{sec:concepts_initialization}
+
+In opC++, you can initialize data members directly at their definitions.
+This is a looser syntax than standard C++, which can only initialize const
+static integer data members.  The result of the initialization syntax can
+be defined as a language feature - it does not coorespond directly to
+default constructors, although it can be made to work that way.
+
+the loose initialization rules in opcpp.
+
+%% syntax
+\subsection{ syntax }
+\label{sec:concepts_syntax}
+
+include a table detailing valid and invalid syntax
+in opcpp vs c++.
+
+this should display a table with valid/invalid non-member syntax.
+
+\begin{table}[htb]
+\centering
+\begin{tabular}{|l|}
+\hline 
+\multicolumn{1}{|c|}{\color{blue}{Allowed Category Preprocessors}} \\
+\hline 
+\#if \\
+\#ifdef \\
+\#ifndef \\
+\#elif \\
+\#else \\
+\#endif \\
+\hline
+\end{tabular}
+\caption{Table showing which \cpp\ preprocessors are allowed inside categories.}
+\label{table:allowed_category_preprocessors}
+\end{table}
+
+%%----------
+%% Enumeration
+%%----------
+\section{ Enumeration }
+\label{sec:concepts_enumeration}
+
+what is an enum?
+
+why is it useful to abstract enum into Enumeration types?
+
+example of a generated strongly typed Enumeration.
+
+%%----------
+%% Modifiers
+%%----------
+\section{ Modifier }
+\label{sec:concepts_modifier}
+
+Modifiers in opC++ are similar to attributes and annotations in other languages.  However,
+modifiers are a language level feature, and may observe special rules at compile time.
+
+Modifiers are enabled for specific categories, and can be defined for data members, function
+members, and category definitions.
+
+example of modifiers in opC++
+
+%% basic modifiers
+\subsection{ basic modifiers }
+\label{sec:concepts_basic_modifiers}
+
+what does a basic modifier look like?
+
+on data members? on functions?
+
+example of basic modifiers in opC++
+
+%% value modifiers
+\subsection{ value modifiers }
+\label{sec:concepts_value_modifiers}
+
+what does a value modifier look like?
+
+on data members? on functions?
+
+example of value modifiers in opC++
+
+
+%% data modifiers
+\subsection{ data modifiers }
+\label{sec:concepts_data_modifiers}
+
+const, volatile
+
+modifiers can only apply to data, functions or both
+
+examples of data modifiers (as abstract attributes)
+
+%% function modifiers
+\subsection{ function modifiers }
+\label{sec:concepts_function_modifiers}
+
+explicit, virtual, inline
+
+modifiers can only apply to data, functions or both
+
+examples of function modifiers (as abstract attributes)
+
+%% access modifiers
+\subsection{ access modifiers }
+\label{sec:concepts_access_modifiers}
+
+public, private, protected
+
+%% special modifiers
+\subsection{ special modifiers }
+\label{sec:concepts_special_modifiers}
+
+uninline, inline, static
+
+%% automatic modifiers
+\subsection{ automatic modifiers }
+\label{sec:concepts_automatic_modifiers}
+
+In addition to specified modifiers, opC++ also automatically applies
+a number of modifiers to declarations.  These modifiers exist in order
+to allow you to filter through and constrain language syntax.  Currently
+these modifiers only apply to the original statement and do not derive from
+types declared elsewhere.
+
+example of a data statement and the generated modifiers
+example of a function statement and the generated modifiers
+
+example of automatic modifiers only applying to the exact statement.
+
+need a whole table describing what modifiers are generated when
+
+%%----------
+%% Constraints
+%%----------
+\section{ Constraints }
+\label{sec:concepts_constraints}
+
+Constraints in opC++ allow you to specify extra
+language options for validation.  Disallow constraints
+let you specify invalid modifier combinations.  Modifier
+Value constraints allow you to specify what values
+are valid for a modifier.
+
+%% disallow
+\subsection{ disallow }
+\label{sec:concepts_disallow}
+
+Disallow constraints may specify a custom error message.
+
+Example: tighten back the initialization options.
+
+Example: dont allow certain modifier combinations
+
+Example: enforce naming conventions.
+
+%% modifier values
+\subsection{ modifier values }
+\label{sec:concepts_modifier_values}
+
+Modifier value constraints may specify a custom error message.
+
+Example: only want float numbers in a version() modifier.
+
+Example: only want an identifier in another modifier.
+

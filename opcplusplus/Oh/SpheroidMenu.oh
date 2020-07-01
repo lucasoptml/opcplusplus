@@ -1,0 +1,438 @@
+
+opclass SPHEROID_API SpheroidIntroSequence : public SoundSupport<Menu>
+{
+public:
+
+	//setup animations
+	virtual void Destroy();
+};
+
+opclass SPHEROID_API SpheroidExitSequence : public SubMenu
+{
+public:
+
+	void Destroy()
+	{
+		//weird case.
+		if(GetManager())
+			Engine::GetDevice()->ExitGame();
+		else
+			Super::Destroy();
+	}
+};
+
+using namespace opInterface;
+
+opclass SPHEROID_API SpheroidMainMenu : public Scalable< Menu >
+{
+public:
+
+	virtual void Created();
+	virtual void Serialize(opArchiver& Ar);
+
+	virtual void NativeTick(float DeltaTime);
+
+	virtual bool NativeKeyEvent(const BYTE& iKey, const BYTE& State, const float Delta = 0.f );
+
+	virtual void ScreenResized(const opPoint& newsize);
+
+	void CreateMain();
+
+	//main submenu
+	opClass<SubMenu> MainClass;
+	string MainPath;
+};
+
+
+//
+// Spheroid Sub Menus
+//
+
+opclass SPHEROID_API SpheroidSubMenu : public SubMenu
+{
+public:
+
+	virtual void Serialize(opArchiver& Ar);
+	
+	void CloseMenu();
+
+	WindowXMLAction OnCloseMenu;
+
+	class SpheroidToolTip* CreateTip(opWindowPage* owner, string tipstring);
+	void RemoveTip(SpheroidToolTip* tip);
+
+	void ToolTipClosed(SpheroidToolTip* tip);
+
+private:
+	opArray<SpheroidToolTip*> ToolTips;
+};
+
+//
+// Spheroid Tool Tips
+//
+
+opclass SpheroidToolTip : public opWindowPage
+{
+public:
+
+	void Initialize()
+	{
+		Super::Initialize();
+
+		LoadData("Windows\\Messages\\TipBubble.xml");
+	}
+
+	void SetOwnerMenu(SpheroidSubMenu* owner);
+
+	void CloseToolTip();
+
+	void Destroy();
+
+	void SetTipText(string tiptext);
+
+	WindowXMLAction OnClose;
+
+	opText* TipText;
+	
+	void Serialize(opArchiver& Ar);
+
+private:
+	SpheroidSubMenu* ToolTipOwner;
+
+};
+
+opclass SPHEROID_API SpheroidMainSubMenu : public SpheroidSubMenu
+{
+public:
+
+	virtual void ButtonClicked(opButton* Button);
+	virtual void Serialize(opArchiver& Ar);
+
+	opButton* QuickGameButton;
+	opButton* StoryGameButton;
+	opButton* SettingsButton;
+	opButton* ExitButton;
+
+	//events I call using delegates..
+	void RecreateMain();
+	void Travel(string TravelClass, string TravelPath);
+};
+
+opclass SPHEROID_API SpheroidQuickMenu : public SpheroidSubMenu
+{
+public:
+
+	opButton* BackButton;
+	opButton* EasyButton;
+	opButton* MediumButton;
+	opButton* HardButton;
+
+	//handle clicks
+	virtual void ButtonClicked(class opButton* Button);
+
+	virtual void Serialize(opArchiver& Ar);
+};
+
+opclass SPHEROID_API SpheroidSaveGameButton : public opButton
+{
+public:
+	//This control has pointers to various data boxes
+
+	virtual void Created();
+};
+
+opclass SPHEROID_API SpheroidStoryMenu : public SpheroidSubMenu
+{
+public:
+
+	opButton* BackButton;
+	SpheroidSaveGameButton* GameA;
+	SpheroidSaveGameButton* GameB;
+	SpheroidSaveGameButton* GameC;
+
+	//TODO: on creation, this sets up the gameA/B/C buttons - filling them with information
+
+	//handle clicks
+	virtual void ButtonClicked(opButton* Button);
+	virtual void Serialize(opArchiver& Ar);
+};
+
+//HoverTip interface
+template< class Parent >
+class HoverTip : public Parent
+{
+public:
+	typedef Parent Super;
+
+	SpheroidSubMenu* GetSubMenu()
+	{
+		opWindowPage* owner = wOwner;
+
+		while(owner)
+		{
+			if(SpheroidSubMenu* sub = Cast<SpheroidSubMenu>(owner))
+				return sub;
+
+			owner = owner->wOwner;
+		}
+
+		return NULL;
+	}
+
+	//not necessarily valid, do all operations through the ToolTip registry
+	SpheroidToolTip* MyTip;
+
+	//ToolTip support
+	string TipString;
+
+	void MouseEnter(opMouseWindow* mouse, opWindow* window = NULL)
+	{
+		if(TipString.length())
+			MyTip = GetSubMenu()->CreateTip(this,TipString);
+
+		Super::MouseEnter(mouse,window);
+	}
+
+	void MouseLeave(opMouseWindow* mouse, opWindow* window = NULL)
+	{
+		if(MyTip)
+			GetSubMenu()->RemoveTip(MyTip);
+		MyTip = NULL;
+
+		Super::MouseLeave(mouse,window);
+	}
+
+	inline void Serialize(opArchiver& Ar);
+};
+
+
+opclass SPHEROID_API SpheroidCheckBox : public HoverTip< opButton >
+{
+public:
+
+	bool bInitialSet;
+	bool bChecked;
+
+	//should overload this?
+	void ButtonClicked(opButton* Button);
+
+	virtual void SetCheck(bool newval);
+
+	//events: (in addition?)
+	WindowXMLAction OnCheck;
+	WindowXMLAction OnUnCheck;
+
+	virtual void Serialize(opArchiver& Ar);
+
+	//TODO: on click, this should change the buttons appearance - could be an xml action thing I suppose.
+};
+
+
+
+//spheroid slider takes 4 different values - each button will switch to a particular value
+opclass SPHEROID_API SpheroidSlider : public opButton
+{
+public:
+
+	SpheroidCheckBox* Check1;
+	SpheroidCheckBox* Check2;
+	SpheroidCheckBox* Check3;
+	SpheroidCheckBox* Check4;
+
+	string CheckTip1;
+	string CheckTip2;
+	string CheckTip3;
+	string CheckTip4;
+
+	void Created()
+	{
+		Super::Created();
+
+		Check1->TipString = CheckTip1;
+		Check2->TipString = CheckTip2;
+		Check3->TipString = CheckTip3;
+		Check4->TipString = CheckTip4;
+	}
+
+	//value is from 1-4
+	int Value;
+
+	void SetValue(int newval);
+
+	//cascades the values
+	//this acts like a button too..that is, it will send backwards
+	virtual void ButtonClicked(class opButton* Button);
+	virtual void Serialize(opArchiver& Ar);
+};
+
+opclass SPHEROID_API SpheroidSettingsMenu : public SpheroidSubMenu
+{
+public:
+
+	//initialize the settings to current values
+	virtual void Created();
+
+	opButton* BackButton;
+	SpheroidSlider* ResolutionControl;
+	SpheroidSlider* DetailControl;
+	SpheroidSlider* SoundControl;
+	SpheroidSlider* MusicControl;
+
+	virtual void ButtonClicked(class opButton* Button);
+	virtual void Serialize(opArchiver& Ar);
+};
+
+
+
+
+
+
+
+
+
+opclass SPHEROID_API SpheroidIngameMenu : public Menu
+{
+public:
+
+	virtual void Created();
+	virtual void Destroy();
+	virtual void Serialize(opArchiver& Ar);
+
+	virtual void NativeTick(float DeltaTime);
+
+	virtual bool NativeKeyEvent(const BYTE& iKey, const BYTE& State, const float Delta = 0.f );
+
+	virtual void ButtonClicked(opButton* Button);
+
+	opWindowPage* MenuFrame;
+
+	opButton* ContinueButton;
+	opButton* ExitButton;
+
+	opWindowPage* ScreenFade;
+};
+
+
+opclass SPHEROID_API SpheroidMenuButton : public HoverTip< MenuButton >
+{
+public:
+	DECLARE_CLASS(SpheroidMenuButton,MenuButton);
+
+	void Initialize()
+	{
+		Super::Initialize();
+
+		LoadData("Windows\\Menus\\MenuButton.xml");
+	}
+
+};
+
+opclass SPHEROID_API SpheroidHelpDialog : public SoundSupport< Menu >
+{
+public:
+
+	void Initialize()
+	{
+		Super::Initialize();
+
+		OpenSound = opSound::GetSound("Sounds\\Effects\\fx2.wav");
+	}
+
+	virtual void Created();
+	virtual void Serialize(opArchiver& Ar);
+
+	virtual void ButtonClicked(opButton* Button);
+
+	opWindowPage* Picture;
+	opText* Text;
+
+	opButton* ContinueButton;
+
+	opSound* OpenSound;
+};
+
+//
+
+opclass SPHEROID_API SpheroidToken : public ActorEffect
+{
+public:
+
+	void OnLeaveEvent()
+	{
+		OnLeave(this);
+	}
+
+	void OnHoverEvent()
+	{
+		OnHover(this);
+	}
+
+	void OnUpEvent()
+	{
+		OnUp(this);
+	}
+
+	void OnDownEvent()
+	{
+		OnDown(this);
+	}
+
+	void OnClickedEvent()
+	{
+		OnClicked(this);
+	}
+
+	ActorXMLAction OnLeave;
+	ActorXMLAction OnHover;//called when over and not down, or not over and down
+	ActorXMLAction OnUp;//called when not over
+	ActorXMLAction OnDown;//called when down
+	ActorXMLAction OnClicked;//called on actual click
+
+	// check box related:
+	
+	void OnCheckEvent()
+	{
+		OnCheck(this);
+	}
+
+	void OnUnCheckEvent()
+	{
+		OnUnCheck(this);
+	}
+
+	ActorXMLAction OnCheck;
+	ActorXMLAction OnUnCheck;
+
+	void Serialize(opArchiver& Ar);
+	//TODO: mirror all events
+};
+
+opclass SPHEROID_API SpheroidTokenButton : public SpheroidMenuButton
+{
+public:
+	DECLARE_CLASS(SpheroidTokenButton,SpheroidMenuButton);
+
+	//TODO: pass on events to tokens
+	//		(same events the button gets)...
+
+	opArray<SpheroidToken*> Tokens;
+	
+	virtual void OnButtonUp();
+	virtual void OnButtonDown();
+	virtual void MouseEnter(opMouseWindow*, opWindow* = NULL);
+	virtual void MouseLeave(opMouseWindow*, opWindow* = NULL);
+	virtual void OnButtonClicked();
+
+	void Serialize(opArchiver& Ar);
+};
+
+opclass SPHEROID_API SpheroidTokenCheckBox : public SpheroidCheckBox
+{
+public:
+
+	void SetCheck(bool newval);
+
+	opArray<SpheroidToken*> Tokens;
+
+	void Serialize(opArchiver& Ar);
+};

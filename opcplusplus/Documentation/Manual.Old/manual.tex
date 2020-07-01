@@ -1,0 +1,89 @@
+%% Kevin Depue & Lucas Ellis (2006)
+%% opCPP Manual
+
+%% DOCUMENT CLASS
+\documentclass[12pt,letterpaper,oneside,fancyhdr]{book}
+
+%% PACKAGES
+\usepackage[english]{babel}
+\usepackage{geometry}
+\geometry{verbose,top=0.5in,bottom=0.5in,letterpaper,lmargin=1in,rmargin=1in}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{fix-cm}
+\usepackage{setspace}
+\usepackage{opcpp}
+\usepackage{fullpage}
+\usepackage{hyperref}
+
+%% set the default sans-serif font
+\usepackage[T1]{fontenc}
+\usepackage[scaled]{berasans}
+\renewcommand*\familydefault{\sfdefault}  %% Only if the base font of the document is to be sans serif
+
+%% set the default typewriter font
+\usepackage[T1]{fontenc}
+\usepackage[scaled]{beramono}
+%% \renewcommand*\familydefault{\ttdefault} %% Only if the base font of the document is to be typewriter style
+
+%% COMMANDS
+\setlength{\parindent}{0em}
+
+%%DOCUMENT START
+\begin{document}
+
+%% TITLE PAGE
+\begin{center}
+\includegraphics[scale=.9]{opcpp.eps}\\
+\vspace{2in}
+{\fontsize{50}{60}\selectfont \opCPP\ Manual}\\
+\vspace{6mm}
+{\Large OP Games LLC \copyright\ 2007}\\ 
+\vspace{3mm}
+{\Large \url{www.opcpp.com}}
+\thispagestyle{empty}
+\end{center}
+\newpage
+
+%% TABLE OF CONTENTS
+\tableofcontents
+\clearpage
+\pagebreak
+
+%% INTRODUCTION
+\input{introduction.tex}
+\clearpage
+\pagebreak
+
+%% CONSTRUCTS
+\input{constructs.tex}
+\clearpage
+\pagebreak
+
+%% MODIFIERS
+\input{modifiers.tex}
+\clearpage
+\pagebreak
+
+%% MACROS
+\input{macros.tex}
+\clearpage
+\pagebreak
+
+%% ALTERNATES
+\input{alternates.tex}
+\clearpage
+\pagebreak
+
+%% COMMAND LINE
+\input{commandline.tex}
+\clearpage
+\pagebreak
+
+%% BIBLIOGRAPHY
+\addcontentsline{toc}{chapter}{References}
+
+\bibliographystyle{plain}
+\bibliography{manual}
+
+\end{document}

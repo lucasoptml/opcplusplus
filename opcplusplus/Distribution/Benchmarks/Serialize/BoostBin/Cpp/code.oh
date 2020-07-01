@@ -1,0 +1,126 @@
+
+#include <boost/serialization/list.hpp>
+#include <boost/serialization/vector.hpp>
+#include <boost/serialization/string.hpp>
+
+using std::vector;
+using std::string;
+using std::list;
+
+opmacro TestClass(prefix)
+{
+public:
+	class prefix@_TestClass
+	{
+	public:
+		prefix@_TestClass()
+		{
+			for(int i = 0; i < 100; i++)
+				integers[i] = i;
+			
+			for(int i = 0; i < 1000; i++)
+				intvect.push_back(i*3134);
+			
+			for(int i = 0; i < 1000; i++)
+				stringlist.push_back("lotsastrings");
+
+		}
+		
+		int integers[100];
+
+		std::vector<int> intvect;
+		
+		std::list<std::string> stringlist;
+
+		template<class Archive>
+		void serialize(Archive & ar, const unsigned int version)
+		{
+			ar & integers;
+			ar & intvect;
+			ar & stringlist;
+		}
+	};
+	
+	prefix@_TestClass prefix@_test;
+};
+
+
+opmacro TestClass10(prefix)
+{
+	expand TestClass(a_@prefix);
+	expand TestClass(b_@prefix);
+	expand TestClass(c_@prefix);
+	expand TestClass(d_@prefix);
+	expand TestClass(e_@prefix);
+	expand TestClass(f_@prefix);
+	expand TestClass(g_@prefix);
+	expand TestClass(h_@prefix);
+	expand TestClass(i_@prefix);
+	expand TestClass(j_@prefix);
+}
+
+opmacro TestClass100(prefix)
+{
+	expand TestClass10(a_@prefix);
+	expand TestClass10(b_@prefix);
+	expand TestClass10(c_@prefix);
+	expand TestClass10(d_@prefix);
+	expand TestClass10(e_@prefix);
+	expand TestClass10(f_@prefix);
+	expand TestClass10(g_@prefix);
+	expand TestClass10(h_@prefix);
+	expand TestClass10(i_@prefix);
+	expand TestClass10(j_@prefix);
+}
+
+opmacro TesterDef(prefix)
+{
+		ar & prefix@_test;
+}
+
+
+opmacro TesterDef10(prefix)
+{
+	expand TesterDef(a_@prefix);
+	expand TesterDef(b_@prefix);
+	expand TesterDef(c_@prefix);
+	expand TesterDef(d_@prefix);
+	expand TesterDef(e_@prefix);
+	expand TesterDef(f_@prefix);
+	expand TesterDef(g_@prefix);
+	expand TesterDef(h_@prefix);
+	expand TesterDef(i_@prefix);
+	expand TesterDef(j_@prefix);
+}
+
+opmacro TesterDef100(prefix)
+{
+	expand TesterDef10(a_@prefix);
+	expand TesterDef10(b_@prefix);
+	expand TesterDef10(c_@prefix);
+	expand TesterDef10(d_@prefix);
+	expand TesterDef10(e_@prefix);
+	expand TesterDef10(f_@prefix);
+	expand TesterDef10(g_@prefix);
+	expand TesterDef10(h_@prefix);
+	expand TesterDef10(i_@prefix);
+	expand TesterDef10(j_@prefix);
+}
+
+class Tester
+{
+public:
+	Tester() 
+	{}
+	
+	expand TestClass100(a);
+
+	template<class Archive>
+	void serialize(Archive & ar, const unsigned int version)
+	{
+		expand TesterDef100(a);
+	}
+};
+
+
+

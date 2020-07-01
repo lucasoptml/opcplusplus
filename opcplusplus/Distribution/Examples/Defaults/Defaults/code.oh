@@ -1,0 +1,59 @@
+// opC++ code
+
+// A goldfish class.
+fish Goldfish
+{
+	// We don't have to declare a constructor because
+	// one is already generated, and the generated one
+	// calls the generated Defaults() method.  This is 
+	// of course true of all fish.
+
+	/*=== data ===*/
+
+	int   Weight;
+	float Inches;
+};
+
+// Add a trolley class.  Note that this is a regular C++ 
+// class.  Because it is not a fish (or a category instance
+// that has "defaults" support) we must specialize for type
+// Trolley in the defaults namespace.  We must make the template
+// method a friend so that it has direct access to the Trolley's
+// data.
+class Trolley
+{
+	friend void defaults::SetToDefault<Trolley>(Trolley*);
+
+	/*=== data ===*/
+
+	int Knots;
+	int Tons;
+};
+
+// Here, we implement the actual template specialization
+// for the C++ Trolley class.  We did this to show that it
+// is entirely possible.  Of course, you'd want to use category
+// declarations with "defaults" support (or the defaults 
+// "feature", in other words.).
+namespace defaults
+{
+	template<>
+	void SetToDefault<Trolley>(Trolley* t)
+	{
+		SetToDefault(&t->Knots);
+		SetToDefault(&t->Tons);
+	}
+}
+
+// Let's declare a whale type.
+fish Whale
+{
+	/*=== data ===*/
+
+	int        Weight;		
+	Goldfish*  Neighbor;	// Notice here that our data member is a Goldfish*.
+	Goldfish** School;		// Notice here that our data member is a Goldfish**.
+	Goldfish   Tenant;		// Notice here that our data member is a Goldfish.
+	Trolley    Hunter;		// Notice here that our data member is a C++ class object.
+};
+

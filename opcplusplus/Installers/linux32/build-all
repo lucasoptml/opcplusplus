@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# build the compiler
+make
+
+# build the archive
+./build-archive 0.91
+
+

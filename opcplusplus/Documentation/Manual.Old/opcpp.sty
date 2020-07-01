@@ -1,0 +1,81 @@
+%% ***********************
+%% OPCPP STYLE/ENVIRONMENT
+%% ***********************
+
+%% REQUIRED PACKAGES
+\usepackage{listings}
+\usepackage[usenames]{color}
+
+%% RENEWALS
+\renewcommand{\lstlistingname}{Figure}
+
+%% NEW COMMANDS
+\newcommand{\cpp}{C{\tt ++}}
+\newcommand{\opCPP}{opC{\tt ++}}
+
+%% OPCPP LANGUAGE DEFINITION
+\lstdefinelanguage{opCPP}[Visual]{C++}
+{
+morekeywords={opmacro,
+              opdefine,
+              expand,
+              opclass,
+              opstruct,
+              openum,
+              state,
+              native,
+              transient,
+              delegate,
+              opstatic,
+              macro,
+              opinclude,
+              uninline},
+basicstyle=\small\ttfamily,
+keywordstyle=\small\ttfamily\color{blue},
+commentstyle=\small\ttfamily\color{OliveGreen},
+stringstyle=\small\ttfamily\color{RedViolet},
+identifierstyle=\small\ttfamily\color{black},
+tabsize=4,
+showtabs=false,
+showspaces=false,
+showstringspaces=false,
+frame=single,
+captionpos=b,
+float=htb
+}
+
+%% OPCPP ENVIRONMENT DEFINITIONS
+\lstnewenvironment{opcpp}[1][]{\lstset{language=opCPP,#1}}{}
+
+%% OPCPP KEYWORDS             
+\newcommand\opcppK{\lstinline[language=opCPP]}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% HOW TO USE THIS STYLE FILE              %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%
+%% To declare a block of code, do this:
+%%
+%% \begin{opcpp}[label={put label here}, caption={put caption here}]
+%% ... code goes here ...
+%% \end{opcpp}
+%%
+%% To declare a single keyword and have it be correctly highlighted,
+%% do this:
+%%
+%% \opcppK{put keyword here}
+%%
+%% The symbols for C++ and opC++ are the following:
+%%
+%% \cpp
+%% \opCPP
+%%
+%% NOTE: If you want a space after these symbols, you have to do this:
+%%
+%% \cpp\
+%% \opCPP\
+
+
+
+
+

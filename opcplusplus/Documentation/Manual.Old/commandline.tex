@@ -1,0 +1,50 @@
+%% ************
+%% COMMAND LINE
+%% ************
+
+%% COMMANDS
+\newcommand{\cloption}[2]{{\tt #1} \\ \hspace*{4ex} #2 \\}
+
+% command line
+\chapter{Commandline}
+\label{chap:commandline}
+
+This chapter lists all the available commandline options in the \opCPP\ compiler.  An important thing to note is that if a file or directory includes spaces, it must be in quotes!  Also, separate multiple strings with commas and {\em no spaces}.\\
+
+Example:  {\tt opcpp -oh file1.oh,"file 2.oh" -d dir1,dir2 -opobject uclass,scriptclass}
+
+\section{Commands}
+
+% commandline options
+\cloption{-oh <files>}{Input files to be compiled.}
+
+\cloption{-d <directories>}{Input file directories, separated by a comma.}
+
+\cloption{-ohd <directories>}{All .oh files within these directories will be parsed.}
+
+\cloption{-gd <directory>}{Generated files output directory.}
+
+\cloption{-globmode}{Enables \opCPP\ glob mode.}
+
+\cloption{-verbose}{Prints verbose output.}
+
+\cloption{-silent}{Only prints out compiler errors and tree (if enabled).}
+
+\cloption{-fm}{User defined function modifiers.}
+
+\cloption{-dm}{User defined data modifiers.}
+
+\cloption{-vdm}{User defined valued data modifiers.}
+
+\cloption{-opobject}{User defined \opCPP\ object types.  Can only contain alphabetic charcters!}
+
+\cloption{--opobject-remove-defaults}{Removes the default \opCPP\ object type specifiers. (\opcppK{opclass}, \opcppK{opstruct})}
+
+\cloption{-nodebug}{Suppress debug line directives (suppress debugging redirection support).}
+
+\cloption{--opmacro-expansion-depth}{Specifies the maximum opmacro expansion depth.}
+
+\cloption{-altclass}{Specify alternative mappings for class categories (syntax: classprefix=category,...).}
+
+\cloption{-altstruct}{Specify alternative mappings for struct categories (syntax: structprefix=category,...).}
+

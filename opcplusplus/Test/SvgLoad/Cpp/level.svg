@@ -1,0 +1,893 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://web.resource.org/cc/"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="765"
+   height="990"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.45.1"
+   version="1.0"
+   sodipodi:docbase="C:\Spheroid\opCPP\Test\SvgLoad\Cpp"
+   sodipodi:docname="level.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape">
+  <defs
+     id="defs4">
+    <linearGradient
+       id="linearGradient3301">
+      <stop
+         style="stop-color:#70ee5e;stop-opacity:1;"
+         offset="0"
+         id="stop3303" />
+      <stop
+         style="stop-color:#004dae;stop-opacity:1;"
+         offset="1"
+         id="stop3305" />
+    </linearGradient>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     gridtolerance="10000"
+     guidetolerance="10"
+     objecttolerance="10"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.979899"
+     inkscape:cx="578.25928"
+     inkscape:cy="743.22641"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     width="8.5in"
+     height="11in"
+     units="in"
+     inkscape:window-width="1280"
+     inkscape:window-height="968"
+     inkscape:window-x="1276"
+     inkscape:window-y="-4"
+     showguides="true"
+     inkscape:guide-bbox="true" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="opacity:1;fill:#f9eedf;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2.0999999;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.35;stroke-opacity:0.69182392"
+       d="M 423.36223,382.0203 L 727.14287,384.28571 L 725.71429,207.14285 L 692.85715,115.71428 L 610.71429,77.857139 L 520.71429,77.857139 L 431.42858,109.28571 L 404.28572,199.28571 L 423.36223,382.0203 z "
+       id="path3345"
+       sodipodi:nodetypes="ccccccccc"
+       inkscape:export-filename="C:\Documents and Settings\Lucas Ellis.LUCAS\Desktop\beakie-level.png"
+       inkscape:export-xdpi="199.98645"
+       inkscape:export-ydpi="199.98645" />
+    <path
+       inkscape:export-ydpi="199.98645"
+       inkscape:export-xdpi="199.98645"
+       inkscape:export-filename="C:\Documents and Settings\Lucas Ellis.LUCAS\Desktop\beakie-level.png"
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:0.5534592"
+       d="M 579.14264,391.81016 C 577.48279,397.17796 571.7792,400.18731 566.4114,398.52747 C 561.0436,396.86762 558.03425,391.16403 559.69409,385.79623 C 561.35393,380.42843 567.05753,377.41908 572.42533,379.07892 C 577.79313,380.73877 580.80248,386.44236 579.14264,391.81016 z "
+       id="path3347" />
+    <path
+       transform="translate(182.5,46.964286)"
+       d="M 380.35714 321.69641 A 3.4821429 3.4821429 0 1 1  373.39286,321.69641 A 3.4821429 3.4821429 0 1 1  380.35714 321.69641 z"
+       sodipodi:ry="3.4821429"
+       sodipodi:rx="3.4821429"
+       sodipodi:cy="321.69641"
+       sodipodi:cx="376.875"
+       id="path3325"
+       style="opacity:1;fill:#488bff;fill-opacity:1;fill-rule:nonzero;stroke:#48f626;stroke-width:3;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.35;stroke-opacity:1"
+       sodipodi:type="arc"
+       inkscape:export-filename="C:\Documents and Settings\Lucas Ellis.LUCAS\Desktop\beakie-level.png"
+       inkscape:export-xdpi="199.98645"
+       inkscape:export-ydpi="199.98645" />
+    <path
+       style="opacity:1;fill:#53ad5d;fill-opacity:1;fill-rule:nonzero;stroke:#a5de9d;stroke-width:2.0999999;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.35;stroke-opacity:1"
+       d="M 646.00001,359.28571 C 642.41316,334.46385 659.04783,325.81921 673.85715,315.71428 C 656.8231,306.40625 639.63439,297.27499 609.57144,302.85714 C 620.9763,293.51702 625.41527,283.0287 628.85715,272.85714 L 618.85715,268.57142 C 623.41198,281.90475 616.68055,289.5238 594.57144,308.57142 C 617.3646,308.4293 650.13948,307.7789 654.57144,320.71428 C 636.03786,332.59401 639.90264,344.59497 639.57144,359.64285 L 646.00001,359.28571 z "
+       id="path3234"
+       sodipodi:nodetypes="ccccccccc"
+       inkscape:export-filename="C:\Documents and Settings\Lucas Ellis.LUCAS\Desktop\beakie-level.png"
+       inkscape:export-xdpi="199.98645"
+       inkscape:export-ydpi="199.98645" />
+    <path
+       style="opacity:0.44919787;fill:#dadada;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:1.8;stroke-opacity:1"
+       d="M 67.680221,799.08117 L 92.934034,714.22836 L 77.781746,604.12173 L 90.913729,523.30952 L 74.751288,408.15213 L 121.21831,396.0303 L 131.31983,346.53283 L 203.04066,326.32978 L 243.44676,353.6039 L 319.2082,348.55313 L 330.31988,407.14198 L 307.08637,435.42625 L 334.36049,491.9948 C 334.36049,491.9948 354.56354,534.4212 354.56354,539.47196 C 354.56354,544.52273 349.51278,613.2131 350.52293,617.25371 C 351.53309,621.29432 366.68537,669.78164 367.69553,679.88317 C 368.70568,689.98469 325.26912,723.31973 325.26912,723.31973 L 299.00515,781.90858 L 282.84271,804.13193"
+       id="path3486" />
+    <rect
+       y="583.9657"
+       x="39.247238"
+       height="237.14285"
+       width="355.71429"
+       id="rect3480"
+       style="opacity:0.44919787;fill:#b1e6ff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:2.66819382;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:1.8;stroke-opacity:1"
+       transform="matrix(0.9999892,-4.6397971e-3,4.6397971e-3,0.9999892,0,0)"
+       inkscape:label="screen" />
+    <path
+       sodipodi:type="arc"
+       style="opacity:1;fill:#f2f2f2;fill-opacity:1;fill-rule:nonzero;stroke:#2e5993;stroke-width:2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:1.8;stroke-opacity:1"
+       id="path3150"
+       sodipodi:cx="10.267858"
+       sodipodi:cy="10.267855"
+       sodipodi:rx="10.178572"
+       sodipodi:ry="10.178572"
+       d="M 20.446429 10.267855 A 10.178572 10.178572 0 1 1  0.089285851,10.267855 A 10.178572 10.178572 0 1 1  20.446429 10.267855 z"
+       transform="translate(4.087843,63.524119)"
+       inkscape:label="bubble" />
+    <path
+       transform="translate(7.5179473,37.283885)"
+       d="M 11.111678 5.7326126 A 5.6821079 5.6821079 0 1 1  -0.2525382,5.7326126 A 5.6821079 5.6821079 0 1 1  11.111678 5.7326126 z"
+       sodipodi:ry="5.6821079"
+       sodipodi:rx="5.6821079"
+       sodipodi:cy="5.7326126"
+       sodipodi:cx="5.4295697"
+       id="path3192"
+       style="opacity:1;fill:#f2f2f2;fill-opacity:1;fill-rule:nonzero;stroke:#2e5993;stroke-width:2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:1.8;stroke-opacity:1"
+       sodipodi:type="arc" />
+    <path
+       sodipodi:type="arc"
+       style="opacity:1;fill:#f2f2f2;fill-opacity:1;fill-rule:nonzero;stroke:#2e5993;stroke-width:2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:1.8;stroke-opacity:1"
+       id="path3214"
+       sodipodi:cx="9.375"
+       sodipodi:cy="24.910713"
+       sodipodi:rx="3.3035715"
+       sodipodi:ry="3.3035715"
+       d="M 12.678571 24.910713 A 3.3035715 3.3035715 0 1 1  6.0714285,24.910713 A 3.3035715 3.3035715 0 1 1  12.678571 24.910713 z"
+       transform="translate(1.0507625,-14.243661)" />
+    <path
+       sodipodi:type="arc"
+       style="opacity:1;fill:#505050;fill-opacity:1;fill-rule:nonzero;stroke:#a1a4a7;stroke-width:2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:1.8;stroke-opacity:1"
+       id="path3274"
+       sodipodi:cx="10.267858"
+       sodipodi:cy="10.267855"
+       sodipodi:rx="10.178572"
+       sodipodi:ry="10.178572"
+       d="M 20.446429 10.267855 A 10.178572 10.178572 0 1 1  0.089285851,10.267855 A 10.178572 10.178572 0 1 1  20.446429 10.267855 z"
+       transform="translate(5.6621581,93.769223)" />
+    <path
+       transform="matrix(0.9627654,-0.270338,0.270338,0.9627654,-0.3501313,5.7744736)"
+       d="M 20.446429 10.267855 A 10.178572 10.178572 0 1 1  0.089285851,10.267855 A 10.178572 10.178572 0 1 1  20.446429 10.267855 z"
+       sodipodi:ry="10.178572"
+       sodipodi:rx="10.178572"
+       sodipodi:cy="10.267855"
+       sodipodi:cx="10.267858"
+       id="path3366"
+       style="opacity:1;fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:1.8;stroke-opacity:1"
+       sodipodi:type="arc" />
+    <path
+       transform="translate(5.4191133,127.486)"
+       d="M 20.446429 10.267855 A 10.178572 10.178572 0 1 1  0.089285851,10.267855 A 10.178572 10.178572 0 1 1  20.446429 10.267855 z"
+       sodipodi:ry="10.178572"
+       sodipodi:rx="10.178572"
+       sodipodi:cy="10.267855"
+       sodipodi:cx="10.267858"
+       id="path3374"
+       style="opacity:1;fill:#ffd98d;fill-opacity:1;fill-rule:nonzero;stroke:#fff3af;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:1.8;stroke-opacity:1"
+       sodipodi:type="arc" />
+    <g
+       id="g2251">
+      <path
+         id="path3390"
+         d="M 20.446429,10.267855 C 20.446429,15.886426 15.886429,20.446426 10.267858,20.446426 C 4.649286,20.446426 0.089285851,15.886426 0.089285851,10.267855 C 0.089285851,4.6492831 4.649286,0.08928299 10.267858,0.08928299 C 15.886429,0.08928299 20.446429,4.6492831 20.446429,10.267855 z "
+         style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:1"
+         transform="translate(174.80357,366.53571)" />
+      <path
+         id="path3392"
+         d="M 20.446429,10.267855 C 20.446429,15.886426 15.886429,20.446426 10.267858,20.446426 C 4.649286,20.446426 0.089285851,15.886426 0.089285851,10.267855 C 0.089285851,4.6492831 4.649286,0.08928299 10.267858,0.08928299 C 15.886429,0.08928299 20.446429,4.6492831 20.446429,10.267855 z "
+         style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:1"
+         transform="translate(152.80357,362.53571)" />
+      <path
+         id="path3394"
+         d="M 20.446429,10.267855 C 20.446429,15.886426 15.886429,20.446426 10.267858,20.446426 C 4.649286,20.446426 0.089285851,15.886426 0.089285851,10.267855 C 0.089285851,4.6492831 4.649286,0.08928299 10.267858,0.08928299 C 15.886429,0.08928299 20.446429,4.6492831 20.446429,10.267855 z "
+         style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:1"
+         transform="translate(158.80357,382.53571)" />
+    </g>
+    <path
+       transform="translate(274.80357,386.53571)"
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:1"
+       d="M 20.446429,10.267855 C 20.446429,15.886426 15.886429,20.446426 10.267858,20.446426 C 4.649286,20.446426 0.089285851,15.886426 0.089285851,10.267855 C 0.089285851,4.6492831 4.649286,0.08928299 10.267858,0.08928299 C 15.886429,0.08928299 20.446429,4.6492831 20.446429,10.267855 z "
+       id="path3396" />
+    <path
+       transform="translate(252.80357,382.53571)"
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:1"
+       d="M 20.446429,10.267855 C 20.446429,15.886426 15.886429,20.446426 10.267858,20.446426 C 4.649286,20.446426 0.089285851,15.886426 0.089285851,10.267855 C 0.089285851,4.6492831 4.649286,0.08928299 10.267858,0.08928299 C 15.886429,0.08928299 20.446429,4.6492831 20.446429,10.267855 z "
+       id="path3398" />
+    <path
+       transform="translate(258.80357,402.53571)"
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:1"
+       d="M 20.446429,10.267855 C 20.446429,15.886426 15.886429,20.446426 10.267858,20.446426 C 4.649286,20.446426 0.089285851,15.886426 0.089285851,10.267855 C 0.089285851,4.6492831 4.649286,0.08928299 10.267858,0.08928299 C 15.886429,0.08928299 20.446429,4.6492831 20.446429,10.267855 z "
+       id="path3400" />
+    <path
+       transform="translate(134.80357,466.53571)"
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:1"
+       d="M 20.446429,10.267855 C 20.446429,15.886426 15.886429,20.446426 10.267858,20.446426 C 4.649286,20.446426 0.089285851,15.886426 0.089285851,10.267855 C 0.089285851,4.6492831 4.649286,0.08928299 10.267858,0.08928299 C 15.886429,0.08928299 20.446429,4.6492831 20.446429,10.267855 z "
+       id="path3402" />
+    <path
+       transform="translate(112.80357,462.53571)"
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:1"
+       d="M 20.446429,10.267855 C 20.446429,15.886426 15.886429,20.446426 10.267858,20.446426 C 4.649286,20.446426 0.089285851,15.886426 0.089285851,10.267855 C 0.089285851,4.6492831 4.649286,0.08928299 10.267858,0.08928299 C 15.886429,0.08928299 20.446429,4.6492831 20.446429,10.267855 z "
+       id="path3404" />
+    <path
+       transform="translate(118.80357,482.53571)"
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:1"
+       d="M 20.446429,10.267855 C 20.446429,15.886426 15.886429,20.446426 10.267858,20.446426 C 4.649286,20.446426 0.089285851,15.886426 0.089285851,10.267855 C 0.089285851,4.6492831 4.649286,0.08928299 10.267858,0.08928299 C 15.886429,0.08928299 20.446429,4.6492831 20.446429,10.267855 z "
+       id="path3406" />
+    <path
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:1"
+       d="M 270.49343,531.90859 C 268.83359,537.27639 263.12999,540.28574 257.76219,538.6259 C 252.39439,536.96605 249.38504,531.26246 251.04488,525.89466 C 252.70473,520.52686 258.40832,517.51751 263.77612,519.17735 C 269.14392,520.8372 272.15328,526.54079 270.49343,531.90859 z "
+       id="path3408" />
+    <path
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:1"
+       d="M 250.65704,521.58786 C 248.99719,526.95565 243.2936,529.96501 237.9258,528.30516 C 232.558,526.64532 229.54865,520.94172 231.20849,515.57393 C 232.86834,510.20613 238.57193,507.19677 243.93973,508.85662 C 249.30753,510.51646 252.31688,516.22006 250.65704,521.58786 z "
+       id="path3410" />
+    <path
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:1"
+       d="M 250.48082,542.46773 C 248.82097,547.83552 243.11738,550.84488 237.74958,549.18503 C 232.38178,547.52519 229.37243,541.82159 231.03227,536.4538 C 232.69212,531.086 238.39571,528.07664 243.76351,529.73649 C 249.13131,531.39633 252.14066,537.09993 250.48082,542.46773 z "
+       id="path3412" />
+    <path
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:1"
+       d="M 286.86079,499.2879 C 285.20095,504.6557 279.49735,507.66505 274.12956,506.00521 C 268.76176,504.34536 265.7524,498.64177 267.41225,493.27397 C 269.07209,487.90617 274.77569,484.89682 280.14349,486.55666 C 285.51128,488.21651 288.52064,493.9201 286.86079,499.2879 z "
+       id="path3414" />
+    <path
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:1"
+       d="M 267.0244,488.96717 C 265.36456,494.33496 259.66096,497.34432 254.29316,495.68447 C 248.92536,494.02463 245.91601,488.32103 247.57586,482.95324 C 249.2357,477.58544 254.93929,474.57608 260.30709,476.23593 C 265.67489,477.89577 268.68425,483.59937 267.0244,488.96717 z "
+       id="path3416" />
+    <path
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:1"
+       d="M 266.84818,509.84704 C 265.18834,515.21483 259.48474,518.22419 254.11694,516.56434 C 248.74915,514.9045 245.73979,509.2009 247.39964,503.83311 C 249.05948,498.46531 254.76308,495.45595 260.13087,497.1158 C 265.49867,498.77564 268.50803,504.47924 266.84818,509.84704 z "
+       id="path3418" />
+    <path
+       transform="translate(140.80357,610.53571)"
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:1"
+       d="M 20.446429,10.267855 C 20.446429,15.886426 15.886429,20.446426 10.267858,20.446426 C 4.649286,20.446426 0.089285851,15.886426 0.089285851,10.267855 C 0.089285851,4.6492831 4.649286,0.08928299 10.267858,0.08928299 C 15.886429,0.08928299 20.446429,4.6492831 20.446429,10.267855 z "
+       id="path3420" />
+    <path
+       transform="translate(118.80357,606.53571)"
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:1"
+       d="M 20.446429,10.267855 C 20.446429,15.886426 15.886429,20.446426 10.267858,20.446426 C 4.649286,20.446426 0.089285851,15.886426 0.089285851,10.267855 C 0.089285851,4.6492831 4.649286,0.08928299 10.267858,0.08928299 C 15.886429,0.08928299 20.446429,4.6492831 20.446429,10.267855 z "
+       id="path3422" />
+    <path
+       transform="translate(124.80357,626.53571)"
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:1"
+       d="M 20.446429,10.267855 C 20.446429,15.886426 15.886429,20.446426 10.267858,20.446426 C 4.649286,20.446426 0.089285851,15.886426 0.089285851,10.267855 C 0.089285851,4.6492831 4.649286,0.08928299 10.267858,0.08928299 C 15.886429,0.08928299 20.446429,4.6492831 20.446429,10.267855 z "
+       id="path3424" />
+    <path
+       transform="translate(148.80357,572.53571)"
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:1"
+       d="M 20.446429,10.267855 C 20.446429,15.886426 15.886429,20.446426 10.267858,20.446426 C 4.649286,20.446426 0.089285851,15.886426 0.089285851,10.267855 C 0.089285851,4.6492831 4.649286,0.08928299 10.267858,0.08928299 C 15.886429,0.08928299 20.446429,4.6492831 20.446429,10.267855 z "
+       id="path3426" />
+    <path
+       transform="translate(126.80357,568.53571)"
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:1"
+       d="M 20.446429,10.267855 C 20.446429,15.886426 15.886429,20.446426 10.267858,20.446426 C 4.649286,20.446426 0.089285851,15.886426 0.089285851,10.267855 C 0.089285851,4.6492831 4.649286,0.08928299 10.267858,0.08928299 C 15.886429,0.08928299 20.446429,4.6492831 20.446429,10.267855 z "
+       id="path3428" />
+    <path
+       transform="translate(132.80357,588.53571)"
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:1"
+       d="M 20.446429,10.267855 C 20.446429,15.886426 15.886429,20.446426 10.267858,20.446426 C 4.649286,20.446426 0.089285851,15.886426 0.089285851,10.267855 C 0.089285851,4.6492831 4.649286,0.08928299 10.267858,0.08928299 C 15.886429,0.08928299 20.446429,4.6492831 20.446429,10.267855 z "
+       id="path3430" />
+    <path
+       transform="translate(154.80357,536.53571)"
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:1"
+       d="M 20.446429,10.267855 C 20.446429,15.886426 15.886429,20.446426 10.267858,20.446426 C 4.649286,20.446426 0.089285851,15.886426 0.089285851,10.267855 C 0.089285851,4.6492831 4.649286,0.08928299 10.267858,0.08928299 C 15.886429,0.08928299 20.446429,4.6492831 20.446429,10.267855 z "
+       id="path3432" />
+    <path
+       transform="translate(132.80357,532.53571)"
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:1"
+       d="M 20.446429,10.267855 C 20.446429,15.886426 15.886429,20.446426 10.267858,20.446426 C 4.649286,20.446426 0.089285851,15.886426 0.089285851,10.267855 C 0.089285851,4.6492831 4.649286,0.08928299 10.267858,0.08928299 C 15.886429,0.08928299 20.446429,4.6492831 20.446429,10.267855 z "
+       id="path3434" />
+    <path
+       transform="translate(138.80357,552.53571)"
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:1"
+       d="M 20.446429,10.267855 C 20.446429,15.886426 15.886429,20.446426 10.267858,20.446426 C 4.649286,20.446426 0.089285851,15.886426 0.089285851,10.267855 C 0.089285851,4.6492831 4.649286,0.08928299 10.267858,0.08928299 C 15.886429,0.08928299 20.446429,4.6492831 20.446429,10.267855 z "
+       id="path3436" />
+    <path
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:1"
+       d="M 283.33991,598.68409 C 281.68007,604.05189 275.97647,607.06125 270.60868,605.4014 C 265.24088,603.74156 262.23152,598.03796 263.89137,592.67016 C 265.55121,587.30236 271.25481,584.29301 276.62261,585.95286 C 281.9904,587.6127 284.99976,593.31629 283.33991,598.68409 z "
+       id="path3438" />
+    <path
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:1"
+       d="M 263.50352,588.36336 C 261.84368,593.73116 256.14008,596.74051 250.77228,595.08067 C 245.40448,593.42082 242.39513,587.71723 244.05497,582.34943 C 245.71482,576.98163 251.41841,573.97228 256.78621,575.63212 C 262.15401,577.29197 265.16336,582.99556 263.50352,588.36336 z "
+       id="path3440" />
+    <path
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:1"
+       d="M 263.3273,609.24323 C 261.66746,614.61103 255.96386,617.62038 250.59606,615.96054 C 245.22826,614.30069 242.21891,608.5971 243.87875,603.2293 C 245.5386,597.8615 251.24219,594.85215 256.60999,596.51199 C 261.97779,598.17184 264.98715,603.87543 263.3273,609.24323 z "
+       id="path3442" />
+    <path
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:1"
+       d="M 263.15108,630.1231 C 261.49124,635.4909 255.78764,638.50025 250.41984,636.84041 C 245.05205,635.18056 242.04269,629.47697 243.70254,624.10917 C 245.36238,618.74137 251.06597,615.73202 256.43377,617.39186 C 261.80157,619.05171 264.81093,624.7553 263.15108,630.1231 z "
+       id="path3444" />
+    <path
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:1"
+       d="M 243.31469,619.80237 C 241.65484,625.17016 235.95125,628.17952 230.58345,626.51967 C 225.21565,624.85983 222.2063,619.15623 223.86614,613.78844 C 225.52599,608.42064 231.22958,605.41128 236.59738,607.07113 C 241.96518,608.73097 244.97453,614.43457 243.31469,619.80237 z "
+       id="path3446" />
+    <path
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:1"
+       d="M 243.13847,640.68224 C 241.47862,646.05003 235.77503,649.05939 230.40723,647.39954 C 225.03943,645.7397 222.03008,640.0361 223.68992,634.66831 C 225.34977,629.30051 231.05336,626.29115 236.42116,627.951 C 241.78896,629.61084 244.79831,635.31444 243.13847,640.68224 z "
+       id="path3448" />
+    <path
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:1"
+       d="M 280.90052,660.73286 C 279.24068,666.10066 273.53708,669.11001 268.16928,667.45017 C 262.80148,665.79032 259.79213,660.08673 261.45197,654.71893 C 263.11182,649.35113 268.81541,646.34178 274.18321,648.00162 C 279.55101,649.66147 282.56037,655.36506 280.90052,660.73286 z "
+       id="path3450" />
+    <path
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:1"
+       d="M 261.06413,650.41213 C 259.40428,655.77992 253.70069,658.78928 248.33289,657.12943 C 242.96509,655.46959 239.95574,649.76599 241.61558,644.3982 C 243.27543,639.0304 248.97902,636.02104 254.34682,637.68089 C 259.71462,639.34073 262.72397,645.04433 261.06413,650.41213 z "
+       id="path3452" />
+    <path
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:1"
+       d="M 260.88791,671.292 C 259.22806,676.65979 253.52447,679.66915 248.15667,678.0093 C 242.78887,676.34946 239.77952,670.64586 241.43936,665.27807 C 243.09921,659.91027 248.8028,656.90091 254.1706,658.56076 C 259.5384,660.2206 262.54775,665.9242 260.88791,671.292 z "
+       id="path3454" />
+    <path
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:1"
+       d="M 319.42963,657.99288 C 317.76979,663.36068 312.06619,666.37003 306.6984,664.71019 C 301.3306,663.05034 298.32124,657.34675 299.98109,651.97895 C 301.64093,646.61115 307.34453,643.6018 312.71233,645.26164 C 318.08012,646.92149 321.08948,652.62508 319.42963,657.99288 z "
+       id="path3456" />
+    <path
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:1"
+       d="M 299.59324,647.67215 C 297.9334,653.03994 292.2298,656.0493 286.862,654.38945 C 281.4942,652.72961 278.48485,647.02601 280.14469,641.65822 C 281.80454,636.29042 287.50813,633.28106 292.87593,634.94091 C 298.24373,636.60075 301.25308,642.30435 299.59324,647.67215 z "
+       id="path3458" />
+    <path
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:1"
+       d="M 299.41702,668.55202 C 297.75718,673.91981 292.05358,676.92917 286.68578,675.26932 C 281.31798,673.60948 278.30863,667.90588 279.96848,662.53809 C 281.62832,657.17029 287.33191,654.16093 292.69971,655.82078 C 298.06751,657.48062 301.07687,663.18422 299.41702,668.55202 z "
+       id="path3460" />
+    <path
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:1"
+       d="M 336.38784,623.46145 C 334.72799,628.82925 329.0244,631.83861 323.6566,630.17876 C 318.2888,628.51892 315.27945,622.81532 316.93929,617.44752 C 318.59914,612.07973 324.30273,609.07037 329.67053,610.73022 C 335.03833,612.39006 338.04768,618.09366 336.38784,623.46145 z "
+       id="path3462" />
+    <path
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:1"
+       d="M 316.55145,613.14072 C 314.8916,618.50852 309.18801,621.51787 303.82021,619.85803 C 298.45241,618.19818 295.44305,612.49459 297.1029,607.12679 C 298.76274,601.75899 304.46634,598.74964 309.83414,600.40948 C 315.20194,602.06933 318.21129,607.77292 316.55145,613.14072 z "
+       id="path3464" />
+    <path
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:1"
+       d="M 316.37523,634.02059 C 314.71538,639.38839 309.01179,642.39774 303.64399,640.7379 C 298.27619,639.07805 295.26684,633.37446 296.92668,628.00666 C 298.58652,622.63886 304.29012,619.62951 309.65792,621.28935 C 315.02572,622.9492 318.03507,628.65279 316.37523,634.02059 z "
+       id="path3466" />
+    <path
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:1"
+       d="M 326.00492,582.56897 C 324.34508,587.93677 318.64148,590.94613 313.27368,589.28628 C 307.90588,587.62644 304.89653,581.92284 306.55637,576.55504 C 308.21622,571.18724 313.91981,568.17789 319.28761,569.83774 C 324.65541,571.49758 327.66477,577.20117 326.00492,582.56897 z "
+       id="path3468" />
+    <path
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:1"
+       d="M 306.16853,572.24824 C 304.50868,577.61604 298.80509,580.62539 293.43729,578.96555 C 288.06949,577.3057 285.06014,571.60211 286.71998,566.23431 C 288.37983,560.86651 294.08342,557.85716 299.45122,559.517 C 304.81902,561.17685 307.82837,566.88044 306.16853,572.24824 z "
+       id="path3470" />
+    <path
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:1"
+       d="M 305.99231,593.12811 C 304.33246,598.49591 298.62887,601.50526 293.26107,599.84542 C 287.89327,598.18557 284.88392,592.48198 286.54376,587.11418 C 288.20361,581.74638 293.9072,578.73703 299.275,580.39687 C 304.6428,582.05672 307.65215,587.76031 305.99231,593.12811 z "
+       id="path3472" />
+    <path
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#215e00;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:1.8;stroke-opacity:1"
+       d="M 220.71429,798.57143 L 160,704.28571 L 206.42857,595 C 206.42857,595 165.76085,529.46235 179.28572,501.42858 C 192.81059,473.39481 222.56644,464.77783 210.71429,441.42858"
+       id="path3476"
+       sodipodi:nodetypes="ccczc" />
+    <path
+       transform="translate(211.80357,793.82142)"
+       d="M 20.446429 10.267855 A 10.178572 10.178572 0 1 1  0.089285851,10.267855 A 10.178572 10.178572 0 1 1  20.446429 10.267855 z"
+       sodipodi:ry="10.178572"
+       sodipodi:rx="10.178572"
+       sodipodi:cy="10.267855"
+       sodipodi:cx="10.267858"
+       id="path3474"
+       style="opacity:1;fill:#64ff8b;fill-opacity:1;fill-rule:nonzero;stroke:#215e00;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:1.8;stroke-opacity:1"
+       sodipodi:type="arc" />
+    <path
+       id="path2218"
+       d="M 490.60177,197.55704 C 488.94192,202.92484 483.23833,205.9342 477.87053,204.27435 C 472.50273,202.61451 469.49338,196.91091 471.15322,191.54311 C 472.81307,186.17532 478.51666,183.16596 483.88446,184.82581 C 489.25226,186.48565 492.26161,192.18925 490.60177,197.55704 z "
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:0.69182392"
+       inkscape:export-filename="C:\Documents and Settings\Lucas Ellis.LUCAS\Desktop\beakie-level.png"
+       inkscape:export-xdpi="199.98645"
+       inkscape:export-ydpi="199.98645" />
+    <path
+       id="path2220"
+       d="M 470.76538,187.23631 C 469.10553,192.60411 463.40194,195.61346 458.03414,193.95362 C 452.66634,192.29377 449.65698,186.59018 451.31683,181.22238 C 452.97667,175.85458 458.68027,172.84523 464.04807,174.50507 C 469.41587,176.16492 472.42522,181.86851 470.76538,187.23631 z "
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:0.69182392"
+       inkscape:export-filename="C:\Documents and Settings\Lucas Ellis.LUCAS\Desktop\beakie-level.png"
+       inkscape:export-xdpi="199.98645"
+       inkscape:export-ydpi="199.98645" />
+    <path
+       id="path2222"
+       d="M 470.58916,208.11618 C 468.92931,213.48398 463.22572,216.49333 457.85792,214.83349 C 452.49012,213.17364 449.48077,207.47005 451.14061,202.10225 C 452.80045,196.73445 458.50405,193.7251 463.87185,195.38494 C 469.23965,197.04479 472.249,202.74838 470.58916,208.11618 z "
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:0.69182392"
+       inkscape:export-filename="C:\Documents and Settings\Lucas Ellis.LUCAS\Desktop\beakie-level.png"
+       inkscape:export-xdpi="199.98645"
+       inkscape:export-ydpi="199.98645" />
+    <rect
+       style="opacity:1;fill:#d4b37f;fill-opacity:1;fill-rule:nonzero;stroke:#a1a1a1;stroke-width:3;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.35;stroke-opacity:1"
+       id="rect2226"
+       width="22.857143"
+       height="88.571426"
+       x="359.98593"
+       y="343.427"
+       rx="3.0876827"
+       ry="3.3141434"
+       transform="matrix(0.9918232,-0.1276193,0.1276193,0.9918232,0,0)"
+       inkscape:export-filename="C:\Documents and Settings\Lucas Ellis.LUCAS\Desktop\beakie-level.png"
+       inkscape:export-xdpi="199.98645"
+       inkscape:export-ydpi="199.98645" />
+    <rect
+       ry="3.3141429"
+       rx="3.0876822"
+       y="211.12564"
+       x="393.03659"
+       height="88.571411"
+       width="22.85714"
+       id="rect3198"
+       style="opacity:1;fill:#d4b37f;fill-opacity:1;fill-rule:nonzero;stroke:#a1a1a1;stroke-width:2.99999952;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.35;stroke-opacity:1"
+       transform="matrix(0.9997567,-2.2055465e-2,2.2055465e-2,0.9997567,0,0)"
+       inkscape:export-filename="C:\Documents and Settings\Lucas Ellis.LUCAS\Desktop\beakie-level.png"
+       inkscape:export-xdpi="199.98645"
+       inkscape:export-ydpi="199.98645" />
+    <rect
+       style="opacity:1;fill:#d4b37f;fill-opacity:1;fill-rule:nonzero;stroke:#a1a1a1;stroke-width:3;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.35;stroke-opacity:1"
+       id="rect3200"
+       width="22.857143"
+       height="88.571426"
+       x="432.90671"
+       y="2.3057208"
+       rx="3.0876827"
+       ry="3.3141434"
+       transform="matrix(0.9693756,0.2455828,-0.2455828,0.9693756,0,0)"
+       inkscape:export-filename="C:\Documents and Settings\Lucas Ellis.LUCAS\Desktop\beakie-level.png"
+       inkscape:export-xdpi="199.98645"
+       inkscape:export-ydpi="199.98645" />
+    <rect
+       ry="3.3141434"
+       rx="3.0876827"
+       y="-471.35092"
+       x="222.82556"
+       height="88.571426"
+       width="22.857143"
+       id="rect3202"
+       style="opacity:1;fill:#d4b37f;fill-opacity:1;fill-rule:nonzero;stroke:#a1a1a1;stroke-width:3;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.35;stroke-opacity:1"
+       transform="matrix(0.3092241,0.9509892,-0.9509892,0.3092241,0,0)"
+       inkscape:export-filename="C:\Documents and Settings\Lucas Ellis.LUCAS\Desktop\beakie-level.png"
+       inkscape:export-xdpi="199.98645"
+       inkscape:export-ydpi="199.98645" />
+    <rect
+       style="opacity:1;fill:#d4b37f;fill-opacity:1;fill-rule:nonzero;stroke:#a1a1a1;stroke-width:3;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.35;stroke-opacity:1"
+       id="rect3204"
+       width="22.857143"
+       height="88.571426"
+       x="51.463253"
+       y="-613.38068"
+       rx="3.0876827"
+       ry="3.3141434"
+       transform="matrix(-2.75939e-2,0.9996192,-0.9996192,-2.75939e-2,0,0)"
+       inkscape:export-filename="C:\Documents and Settings\Lucas Ellis.LUCAS\Desktop\beakie-level.png"
+       inkscape:export-xdpi="199.98645"
+       inkscape:export-ydpi="199.98645" />
+    <rect
+       ry="3.3141429"
+       rx="3.0876822"
+       y="583.49207"
+       x="197.61961"
+       height="88.571426"
+       width="22.85714"
+       id="rect3206"
+       style="opacity:1;fill:#d4b37f;fill-opacity:1;fill-rule:nonzero;stroke:#a1a1a1;stroke-width:2.99999952;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.35;stroke-opacity:1"
+       transform="matrix(0.4537584,-0.8911247,0.8911247,0.4537584,0,0)"
+       inkscape:export-filename="C:\Documents and Settings\Lucas Ellis.LUCAS\Desktop\beakie-level.png"
+       inkscape:export-xdpi="199.98645"
+       inkscape:export-ydpi="199.98645" />
+    <rect
+       style="opacity:1;fill:#d4b37f;fill-opacity:1;fill-rule:nonzero;stroke:#a1a1a1;stroke-width:3;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.35;stroke-opacity:1"
+       id="rect3208"
+       width="22.857143"
+       height="88.571426"
+       x="629.76575"
+       y="306.43787"
+       rx="3.0876827"
+       ry="3.3141434"
+       transform="matrix(0.9627504,-0.2703916,0.2703916,0.9627504,0,0)"
+       inkscape:export-filename="C:\Documents and Settings\Lucas Ellis.LUCAS\Desktop\beakie-level.png"
+       inkscape:export-xdpi="199.98645"
+       inkscape:export-ydpi="199.98645" />
+    <rect
+       ry="3.3141434"
+       rx="3.0876827"
+       y="209.28572"
+       x="713.57141"
+       height="88.571426"
+       width="22.857143"
+       id="rect3210"
+       style="opacity:1;fill:#d4b37f;fill-opacity:1;fill-rule:nonzero;stroke:#a1a1a1;stroke-width:3;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.35;stroke-opacity:1"
+       inkscape:export-filename="C:\Documents and Settings\Lucas Ellis.LUCAS\Desktop\beakie-level.png"
+       inkscape:export-xdpi="199.98645"
+       inkscape:export-ydpi="199.98645" />
+    <rect
+       style="opacity:1;fill:#d4b37f;fill-opacity:1;fill-rule:nonzero;stroke:#a1a1a1;stroke-width:3;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.35;stroke-opacity:1"
+       id="rect3212"
+       width="22.857143"
+       height="88.571426"
+       x="714.28577"
+       y="300.71429"
+       rx="3.0876827"
+       ry="3.3141434"
+       inkscape:export-filename="C:\Documents and Settings\Lucas Ellis.LUCAS\Desktop\beakie-level.png"
+       inkscape:export-xdpi="199.98645"
+       inkscape:export-ydpi="199.98645" />
+    <path
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:0.69182392"
+       d="M 554.88748,233.27133 C 553.22763,238.63913 547.52404,241.64849 542.15624,239.98864 C 536.78844,238.3288 533.77909,232.6252 535.43893,227.2574 C 537.09878,221.88961 542.80237,218.88025 548.17017,220.5401 C 553.53797,222.19994 556.54732,227.90354 554.88748,233.27133 z "
+       id="path3216"
+       inkscape:export-filename="C:\Documents and Settings\Lucas Ellis.LUCAS\Desktop\beakie-level.png"
+       inkscape:export-xdpi="199.98645"
+       inkscape:export-ydpi="199.98645" />
+    <path
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:0.69182392"
+       d="M 535.05109,222.9506 C 533.39124,228.3184 527.68765,231.32775 522.31985,229.66791 C 516.95205,228.00806 513.94269,222.30447 515.60254,216.93667 C 517.26238,211.56887 522.96598,208.55952 528.33378,210.21936 C 533.70158,211.87921 536.71093,217.5828 535.05109,222.9506 z "
+       id="path3218"
+       inkscape:export-filename="C:\Documents and Settings\Lucas Ellis.LUCAS\Desktop\beakie-level.png"
+       inkscape:export-xdpi="199.98645"
+       inkscape:export-ydpi="199.98645" />
+    <path
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:0.69182392"
+       d="M 534.87487,243.83047 C 533.21502,249.19827 527.51143,252.20762 522.14363,250.54778 C 516.77583,248.88793 513.76648,243.18434 515.42632,237.81654 C 517.08616,232.44874 522.78976,229.43939 528.15756,231.09923 C 533.52536,232.75908 536.53471,238.46267 534.87487,243.83047 z "
+       id="path3220"
+       inkscape:export-filename="C:\Documents and Settings\Lucas Ellis.LUCAS\Desktop\beakie-level.png"
+       inkscape:export-xdpi="199.98645"
+       inkscape:export-ydpi="199.98645" />
+    <path
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:0.69182392"
+       d="M 544.50456,192.37885 C 542.84472,197.74665 537.14112,200.75601 531.77332,199.09616 C 526.40552,197.43632 523.39617,191.73272 525.05601,186.36492 C 526.71586,180.99712 532.41945,177.98777 537.78725,179.64762 C 543.15505,181.30746 546.16441,187.01105 544.50456,192.37885 z "
+       id="path3222"
+       inkscape:export-filename="C:\Documents and Settings\Lucas Ellis.LUCAS\Desktop\beakie-level.png"
+       inkscape:export-xdpi="199.98645"
+       inkscape:export-ydpi="199.98645" />
+    <path
+       id="path3224"
+       d="M 623.45891,231.12847 C 621.79906,236.49627 616.09547,239.50563 610.72767,237.84578 C 605.35987,236.18594 602.35052,230.48234 604.01036,225.11454 C 605.67021,219.74675 611.3738,216.73739 616.7416,218.39724 C 622.1094,220.05708 625.11875,225.76068 623.45891,231.12847 z "
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:0.69182392"
+       inkscape:export-filename="C:\Documents and Settings\Lucas Ellis.LUCAS\Desktop\beakie-level.png"
+       inkscape:export-xdpi="199.98645"
+       inkscape:export-ydpi="199.98645" />
+    <path
+       id="path3226"
+       d="M 603.62252,220.80774 C 601.96267,226.17554 596.25908,229.18489 590.89128,227.52505 C 585.52348,225.8652 582.51412,220.16161 584.17397,214.79381 C 585.83381,209.42601 591.53741,206.41666 596.90521,208.0765 C 602.27301,209.73635 605.28236,215.43994 603.62252,220.80774 z "
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:0.69182392"
+       inkscape:export-filename="C:\Documents and Settings\Lucas Ellis.LUCAS\Desktop\beakie-level.png"
+       inkscape:export-xdpi="199.98645"
+       inkscape:export-ydpi="199.98645" />
+    <path
+       id="path3228"
+       d="M 635.77118,245.72822 C 634.11133,251.09602 628.40774,254.10537 623.03994,252.44553 C 617.67214,250.78568 614.66279,245.08209 616.32263,239.71429 C 617.98247,234.34649 623.68607,231.33714 629.05387,232.99698 C 634.42167,234.65683 637.43102,240.36042 635.77118,245.72822 z "
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:0.69182392"
+       inkscape:export-filename="C:\Documents and Settings\Lucas Ellis.LUCAS\Desktop\beakie-level.png"
+       inkscape:export-xdpi="199.98645"
+       inkscape:export-ydpi="199.98645" />
+    <path
+       id="path3230"
+       d="M 613.07599,190.23599 C 611.41615,195.60379 605.71255,198.61315 600.34475,196.9533 C 594.97695,195.29346 591.9676,189.58986 593.62744,184.22206 C 595.28729,178.85426 600.99088,175.84491 606.35868,177.50476 C 611.72648,179.1646 614.73584,184.86819 613.07599,190.23599 z "
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:0.69182392"
+       inkscape:export-filename="C:\Documents and Settings\Lucas Ellis.LUCAS\Desktop\beakie-level.png"
+       inkscape:export-xdpi="199.98645"
+       inkscape:export-ydpi="199.98645" />
+    <path
+       style="opacity:1;fill:#cea05a;fill-opacity:1;fill-rule:nonzero;stroke:#514a4a;stroke-width:3;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.35;stroke-opacity:1"
+       d="M 620.66453,360.76133 L 628.14286,384.99999 L 659.57143,385.71428 L 667.30603,362.9079 L 660.85425,357.73087 L 642.78572,357.85714 L 625.85361,357.22579 L 620.66453,360.76133 z "
+       id="path3232"
+       inkscape:export-filename="C:\Documents and Settings\Lucas Ellis.LUCAS\Desktop\beakie-level.png"
+       inkscape:export-xdpi="199.98645"
+       inkscape:export-ydpi="199.98645"
+       sodipodi:nodetypes="cccccccc" />
+    <path
+       style="fill:#35cb47;fill-opacity:1;fill-rule:nonzero;stroke:#a3fb9c;stroke-width:3;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:0.35;stroke-opacity:1"
+       d="M 639.92858,279.99999 C 630.38068,278.65597 624.21211,282.71889 619.40581,288.96144 C 619.35503,279.70032 615.97414,272.93679 604.54109,272.21237 C 612.43299,267.82262 614.08687,261.98435 615.87694,252.89943 C 622.15622,261.44059 629.1017,262.66617 637.74762,257.71244 C 633.81529,266.69473 635.3037,273.8701 639.92858,279.99999 z "
+       id="path3236"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="C:\Documents and Settings\Lucas Ellis.LUCAS\Desktop\beakie-level.png"
+       inkscape:export-xdpi="199.98645"
+       inkscape:export-ydpi="199.98645" />
+    <g
+       id="g3262"
+       transform="matrix(0.7132767,0.2408596,-0.2408596,0.7132767,480.10664,-11.617661)"
+       inkscape:export-filename="C:\Documents and Settings\Lucas Ellis.LUCAS\Desktop\beakie-level.png"
+       inkscape:export-xdpi="199.98645"
+       inkscape:export-ydpi="199.98645">
+      <path
+         sodipodi:nodetypes="cccc"
+         id="path3245"
+         d="M 347.99755,322.79424 C 347.9967,306.54635 350.54918,294.12845 358.60415,289.96428 C 368.558,300.18311 368.91998,311.77221 369.71583,323.29932 L 347.99755,322.79424 z "
+         style="opacity:1;fill:#7fa1d4;fill-opacity:1;fill-rule:nonzero;stroke:#4e4ea6;stroke-width:3;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.35;stroke-opacity:1" />
+      <path
+         sodipodi:nodetypes="cccc"
+         id="path3249"
+         d="M 346.3532,311.90745 C 346.22655,314.30961 348.26142,315.99486 351.89364,317.87261 C 356.38212,313.26464 356.29282,313.53148 356.14661,311.6797 L 346.3532,311.90745 z "
+         style="opacity:1;fill:#ffff6f;fill-opacity:1;fill-rule:nonzero;stroke:#fde34b;stroke-width:1.35278738;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.35;stroke-opacity:1" />
+      <path
+         style="opacity:1;fill:#ffff6f;fill-opacity:1;fill-rule:nonzero;stroke:#fde34b;stroke-width:1.35278738;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.35;stroke-opacity:1"
+         d="M 346.41633,313.28857 C 346.41595,305.96192 347.56694,300.36233 351.19916,298.48458 C 355.68764,303.09255 355.85087,308.31841 356.20974,313.51632 L 346.41633,313.28857 z "
+         id="path3247"
+         sodipodi:nodetypes="cccc" />
+    </g>
+    <g
+       id="g3257"
+       transform="matrix(0.4892691,8.0242745e-2,-8.0242745e-2,0.4892691,475.38449,105.55351)"
+       inkscape:export-filename="C:\Documents and Settings\Lucas Ellis.LUCAS\Desktop\beakie-level.png"
+       inkscape:export-xdpi="199.98645"
+       inkscape:export-ydpi="199.98645">
+      <path
+         style="opacity:1;fill:#7fa1d4;fill-opacity:1;fill-rule:nonzero;stroke:#4e4ea6;stroke-width:3;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.35;stroke-opacity:1"
+         d="M 393.70695,335.16861 C 393.7061,318.92072 396.25858,306.50282 404.31355,302.33865 C 414.2674,312.55748 414.62938,324.14658 415.42523,335.67369 L 393.70695,335.16861 z "
+         id="path3251"
+         sodipodi:nodetypes="cccc" />
+      <path
+         style="opacity:1;fill:#ffff6f;fill-opacity:1;fill-rule:nonzero;stroke:#fde34b;stroke-width:1.35278738;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.35;stroke-opacity:1"
+         d="M 392.0626,324.28182 C 391.93595,326.68398 393.97082,328.36923 397.60304,330.24698 C 402.09152,325.63901 402.00222,325.90585 401.85601,324.05407 L 392.0626,324.28182 z "
+         id="path3253"
+         sodipodi:nodetypes="cccc" />
+      <path
+         sodipodi:nodetypes="cccc"
+         id="path3255"
+         d="M 392.12573,325.66294 C 392.12535,318.33629 393.27634,312.7367 396.90856,310.85895 C 401.39704,315.46692 401.56027,320.69278 401.91914,325.89069 L 392.12573,325.66294 z "
+         style="opacity:1;fill:#ffff6f;fill-opacity:1;fill-rule:nonzero;stroke:#fde34b;stroke-width:1.35278738;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.35;stroke-opacity:1" />
+    </g>
+    <g
+       transform="matrix(0.4316044,-0.2440097,0.2440097,0.4316044,395.52289,232.05771)"
+       id="g3267"
+       inkscape:export-filename="C:\Documents and Settings\Lucas Ellis.LUCAS\Desktop\beakie-level.png"
+       inkscape:export-xdpi="199.98645"
+       inkscape:export-ydpi="199.98645">
+      <path
+         sodipodi:nodetypes="cccc"
+         id="path3269"
+         d="M 393.70695,335.16861 C 393.7061,318.92072 396.25858,306.50282 404.31355,302.33865 C 414.2674,312.55748 414.62938,324.14658 415.42523,335.67369 L 393.70695,335.16861 z "
+         style="opacity:1;fill:#7fa1d4;fill-opacity:1;fill-rule:nonzero;stroke:#4e4ea6;stroke-width:3;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.35;stroke-opacity:1" />
+      <path
+         sodipodi:nodetypes="cccc"
+         id="path3271"
+         d="M 392.0626,324.28182 C 391.93595,326.68398 393.97082,328.36923 397.60304,330.24698 C 402.09152,325.63901 402.00222,325.90585 401.85601,324.05407 L 392.0626,324.28182 z "
+         style="opacity:1;fill:#ffff6f;fill-opacity:1;fill-rule:nonzero;stroke:#fde34b;stroke-width:1.35278738;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.35;stroke-opacity:1" />
+      <path
+         style="opacity:1;fill:#ffff6f;fill-opacity:1;fill-rule:nonzero;stroke:#fde34b;stroke-width:1.35278738;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.35;stroke-opacity:1"
+         d="M 392.12573,325.66294 C 392.12535,318.33629 393.27634,312.7367 396.90856,310.85895 C 401.39704,315.46692 401.56027,320.69278 401.91914,325.89069 L 392.12573,325.66294 z "
+         id="path3273"
+         sodipodi:nodetypes="cccc" />
+    </g>
+    <path
+       style="opacity:1;fill:#7dff9f;fill-opacity:1;fill-rule:nonzero;stroke:#38e659;stroke-width:3;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.35;stroke-opacity:1"
+       d="M 567.67487,352.73612 C 558.53214,358.39457 558.98006,371.59049 561.25001,380.71428 C 562.91272,387.39734 578.92858,384.2857 578.92858,384.2857 C 578.92858,384.2857 578.66072,390.53571 581.42858,390.53571 C 590.35581,390.53572 611.42858,390 611.42858,390 C 611.42858,390 631.87501,398.25892 633.21429,378.75 C 633.80142,370.27584 628.00068,363.00005 620.53572,362.32142 C 612.67857,361.60714 608.03573,370 608.03573,370 L 585.17858,369.82142 C 583.18032,363.01801 575.86351,355.25387 567.67487,352.73612 z "
+       id="path3283"
+       sodipodi:nodetypes="cscscssccc"
+       inkscape:export-filename="C:\Documents and Settings\Lucas Ellis.LUCAS\Desktop\beakie-level.png"
+       inkscape:export-xdpi="199.98645"
+       inkscape:export-ydpi="199.98645" />
+    <path
+       sodipodi:type="arc"
+       style="opacity:1;fill:#488bff;fill-opacity:1;fill-rule:nonzero;stroke:#48f626;stroke-width:3;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.35;stroke-opacity:1"
+       id="path3285"
+       sodipodi:cx="376.875"
+       sodipodi:cy="321.69641"
+       sodipodi:rx="3.4821429"
+       sodipodi:ry="3.4821429"
+       d="M 380.35714 321.69641 A 3.4821429 3.4821429 0 1 1  373.39286,321.69641 A 3.4821429 3.4821429 0 1 1  380.35714 321.69641 z"
+       transform="translate(192.5,46.428572)"
+       inkscape:export-filename="C:\Documents and Settings\Lucas Ellis.LUCAS\Desktop\beakie-level.png"
+       inkscape:export-xdpi="199.98645"
+       inkscape:export-ydpi="199.98645" />
+    <path
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#10f273;stroke-width:2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.35;stroke-opacity:1"
+       d="M 563.48215,379.99999 C 563.48215,379.99999 572.81251,378.43749 576.78572,377.49999 C 580.75893,376.56249 580.00001,374.64285 580.00001,374.64285"
+       id="path3291"
+       sodipodi:nodetypes="csc"
+       inkscape:export-filename="C:\Documents and Settings\Lucas Ellis.LUCAS\Desktop\beakie-level.png"
+       inkscape:export-xdpi="199.98645"
+       inkscape:export-ydpi="199.98645" />
+    <g
+       transform="matrix(0.492474,-5.738014e-2,5.738014e-2,0.492474,349.22017,211.04413)"
+       id="g3275"
+       inkscape:export-filename="C:\Documents and Settings\Lucas Ellis.LUCAS\Desktop\beakie-level.png"
+       inkscape:export-xdpi="199.98645"
+       inkscape:export-ydpi="199.98645">
+      <path
+         sodipodi:nodetypes="cccc"
+         id="path3277"
+         d="M 393.70695,335.16861 C 393.7061,318.92072 396.25858,306.50282 404.31355,302.33865 C 414.2674,312.55748 414.62938,324.14658 415.42523,335.67369 L 393.70695,335.16861 z "
+         style="opacity:1;fill:#7fa1d4;fill-opacity:1;fill-rule:nonzero;stroke:#4e4ea6;stroke-width:3;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.35;stroke-opacity:1" />
+      <path
+         sodipodi:nodetypes="cccc"
+         id="path3279"
+         d="M 392.0626,324.28182 C 391.93595,326.68398 393.97082,328.36923 397.60304,330.24698 C 402.09152,325.63901 402.00222,325.90585 401.85601,324.05407 L 392.0626,324.28182 z "
+         style="opacity:1;fill:#ffff6f;fill-opacity:1;fill-rule:nonzero;stroke:#fde34b;stroke-width:1.35278738;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.35;stroke-opacity:1" />
+      <path
+         style="opacity:1;fill:#ffff6f;fill-opacity:1;fill-rule:nonzero;stroke:#fde34b;stroke-width:1.35278738;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.35;stroke-opacity:1"
+         d="M 392.12573,325.66294 C 392.12535,318.33629 393.27634,312.7367 396.90856,310.85895 C 401.39704,315.46692 401.56027,320.69278 401.91914,325.89069 L 392.12573,325.66294 z "
+         id="path3281"
+         sodipodi:nodetypes="cccc" />
+    </g>
+    <g
+       id="g3311"
+       transform="matrix(0.492474,-5.738014e-2,5.738014e-2,0.492474,346.69479,196.14438)"
+       inkscape:export-filename="C:\Documents and Settings\Lucas Ellis.LUCAS\Desktop\beakie-level.png"
+       inkscape:export-xdpi="199.98645"
+       inkscape:export-ydpi="199.98645">
+      <path
+         style="opacity:1;fill:#d47f85;fill-opacity:1;fill-rule:nonzero;stroke:#a64e5b;stroke-width:3;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.35;stroke-opacity:1"
+         d="M 393.70695,335.16861 C 393.7061,318.92072 396.25858,306.50282 404.31355,302.33865 C 414.2674,312.55748 414.62938,324.14658 415.42523,335.67369 L 393.70695,335.16861 z "
+         id="path3313"
+         sodipodi:nodetypes="cccc" />
+      <path
+         style="opacity:1;fill:#ffff6f;fill-opacity:1;fill-rule:nonzero;stroke:#fde34b;stroke-width:1.35278738;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.35;stroke-opacity:1"
+         d="M 392.0626,324.28182 C 391.93595,326.68398 393.97082,328.36923 397.60304,330.24698 C 402.09152,325.63901 402.00222,325.90585 401.85601,324.05407 L 392.0626,324.28182 z "
+         id="path3315"
+         sodipodi:nodetypes="cccc" />
+      <path
+         sodipodi:nodetypes="cccc"
+         id="path3317"
+         d="M 392.12573,325.66294 C 392.12535,318.33629 393.27634,312.7367 396.90856,310.85895 C 401.39704,315.46692 401.56027,320.69278 401.91914,325.89069 L 392.12573,325.66294 z "
+         style="opacity:1;fill:#ffff6f;fill-opacity:1;fill-rule:nonzero;stroke:#fde34b;stroke-width:1.35278738;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.35;stroke-opacity:1" />
+      <path
+         sodipodi:nodetypes="cccc"
+         id="path3319"
+         d="M 392.63151,304.78841 C 392.63066,288.54052 395.18314,276.12262 403.23811,271.95845 C 413.19196,282.17728 413.55394,293.76638 414.34979,305.29349 L 392.63151,304.78841 z "
+         style="opacity:1;fill:#8fd47f;fill-opacity:1;fill-rule:nonzero;stroke:#62a64e;stroke-width:3;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.35;stroke-opacity:1" />
+      <path
+         sodipodi:nodetypes="cccc"
+         id="path3321"
+         d="M 390.98716,293.90162 C 390.86051,296.30378 392.89538,297.98903 396.5276,299.86678 C 401.01608,295.25881 400.92678,295.52565 400.78057,293.67387 L 390.98716,293.90162 z "
+         style="opacity:1;fill:#ffff6f;fill-opacity:1;fill-rule:nonzero;stroke:#fde34b;stroke-width:1.35278738;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.35;stroke-opacity:1" />
+      <path
+         style="opacity:1;fill:#ffff6f;fill-opacity:1;fill-rule:nonzero;stroke:#fde34b;stroke-width:1.35278738;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.35;stroke-opacity:1"
+         d="M 391.05029,295.28274 C 391.04991,287.95609 392.2009,282.3565 395.83312,280.47875 C 400.3216,285.08672 400.48483,290.31258 400.8437,295.51049 L 391.05029,295.28274 z "
+         id="path3323"
+         sodipodi:nodetypes="cccc" />
+    </g>
+    <path
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#38e659;stroke-width:2;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.35;stroke-opacity:1"
+       d="M 611.78572,383.92856 C 621.28663,387.40383 627.15404,384.95246 627.14286,377.85714 C 627.13253,371.29644 623.43151,369.98205 620,369.64285 C 613.35132,368.98563 611.33312,374.95571 612.32143,376.78571 C 615.07323,381.88106 621.25,377.14285 621.25,377.14285"
+       id="path3327"
+       sodipodi:nodetypes="csssc"
+       inkscape:export-filename="C:\Documents and Settings\Lucas Ellis.LUCAS\Desktop\beakie-level.png"
+       inkscape:export-xdpi="199.98645"
+       inkscape:export-ydpi="199.98645" />
+    <path
+       sodipodi:type="arc"
+       style="opacity:1;fill:#d0ab71;fill-opacity:1;fill-rule:nonzero;stroke:#ad8e27;stroke-width:3;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.35;stroke-opacity:1"
+       id="path3329"
+       sodipodi:cx="398.03571"
+       sodipodi:cy="246.60713"
+       sodipodi:rx="3.0357144"
+       sodipodi:ry="3.0357144"
+       d="M 401.07142 246.60713 A 3.0357144 3.0357144 0 1 1  394.99999,246.60713 A 3.0357144 3.0357144 0 1 1  401.07142 246.60713 z"
+       transform="translate(224.10788,12.881249)"
+       inkscape:export-filename="C:\Documents and Settings\Lucas Ellis.LUCAS\Desktop\beakie-level.png"
+       inkscape:export-xdpi="199.98645"
+       inkscape:export-ydpi="199.98645" />
+    <path
+       transform="translate(220.53645,24.666963)"
+       d="M 401.07142 246.60713 A 3.0357144 3.0357144 0 1 1  394.99999,246.60713 A 3.0357144 3.0357144 0 1 1  401.07142 246.60713 z"
+       sodipodi:ry="3.0357144"
+       sodipodi:rx="3.0357144"
+       sodipodi:cy="246.60713"
+       sodipodi:cx="398.03571"
+       id="path3339"
+       style="opacity:1;fill:#d0ab71;fill-opacity:1;fill-rule:nonzero;stroke:#ad8e27;stroke-width:3;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.35;stroke-opacity:1"
+       sodipodi:type="arc"
+       inkscape:export-filename="C:\Documents and Settings\Lucas Ellis.LUCAS\Desktop\beakie-level.png"
+       inkscape:export-xdpi="199.98645"
+       inkscape:export-ydpi="199.98645" />
+    <path
+       sodipodi:type="arc"
+       style="opacity:1;fill:#d0ab71;fill-opacity:1;fill-rule:nonzero;stroke:#ad8e27;stroke-width:3;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.35;stroke-opacity:1"
+       id="path3341"
+       sodipodi:cx="398.03571"
+       sodipodi:cy="246.60713"
+       sodipodi:rx="3.0357144"
+       sodipodi:ry="3.0357144"
+       d="M 401.07142 246.60713 A 3.0357144 3.0357144 0 1 1  394.99999,246.60713 A 3.0357144 3.0357144 0 1 1  401.07142 246.60713 z"
+       transform="translate(232.67931,22.524106)"
+       inkscape:export-filename="C:\Documents and Settings\Lucas Ellis.LUCAS\Desktop\beakie-level.png"
+       inkscape:export-xdpi="199.98645"
+       inkscape:export-ydpi="199.98645" />
+    <path
+       id="path3343"
+       d="M 569.05598,301.47841 C 567.39613,306.84621 561.69254,309.85556 556.32474,308.19572 C 550.95694,306.53587 547.94759,300.83228 549.60743,295.46448 C 551.26727,290.09668 556.97087,287.08733 562.33867,288.74717 C 567.70647,290.40702 570.71582,296.11061 569.05598,301.47841 z "
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:0.5534592"
+       inkscape:export-filename="C:\Documents and Settings\Lucas Ellis.LUCAS\Desktop\beakie-level.png"
+       inkscape:export-xdpi="199.98645"
+       inkscape:export-ydpi="199.98645" />
+    <path
+       inkscape:export-ydpi="199.98645"
+       inkscape:export-xdpi="199.98645"
+       inkscape:export-filename="C:\Documents and Settings\Lucas Ellis.LUCAS\Desktop\beakie-level.png"
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:3.99999952;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:0.69182392"
+       d="M 437.5485,26.874774 C 436.95916,28.780644 434.93406,29.849134 433.02819,29.259804 C 431.12231,28.670454 430.05382,26.645354 430.64316,24.739484 C 431.2325,22.833614 433.2576,21.765124 435.16348,22.354454 C 437.06935,22.943794 438.13784,24.968894 437.5485,26.874774 z "
+       id="path4272" />
+    <path
+       id="path4274"
+       d="M 446.89241,30.789114 C 446.30307,32.694984 444.27797,33.763474 442.3721,33.174144 C 440.46622,32.584794 439.39773,30.559694 439.98707,28.653824 C 440.57641,26.747954 442.60151,25.679464 444.50739,26.268794 C 446.41326,26.858134 447.48175,28.883234 446.89241,30.789114 z "
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:3.99999952;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:0.69182392"
+       inkscape:export-filename="C:\Documents and Settings\Lucas Ellis.LUCAS\Desktop\beakie-level.png"
+       inkscape:export-xdpi="199.98645"
+       inkscape:export-ydpi="199.98645" />
+    <path
+       inkscape:export-ydpi="199.98645"
+       inkscape:export-xdpi="199.98645"
+       inkscape:export-filename="C:\Documents and Settings\Lucas Ellis.LUCAS\Desktop\beakie-level.png"
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:3.99999952;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:0.69182392"
+       d="M 438.93746,39.375414 C 438.34812,41.281284 436.32302,42.349774 434.41715,41.760444 C 432.51127,41.171094 431.44278,39.145994 432.03212,37.240124 C 432.62146,35.334254 434.64656,34.265764 436.55244,34.855094 C 438.45831,35.444434 439.5268,37.469534 438.93746,39.375414 z "
+       id="path4276" />
+    <path
+       inkscape:export-ydpi="199.98645"
+       inkscape:export-xdpi="199.98645"
+       inkscape:export-filename="C:\Documents and Settings\Lucas Ellis.LUCAS\Desktop\beakie-level.png"
+       style="fill:#398df0;fill-opacity:1;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:0.69182392"
+       d="M 404.42417,33.612334 C 402.76432,38.980134 397.06073,41.989484 391.69293,40.329644 C 386.32513,38.669794 383.31578,32.966204 384.97562,27.598404 C 386.63546,22.230604 392.33906,19.221254 397.70686,20.881094 C 403.07466,22.540944 406.08401,28.244534 404.42417,33.612334 z "
+       id="path4278" />
+    <path
+       style="opacity:1;fill:#9a9389;fill-opacity:1;fill-rule:nonzero;stroke:#6b6a68;stroke-width:2.0999999;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.35;stroke-opacity:1"
+       d="M 408.6461,28.462204 L 413.82313,28.714744 L 414.32821,20.002184 L 428.2178,34.523124 L 413.31805,47.907644 L 413.06552,39.195084 L 408.39356,39.195074 L 408.6461,28.462204 z "
+       id="path4280"
+       sodipodi:nodetypes="cccccccc" />
+    <text
+       xml:space="preserve"
+       style="font-size:8.9826479px;font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;text-align:start;line-height:125%;writing-mode:lr-tb;text-anchor:start;opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#e9e9e9;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:bevel;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.35;stroke-opacity:1;font-family:Consolas"
+       x="376.79092"
+       y="39.794464"
+       id="text4282"
+       sodipodi:linespacing="125%"
+       transform="scale(1.0865661,0.9203306)"><tspan
+         sodipodi:role="line"
+         id="tspan4284"
+         x="376.79092"
+         y="39.794464"
+         style="fill:#ffffff;fill-opacity:1;stroke:#e9e9e9;stroke-width:0.5;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1">POP</tspan></text>
+    <path
+       inkscape:export-ydpi="199.98645"
+       inkscape:export-xdpi="199.98645"
+       inkscape:export-filename="C:\Documents and Settings\Lucas Ellis.LUCAS\Desktop\beakie-level.png"
+       style="opacity:0.43315508;fill:#398df0;fill-opacity:0.43396223;fill-rule:nonzero;stroke:#c5defd;stroke-width:3.12923121;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:0.69182392"
+       d="M 534.54422,149.82279 C 533.24571,154.02206 528.78374,156.37631 524.58447,155.0778 C 520.3852,153.77929 518.03096,149.31732 519.32947,145.11805 C 520.62798,140.91879 525.08995,138.56455 529.28922,139.86306 C 533.48849,141.16156 535.84274,145.62352 534.54422,149.82279 z "
+       id="path4294" />
+    <path
+       id="path4296"
+       d="M 511.89428,150.554 C 510.81946,154.0299 507.12611,155.9786 503.65022,154.90377 C 500.17432,153.82895 498.22563,150.1356 499.30045,146.65971 C 500.37528,143.18382 504.06862,141.23513 507.54452,142.30995 C 511.02041,143.38477 512.96912,147.07811 511.89428,150.554 z "
+       style="opacity:0.32085561;fill:#398df0;fill-opacity:0.43396223;fill-rule:nonzero;stroke:#c5defd;stroke-width:2.59018397;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:0.69182392"
+       inkscape:export-filename="C:\Documents and Settings\Lucas Ellis.LUCAS\Desktop\beakie-level.png"
+       inkscape:export-xdpi="199.98645"
+       inkscape:export-ydpi="199.98645" />
+    <g
+       inkscape:export-ydpi="199.98645"
+       inkscape:export-xdpi="199.98645"
+       inkscape:export-filename="C:\Documents and Settings\Lucas Ellis.LUCAS\Desktop\beakie-level.png"
+       id="g4286"
+       transform="matrix(0.492474,-5.738014e-2,5.738014e-2,0.492474,334.19414,10.023776)">
+      <path
+         style="opacity:1;fill:#7fa1d4;fill-opacity:1;fill-rule:nonzero;stroke:#4e4ea6;stroke-width:3;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.35;stroke-opacity:1"
+         d="M 393.70695,335.16861 C 393.7061,318.92072 396.25858,306.50282 404.31355,302.33865 C 414.2674,312.55748 414.62938,324.14658 415.42523,335.67369 L 393.70695,335.16861 z "
+         id="path4288"
+         sodipodi:nodetypes="cccc" />
+      <path
+         style="opacity:1;fill:#ffff6f;fill-opacity:1;fill-rule:nonzero;stroke:#fde34b;stroke-width:1.35278738;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.35;stroke-opacity:1"
+         d="M 392.0626,324.28182 C 391.93595,326.68398 393.97082,328.36923 397.60304,330.24698 C 402.09152,325.63901 402.00222,325.90585 401.85601,324.05407 L 392.0626,324.28182 z "
+         id="path4290"
+         sodipodi:nodetypes="cccc" />
+      <path
+         sodipodi:nodetypes="cccc"
+         id="path4292"
+         d="M 392.12573,325.66294 C 392.12535,318.33629 393.27634,312.7367 396.90856,310.85895 C 401.39704,315.46692 401.56027,320.69278 401.91914,325.89069 L 392.12573,325.66294 z "
+         style="opacity:1;fill:#ffff6f;fill-opacity:1;fill-rule:nonzero;stroke:#fde34b;stroke-width:1.35278738;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0.35;stroke-opacity:1" />
+    </g>
+    <path
+       id="path2224"
+       d="M 561.53612,148.07826 C 559.87628,153.44606 554.17268,156.45542 548.80488,154.79557 C 543.43708,153.13573 540.42773,147.43213 542.08757,142.06433 C 543.74742,136.69654 549.45101,133.68719 554.81881,135.34704 C 560.18661,137.00688 563.19597,142.71046 561.53612,148.07826 z "
+       style="fill:#398df0;fill-opacity:0.43396223;fill-rule:nonzero;stroke:#c5defd;stroke-width:4;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dashoffset:1.8;stroke-opacity:0.69182392"
+       inkscape:export-filename="C:\Documents and Settings\Lucas Ellis.LUCAS\Desktop\beakie-level.png"
+       inkscape:export-xdpi="199.98645"
+       inkscape:export-ydpi="199.98645" />
+  </g>
+</svg>

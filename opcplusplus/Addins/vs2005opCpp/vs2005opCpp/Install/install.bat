@@ -1,0 +1,5 @@
+mkdir "%HOMEPATH%\My Documents\Visual Studio 2005\Addins\opCpp\"
+copy opCpp.AddIn "%HOMEPATH%\My Documents\Visual Studio 2005\Addins\"
+copy ..\bin\*.dll "%HOMEPATH%\My Documents\Visual Studio 2005\Addins\opCpp"
+mkdir "%HOMEPATH%\My Documents\Visual Studio 2005\Addins\opCpp\en-US"
+copy ..\bin\en-US\vs2005opCpp.resources.dll "%HOMEPATH%\My Documents\Visual Studio 2005\Addins\opCpp\en-US"

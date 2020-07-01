@@ -1,0 +1,627 @@
+///****************************************************************
+/// Copyright (C) 2007 OP Games LLC - All Rights Reserved
+///
+/// Authors: Kevin Depue & Lucas Ellis
+///
+/// File: code.oh
+/// Date: 10/12/2007
+///
+/// Description:
+///
+/// code file
+///****************************************************************
+
+#include <vector>
+#include <string>
+#include <list>
+#include <algorithm>
+#include <sstream>
+#include <math.h>
+
+namespace SvgReader
+{
+
+	using std::list;
+	using std::string;
+
+	//utility functions
+	template<class container>
+	void string_tokenize(const string& s, const string& delimiters, container& c)
+	{
+		string::size_type lastPos(s.find_first_not_of(delimiters, 0));
+		string::size_type pos(s.find_first_of(delimiters, lastPos));
+		while (string::npos != pos || string::npos != lastPos)
+		{
+			std::back_insert_iterator< container > it( c );
+			*it = s.substr(lastPos, pos - lastPos);
+			lastPos = s.find_first_not_of(delimiters, pos);
+			pos = s.find_first_of(delimiters, lastPos);
+		}
+	}
+
+	template<class T>
+	void string_to(const string& source, T& dest)
+	{
+		std::stringstream ss;
+		ss << source;
+		ss >> dest;
+	}
+
+	template<>
+	void string_to<string>(const string& source, string& dest)
+	{
+		dest = source;
+	}
+
+
+
+
+	struct SvgPoint
+	{
+		SvgPoint()
+			:
+			x(0), 
+			y(0) 
+		{}
+
+		float x;
+		float y;
+
+		float DistanceSqr(const SvgPoint& p) const
+		{
+			SvgPoint diff = p - *this;
+
+			float d = diff.Dot(diff);
+
+			return d;
+		}
+
+		SvgPoint operator-(const SvgPoint& p) const
+		{
+			SvgPoint r;
+			r.x = x - p.x;
+			r.y = y - p.y;
+			return r;
+		}
+
+		float Dot(const SvgPoint& p)
+		{
+			return x*p.x + y*p.y;
+		}
+	};
+
+
+	struct SvgMatrix
+	{
+		SvgMatrix()
+			:
+			_11(1),
+			_12(0),
+			_21(0),
+			_22(1),
+			translationX(0),
+			translationY(0)
+		{
+		}
+
+		float _11; 	float _12;
+		float _21; 	float _22;
+
+		float translationX;	
+		float translationY;
+
+		//multiply
+		SvgPoint operator * (const SvgPoint& p) const
+		{
+			SvgPoint r;
+
+			r.x = p.x * _11 + p.y * _12 + translationX;
+			r.y = p.x * _21 + p.y * _22 + translationY;
+
+			return r;
+		}
+
+	};
+
+	opclass SvgBase
+	{
+	public:
+		SvgBase()
+			:
+			parent(NULL)
+		{
+
+		}
+
+		opreflect("inkscape:label")
+			string label;
+
+		string transform;
+
+		native SvgBase* parent;	
+
+		native SvgMatrix matrix;
+
+		void ParseTransform()
+		{
+			typedef list<string>::iterator iterator;
+			list<string> tvalues;
+
+			string_tokenize(transform,"(,)",tvalues);
+
+			//now lets look at all values
+			iterator it  = tvalues.begin();
+			iterator end = tvalues.end();
+
+			if(it != end)
+			{
+				if(*it == "matrix")
+				{
+					++it;
+					string _11string = *it;
+
+					++it;
+					string _12string = *it;
+
+					++it;
+					string _21string = *it;
+
+					++it;
+					string _22string = *it;
+
+					++it;
+					string xstring = *it;
+
+					++it;
+					string ystring = *it;
+
+					string_to(_11string,matrix._11);
+					string_to(_12string,matrix._12);
+					string_to(_21string,matrix._21);
+					string_to(_22string,matrix._22);
+
+					string_to(xstring,matrix.translationX);
+					string_to(ystring,matrix.translationY);
+
+				}
+				else if(*it == "translate")
+				{			
+					++it;
+					string xstring = *it;
+
+					++it;
+					string ystring = *it;
+
+					string_to(xstring,matrix.translationX);
+					string_to(ystring,matrix.translationY);
+				}
+			}
+		}
+
+		//oops: need to wrap the function in namespaces
+		//		scopes are not enough
+		//		function moving is semi problematic
+		SvgReader::SvgPoint LocalToPage(const SvgPoint& p)
+		{
+			if(parent)
+				return matrix * parent->LocalToPage(p);
+			return matrix * p;
+		}
+
+	};
+
+	opclass SvgGroup : public SvgBase
+	{
+	public:
+		list<SvgRect> rect;
+		list<SvgPath> path;
+		list<SvgGroup> g;
+
+		//TODO: need to be able to extract paths (by name)
+		//		and rects						 (by name)
+		//		this essentially means you must know the tags
+		//		you're looking for.
+
+		void Parse()
+		{
+			//parse rects
+			{
+				list<SvgRect>::iterator it  = rect.begin();
+				list<SvgRect>::iterator end = rect.end();
+				while(it != end)
+				{
+					it->parent = this;
+					it->Parse();
+					++it;
+				}
+			}
+
+			//parse groups
+			{
+				list<SvgGroup>::iterator it  = g.begin();
+				list<SvgGroup>::iterator end = g.end();
+				while(it != end)
+				{
+					it->parent = this;
+					it->Parse();
+
+					++it;
+				}
+			}
+
+			//parse paths
+			{
+				list<SvgPath>::iterator it  = path.begin();
+				list<SvgPath>::iterator end = path.end();
+				while(it != end)
+				{
+					it->parent = this;
+					it->Parse();
+
+					++it;
+				}
+			}
+		}
+
+
+		void GetLabelPaths(const string& label, list<SvgPath*>& paths )
+		{
+			{
+				typedef list<SvgGroup>::iterator iterator;
+
+				iterator it  = g.begin();
+				iterator end = g.end();
+				while(it != end)
+				{
+					it->GetLabelPaths(label,paths);
+
+					++it;
+				}	
+			}
+	
+			{
+				typedef list<SvgPath>::iterator iterator;
+
+				iterator it  = path.begin();
+				iterator end = path.end();
+				while(it != end)
+				{
+					if((*it).label == label)
+						paths.push_back(&(*it));
+
+					++it;
+				}
+			}
+		}
+
+		void GetLabelRects(const string& label, list<SvgRect*>& rects )
+		{
+			{
+				typedef list<SvgGroup>::iterator iterator;
+
+				iterator it  = g.begin();
+				iterator end = g.end();
+				while(it != end)
+				{
+					it->GetLabelRects(label,rects);
+
+					++it;
+				}
+			}
+
+			{
+				typedef list<SvgRect>::iterator iterator;
+
+				iterator it  = rect.begin();
+				iterator end = rect.end();
+				while(it != end)
+				{
+					if((*it).label == label)
+						rects.push_back(&(*it));
+
+					++it;
+				}
+			}
+
+		}
+
+		void GetLabelGroups(const string& label, list<SvgGroup*>& groups )
+		{
+			typedef list<SvgGroup>::iterator iterator;
+
+			iterator it  = g.begin();
+			iterator end = g.end();
+			while(it != end)
+			{
+				if((*it).label == label)
+					groups.push_back(&(*it));
+
+				it->GetLabelGroups(label,groups);
+
+				++it;
+			}			
+		}
+
+	};
+
+
+	opclass SvgPath : public SvgBase
+	{
+	private:
+		string d;
+
+	public:
+		native vector<SvgPoint> points;
+		native vector<SvgPoint> transformedpoints;
+
+		native SvgPoint			centroid;
+		native SvgPoint			transformedcentroid;
+
+		native float			radius;
+
+		void Parse()
+		{
+			ParsePoints();
+			ParseTransform();
+
+			DetermineCentroid();
+			DetermineRadius();
+
+			TransformPoints();
+			TransformCentroid();
+		}
+
+		void DetermineCentroid()
+		{
+			SvgPoint sum;
+
+			typedef vector<SvgPoint>::iterator iterator;
+
+			iterator it  = points.begin();
+			iterator end = points.end();
+
+			if(points.size() < 2)
+				return;
+
+			iterator last = points.end(); --last;
+
+			while(it != last)
+			{
+				sum.x += (*it).x;
+				sum.y += (*it).y;
+				++it;
+			}
+
+			size_t size  = points.size()-1;
+
+			centroid.x = sum.x / (float)size;
+			centroid.y = sum.y / (float)size;
+		}
+
+		void TransformCentroid()
+		{
+			//transform the centroid
+			transformedcentroid = matrix * centroid;
+		}
+
+		void DetermineRadius()
+		{
+			typedef vector<SvgPoint>::iterator iterator;
+
+			iterator it  = points.begin();
+			iterator end = points.end();
+
+			float maxrsqr = 0.f;
+
+			while(it != end)
+			{
+				float newrsqr = (*it).DistanceSqr(centroid);
+
+				if(newrsqr > maxrsqr)
+					maxrsqr = newrsqr;
+				++it;
+			}
+
+			radius = sqrt(maxrsqr);
+		}
+
+		void ParsePoints()
+		{
+			typedef list<string>::iterator iterator;
+			list<string> dvalues;
+
+			string_tokenize(d," ,",dvalues);
+
+			//now lets look at all values
+			iterator it  = dvalues.begin();
+			iterator end = dvalues.end();
+
+			while(it != end)
+			{
+				if(*it == "A")
+				{
+					SvgPoint p;
+
+					//skip 5 values
+					++it;
+					++it;
+					++it;
+					++it;
+					++it;
+
+
+					++it;
+					string xstring = *it;
+
+					++it;
+					string ystring = *it;
+
+					string_to(xstring,p.x);
+					string_to(ystring,p.y);
+
+					points.push_back(p);
+
+				}
+				else if(*it == "L")
+				{
+					SvgPoint p;
+
+					++it;
+					string xstring = *it;
+
+					++it;
+					string ystring = *it;
+
+					string_to(xstring,p.x);
+					string_to(ystring,p.y);
+
+					points.push_back(p);
+				}
+				else if(*it == "M")
+				{
+					SvgPoint p;
+
+					++it;
+					string xstring = *it;
+
+					++it;
+					string ystring = *it;
+
+					string_to(xstring,p.x);
+					string_to(ystring,p.y);
+
+					points.push_back(p);
+				}
+				else if(*it == "C")
+				{
+					SvgPoint p;
+
+					//skip 4 values
+					++it;
+					++it;
+					++it;
+					++it;
+
+
+					++it;
+					string xstring = *it;
+
+					++it;
+					string ystring = *it;
+
+					string_to(xstring,p.x);
+					string_to(ystring,p.y);
+
+					points.push_back(p);
+				}
+
+				++it;
+			}
+
+		}
+
+
+		void TransformPoints()
+		{
+			typedef vector<SvgPoint>::iterator iterator;
+			iterator it  = points.begin();
+			iterator end = points.end();
+
+			while(it != end)
+			{
+				SvgPoint transformed = LocalToPage(*it);
+
+				transformedpoints.push_back(transformed);
+
+				++it;
+			}
+		}
+	};
+
+	opclass SvgRect : public SvgBase
+	{
+	public:
+		float height;
+		float width;
+		float x;
+		float y;
+
+		void Parse()
+		{
+		}
+	};
+
+	opclass SvgObject
+	{
+	public:
+		int height;
+		int width;
+		string id;
+		float version;
+
+		list< SvgGroup > g;
+
+		void Parse()
+		{
+			typedef list<SvgGroup>::iterator iterator;
+
+			iterator it  = g.begin();
+			iterator end = g.end();
+			while(it != end)
+			{
+				it->Parse();
+
+				++it;
+			}
+		}
+
+		void GetLabelPaths(const string& label, list<SvgPath*>& paths )
+		{
+			typedef list<SvgGroup>::iterator iterator;
+
+			iterator it  = g.begin();
+			iterator end = g.end();
+			while(it != end)
+			{
+				it->GetLabelPaths(label,paths);
+
+				++it;
+			}			
+		}
+
+		void GetLabelRects(const string& label, list<SvgRect*>& rects )
+		{
+			typedef list<SvgGroup>::iterator iterator;
+
+			iterator it  = g.begin();
+			iterator end = g.end();
+			while(it != end)
+			{
+				it->GetLabelRects(label,rects);
+
+				++it;
+			}			
+		}
+
+		void GetLabelGroups(const string& label, list<SvgGroup*>& groups )
+		{
+			typedef list<SvgGroup>::iterator iterator;
+
+			iterator it  = g.begin();
+			iterator end = g.end();
+			while(it != end)
+			{
+				it->GetLabelGroups(label,groups);
+
+				++it;
+			}			
+		}
+
+
+	};
+
+
+
+
+}
+

@@ -1,0 +1,87 @@
+#define uclass class
+
+uclass Actor
+{
+
+};
+
+//generates SpheroidActor.uc 
+nativereplication
+native
+ini(spheroid)
+uclass SpheroidActor : public Actor
+{
+	var int a; // require var?
+	int b;	   // or not.
+	
+	native		int		identifier;
+	transient	float	poptime;
+	
+	var(Spheroid) float bubblosity;
+	
+	var() name blah; // error: name is not editable ( can setup specific rules for types )
+	
+	script class<Name> 
+
+	editreadonly double value;
+	
+	string blah; //error: use UString
+	
+	Type somestruct; // auto maps if known.
+	
+	UnknownType someunknown; // static asserts to a comment: you must declare unknown types native.
+	
+	//write barebones uscript stubs in one place.
+	function Pop() // can allow this, detected as a non-returning uscript function.
+	{
+		//uscript here, outputs to SpheroidActor.uc
+	}
+	
+	function bool IsPopped() // can allow this, detected as a bool returning uscript function.
+	{
+		//SpheroidActor.uc
+	}
+	
+	event DoSomething(); // can allow this, this writes a stub etc
+	
+	event bool IsFalling() // can allow this, writes a stub and a c++ function mapping.
+	{
+		//write some uscript here.
+	}
+	
+	//generates execBlah(), which calls blah after extracting arguments
+	//and pushes the bool back into uscript.
+	//A. generates native bool function Blah(float a); (uscript)
+	//B. generates void execBlah()
+	//C. generates argument extracter.
+	//D. generates bool Blah(float a) as written.
+	//E. generates auto return stub.
+	native bool function Blah(float a)
+	{
+		
+	}
+	
+	//generates the same except
+	//native bool function Another(optional float a);
+	//generates argument extracter w/ a optional = 1.f;
+	//generates bool Blah(float a = 1.f) (or w/o 1.f, doesnt matter).
+	//same beyond this.
+	//can write source definition like normally.
+	native bool function Another(float a = 1.f);
+
+	scriptcomment(blah blah blah)
+	native function Hey()
+	{
+
+	}
+};
+
+//Possible Uses:
+//1. stub/hookup painless autogen. <-- licensee useful.
+//2. native-only registration/metadata. <-- licensee useful.
+//3. native keyworded networking functions (faster, well defined). <-- licensee useful.
+
+//4. implement clean opReflection like-setup (unlikely to be viable).
+//5. 
+
+

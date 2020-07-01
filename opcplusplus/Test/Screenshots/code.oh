@@ -1,0 +1,86 @@
+// opC++ code
+
+#include <string>
+
+using namespace std;
+
+opclass Object //: public opcpp::base::class_base
+{
+	public virtual void Tick(float DeltaTime)
+	{
+
+	}
+};
+
+opclass RenderInterface : public Object
+{
+
+};
+
+opcomponent Renderable
+{
+	/*=== render method ===*/
+
+	public virtual void Render(RenderInterface* ri) = 0;
+
+	/*=== tick method ===*/
+
+	public virtual void Tick(float DeltaTime)
+	{
+		Super::Tick(DeltaTime);
+	}
+};
+
+opclass Actor : public Renderable<Object>
+{
+	public virtual void Render(RenderInterface* ri)
+	{
+		
+	}
+
+	/*=== data - not serialized, not reflectable ===*/
+
+	private native int Id;
+
+	/*=== data - not serialized, reflectable ===*/
+
+	private transient float LastRenderTime;
+
+	/*=== data - serialized, reflectable ===*/
+
+	public string Name; 
+
+
+
+
+
+
+
+	/*public int getId()
+	{
+		return Id;
+	}
+
+	private int numChildren;*/
+};
+
+opclass Apple : public Object
+{
+	/*=== data ===*/
+
+	private float Weight;
+	private float Tartness;
+
+	/*=== events ===*/
+
+	public void Pick()
+	{
+
+	}
+};
+
+
+
+
+
+

@@ -1,0 +1,224 @@
+// opC++ code
+
+#include <string>
+#include <map>
+#include <set>
+#include <deque>
+#include <list>
+#include <vector>
+#include <utility>
+
+using namespace std;
+
+/*=== come classes, etc. ===*/
+
+opclass beef
+{
+	int taco;
+};
+
+opclass steak : public beef
+{
+	bool rare;
+};
+
+opclass ground : public beef
+{
+	string hamburger;
+}
+
+opclass testclass
+{
+	int value;
+};
+
+opstruct teststruct
+{
+	int value;
+};
+
+openum testenum
+{
+	test_value,
+	max_value
+};
+
+/*=== matrix - columns ===*/
+
+opmacro basic_type(type, name)
+{
+	type basic_@name;
+}
+
+opmacro const_type(type, name)
+{
+	const type const_@name;
+}
+
+opmacro volatile_type(type, name)
+{	
+	volatile type volatile_@name;
+}
+
+opmacro const_volatile_type(type, name)
+{
+	const volatile type const_volatile_@name;
+}
+
+opmacro vector_type(type, name)
+{
+	vector< type > vector_@name;
+}
+
+opmacro list_type(type, name)
+{
+	list< type > list_@name;
+}
+
+opmacro deque_type(type, name)
+{
+	deque< type > deque_@name;
+}
+
+opmacro set_type(type, name)
+{
+	set< type > set_@name;
+}
+
+opmacro multiset_type(type, name)
+{
+	multiset< type > multiset_@name;
+}
+
+opmacro map_type(key, value, name)
+{
+	map< key, value > map_@name;
+}
+
+opmacro multimap_type(key, value, name)
+{
+	multimap< key, value > multimap_@name;
+}
+
+opmacro array_type(type, n, name)
+{
+	type array_@name[n];
+}
+
+opmacro array2d_type(type, n, m, name)
+{
+	type array2d_@name[n][m];
+}
+
+opmacro pair_type(type, name)
+{
+	pair<type, type> pair_@name;
+}
+
+/*=== matrix - row stuff ===*/
+
+opmacro testmatrix_row(type, name)
+{
+  	expand basic_type(type, name);
+	expand const_type(type, name);
+	expand volatile_type(type, name);
+// 	expand const_volatile_type(type, name)
+ 	expand vector_type(type, name);
+  	expand list_type(type, name);
+   	expand deque_type(type, name);
+   	expand set_type(type, name);
+   	expand multiset_type(type, name);
+   	expand map_type(string, type, string_@name);
+   	expand map_type(int, type, int_@name);
+   	expand multimap_type(string, type, name);
+ 	expand array_type(type, 4, name);
+	expand array2d_type(type, 3, 3, name);
+	expand pair_type(type, name);
+}
+
+/*=== some typedefs ===*/
+
+typedef map<int, int>      map_type;
+typedef multimap<int, int> multimap_type;
+typedef pair<int, int>     pair_type;
+
+// struct cpp
+// {
+// 	cpp()
+// 	{
+// 		cppvalue = 9;
+// 	}
+// 
+// 	bool operator < (const cpp& other) const
+// 	{
+// 		return cppvalue < other.cppvalue;
+// 	}
+// 
+// 	friend bool operator == (const cpp& a, const cpp& b)
+// 	{
+// 		return a.cppvalue == b.cppvalue;
+// 	}
+// 
+// 	int cppvalue;
+// };
+
+/*=== matrix - full matrix ===*/
+
+opmacro testmatrix()
+{
+  	expand testmatrix_row(int, int);
+  	expand testmatrix_row(float, float);
+ 	expand testmatrix_row(double, double);
+   	expand testmatrix_row(bool, bool);
+   	expand testmatrix_row(unsigned int, unsigned_int);
+   	expand testmatrix_row(long, long);
+   	expand testmatrix_row(long long, long_long);
+   	expand testmatrix_row(char, char);
+// 	expand testmatrix_row(void*, void_star)
+  	expand testmatrix_row(string, string);
+ 	expand testmatrix_row(vector<int>, vector);
+  	expand testmatrix_row(list<int>, list);
+   	expand testmatrix_row(deque<int>, deque);
+   	expand testmatrix_row(set<int>, set);
+   	expand testmatrix_row(multiset<int>, multiset);
+	expand testmatrix_row(map_type, map);
+	expand testmatrix_row(multimap_type, multimap);
+   	expand testmatrix_row(testclass, testclass);
+  	expand testmatrix_row(teststruct, teststruct);
+ 	expand testmatrix_row(testenum, testenum);
+  	expand testmatrix_row(testclass*, testclass_star);
+   	expand testmatrix_row(teststruct*, teststruct_star);
+	expand testmatrix_row(pair_type, pair);
+}
+
+opmacro retestexpand(name)
+{
+	name
+}
+
+opmacro testexpand(name)
+{
+	expand retestexpand( name )
+}
+
+/*=== the test class ===*/
+
+opclass testmatrixclass
+{
+public:
+
+	expand testmatrix()
+};
+
+
+
+//NOTE: hard to test const and const volatile due to init, do this though ( use dialect ? )
+
+//NOTE: issues w/ instantiation of void* (it should map to unknown type correctly - need unknown_info_void probably)
+
+//TODO: redo container casting (To Functions!)
+
+
+
+
+

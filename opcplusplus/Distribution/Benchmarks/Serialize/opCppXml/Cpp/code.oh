@@ -1,0 +1,123 @@
+///****************************************************************
+/// Copyright (C) 2007 OP Games LLC - All Rights Reserved
+///
+/// Authors: Kevin Depue & Lucas Ellis
+///
+/// File: code.oh
+/// Date: 10/12/2007
+///
+/// Description:
+///
+/// code file
+///****************************************************************
+
+#include <vector>
+#include <string>
+#include <list>
+
+using std::vector;
+using std::string;
+using std::list;
+
+
+opmacro TestClass(prefix)
+{
+	opclass prefix@_TestClass
+	{
+	public:
+		prefix@_TestClass()
+		{
+			for(int i = 0; i < 100; i++)
+				integers[i] = i;
+
+			for(int i = 0; i < 1000; i++)
+				intvect.push_back(i*3134);
+
+			for(int i = 0; i < 1000; i++)
+				stringlist.push_back("lotsastrings");
+		}
+
+		int integers[100];
+
+ 		std::vector<int> intvect;
+ 
+		std::list<std::string> stringlist;
+	};
+};
+
+opmacro TestClass10(prefix)
+{
+	expand TestClass(a_@prefix);
+	expand TestClass(b_@prefix);
+	expand TestClass(c_@prefix);
+	expand TestClass(d_@prefix);
+	expand TestClass(e_@prefix);
+	expand TestClass(f_@prefix);
+	expand TestClass(g_@prefix);
+	expand TestClass(h_@prefix);
+	expand TestClass(i_@prefix);
+	expand TestClass(j_@prefix);
+}
+
+opmacro TestClass100(prefix)
+{
+	expand TestClass10(a_@prefix);
+	expand TestClass10(b_@prefix);
+	expand TestClass10(c_@prefix);
+	expand TestClass10(d_@prefix);
+	expand TestClass10(e_@prefix);
+	expand TestClass10(f_@prefix);
+	expand TestClass10(g_@prefix);
+	expand TestClass10(h_@prefix);
+	expand TestClass10(i_@prefix);
+	expand TestClass10(j_@prefix);
+}
+
+opmacro TestInstance(prefix)
+{
+	prefix@_TestClass prefix@_test;
+
+}
+
+opmacro TestInstance10(prefix)
+{
+	expand TestInstance(a_@prefix);
+	expand TestInstance(b_@prefix);
+	expand TestInstance(c_@prefix);
+	expand TestInstance(d_@prefix);
+	expand TestInstance(e_@prefix);
+	expand TestInstance(f_@prefix);
+	expand TestInstance(g_@prefix);
+	expand TestInstance(h_@prefix);
+	expand TestInstance(i_@prefix);
+	expand TestInstance(j_@prefix);
+}
+
+opmacro TestInstance100(prefix)
+{
+	expand TestInstance10(a_@prefix);
+	expand TestInstance10(b_@prefix);
+	expand TestInstance10(c_@prefix);
+	expand TestInstance10(d_@prefix);
+	expand TestInstance10(e_@prefix);
+	expand TestInstance10(f_@prefix);
+	expand TestInstance10(g_@prefix);
+	expand TestInstance10(h_@prefix);
+	expand TestInstance10(i_@prefix);
+	expand TestInstance10(j_@prefix);
+}
+
+expand TestClass100(a)
+
+opclass Tester
+{
+public:
+	Tester() 
+	{
+	}
+	
+	expand TestInstance100(a);
+
+};
+
+

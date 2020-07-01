@@ -1,0 +1,23 @@
+*----------------------------------------------------*
+*------------------- opC++ README -------------------*
+*----------------------------------------------------*
+
+Included in this archive is a tgz file called 
+default.tgz.  It contains an empty default project.  
+You can use this as a starting point.  You can add 
+dialect code to dialect.doh, and opC++ code to 
+code.oh.  To unzip, simply type the following:
+
+	tar -xvf default.tgz
+
+A makefile is included, and assumes that you have the 
+g++ compiler installed.  If not, you may change it to
+the C++ compiler of your choosing.
+
+At the top of main.h and main.cpp, there are 
+#include's that point to the generated code.  If you
+change the name of the generated directory, you will 
+have to update these #include's.
+
+You can see all command line options available to the
+compiler by typing the compiler name with no options.

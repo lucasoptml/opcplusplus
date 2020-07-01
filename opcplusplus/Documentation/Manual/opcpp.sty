@@ -1,0 +1,135 @@
+%% ***********************
+%% OPCPP STYLE/ENVIRONMENT
+%% ***********************
+
+\ProvidesPackage{opcpp}
+
+%% packages
+\usepackage[english]{babel}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{fix-cm}
+\usepackage{setspace}
+\usepackage{fullpage}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage[usenames]{color}
+\usepackage{sectsty}
+\usepackage{multirow}
+
+%% setup the geometry
+\geometry{verbose, letterpaper, includehead=true, left=0.5in, right=0.5in, bottom=1in, top=0.5in}
+
+%% set the default sans-serif font
+\usepackage[T1]{fontenc}
+\usepackage[scaled]{berasans}
+\renewcommand*\familydefault{\sfdefault} 
+
+%% set the default typewriter font
+\usepackage[T1]{fontenc}
+\usepackage[scaled]{beramono}
+
+%% change font for section/chapter headings
+\definecolor{MyGray}{rgb}{0.58, 0.55, 0.47}
+\chapterfont{\color{MyGray}}
+
+%% format the chapter titles correctly
+\renewcommand{\@makechapterhead}[1]{%
+  {\parindent \z@ \raggedright \normalfont
+    \ifnum \c@secnumdepth >\m@ne
+      \if@mainmatter
+        \begin{tabular}{cc}
+           \begin{tabular}{c}
+              \includegraphics{plus.svg.eps}
+           \end{tabular} &
+           \begin{tabular}{l}
+              \huge\bfseries\color{MyGray}\thechapter:\ \Huge\bfseries\color{MyGray}#1 \\ 
+              \color{MyGray}\rule{6.1in}{3pt} \\
+           \end{tabular}
+        \end{tabular}
+        \vspace*{0.05in}
+        \par\nobreak
+      \fi
+    \fi
+    \interlinepenalty\@M
+  }}
+
+%% commands
+\setlength{\parindent}{0em}
+
+%% renewals
+\renewcommand{\lstlistingname}{Figure}
+
+%% new commands
+\newcommand{\cpp}{C{\tt ++}}
+\newcommand{\opCPP}{opC{\tt ++}}
+\newcommand{\csharp}{C{\tt \#}}
+
+%% new environments
+\newenvironment{comment}{\bf\color{OliveGreen}}{\color{black}}
+
+%% opcpp language definition
+\lstdefinelanguage{opCPP}[Visual]{C++}
+{
+morekeywords={% new language keywords
+              opdefine,
+              opmacro,
+              expand,
+              opinclude,
+              uninline,
+              state,
+              % dialect keywords
+              category,
+              error,
+              disallow,
+              is,
+              not,
+              and,
+              datamodifier,
+              functionmodifier,
+              location,
+              note,
+              hidden,
+              datamap,
+              functionmap,
+              enumeration,
+              enummap,
+              override,
+              verbatim,
+              % opC++ keywords
+              opclass,
+              opstruct,
+              openum,
+              native,
+              transient,
+              opstatic,
+              opreflect,
+},
+basicstyle=\small\ttfamily,
+keywordstyle=\small\ttfamily\color{blue},
+commentstyle=\small\ttfamily\color{OliveGreen},
+stringstyle=\small\ttfamily\color{RedViolet},
+identifierstyle=\small\ttfamily\color{black},
+tabsize=4,
+showtabs=false,
+showspaces=false,
+showstringspaces=false,
+frame=single,
+framerule=0.6pt,
+rulecolor=\color{red},
+captionpos=b,
+float=htb
+}
+
+%% opcpp language environments
+\lstnewenvironment{opcpp}[1][]{\lstset{language=opCPP,#1}}{}
+
+%% opcpp keyword blocks
+\newcommand\opcppk{\lstinline[language=opCPP]}              
+
+
+
+
+
+

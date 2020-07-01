@@ -1,0 +1,297 @@
+﻿//
+// This is the file that defines the actual layout and type of the commands.
+// It is divided in different sections (e.g. command definition, command
+// placement, ...), with each defining a specific set of properties.
+// See the comment before each section for more details about how to
+// use it.
+
+// The CTC compiler (the tool that translates this file into the binary
+// format that VisualStudio will consume) has the ability to run a preprocessor
+// on the ctc file; this preprocessor is (usually) the C++ preprocessor, so
+// it is possible to define includes and macros with the same syntax used
+// in C++ files. Using this ability of the compiler here, we include some files
+// defining some of the constants that we will use inside the file.
+
+#include "stdidcmd.h"      // This is the file that defines the IDs for all the
+                           // commands exposed by VisualStudio.
+
+#include "vsshlids.h"      // This header contains the command ids for the menus
+                           // provided by the shell.
+
+#include "msobtnid.h"      // Definition of some CTC specific constants. In this sample
+                           // we use it for the IDs inside the guidOfficeIcon group.
+
+#include "CommandIds.h"      // Definition of the IDs of the commands and CTC elements
+                           // specific for this sample.
+
+#include "Resource.h"      // Definition of the IDs of the resources used by this package;
+                           // Here it is used to include the bitmap with the images used for
+                           // the commands.
+
+#include "Guids.h"         // This is the file with the definition of the Guid
+                           // specific for this sample.
+
+// shorthand macros for a more compact and manageable table
+#define OI_NOID         guidOfficeIcon:msotcidNoIcon
+#define DIS_DEF         DEFAULTDISABLED | DEFAULTINVISIBLE | DYNAMICVISIBILITY
+#define VIS_DEF         COMMANDWELLONLY
+
+
+// The CMDS_SECTION section is where we the commands, menus and menu groups are defined. 
+// This section uses a Guid to identify the package that provides the command defined 
+// inside it.
+CMDS_SECTION guidopCpp2005Pkg
+
+  // Inside this section we have different sub-sections: one for the menus, another 
+  // for the menu groups, one for the buttons (the actual commands), one for the combos
+  // and the last one for the bitmaps used. Each element is identified by a command id that 
+  // is a unique pair of guid and numeric identifier; the guid part of the identifier is usually 
+  // called "command set" and is used to group different command inside a logically related 
+  // group; your package should define its own command set in order to avoid collisions 
+  // with command ids defined by other packages.
+
+  // This is the sub-section that defines the menus and toolbars.
+  MENUS_BEGIN
+  // To define an element in this group you need an ID, a parent group, a display priority,
+  // a menu type, a name and a default text.
+
+  // NewMenu                              Relative to Group                       Priority    Type        Name       Text
+  guidopCpp2005CmdSet:opCppMenu,  guidopCpp2005CmdSet:VSTopLevelGroup,             0x0000,           ,     "opC++Menu", "opC++";
+
+  // Additional Options
+  guidopCpp2005CmdSet:opCppAdditionalMenu, guidopCpp2005CmdSet:opCppGotoGroup, 0x1000, MenuController , "opCppAdditional", "opC++ Additional";
+
+  //NOTE: adding a toolbar... I think I have to add a menu here..
+  guidopCpp2005CmdSet:opCppToolbar, guidopCpp2005CmdSet:0 , 0x0000, Toolbar, "opC++CompilerToolbar", "opC++ Compiler Toolbar";
+
+  // adding a submenu
+  guidopCpp2005CmdSet:opCppArgumentMenu, guidopCpp2005CmdSet:opCppCodeToolsGroup, 0x0000, DynamicVisibility|DefaultInvisible  ,"ArgumentsMenu", "Add Note Argument";
+
+  MENUS_END
+
+  // In this section you can define new menu groups. A menu group is a container for
+  // other menus or buttons (commands); from a visual point of view you can see the
+  // group as the part of a menu contained between two lines. The parent of a group
+  // must be a menu.
+  NEWGROUPS_BEGIN
+  // NewGroup                              Parent Group                            Priority
+
+// Any command added to this group is placed in the top level menu.
+guidopCpp2005CmdSet:opCppCompilerGroup,  // Group ID
+    guidopCpp2005CmdSet:opCppMenu		 // Menu ID
+    0x0000;                              // Priority
+
+// Any menu added to this group is placed in the top level menu bar.
+guidopCpp2005CmdSet:VSTopLevelGroup,     // Group ID
+    guidSHLMainMenu:IDM_VS_TOOL_MAINMENU,// Menu ID
+    0xE000;                              // Priority
+
+// Any command added to this group is placed in the top level menu.
+guidopCpp2005CmdSet:opCppSettingsGroup,  // Group ID
+    guidopCpp2005CmdSet:opCppMenu		 // Menu ID
+    0x0100;                              // Priority
+
+// Any command added to this group is placed in the top level menu.
+guidopCpp2005CmdSet:opCppGlobalGroup,    // Group ID
+    guidopCpp2005CmdSet:opCppMenu		 // Menu ID
+    0x0110;                              // Priority
+
+// Any command added to this group is placed in the toolbar compile group.
+guidopCpp2005CmdSet:opCppAdditionalGroup,    // Group ID
+    guidopCpp2005CmdSet:opCppAdditionalMenu	 // Menu ID
+    0x0100;                                  // Priority
+
+
+// Any command added to this group is placed in the toolbar compile group.
+guidopCpp2005CmdSet:opCppToolbarGroup, // Group ID
+    guidopCpp2005CmdSet:opCppToolbar   // Menu ID
+    0x0100;                            // Priority
+
+guidopCpp2005CmdSet:opCppGotoGroup, // Group ID
+    guidopCpp2005CmdSet:opCppToolbar// Menu ID
+    0x0200;                         // Priority
+
+
+// commands for context menu
+guidopCpp2005CmdSet:opCppProjectContextGroup,
+	guidSHLMainMenu:IDM_VS_CTXT_PROJNODE,
+	0x1000;
+
+guidopCpp2005CmdSet:opCppCodeContextGroup,
+	guidSHLMainMenu:IDM_VS_CTXT_CODEWIN,
+	0x1000;
+
+
+//arguments group
+guidopCpp2005CmdSet:opCppArgumentGroup,
+guidopCpp2005CmdSet:opCppArgumentMenu,
+	0x0000;
+
+					
+//arguments group
+guidopCpp2005CmdSet:opCppCodeToolsGroup,
+	guidSHLMainMenu:IDM_VS_CTXT_CODEWIN,
+	0x0000;
+
+  NEWGROUPS_END
+
+  // Button section.
+  // This section defines the elements the user can interact with, like a menu command or a button 
+  // or combo box in a toolbar.
+  BUTTONS_BEGIN
+  // To define a menu group you have to specify its ID, the parent menu and its display priority.
+  // Some commands are not defined as shared, so they use our package CLSID
+  // as the command set GUID. Also, by specifying blank for the FLAGS, the command is
+  // default visible and enabled. Other valid values for FLAGS are the following:
+  //    DEFAULTDISABLED, DEFAULTINVISIBLE, DYNAMICVISIBILITY, TEXTCHANGES
+  // These values for FLAGS can be or'ed together, e.g. "DEFAULTINVISIBLE | DYNAMICVISIBILITY"
+  // If you do not want an image next to your command, set the image to "guidOfficeIcon:msotcidNoIcon"
+
+  // Command                              Parent Group                               Priority        Image                           Type       Visibility        
+
+//
+// Menu Buttons
+//
+
+//Build Solution
+guidopCpp2005CmdSet:cmdopBuildSolution,    guidopCpp2005CmdSet:opCppCompilerGroup,    0x0000,        guidSolutionBuild:1,    BUTTON,  DefaultDisabled   ,   "Build Solution";
+
+//Build Project
+guidopCpp2005CmdSet:cmdopBuildProject,    guidopCpp2005CmdSet:opCppCompilerGroup,    0x0100,          guidProjectBuild:1,   BUTTON,   DefaultDisabled  ,   "Build Project";
+
+//Clean Solution
+guidopCpp2005CmdSet:cmdopCleanSolution,    guidopCpp2005CmdSet:opCppCompilerGroup,    0x0200,        guidCleanSolution:1,    BUTTON,  DefaultDisabled   ,   "Clean Solution";
+
+//Clean Solution
+guidopCpp2005CmdSet:cmdStop,				guidopCpp2005CmdSet:opCppCompilerGroup,	  0x0400,		 guidStop:1,			BUTTON,  DefaultDisabled   ,   "Stop Build";
+
+//Global Settings Dialog
+guidopCpp2005CmdSet:cmdopProjectSettings,    guidopCpp2005CmdSet:opCppSettingsGroup,    0x0010,        guidProjectSettings:1,    BUTTON,  DefaultDisabled  ,   "Project Settings";
+
+//Project Settings Dialog
+guidopCpp2005CmdSet:cmdopGlobalSettings,    guidopCpp2005CmdSet:opCppGlobalGroup,    0x0100,        guidopCpp2005CmdSet:1,    BUTTON,    ,   "Global Settings";
+
+//Feature Manager Dialog
+guidopCpp2005CmdSet:cmdopFeatureManager,    guidopCpp2005CmdSet:opCppSettingsGroup,    0x0020,        guidFeatureManager:1,    BUTTON,  DefaultDisabled  ,   "Project Feature Manager (coming soon)";
+
+//Goto Original
+guidopCpp2005CmdSet:cmdGotoOriginal, guidopCpp2005CmdSet:opCppGotoGroup, 0x0003, guidOH:1, BUTTON, DEFAULTINVISIBLE|DynamicVisibility, "Go To Original Code";
+
+//Goto Note
+guidopCpp2005CmdSet:cmdGotoNote, guidopCpp2005CmdSet:opCppGotoGroup, 0x0003, guidDOH:1, BUTTON, DEFAULTINVISIBLE|DynamicVisibility, "Go To Dialect Note";
+
+//Open opInclude
+guidopCpp2005CmdSet:cmdOpenInclude, guidopCpp2005CmdSet:opCppCodeToolsGroup, 0x0000, guidopInclude:1, BUTTON, DEFAULTINVISIBLE|DynamicVisibility|TextChanges, "Open opInclude";
+
+//Goto OOH File
+guidopCpp2005CmdSet:cmdGotoOOH, guidopCpp2005CmdSet:opCppAdditionalGroup, 0x0000, guidOOH:1, BUTTON, DEFAULTINVISIBLE|DefaultDisabled|DynamicVisibility|TextChanges, "Goto Generated Header";
+
+//Goto OCPP File
+guidopCpp2005CmdSet:cmdGotoOCPP, guidopCpp2005CmdSet:opCppAdditionalGroup, 0x0000, guidOCPP:1, BUTTON, DEFAULTINVISIBLE|DefaultDisabled|DynamicVisibility|TextChanges, "Goto Generated Source";
+
+//Open Visualize
+guidopCpp2005CmdSet:cmdVisualize, guidopCpp2005CmdSet:opCppAdditionalGroup, 0x0000, guidVisualize:1, BUTTON, DefaultInvisible|DefaultDisabled|DynamicVisibility|TextChanges, "Visualize File";
+
+//Argument List
+guidopCpp2005CmdSet:cmdArgumentStart, guidopCpp2005CmdSet:opCppArgumentGroup, 0x0001, guidArgument:1, BUTTON, TextChanges|DynamicItemStart|DynamicVisibility , "Available Arguments";
+  
+  
+  BUTTONS_END
+
+  // The bitmaps section is used to define the bitmaps that are used for the commands.
+  BITMAPS_BEGIN
+  // The bitmap id is defined in a way that is a little bit different from the others:
+  // the declaration starts with a guid for the bitmap strip, then there is the resource id of the
+  // bitmap strip containing the bitmaps and then there are the numeric ids of the elements used
+  // inside a button definition. An important aspect of this declaration is that the element id
+  // must be the actual index (1-based) of the bitmap inside the bitmap strip.
+  
+  // Bitmap                          Bitmap Index, Bitmap Index, ...
+  guidopCpp2005CmdSet:IDB_OPCPP_ICON,       1;
+  guidSolutionBuild:IDB_SOLUTIONBUILD,      1;
+  guidProjectBuild:IDB_PROJECTBUILD,        1;
+  guidCleanSolution:IDB_CLEANSOLUTION,      1;
+  guidProjectSettings:IDB_PROJECTSETTINGS,  1;
+  guidOOH:IDB_OOH,                          1;
+  guidOCPP:IDB_OCPP,                        1;
+  guidOH:IDB_OH,                            1;
+  guidDOH:IDB_DOH,                          1;
+  guidFeatureManager:IDB_FEATUREMANAGER,    1;
+  guidopInclude:IDB_OPINCLUDE,              1;
+  guidArgument:IDB_ARGUMENT,                1;
+  guidVisualize:IDB_VISUALIZE,				1;
+  guidStop:IDB_STOP,					    1;
+  
+  BITMAPS_END
+  
+CMDS_END
+
+// Within this section you can specify the set of commands defined somewhere else that your 
+// packages uses; for instance if your package uses the standard ‘Copy’ command, you don’t 
+// need to define it, because it is defined by the shell, but you have to use this section 
+// of the CTC file to notify the shell that your package uses it using this section.
+
+CMDUSED_SECTION
+
+
+CMDUSED_END
+
+// Inside this section, we have the ability to place menu groups inside some other menu or
+// menu / commands inside other groups.
+// For instance, it is possible to place one of VisualStudio's menus or commands inside one of our 
+// groups or one of our groups inside a menu defined somewhere else.
+CMDPLACEMENT_SECTION
+
+  // Command                                 Group                                      Priority
+
+  //Add Buttons to the command bar 
+  guidopCpp2005CmdSet:cmdopBuildSolution,    guidopCpp2005CmdSet:opCppToolbarGroup,     0x0000;
+  guidopCpp2005CmdSet:cmdopBuildProject,     guidopCpp2005CmdSet:opCppToolbarGroup,     0x0001;
+  guidopCpp2005CmdSet:cmdopCleanSolution,    guidopCpp2005CmdSet:opCppToolbarGroup,     0x0002;
+  guidopCpp2005CmdSet:cmdStop             ,  guidopCpp2005CmdSet:opCppToolbarGroup,     0x0003;
+  guidopCpp2005CmdSet:cmdopProjectSettings,  guidopCpp2005CmdSet:opCppToolbarGroup,     0x0004;
+
+  //TODO: the note should show 'doh' icon, the original should show 'oh' icon
+  guidopCpp2005CmdSet:cmdGotoOriginal, guidopCpp2005CmdSet:opCppCodeToolsGroup, 0x0003;
+  guidopCpp2005CmdSet:cmdGotoNote,     guidopCpp2005CmdSet:opCppCodeToolsGroup, 0x0004;
+  guidopCpp2005CmdSet:cmdGotoOOH,	   guidopCpp2005CmdSet:opCppCodeToolsGroup, 0x0003;
+  guidopCpp2005CmdSet:cmdGotoOCPP,     guidopCpp2005CmdSet:opCppCodeToolsGroup, 0x0004;
+  guidopCpp2005CmdSet:cmdVisualize,    guidopCpp2005CmdSet:opCppCodeToolsGroup, 0x0010;
+
+  //Add Buttons to context menus
+  guidopCpp2005CmdSet:cmdopProjectSettings, guidopCpp2005CmdSet:opCppProjectContextGroup, 0x1000;
+
+//guidopCpp2005CmdSet:cmdopProjectSettings, guidSHLMainMenu:IDG_VS_CODEWIN_NAVIGATETOLOCATION, 0x1000;
+CMDPLACEMENT_END
+
+
+VISIBILITY_SECTION
+  // Command                          GUID when visible
+
+
+
+VISIBILITY_END
+
+// This section is where you can associate a command with a keyboard shortcut; this association is 
+// valid within a specific UI context, that is when the shell is inside a specific mode, e.g. during 
+// debugging, editing a file or when the user is using a specific designer.
+KEYBINDINGS_SECTION
+  // To define a binding, you have to specify the sequence of keys to press to activate the command 
+  // (keystate); the syntax to use is <key>[:<special keys>] where the special keys section can be 
+  // empty. The accepted special keys and their representation are:
+  //   Alt - A
+  //   Control - C
+  //   Shift - S
+  //   Windows Key - W
+  // For example, if you want to define a binding for <Control>C the definition will be 'C':C; if the 
+  // binding is <Control><Alt>C, then the keybinding is 'C':AC.
+  //
+  // Notice that Visual Studio has a lot of components and commands, so it can be difficult to find a 
+  // key binding not used by somebody else; if the key bindings are conflicting only one will be used
+  // and one problem is that the shell will not inform the user that a conflict was found. The only 
+  // way to detect the problem is to start Visual Studio under debugger, try to execute any command 
+  // and look if there is a message in the output window about a duplicated accelerator found.
+
+  // Command                        when available          emulation               keystate
+
+KEYBINDINGS_END

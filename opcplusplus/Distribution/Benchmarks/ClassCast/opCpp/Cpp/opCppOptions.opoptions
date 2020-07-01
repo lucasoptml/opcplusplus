@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProjectOptionsSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Options>
+    <OptionsElement>
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+      <Options>
+        <ExecutablePath>
+          <Value />
+        </ExecutablePath>
+        <LicensePath>
+          <Value />
+        </LicensePath>
+        <OhFiles>
+          <StringList />
+        </OhFiles>
+        <Directories>
+          <StringList />
+        </Directories>
+        <OhDirectories>
+          <StringList />
+        </OhDirectories>
+        <GeneratedDirectory>
+          <Value />
+        </GeneratedDirectory>
+        <DialectFiles>
+          <StringList />
+        </DialectFiles>
+        <DependencyFiles>
+          <StringList />
+        </DependencyFiles>
+        <FeatureDirectories>
+          <StringList />
+        </FeatureDirectories>
+        <Verbose>
+          <UseDefault>true</UseDefault>
+          <Value>false</Value>
+        </Verbose>
+        <Diagnostics>
+          <UseDefault>true</UseDefault>
+          <Value>false</Value>
+        </Diagnostics>
+        <Silent>
+          <UseDefault>true</UseDefault>
+          <Value>false</Value>
+        </Silent>
+        <Force>
+          <UseDefault>true</UseDefault>
+          <Value>false</Value>
+        </Force>
+        <NoStandardIncludes>
+          <UseDefault>true</UseDefault>
+          <Value>false</Value>
+        </NoStandardIncludes>
+        <InlineAll>
+          <UseDefault>true</UseDefault>
+          <Value>false</Value>
+        </InlineAll>
+        <NoDebug>
+          <UseDefault>true</UseDefault>
+          <Value>false</Value>
+        </NoDebug>
+        <Highlighting>
+          <UseDefault>true</UseDefault>
+          <Value>false</Value>
+        </Highlighting>
+        <Ghosts>
+          <UseDefault>true</UseDefault>
+          <Value>false</Value>
+        </Ghosts>
+        <GlobMode>
+          <UseDefault>true</UseDefault>
+          <Value>false</Value>
+        </GlobMode>
+        <ExpansionDepth>
+          <UseDefault>true</UseDefault>
+          <Value>0</Value>
+        </ExpansionDepth>
+        <Notations>
+          <UseDefault>true</UseDefault>
+          <Value>false</Value>
+        </Notations>
+        <Compact>
+          <UseDefault>false</UseDefault>
+          <Value>true</Value>
+        </Compact>
+        <PrintXml>
+          <UseDefault>false</UseDefault>
+          <Value>true</Value>
+        </PrintXml>
+        <ExtendCommands>
+          <UseDefault>true</UseDefault>
+          <Value>false</Value>
+        </ExtendCommands>
+        <PostBuildSolution>
+          <Value />
+        </PostBuildSolution>
+        <PostBuildProject>
+          <Value />
+        </PostBuildProject>
+        <PostCleanSolution>
+          <Value />
+        </PostCleanSolution>
+      </Options>
+    </OptionsElement>
+    <OptionsElement>
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+      <Options>
+        <ExecutablePath>
+          <Value />
+        </ExecutablePath>
+        <LicensePath>
+          <Value />
+        </LicensePath>
+        <OhFiles>
+          <StringList />
+        </OhFiles>
+        <Directories>
+          <StringList />
+        </Directories>
+        <OhDirectories>
+          <StringList />
+        </OhDirectories>
+        <GeneratedDirectory>
+          <Value />
+        </GeneratedDirectory>
+        <DialectFiles>
+          <StringList />
+        </DialectFiles>
+        <DependencyFiles>
+          <StringList />
+        </DependencyFiles>
+        <FeatureDirectories>
+          <StringList />
+        </FeatureDirectories>
+        <Verbose>
+          <UseDefault>true</UseDefault>
+          <Value>false</Value>
+        </Verbose>
+        <Diagnostics>
+          <UseDefault>true</UseDefault>
+          <Value>false</Value>
+        </Diagnostics>
+        <Silent>
+          <UseDefault>true</UseDefault>
+          <Value>false</Value>
+        </Silent>
+        <Force>
+          <UseDefault>true</UseDefault>
+          <Value>false</Value>
+        </Force>
+        <NoStandardIncludes>
+          <UseDefault>true</UseDefault>
+          <Value>false</Value>
+        </NoStandardIncludes>
+        <InlineAll>
+          <UseDefault>true</UseDefault>
+          <Value>false</Value>
+        </InlineAll>
+        <NoDebug>
+          <UseDefault>true</UseDefault>
+          <Value>false</Value>
+        </NoDebug>
+        <Highlighting>
+          <UseDefault>true</UseDefault>
+          <Value>false</Value>
+        </Highlighting>
+        <Ghosts>
+          <UseDefault>true</UseDefault>
+          <Value>false</Value>
+        </Ghosts>
+        <GlobMode>
+          <UseDefault>true</UseDefault>
+          <Value>false</Value>
+        </GlobMode>
+        <ExpansionDepth>
+          <UseDefault>true</UseDefault>
+          <Value>0</Value>
+        </ExpansionDepth>
+        <Notations>
+          <UseDefault>true</UseDefault>
+          <Value>false</Value>
+        </Notations>
+        <Compact>
+          <UseDefault>true</UseDefault>
+          <Value>false</Value>
+        </Compact>
+        <PrintXml>
+          <UseDefault>false</UseDefault>
+          <Value>true</Value>
+        </PrintXml>
+        <ExtendCommands>
+          <UseDefault>true</UseDefault>
+          <Value>false</Value>
+        </ExtendCommands>
+        <PostBuildSolution>
+          <Value />
+        </PostBuildSolution>
+        <PostBuildProject>
+          <Value />
+        </PostBuildProject>
+        <PostCleanSolution>
+          <Value />
+        </PostCleanSolution>
+      </Options>
+    </OptionsElement>
+  </Options>
+</ProjectOptionsSet>

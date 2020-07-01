@@ -1,0 +1,17 @@
+%% ************
+%% INTRODUCTION
+%% ************
+
+% introduction
+\chapter{Introduction}
+\label{chap:introduction}
+
+% history
+\section{History}
+
+\opCPP\ was originally created as a means to speed up computer game development.  The standard programming language for games is \cpp\ due to its speed.  However, there are several nuances in \cpp\ that can make game programming tedious.  One of the most pronounced is serialization, i.e., the process of mapping class data members to memory.  Writing this kind of code can also be difficult to read.  We set out to write a source to source compiler transforming a new extended version of \cpp\ (\opCPP) to standard \cpp\ code that can then be compiled by an optimizing back-end compiler.  In the process, we added several new features to the language that are extremely useful, but very difficult to emulate in standard \cpp\ manually.  Examples include beautification of several \cpp\ constructs (e.g., macros), full data-mapping support for objects, state support for classes, a powerful new preprocessor that allows you to nest macros to any depth, and several new up and coming features such as interfaces/mixins/trait support.  New features will continue to be added to this language as development progresses.
+
+% overview
+\section{Overview}
+
+In this manual we describe the syntax and proper usage of the \opCPP\ language.  Since \opCPP\ is largely a generative programming language, it should be noted that much of the syntax and usage described can be altered.  What is not alterable is the validation of the code performed before the code is translated - which makes this manual very useful even when concrete examples are given.  It should also be mentioned that we have the goal of making our language and compiler \cpp\ friendly.  However, we don't to the extent of making validation not possible.  As a result keep in mind that the syntax is often context dependent, and what works in an \opCPP\ class will not work in a \cpp\ class or have the same implications when compiled with \opCPP.  Another rule of \opCPP\ is for the default setup to have the same overhead and performance as normal \cpp.  You don't need to look out for any hidden costs when using \opCPP, other than the ones you yourself add by hooking in generated code.  The second focus of this manual is on the \opCPP\ compiler.  Topics covered are its proper usage, how you can use it to customize \opCPP, and how to use it to generate code.  The syntax for dialects is also covered in detail in the final chapters.

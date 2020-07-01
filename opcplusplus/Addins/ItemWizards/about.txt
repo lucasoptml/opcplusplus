@@ -1,0 +1,9 @@
+Installer needs to locate visual studio (or query the user for it)
+
+opC++ Directory goes into:
+
+\Program Files\Microsoft Visual Studio 8\VC\vcprojectitems
+
+opCppItems.vsdir goes into:
+
+\Program Files\Microsoft Visual Studio 8\VC\VCNewItems

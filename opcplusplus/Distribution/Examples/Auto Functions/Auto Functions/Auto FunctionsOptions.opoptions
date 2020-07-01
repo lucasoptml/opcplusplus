@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProjectOptionsSet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Options>
+    <OptionsElement>
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+      <Options>
+        <Tree>
+          <UseDefault>true</UseDefault>
+          <Value>false</Value>
+        </Tree>
+        <FullTree>
+          <UseDefault>true</UseDefault>
+          <Value>false</Value>
+        </FullTree>
+        <TestMode>
+          <UseDefault>true</UseDefault>
+          <Value>false</Value>
+        </TestMode>
+        <AlternativeStructs>
+          <UseDefault>true</UseDefault>
+          <StringList />
+        </AlternativeStructs>
+        <AlternativeClasses>
+          <UseDefault>true</UseDefault>
+          <StringList />
+        </AlternativeClasses>
+        <ExecutablePath>
+          <UseDefault>true</UseDefault>
+          <Value>G:\opEngine\opCPP\Distribution\bin\win32\release\opCPP.exe</Value>
+        </ExecutablePath>
+        <OhFiles>
+          <UseDefault>true</UseDefault>
+          <StringList />
+        </OhFiles>
+        <Directories>
+          <UseDefault>true</UseDefault>
+          <StringList />
+        </Directories>
+        <OhDirectories>
+          <UseDefault>true</UseDefault>
+          <StringList />
+        </OhDirectories>
+        <GeneratedDirectory>
+          <UseDefault>true</UseDefault>
+          <Value>Generated/$(ProjectName)</Value>
+        </GeneratedDirectory>
+        <DialectFiles>
+          <UseDefault>true</UseDefault>
+          <StringList />
+        </DialectFiles>
+        <DependencyFiles>
+          <UseDefault>true</UseDefault>
+          <StringList />
+        </DependencyFiles>
+        <FeatureDirectories>
+          <UseDefault>true</UseDefault>
+          <StringList />
+        </FeatureDirectories>
+        <Verbose>
+          <UseDefault>true</UseDefault>
+          <Value>false</Value>
+        </Verbose>
+        <Silent>
+          <UseDefault>true</UseDefault>
+          <Value>false</Value>
+        </Silent>
+        <Force>
+          <UseDefault>true</UseDefault>
+          <Value>false</Value>
+        </Force>
+        <NoStandardIncludes>
+          <UseDefault>true</UseDefault>
+          <Value>false</Value>
+        </NoStandardIncludes>
+        <InlineAll>
+          <UseDefault>true</UseDefault>
+          <Value>false</Value>
+        </InlineAll>
+        <NoDebug>
+          <UseDefault>true</UseDefault>
+          <Value>false</Value>
+        </NoDebug>
+        <Highlighting>
+          <UseDefault>true</UseDefault>
+          <Value>true</Value>
+        </Highlighting>
+        <Ghosts>
+          <UseDefault>true</UseDefault>
+          <Value>true</Value>
+        </Ghosts>
+        <GlobMode>
+          <UseDefault>true</UseDefault>
+          <Value>true</Value>
+        </GlobMode>
+        <ExpansionDepth>
+          <UseDefault>true</UseDefault>
+          <Value>100</Value>
+        </ExpansionDepth>
+        <Notations>
+          <UseDefault>true</UseDefault>
+          <Value>false</Value>
+        </Notations>
+        <ExtendCommands>
+          <UseDefault>true</UseDefault>
+          <Value>true</Value>
+        </ExtendCommands>
+        <PostBuildSolution>
+          <UseDefault>true</UseDefault>
+          <Value>Build.BuildSolution</Value>
+        </PostBuildSolution>
+        <PostBuildProject>
+          <UseDefault>true</UseDefault>
+          <Value>Build.BuildSelection</Value>
+        </PostBuildProject>
+        <PostCleanSolution>
+          <UseDefault>true</UseDefault>
+          <Value>Build.CleanSolution</Value>
+        </PostCleanSolution>
+      </Options>
+    </OptionsElement>
+  </Options>
+</ProjectOptionsSet>

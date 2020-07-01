@@ -1,0 +1,200 @@
+%% ******************************************
+%% REFLECTION
+%%
+%% Author:  Kevin Depue && Lucas Ellis (2007)
+%% Purpose: Introduces opC++ reflection.
+%% ******************************************
+
+\chapter{\opCPP\ Reflection}
+\label{chap:opcpp_reflection}
+
+%%---------
+%% Overview
+%%---------
+\section{Overview}
+\label{sec:reflection_overview}
+
+In this chapter we introduce \opCPP\ reflection.  Reflection in a language means that you can get information about classes in your program at run-time. It gives you the ability to iterate over an object's data and methods, without needing to know the exact class you're dealing with. \\
+
+Reflection is also often accompanied by descriptive metadata which give you additional information about data members. For example, whether or not a data member is saved to disk may be indicated by metadata. \\
+
+Previously only available in non-standard \cpp\ and other languages, \opCPP\ adds data reflection and metadata capabilities to standard \cpp, opening whole new possibilities to \cpp\ and levels of performance previously unattainable with reflection. \\
+
+\opCPP\ makes three kinds of reflection available: external reflection, instance reflection, and reflection using visitors.  These are covered in the following sections.
+
+%%-------------------------------------
+%% How Does opC++ Implement Reflection?
+%%-------------------------------------
+\section{How Does \opCPP\ Implement Reflection?}
+\label{sec:reflection_how_is_it_implemented}
+
+The \opCPP\ Standard Dialect generates its reflection infrastructure by mapping non-native data members to a parallel code structure.
+
+%%--------------------
+%% External Reflection
+%%--------------------
+\section{External Reflection}
+\label{sec:reflection_external}
+
+By external reflection, we mean learning about an object (names, types, modifiers, members, etc.) without having an actual instance of the object in question.  
+
+%%--------------------
+%% Instance Reflection
+%%--------------------
+\section{Instance Reflection}
+\label{sec:reflection_instance}
+
+%%--------------------
+%% Reflection Visitors
+%%--------------------
+\section{Reflection Visitors}
+\label{sec:reflection_visitors}
+
+In this section we will show how more complex reflection operations can be performed on \opcppk{opclass}es and \opcppk{opstruct}s via reflection visitors and data accessors.
+
+%%------
+%% Costs
+%%------
+\section{Costs}
+\label{sec:reflection_costs}
+
+%%----------
+%% Functionality
+%%----------
+%\break
+%\section{ Functionality }
+%\label{sec:opc_functionality}
+%
+%% casting
+%\subsection{ casting }
+%\label{sec:opc_casting}
+%
+%opCpp comes with a number of optimized casting functions
+%
+%opcpp::casting::class\_cast<Actor>(object) 
+%
+%If you want to cast to an opclass use class\_cast.
+%
+%In release mode class\_cast is approximately 1000\% faster than 
+%using dynamic\_cast, and it may be even faster depending on the RTTI implementation
+%and the number of classes in a project.
+%
+%opcpp::casting::component\_cast<component::Name>(object)
+%
+%if you want to cast to an opcomponent accessor to discover if
+%a given opclass implements a component, use component\_cast.
+%
+%In release mode component\_cast is approximately 5000\% faster than 
+%using dynamic\_cast, and it may be even faster depending on the RTTI implementation
+%and the number of classes in a project.
+%
+%opcpp::casting::cast<type>(object)
+%
+%you can also use a universal cast operator - it
+%will use the fast casts for opclass and opcomponent,
+%or use static\_cast for other types.
+%
+%% visitors
+%\subsection{ visitors }
+%\label{sec:opc_visitors}
+%
+%Visitors can be passed to the opstruct and opclass data\_members
+%function.  This will let them access the data via accessors
+%which are sent to the visitor by the data\_members function.
+%
+%Visitors to data\_members must derive from opcpp::base::visitor\_base.
+%
+%You must override the visit(member\_info\&) function, then
+%use the to\_ functions to discover the data type.
+%
+%You can also override visit for all the accessor types you want,
+%which is faster and is recommended.
+%
+%You can also use the accessor cast function get
+%direct access to the data from an accessor.  This is
+%faster if you're close to the expected data type. 
+%(with the visit function overloads)
+%
+%
+%Examples of visitors that use all of the mentioned methods.
+%
+%
+%% data accessors
+%\subsection{ data accessors }
+%\label{sec:opc_accessors}
+%
+%Accessors are passed to visitors when using the
+%data\_members function in opclass, opstruct and opcomponent.
+%
+%Accessors allow you to read and write data to data members,
+%as well as discover types, read metadata, and operate on
+%STL containers.
+%
+%Accessors are automatically created for all
+%data members in opclasses, opstructs, and opcomponents
+%except those marked with the native modifier.
+%
+%Example of a basic type accessor
+%Example of an array type accessor
+%Example of an stl type accessor
+%Example of a pointer type accessor
+%Example of an opclass type accessor
+%Example of an openum type accessor
+%
+%Accessor functionality
+%
+%member\_info
+%->to functions
+%->access address
+%->access to metadata
+%->access to name
+%->access to type name (maybe)
+%->cast access
+%
+%basic types
+%->access to data
+%
+%array\_info
+%
+%pointer\_info
+%->access to pointer data
+%->access to inner type
+%
+%container\_info
+%->stl control
+%->access to inner type
+%->cast access
+%
+%...all of these...
+%
+%
+%
+%% external accessors
+%\subsection{ external accessors }
+%\label{sec:opc_external_accessors}
+%
+%% meta functions
+%\subsection{ meta functions }
+%\label{sec:opc_metafunctions}
+%
+%
+%
+%
+%%----------
+%% Tracking
+%%----------
+%\section{ Type Tracking }
+%\label{sec:opc_tracking}
+%
+%% opclass tracking
+%\subsection{ opclass tracking }
+%\label{sec:opc_opclass_tracking}
+%
+%% opstruct tracking
+%\subsection{ opstruct tracking }
+%\label{sec:opc_opstruct_tracking}
+%
+%% opcomponent
+%\subsection{ openum tracking }
+%\label{sec:opc_openum_tracking}
+%

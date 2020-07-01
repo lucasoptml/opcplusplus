@@ -1,0 +1,144 @@
+// opC++ code
+
+template<class type>
+struct named
+{
+	static const char* getname()
+	{
+		return "";
+	}
+};
+
+opmacro test(scope,name)
+{
+	namespace scope
+	{
+		class name
+		{
+		public:
+			int a;
+		};
+	}
+
+	template<>
+	struct named<scope::name>
+	{
+		const char* getname()
+		{
+			return ``name``;
+		}
+	};
+}
+
+opmacro test10(scope,name)
+{
+	expand test(scope,a_@name);
+	expand test(scope,b_@name);
+	expand test(scope,c_@name);
+	expand test(scope,d_@name);
+	expand test(scope,e_@name);
+	expand test(scope,f_@name);
+	expand test(scope,g_@name);
+	expand test(scope,h_@name);
+	expand test(scope,i_@name);
+	expand test(scope,j_@name);
+	expand test(scope,k_@name);
+}
+
+opmacro test100(scope,name)
+{
+	expand test10(scope,a_@name);
+	expand test10(scope,b_@name);
+	expand test10(scope,c_@name);
+	expand test10(scope,d_@name);
+	expand test10(scope,e_@name);
+	expand test10(scope,f_@name);
+	expand test10(scope,g_@name);
+	expand test10(scope,h_@name);
+	expand test10(scope,i_@name);
+	expand test10(scope,j_@name);
+	expand test10(scope,k_@name);
+}
+
+opmacro test1000(scope,name)
+{
+	expand test100(scope,a_@name);
+	expand test100(scope,b_@name);
+	expand test100(scope,c_@name);
+	expand test100(scope,d_@name);
+	expand test100(scope,e_@name);
+	expand test100(scope,f_@name);
+	expand test100(scope,g_@name);
+	expand test100(scope,h_@name);
+	expand test100(scope,i_@name);
+	expand test100(scope,j_@name);
+	expand test100(scope,k_@name);
+}
+
+expand test1000(scope,class);
+
+
+opmacro runtest(scope,name)
+{
+	{
+		named<scope::name> instance;
+		const char* name = instance.getname();
+	}
+}
+
+opmacro runtest10(scope,name)
+{
+	expand runtest(scope,a_@name);
+	expand runtest(scope,b_@name);
+	expand runtest(scope,c_@name);
+	expand runtest(scope,d_@name);
+	expand runtest(scope,e_@name);
+	expand runtest(scope,f_@name);
+	expand runtest(scope,g_@name);
+	expand runtest(scope,h_@name);
+	expand runtest(scope,i_@name);
+	expand runtest(scope,j_@name);
+	expand runtest(scope,k_@name);
+}
+
+
+opmacro runtest100(scope,name)
+{
+	expand runtest10(scope,a_@name);
+	expand runtest10(scope,b_@name);
+	expand runtest10(scope,c_@name);
+	expand runtest10(scope,d_@name);
+	expand runtest10(scope,e_@name);
+	expand runtest10(scope,f_@name);
+	expand runtest10(scope,g_@name);
+	expand runtest10(scope,h_@name);
+	expand runtest10(scope,i_@name);
+	expand runtest10(scope,j_@name);
+	expand runtest10(scope,k_@name);
+}
+
+
+opmacro runtest1000(scope,name)
+{
+	expand runtest100(scope,a_@name);
+	expand runtest100(scope,b_@name);
+	expand runtest100(scope,c_@name);
+	expand runtest100(scope,d_@name);
+	expand runtest100(scope,e_@name);
+	expand runtest100(scope,f_@name);
+	expand runtest100(scope,g_@name);
+	expand runtest100(scope,h_@name);
+	expand runtest100(scope,i_@name);
+	expand runtest100(scope,j_@name);
+	expand runtest100(scope,k_@name);
+}
+
+
+inline void runtest()
+{
+	expand runtest1000(scope,class);
+}
+
+
+
+

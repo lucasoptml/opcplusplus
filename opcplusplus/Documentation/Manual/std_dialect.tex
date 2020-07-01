@@ -1,0 +1,475 @@
+%% ******************************************
+%% opC++ STANDARD DIALECT
+%%
+%% Author:  Kevin Depue && Lucas Ellis (2007)
+%% Purpose: Introduces the opC++ standard 
+%% dialect.
+%% ******************************************
+
+\chapter{\opCPP\ Standard Dialect}
+\label{chap:opcpp_standard_dialect}
+
+%%----------
+%% Overview
+%%----------
+\section{Overview}
+\label{sec:opcpp_overview}
+
+The \opCPP\ Standard Dialect is a dialect of \cpp\ that adds data reflection, data member metadata, type reflection, full serialization, Standard Template Library (STL) support, fast dynamic casting, strong enumerations, and easy extensibility.  The goal is to add useful language features while minimizing performance hits and code bloat. \\
+
+Two of the features of the \opCPP\ Standard Dialect, reflection and serialization, are quite new for \cpp, as these language features are difficult to construct in the \cpp\ language.  All previous attempts have been marginal at best.\footnote{For example, one of the only \cpp\ serialization attempts is the \cpp\ Boost Serialization library.  This approach relies heavily on templates, and compile times increase dramatically with each new serialization path you add.  Additionally, our serialization is faster than Boost's.  For more details, see the \opCPP\ benchmark white paper.}  Using \opCPP\ is as easy as integrating the compiler, including the Standard Dialect, and writing code.  Also, it works with any new or existing \cpp\ project.
+
+\paragraph{Data Reflection}
+\opCPP\ gives you portable data reflection, and access to metadata on a per-member basis.  Simply write a visitor
+class with a single function and get type safe access to all data within \opCPP\ objects.  You can use these visitors to filter data members by type and other metadata.
+
+\paragraph{Type Reflection}
+\opCPP\ gives you access to enumerated types and the full inheritance structure of your classes without requiring an instance of the type.  This can be used to directly access a specific member of a type via reflection.
+
+\paragraph{Serialization}
+Automatically and seamlessly serialize your classes to and from text, binary and xml via intuitive data modifiers.  All basic types and \opCPP\ constructs can be serialized immediately, and the framework can be easily extended.
+
+\paragraph{STL Support}
+\opCPP\ not only gives you reflection and serialization for simple data constructs, but also for all STL containers.  Perform
+reads and writes on elements, as well as complicated manipulations with iteration, insertion, and removal access.
+
+\paragraph{Fast Dynamic Casting}
+opC++ type casting is 1000-5000\% faster than C++'s standard dynamic\_cast with solid time guarantees.
+
+\paragraph{Strong Enumerations}
+Use strong enumerations with automatic string conversion routines.
+
+\paragraph{Extensible}
+The \opCPP\ Standard Dialect is easily extensible via extension points, an \opCPP\ dialect language feature. \\
+
+In this chapter we will introduce two new \opCPP\ categories, \opcppk{opclass} and \opcppk{opstruct}, as well as several data modifiers.  We also introduce \opcppk{openum}, the strong enumeration included with the \opCPP\ Standard Dialect.  Although many of the data modifiers in the Standard Dialect are associated with reflection and serialization, we only introduce them syntactically here.  \opCPP\ reflection and serialization are introduced in much greater detail in Chapters \ref{chap:opcpp_reflection} and \ref{chap:opcpp_serialization}, respectively.
+
+%%-----------
+%% Categories
+%%-----------
+\section{Categories}
+\label{sec:opcpp_categories}
+
+The \opCPP\ Standard Dialect introduces two new categories to \cpp: \opcppk{opclass} and \opcppk{opstruct}.  Each is used for different purposes, has different costs, and different functionality.  They are covered in the following sections.
+
+%% opclass
+\subsection{{\tt opclass}}
+\label{subsec:opclass}
+
+The \opCPP\ compiler maps \opcppk{opclass} to a standard \cpp\ class.  It is a polymorphic object with fast casting and reflection/serialization support.  It has private scope just like a \cpp\ class.  The syntax of an \opcppk{opclass} is almost identical to a \cpp\ class.  Figure \ref{fig:opclass:samples} shows an example \opcppk{opclass}.  You can write any code you would normally write in a \cpp\ class (data members, operator overloads, functions, constructors/destructors, etc.) as well as some new modifiers.  These will be introduced in a later section.
+
+\begin{opcpp}[label={fig:opclass:samples},caption={A simple \opcppk{opclass}.}]
+opclass foo
+{
+public:
+
+    foo() : bar( false )
+    {
+
+    }
+
+private:
+
+    bool bar;
+}
+\end{opcpp}
+
+\paragraph{Technical Note}
+Since \opcppk{opclass} is polymorphic, be aware that it has a virtual function table.  If
+you want a type without this cost (typically 4 bytes per object on a 32-bit system),
+use \opcppk{opstruct}.
+
+%% Fast Dynamic Casting
+\subsection{Fast Dynamic Casting}
+\label{subsec:opclass:fast_dynamic_casting}
+
+As aforementioned, \opcppk{opclass} supports fast dynamic casting.  This is achieved via the \opcppk{class_cast} operator.  Unlike \cpp\ \opcppk{dynamic_cast}, \opcppk{class_cast} is achieved in constant time via a simple range check.  This is possible because the \opCPP\ compiler is aware of the inheritance hierarchy at compile time, and generates code appropriately.  Figure \ref{fig:opclass:classcast} shows an example of using the \opcppk{class_cast} operator.  The \opcppk{class_cast} operator will either return a pointer to the class you're trying to cast to, or null if the cast is invalid.
+
+\begin{opcpp}[label={fig:opclass:classcast},caption={Using the \opcppk{class_cast} operator.}]
+// The base class.
+opclass fruit
+{
+
+}
+
+// The subclass.
+opclass apple : public fruit
+{
+
+}
+
+...
+
+// Here we're in code somewhere and randomly get a fruit
+// object, and want to know if it's an apple.  This will
+// either cast sucessfully to a fruit*, or return null.
+fruit* object    = get_fruit();
+apple* the_apple = class_cast< apple >( object );
+
+if ( the_apple )
+    ...
+\end{opcpp}
+
+%% opstruct
+\subsection{{\tt opstruct}}
+\label{subsec:opstruct}
+
+The \opCPP\ compiler maps \opcppk{opstruct} to a standard \cpp\ struct.  It is a non-polymorphic object with reflection/serialization support.  It is well suited to any object whose type is known at compile time.  If the type needs to be discovered dynamically, use \opcppk{opclass}.  \\
+
+\opcppk{opstruct} has public scope just like a \cpp\ struct.  Just as with \opcppk{opclass}, you can write any code in an \opcppk{opstruct} that you would normally write in a \cpp\ struct, as well as some new modifiers.  These will be introduced in a later section.  Figure \ref{fig:opstruct:samples} shows an example \opcppk{opstruct}. \\
+
+\begin{opcpp}[label={fig:opstruct:samples},caption={Using a simple \opcppk{opstruct}.}]
+opstruct point
+{
+	float x;
+	float y;
+	float z;
+};
+\end{opcpp}
+
+Unlike \opcppk{opclass}, \opcppk{opstruct} does \textit{not} support fast dynamic casting.
+
+%% inheritance
+\subsection{Inheritance}
+\label{subsec:categories:inheritance}
+
+\opcppk{opclass} and \opcppk{opstruct} both require the use of single inheritance because of the way reflection and serialization are generated.  Multiple inheritance is not supported.  This is a common constraint in reflected languages.  If your \opcppk{opclass} or \opcppk{opstruct} does not inherit from anything, the Standard Dialect automatically causes it to be inherited from \opcppk{class_base} or \opcppk{struct_base}, respectively.  These are lightweight base classes that implement some necessary reflection code.  All \opCPP\ categories must inherit from one of these base classes. \\
+
+For example, when one \opcppk{opstruct} {\tt B} inherits from another \opcppk{opstruct} {\tt A} that has no parent, {\tt B} inherits from {\tt A} which implicity inherits from \opcppk{struct_base} (the \opCPP\ compiler generates this behind the scenes).  Figure \ref{fig:inheritance:example} shows the example described.  More details about \opcppk{class_base} and \opcppk{struct_base} can be found in the online reference. \\
+
+\begin{opcpp}[label={fig:inheritance:example},caption={\opCPP\ inheritance example.}]
+opstruct A // implicitly is: public struct_base
+{
+
+}
+
+opstruct B : public A
+{
+
+}
+\end{opcpp}
+
+The \opCPP\ Standard Dialect automatically defines the typedef {\tt Super} for every \opcppk{opclass} and \opcppk{opstruct}.  This is a typedef for the parent class.  If the \opcppk{opclass} or \opcppk{opstruct} in question does not inherit from anything, \opcppk{Super} points to \opcppk{class_base} or \opcppk{struct_base}, respectively.  Figure \ref{fig:inheritance:super} shows an example of using \opcppk{Super}. \\
+
+\begin{opcpp}[label={fig:inheritance:super},caption={Using the \opcppk{Super} typedef.}]
+opstruct X
+{
+    void Init()
+    {
+        // ... code ...
+    }
+}
+
+opstruct Y : public X
+{
+    void Init()
+    {
+        Super::Init();
+
+        // ... code ...
+    }
+}
+\end{opcpp}
+
+When using \opcppk{opclass} and \opcppk{opstruct}, you cannot normally inherit from a \cpp\ class or struct but instead only from an \opcppk{opclass} or \opcppk{opstruct}.  However, there is a workaround to make this possible.  Figure \ref{fig:inheritance:cpp_workaround} shows the workaround.  You can define a template class that allows you to inherit from more than one class.  Inheriting from two \opcppk{opclass}es or \opcppk{opstruct}s is not allowed.
+
+\begin{opcpp}[label={fig:inheritance:cpp_workaround},caption={Inheriting from \cpp\ classes.}]
+// This template allows you to inherit from two different objects.
+template<class A, class B>
+class CppWorkaround : public A, public B
+{
+
+};
+
+// A regular C++ class.
+class X
+{
+
+};
+
+// An opclass.
+opclass Y
+{
+
+}
+
+using opcpp::base::class_base;
+
+// Here we inherit from a C++ class (X) and an opclass (Y).
+// This works because W is inheriting from Y, which inherits
+// from class_base.
+opclass W : public CppWorkaround< X, Y >
+{
+
+}
+
+// Here we inherit from a C++ class only, but 
+// we still must make sure to inherit from
+// class_base for the opclass to work correctly.
+opclass Z : public CppWorkaround< X, class_base >
+{
+
+}
+\end{opcpp}
+
+%%----------
+%% Modifiers
+%%----------
+\section{Modifiers}
+\label{sec:opcpp_modifiers}
+
+The \opCPP\ Standard Dialect introduces several data modifiers for \opcppk{opclass}/\opcppk{opstruct}.  Each one is presented in the following subsections.  However, several are related to reflection and serialization, and are covered in more detail in Chapters \ref{chap:opcpp_reflection} and \ref{chap:opcpp_serialization}.
+
+\subsection{Visibility Modifiers}
+\label{subsec:modifiers:visibility}
+
+In \cpp\ classes and structs, visibility is determined by the visibility statements \opcppk{public:}, \opcppk{private:} and \opcppk{protected:}.  In \opCPP, you can use these keywords as modifiers on data and function statements.  You can even mix \cpp\ visibility statements with \opCPP\ visibility modifiers.  If a statement does not contain any visibilty modifiers, the visibility statement it is under is applied.  However, if a visibility modifier is present, it takes precedence.  Figure \ref{fig:modifiers:visibility_examples} shows several examples.
+
+\begin{opcpp}[label={fig:modifiers:visibility_examples},caption={Using \opCPP\ visibility modifiers.}]
+opclass Actor
+{
+    // This member is private (default scope).
+    void Foo()
+    {
+
+    }
+
+public:
+
+    // This method is protected.
+    protected void Bar()
+    {
+
+    }
+
+    // This method is public.
+    void DoesNothing()
+    {
+
+    }
+
+    int           x; // This member is public.
+    protected int y; // This member is protected.
+    private float z; // This member is private.
+}
+\end{opcpp}
+
+%% opstatic
+\subsection{{\tt opstatic}}
+\label{subsec:modifiers:opstatic}
+
+In \cpp, static data members in a class or struct must be declared in the body of the class or struct.  The programmer must always put the initialization of the static members in source code, which can be quite annoying.  A \cpp\ example is shown in Figure \ref{fig:modifiers:cpp_static}. \\
+
+\begin{opcpp}[label={fig:modifiers:cpp_static},caption={Using the \opcppk{static} modifier in \cpp.}]
+// The class is declared in the header file.
+class A
+{
+private:
+
+    static float x;
+    static float y;
+};
+
+// The static members have to be initialized in source.
+float A::x;
+float A::y = 100;
+\end{opcpp}
+
+To remove this annoyance, the \opCPP\ Standard Dialect introduces the \opcppk{opstatic} modifier for data members.  Using \opcppk{opstatic} on a data member, you can declare/initialize the static member in one place.  The \opCPP\ compiler then generates  code to the correct places.  Figure \ref{fig:modifiers:opstatic} shows some examples.  
+
+\begin{opcpp}[label={fig:modifiers:opstatic},caption={Using the \opcppk{opstatic} data modifier.}]
+opclass A
+{
+    // The declaration and initialization happen in one place!
+    private opstatic float x;
+    private opstatic float y = 100;
+}
+\end{opcpp}
+
+%% Reflection/Serialization Modifiers
+\subsection{Reflection/Serialization Modifiers}
+\label{subsec:modifiers:reflection_serialization_modifiers}
+
+The \opCPP\ Standard Dialect adds three data modifiers to make reflection/serialization more intuitive: \opcppk{native}, \opcppk{transient} and \opcppk{opreflect}.  Only brief examples and descriptions are given here.  Reflection and serialization are discussed in depth in Chapters \ref{chap:opcpp_reflection} and \ref{chap:opcpp_serialization}. \\
+
+If a data member is tagged with the \opcppk{native} modifier, it means that the data member is not reflected or serialized.  This is useful for data members that are strictly internal that you want to hide.  It is also useful when a type will not be known to \opCPP, such as a type from an API. \\
+
+If a data member is tagged with the \opcppk{transient} modifier, it means that the data member is not serialized, but that it is reflected and is still accessible via the reflection.  If a data member does not have the \opcppk{native} or \opcppk{transient} modifier, it is automatically reflected and serializable.  Finally, the \opcppk{native} and \opcppk{transient} modifiers are mutually exclusive.  Figure \ref{fig:modifiers:native_transient} shows an example using the native and transient modifiers. \\
+
+\begin{opcpp}[label={fig:modifiers:native_transient},caption={Using the \opcppk{native} and \opcppk{transient} data modifiers.}]
+opclass song
+{
+
+}
+
+opclass playlist
+{
+    native api_window* Window;      // This data member is not reflected or serializable.
+    transient int      NumSongs;    // This data member is reflected but not serializable.
+    song*              CurrentSong; // This data member is both reflected and serializable.
+}
+\end{opcpp}
+
+The third reflection modifier is \opcppk{opreflect}.  This modifier is a \textit{valued} modifier - this means that it has a value associated with it.  The value in this case must be a string.  This modifier is used to change a data member's reflection name.  Figure \ref{fig:modifiers:opreflect} shows an example.
+
+\begin{opcpp}[label={fig:modifiers:opreflect},caption={Using the \opcppk{opreflect} data modifier.}]
+opclass channel
+{
+
+}
+
+opclass television
+{
+    // This forces the "Channels" data member's reflection name
+    // to be "channel".  This also means that this is the name
+    // you use when serializing it to xml, etc.
+    opreflect("channel") vector< channel > Channels;
+}
+\end{opcpp}
+
+%%-------
+%% openum
+%%-------
+\section{{\tt openum}}
+\label{sec:opcpp_openum}
+
+The \opCPP\ Standard Dialect defines a new enumeration type called \opcppk{openum}.  \opcppk{openum} is identical to a \cpp\ enumeration with some additional features.  This type has reflection support, string conversion routines, as well as strong typing.  Figure \ref{fig:openum:strong_typing} shows an example \opcppk{openum} utilizing strong typing.  Strong typing allows you to reduce ambiguities using the scope resolution operator. \\
+
+\begin{opcpp}[label={fig:openum:strong_typing},caption={Example \opcppk{openum} utilizing strong typing.}]
+openum Colors
+{
+    Red,
+    Blue,
+    Green,
+    Yellow
+}
+
+// You can assign an openum the usual C++ way.
+Colors c1 = Red;
+
+// You can also use strong typing to rid
+// the code of ambiguities.  This is not
+// possible in regular C++.
+Colors c2 = Colors::Red;
+\end{opcpp}
+
+The \opCPP\ compiler defines three additional operators for \opcppk{openum}: \opcppk{count}, \opcppk{min} and \opcppk{max}.  These are the number of enum values in the enumeration, the minimum enumeration value, and the maximum enumeration value, respectively.  Figure \ref{fig:openum:min_max} shows examples of using these new operators. \\
+
+\begin{opcpp}[label={fig:openum:min_max},caption={The \opcppk{count}, \opcppk{min} and \opcppk{max} \opcppk{openum} operators.}]
+openum animals
+{
+    dog      = 2,
+    cat      = dog,
+    elephant = 100,
+    mouse    = 0
+}
+
+// Here, the count will return 4 because there are 4
+// enum values in the animals enumeration.
+int count = animals::count;
+
+// Getting the min will return animals::mouse.
+animals min = animals::min;
+
+// Getting the max will return animals::elephant.
+animals max = animals::max;
+\end{opcpp}
+
+The \opcppk{openum} stores an inner table of enumeration values and their corresponding string values.  You can access a table entry using the \opcppk{key_count}, \opcppk{key_value} and \opcppk{key_string} methods.  Figure \ref{fig:openum:key_table} shows an example that accesses this table.  It should be noted that \opcppk{key_count} is identical to the \opcppk{count} operator. \\
+
+\begin{opcpp}[label={fig:openum:key_table},caption={Accessing an \opcppk{openum}'s inner table.}]
+openum Seasons
+{
+    Spring,
+    Summer,
+    Fall,
+    Winter
+}
+
+// Here we loop through the enumeration's inner table,
+// printing its contents to the standard out.
+#include <iostream>
+
+using std::cout;
+
+int count = Seasons::key_count();
+
+for (int i = 0; i < count; i++)
+    cout << Seasons::key_value( i ) << ", " << Seasons::key_string( i ) << endl;
+
+// The above loop will print the following to the standard out:
+//
+// 0, Spring
+// 1, Summer
+// 2, Fall
+// 3, Winter
+\end{opcpp}
+
+There are also string and integer conversion routines for \opcppk{openum}.  The methods are \opcppk{to_int}, \opcppk{to_string}, \opcppk{get_int}, \opcppk{get_string}, \opcppk{from_int} and \opcppk{from_string}.  You cannot directly initialize an enumeration with an integer as you can in \cpp\ as this is considered unsafe.  The \opcppk{to_int}, \opcppk{to_string}, \opcppk{from_int} and \opcppk{from_string} initialization functions return a boolean.  The methods will return false if the initialization failed (was invalid).  \opcppk{get_int} and \opcppk{get_string} return actual values, but you should know that what will be returned will be valid before using them.  Figure \ref{fig:openum:string_conversion} shows examples of these methods.
+
+\begin{opcpp}[label={fig:openum:string_conversion},caption={String and integer conversion routines for \opcppk{openum}.}]
+openum Cuisine
+{
+    Italian,
+    Mexican,
+    American,
+    French
+}
+
+// We can convert an enum to an integer or a string using the 
+// to_int, to_string, get_int and get_string methods.
+Cuisine c1 = Cuisine::French;
+
+int    i;
+string s;
+
+// to_int and to_string will return false if the enum has been corrupted.
+// This can happen if we did something like this, which is unsafe:
+// 
+// c1 = (Cuisine::type) 20;
+
+c1.to_int( i );    // i will be 3 after this function returns.
+c1.to_string( s ); // s will be "French" after this function returns.
+
+int    i2 = c1.get_int();    // This will return 3.
+string s2 = c1.get_string(); // This will return "French".
+
+// We can also initialize enumeration values from an existing
+// integer or string using the from_int and from_string methods.
+// These methods return a bool.  Each method will return true
+// if the iniaialization was successful, or false if the int or
+// string passed in is invalid (does not match an existing enum
+// value).
+Cuisine c2;
+
+c2.from_int( 2 );           // This will set c2 to American.
+c2.from_string( "Mexican" ) // This will set c2 to Mexican.
+
+// Here's an invalid one..
+if ( c2.from_string( "German" ) )
+    // we'll never get here!
+\end{opcpp}
+
+%% alternate prefixes
+\section{Alternate Prefixes}
+\label{sec:categories:alternate_prefixes}
+
+Using the keywords \opcppk{opclass}, \opcppk{opstruct} and \opcppk{openum} can prevent some programming IDE's from performing syntax coloring and intellisense correctly.  We get around this by allowing the syntax \opcppk{op class}, \opcppk{op struct} and \opcppk{op enum} respectively.  We've found that this fixes most problems, as the IDE thinks that the \opCPP\ constructs are class, struct and enum.  Figure \ref{fig:modifiers:visibility_examples} shows some examples.
+
+\begin{opcpp}[label={fig:modifiers:visibility_examples},caption={Alternate prefixes.}]
+op struct X
+{
+
+}
+
+op class Y
+{
+
+}
+
+op enum Z
+{
+
+}
+\end{opcpp}
+

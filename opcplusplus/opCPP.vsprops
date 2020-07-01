@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioPropertySheet
+	ProjectType="Visual C++"
+	Version="8.00"
+	Name="opCPP"
+	>
+	<Tool
+		Name="VCCLCompilerTool"
+		AdditionalOptions="/wd4996 /wd4351"
+		Optimization="2"
+		InlineFunctionExpansion="0"
+		EnableIntrinsicFunctions="true"
+		FavorSizeOrSpeed="1"
+		WholeProgramOptimization="false"
+		AdditionalIncludeDirectories="Inc\;..\opBasis\Inc\;../Lib/boost/;..\opBasis\Inc\opstl"
+		DebugInformationFormat="3"
+	/>
+	<Tool
+		Name="VCLinkerTool"
+		AdditionalLibraryDirectories="../Lib/boost/"
+	/>
+</VisualStudioPropertySheet>

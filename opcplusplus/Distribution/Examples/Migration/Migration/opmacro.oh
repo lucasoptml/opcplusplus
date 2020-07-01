@@ -1,0 +1,62 @@
+
+
+// In this example, we add several functions to two classes
+// A and B.  Assume in this example that A and B are not 
+// related.  In other words, they do not inherit from a common
+// base, and cannot just inherit the same methods.  In this
+// example, we use an opmacro to reduce the code duplication.
+
+opmacro AddCode(class_name)
+{
+public:		
+
+	// Returns the class name.
+	const char* GetClassName()				
+	{										
+		return ``class_name``;				
+	}										
+
+	// Returns the size of class_name.
+	size_t GetClassSize()					
+	{										
+		return sizeof(class_name);			
+	}										
+
+private:									
+
+	// Make new and delete private so you can't  
+	// dynamically allocate an instance of class_name.
+	static void* operator new(size_t size)		
+	{											
+		return NULL;							
+	}											
+
+	static void operator delete(void* object)	
+	{											
+
+	}						
+}
+
+namespace op_macro
+{
+	class A
+	{
+		expand AddCode(A);
+	};
+
+	class B
+	{
+		expand AddCode(B);
+	};
+}
+
+/*=== notes ===*/
+
+// Pros
+// 1) opmacros are fully debuggable!
+// 2) We have reduced code duplication and redundancy.
+// 3) We can put comments into the opmacro definition.
+// 4) It actually looks readable.
+
+// Cons
+// 1) We have to add a call to every class.

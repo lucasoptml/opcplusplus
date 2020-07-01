@@ -1,0 +1,91 @@
+
+
+opclass baseclass : public opcpp::base::class_base
+{
+	public virtual void blah() {}
+};
+
+//1
+opclass A : public baseclass
+{
+
+};
+
+//2
+opclass AA : public A
+{
+
+};
+
+opclass AB : public A
+{
+
+};
+
+//4
+opclass AAA : public AA
+{
+
+};
+
+
+opclass AAB : public AA
+{
+
+};
+
+opclass ABB : public AB
+{
+
+};
+
+opclass ABA : public AB
+{
+
+};
+
+//8
+opclass AAAA : public AAA
+{
+
+};
+
+opclass AABA : public AAB
+{
+
+};
+
+opclass ABBA : public ABB
+{
+
+};
+
+opclass ABAA : public ABA
+{
+
+};
+
+opclass AAAB : public AAA
+{
+
+};
+
+
+opclass AABB : public AAB
+{
+
+};
+
+opclass ABBB : public ABB
+{
+
+};
+
+opclass ABAB : public ABA
+{
+
+};
+
+
+
+

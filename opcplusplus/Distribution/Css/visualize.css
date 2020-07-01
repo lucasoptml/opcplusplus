@@ -1,0 +1,394 @@
+
+/* shared classes */
+
+div
+{
+	font-family: Consolas, Courier New;
+	font-size: 10pt;
+	cursor: default;
+	background-color: White;
+}
+
+
+/* dialect classes */
+
+.code
+{
+	padding: 10px;
+}
+
+
+.include
+{
+	padding: 10px;
+	border: solid 2px #dddddd;
+	border-top: 0px;
+}
+
+.include .title
+{
+	background-color: White;
+	border: solid 1px #efeff0; 
+	background-color: #555555;
+	color: #eeeeee;
+	border-bottom-width: 3px;
+}
+
+.include .name
+{
+	border: solid 1px #efeff0; 
+	background-color: #fcfcfc;
+	color: #0f4189;
+	border-bottom-width: 3px;
+	padding: 10px;
+}
+
+
+.object
+{
+	margin: 10px;
+}
+
+.object .title
+{
+	background-color: #ffffcc;
+	color: #0f4189;
+	border: 1px solid #FFDD99;
+}
+
+.object .name
+{
+	background-color:#ffffee;
+	border: 1px solid #FFDD99;
+	border-bottom-width: 3px;
+	color: #0f4189;
+	padding: 10px;
+}
+
+
+.data
+{
+	padding: 10px;
+	border: solid 2px #eeeeee;
+	border-top: 0px;
+}
+
+.data .name
+{
+	background-color: White;
+	border: solid 1px #96dca8; 
+	background-color: #dbf9f0;
+	color: #0f4189;
+	border-bottom-width: 3px;
+	padding: 10px;
+	
+}
+
+
+.function
+{
+	padding: 10px;
+	border: solid 2px #eeeeee;
+	border-top: 0px;
+}
+
+.function .name
+{
+	background-color: White;
+	border: solid 1px #96dca8; 
+	background-color: #dbf9f0;
+	color: #0f4189;
+	border-bottom-width: 3px;
+	padding: 10px;
+}
+
+.definition
+{
+	padding:0px;
+	line-height:36px;
+}
+
+.statement
+{	
+	background-color: White;
+	border: solid 1px #cecede; 
+	background-color: #f2f2ff;
+	color: #0f4189;
+	border-bottom-width: 3px;
+	padding: 6px;
+	margin:2px;
+	font-size:12pt;
+}
+
+.modifiers
+{
+	padding:10px;
+	padding-bottom:0px;
+	line-height:36px;
+}
+
+.automodifiers
+{
+	padding:10px;
+	line-height:36px;
+}
+
+.modifier
+{
+	background-color: White;
+	border: solid 1px #96dca8; 
+	background-color: #dbf9f0;
+	color: #0f4189;
+	border-bottom-width: 3px;
+	padding: 6px;
+	margin:2px;
+	font-size:8pt;
+}
+
+.tree
+{
+	width:500px;
+	border: solid 2px #eeeeee;
+	padding: 10px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.tree .object
+{
+	width : 300px;
+	padding-left: 20px;
+}
+
+.tree .object .title
+{
+	padding: 1px;
+	font-size:6pt;
+}
+
+.tree .object .name
+{
+	padding: 3px;
+	font-size:8pt;
+}
+
+.modifier .value
+{
+	margin: -5px 0px -5px 0px;
+	padding: 4px;
+	border: solid 1px #96dca8; 
+	background-color: #ebffff;
+}
+
+
+.namespace
+{
+	margin: 10px;
+	padding: 10px;
+	border: solid 2px #eeeeee;
+	padding: 10px;
+}
+
+.namespace .title
+{
+	background-color: #ffffcc;
+	border: 1px solid #FFDD99;
+	color: #0f4189;
+}
+
+.namespace .name
+{
+	background-color:#ffffee; 
+	border: 1px solid #FFDD99;
+	border-bottom-width: 3px;
+	color: #0f4189;
+	padding: 10px;
+}
+
+
+
+/* dialect css */
+
+.dialect
+{
+	padding: 10px;
+}
+
+.category
+{
+	margin: 10px;
+}
+
+.category .title
+{
+	background-color: #ffffcc;
+	border: 1px solid #FFDD99;
+	color: #0f4189;
+}
+
+.category .name
+{
+	background-color:#ffffee;
+	border: 1px solid #FFDD99;
+	border-bottom-width: 3px;
+	color: #0f4189;
+	padding: 10px;
+}
+
+
+.enumeration
+{
+	margin: 10px;
+}
+
+.enumeration .title
+{
+	background-color: #ffffcc;
+	border: 1px solid #FFDD99;
+	color: #0f4189;
+}
+
+.enumeration .name
+{
+	background-color:#ffffee;
+	border: 1px solid #FFDD99;
+	border-bottom-width: 3px;
+	color: #0f4189;
+	padding: 10px;
+}
+
+.location
+{
+	padding: 10px;
+	border: solid 2px #eeeeee;
+	border-top: 0px;
+}
+
+.location .title
+{
+	background-color: White;
+	border: solid 1px #dfdfe0; 
+	background-color: #efeff0;
+	color: #0f4189;
+	border-bottom-width: 3px;
+}
+
+.location .name
+{
+	border: solid 1px #dfdfe0; 
+	background-color: #f6f6f6;
+	color: #0f4189;
+	border-bottom-width: 3px;
+	padding: 10px;
+}
+
+.map .title
+{
+	border: solid 1px #eebbbb; 
+	background-color: #ffdddd;
+	color: #0f4189;
+	border-bottom-width: 3px;
+}
+
+.map
+{
+	padding: 10px;
+	border: solid 2px #eeeeee;
+	border-top: 0px;
+}
+
+.map .name
+{
+	border: solid 1px #eebbbb; 
+	background-color: #ffeeee;
+	color: #0f4189;
+	border-bottom-width: 3px;
+	padding: 10px;
+}
+
+.note .title
+{
+	background-color: White;
+	border: solid 1px #bbe9ef; 
+	background-color: #cbf9ff;
+	color: #0f4189;
+	border-bottom-width: 3px;
+}
+
+.note
+{
+	padding: 10px;
+	border: solid 2px #eeeeee;
+	border-top: 0px;
+}
+
+.note .name
+{
+	background-color: White;
+	border: solid 1px #bbe9ef; 
+	background-color: #ebf9ff;
+	color: #0f4189;
+	border-bottom-width: 3px;
+	padding: 10px;
+}
+
+.arguments
+{
+	padding:10px;
+	padding-bottom:0px;
+	line-height:36px;
+}
+
+.argument
+{
+	background-color: White;
+	border: solid 1px #dadad0; 
+	background-color: #fafaf0;
+	color: #0f4189;
+	border-bottom-width: 3px;
+	padding: 6px;
+	margin:2px;
+	font-size:8pt;
+}
+
+.argument .value
+{
+	margin: -5px 0px -5px 0px;
+	padding: 4px;
+	border: solid 1px #96dca8; 
+	background-color: #ebffff;
+}
+
+
+/* stuff */
+
+.title, .data .title, .function .title, .arguments .title, .modifiers .title
+{
+	font-size:9pt;
+	font-style:italic;
+	padding:2px;
+	border: solid 1px #96dca8; 
+	background-color: #ebffff;
+	height:8pt;
+	color: #0f4189;
+	line-height:normal;
+	text-align:center;
+}
+
+.gotobutton
+{
+	border: solid 1px #000000;
+	background-color: #ffffff;
+	padding:4px;
+	float:right;
+}
+
+.gotopath
+{
+	display:none;
+}
+
+.gotoline
+{
+	display:none;
+}

@@ -1,0 +1,21 @@
+// opC++ code
+
+// Let's declare a new autoclass
+// called 'Ball'.
+autoclass Ball
+{
+	/*=== construction ===*/
+
+	public Ball()
+	{
+		Weight   = 10;
+		Diameter = 100;
+	}
+
+	/*=== data ===*/
+
+	public  log int   Weight;
+	public  log int   Diameter;
+    private     int   Density;
+	private     float Restitution;
+};
