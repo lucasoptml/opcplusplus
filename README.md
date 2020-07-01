@@ -12,3 +12,9 @@ supports reflection of stl data structures.
 [dialect definition files](opcplusplus/Distribution/opcpp/dialects/)
 
 [reflection dialect definition](opcplusplus/Distribution/opcpp/dialects/opc++dialect.doh)
+
+
+## manual pdf
+
+[manual](opcplusplus/Documentation/Manual/Manual.pdf)
+
