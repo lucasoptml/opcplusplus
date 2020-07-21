@@ -20,5 +20,6 @@ supports reflection of stl data structures.
 
 ## site
 
-getting started site: http://opcpp.com
+[getting started site](http://opcpp.com)
 
+[reflection class reference](http://opcpp.com/documentation/docs/html)
