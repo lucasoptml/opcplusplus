@@ -1,6 +1,6 @@
 # opcplusplus
 
-compiler for c++ headers with custom attributes/modifiers via language extension dialects, outputs generated src/h, xml definitions.
+pre compiler for c++ headers with custom attributes/modifiers via language extension dialects, outputs generated src/h, xml definitions.
 
 default extension dialect generates mirrored reflection structure, fast dynamic casts, stack memory only, no heap allocations.
 
