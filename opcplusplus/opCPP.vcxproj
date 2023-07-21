@@ -318,6 +318,7 @@
     <ClInclude Include="Inc\Beta.h" />
     <ClInclude Include="Inc\CodeVisitors.h" />
     <ClInclude Include="Inc\Config.h" />
+    <ClInclude Include="Inc\ContextInlines.h" />
     <ClInclude Include="Inc\Contexts.h" />
     <ClInclude Include="Inc\Delegates.h" />
     <ClInclude Include="Inc\Demo.h" />
@@ -357,6 +358,7 @@
     <ClInclude Include="Inc\Platforms.h" />
     <ClInclude Include="Inc\RegexSupport.h" />
     <ClInclude Include="Inc\Scanner.h" />
+    <ClInclude Include="Inc\StatementInlines.h" />
     <ClInclude Include="Inc\StatementInterfaces.h" />
     <ClInclude Include="Inc\StatementNodes.h" />
     <ClInclude Include="Inc\Stream.h" />

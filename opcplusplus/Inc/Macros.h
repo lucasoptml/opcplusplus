@@ -191,7 +191,7 @@ AlterContext newcontext(GetId(),this);	\
 				exceptionhandler.CaughtException();	\
 			}										\
 		}											\
-	ResetPosition();
+	this.ResetPosition();
 
 // INSPECT macros
 #define INSPECT_START(t)				\

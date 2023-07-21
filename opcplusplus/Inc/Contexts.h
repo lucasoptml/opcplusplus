@@ -14,6 +14,9 @@
 #pragma once
 
 #include "Interfaces.h"
+#include "UtilityInterfaces.h"
+#include "StatementInterfaces.h"
+#include "DialectStatementInterfaces.h"
 
 ///==========================================
 /// Context interfaces
@@ -59,32 +62,7 @@ namespace context
 			PARSE_END;
 		}
 		
-		void FindBasicTypes()
-		{
-			FindAngles();
-			
-			CleanAll();
-			
-			//NOTE: we want standalone angles anytime we can have expressions.
-			Disallow(T_LESS_THAN);//??
-			Disallow(T_GREATER_THAN);
-			
-			FindTemplateTypes();
-			
-			FindScopes(); // id::id
-		
-			FindSigned();
-			FindUnsigned();
-
-			FindArrays(); // id[...][...]
-						
-			FindPointers();
-			FindReferences();
-
-			FindFunctionPointers();
-
-			FindPointerMembers();
-		}
+		void FindBasicTypes();
 	};
 
 	template<class Parent>
@@ -124,83 +102,9 @@ namespace context
 			return "";
 		}
 
-		bool Parse()
-		{
-			PARSE_START;
-			
-			CleanAll();
+		bool Parse();
 
-			//needs to be before arrays
-			FindOperators();	 // operator ... [(...)]
-
-			FindAngles();
-
-			ConcatenationWalker performconcat(this);
-
-			FindCPlusPluses();
-		
-			FindTemplateDecls(); // template< ... >
-
-			FindTemplateTypes();
-
-			FindSigned();
-			FindUnsigned();
-
-			FindModifiers();
-			FindValuedModifiers();
-			
-			FindScopes(); // id::id
-			
-			FindArrays(); // id[...][...]
-			
-			FindPointers();
-			
-			FindReferences();
-			
-			FindFunctionPointers();
-			
-			FindPointerMembers();			
-			
-			FindFunctions();
-			
-			FindDestructors(GetClassName());
-			
-			FindConstructors(GetClassName());
-			
-			FindDestructorDefinitions();
-
-			FindConstructorDefinitions();			
-
-			FindFunctionDefinitions();
-
-			FindFriends();
-
-			FindUsings();
-
-			FindTypedefs();
-
-			FindVisibilityLabels();
-
-			FindCPPConstructs();
-
-			FindOPEnums();
-			FindOPObjects();
-
-			FindTemplated();
-			
-			FindBasicStatements();
-			
-			PARSE_END;
-		}
-
-		bool PostParse()
-		{
-			POSTPARSE_START;
-			{
-				AllowOnlyBasicStatements();
-			}
-			POSTPARSE_END;
-		}
+		bool PostParse();
 	};
 
 	///==========================================
@@ -218,7 +122,7 @@ namespace context
 		{
 			PARSE_START;
 			{
-				FindBasicTypes();
+				this.FindBasicTypes();
 			}
 			PARSE_END;
 		}
@@ -248,49 +152,9 @@ namespace context
 	public:
 		IMPLEMENTS_INTERFACE(State)
 
-		bool Parse()
-		{
-			PARSE_START;
-			
-			//TODO: definitely should group these things... (share between stuff...)
-			FindAngles();
-		
-			CleanAll();
-			
-			Disallow(T_LESS_THAN);
-			Disallow(T_GREATER_THAN);
+		bool Parse();
 
-			FindTemplateTypes();
-						
-			FindScopes();
-		
-			FindArrays();
-				
-			FindPointers();
-			FindReferences();
-			
-			FindFunctionPointers();
-			
-			FindFunctions();
-			FindFunctionDefinitions();
-			
-			FindStates();
-			
-			FindVisibilityLabels();
-			
-			FindStateStatements();
-			
-			PARSE_END;
-		}
-
-		bool PostParse()
-		{
-			POSTPARSE_START;
-			{
-				AllowOnlyStateStatements();
-			}
-			POSTPARSE_END;
-		}
+		bool PostParse();
 	};
 
 	///==========================================
@@ -308,22 +172,7 @@ namespace context
 	public:
 		IMPLEMENTS_INTERFACE(Inheritance)
 
-		bool Parse()
-		{
-			PARSE_START;
-
-			FindAngles();
-		
-			CleanAll();
-
-			Disallow(T_LESS_THAN);
-			Disallow(T_GREATER_THAN);
-
-			FindTemplateTypes();
-			FindScopes();
-
-			PARSE_END;
-		}
+		bool Parse();
 	};
 
 	///==========================================
@@ -341,16 +190,7 @@ namespace context
 	public:
 		IMPLEMENTS_INTERFACE(NamespaceDecl)
 
-		bool Parse()
-		{
-			PARSE_START;
-
-			CleanAll();
-
-			FindScopes();
-
-			PARSE_END;
-		}
+		bool Parse();
 	};
 
 	///==========================================
@@ -372,40 +212,11 @@ namespace context
 	public:
 		IMPLEMENTS_INTERFACE(Global)
 
-		bool PreParse()
-		{
-			PREPARSE_START;
-			{
-				FindOPIncludes();
-			}
-			PREPARSE_END;
-		}
+		bool PreParse();
 
-		bool Parse()
-		{
-			PARSE_START;
-			{
-				ConcatenationWalker performconcat(this);
+		bool Parse();
 
-				FindOPDefines();
-				FindUsingNamespaceKeywords();
-				FindNamespaces();
-				FindCPlusPluses();
-				FindOPEnums();
-				FindOPObjects();
-				FindConditionalPreprocessorStatements();
-			}
-			PARSE_END;
-		}
-
-		bool PostParse()
-		{
-			POSTPARSE_START;
-			{
-				NameResolverWalker walker(this);
-			}
-			POSTPARSE_END;
-		}
+		bool PostParse();
 	};
 
 	///==========================================
@@ -429,32 +240,7 @@ namespace context
 			OperatorType  = NULL;
 		}
 
-		bool Parse()
-		{
-			PARSE_START;
-
-			//TODO: validate this, its probably wrong.
-			FindScopes();
-
-			if(!IsCurrent(T_STAR))
-				FindPointers();
-			
-			if(!IsCurrent(T_AMPERSAND))
-				FindReferences();
-
-			if( IsCurrent(G_POINTER) || IsCurrent(T_ID) || IsCurrent(G_REFERENCE) || IsCurrent(G_SCOPE) )
-			{
-				bCastOperator = true;
-				OperatorType  = CurrentNode();
-				IncrementPosition();
-			}
-			else
-				OperatorType = CheckOverloadableOperator();
-
-			CheckNone();
-
-			PARSE_END;
-		}
+		bool Parse();
 
 	protected:
 		opNode* OperatorType;
@@ -793,6 +579,8 @@ namespace context
 			PARSE_END;
 		}
 	};
+
+
 
 } // end namespace context
 

@@ -11,6 +11,8 @@
 /// Contains interfaces for dialect statements.
 ///****************************************************************
 
+#pragma once
+
 namespace interfaces
 {
 

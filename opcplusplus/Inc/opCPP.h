@@ -82,6 +82,8 @@ using boost::filesystem::path;
 #include "Modifiers.h"
 #include "Timer.h"
 #include "InterfaceInlines.h"
+#include "ContextInlines.h"
+#include "StatementInlines.h"
 #include "RegexSupport.h"
 #include "MacroInterfaces.h"
 #include "Walkers.h"

@@ -11,6 +11,8 @@
 /// Utility interfaces.
 ///****************************************************************
 
+#pragma once
+
 namespace interfaces
 {
 

@@ -497,5 +497,11 @@
     <ClInclude Include="..\lib\boost\libs\filesystem\src\windows_tools.hpp">
       <Filter>Library Files\Boost Filesystem\Source</Filter>
     </ClInclude>
+    <ClInclude Include="Inc\ContextInlines.h">
+      <Filter>Header Files\opC++</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\StatementInlines.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
