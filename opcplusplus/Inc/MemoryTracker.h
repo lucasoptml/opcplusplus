@@ -11,6 +11,7 @@
 /// Debug Memory Tracker
 ///****************************************************************
 
+using exceptions::opException;
 
 //hash pointer functor
 template<>
@@ -63,6 +64,7 @@ public:
 
 template<class T>
 class stackedcontext;
+
 
 // smart pointer for parse nodes (opnodes)
 // can copy etc safely, it deletes the node upon exceptions only

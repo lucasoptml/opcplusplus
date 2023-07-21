@@ -14,6 +14,11 @@
 /// increases code reusability.
 ///****************************************************************
 
+#pragma once
+
+#include "BasicNodes.h"
+
+
 namespace interfaces
 {
 
@@ -42,17 +47,17 @@ public:
 		{
 			HIT(T_NAMESPACE)
 			{
-				stackedcontext<NamespaceNode> newNode = opNode::Make<NamespaceNode>(T_NAMESPACE);
+				stackedcontext<nodes::NamespaceNode> newNode = opNode::Make<nodes::NamespaceNode>(T_NAMESPACE);
 				
-				Erase(T_NAMESPACE);
+				this.Erase(T_NAMESPACE);
 				
-				EatWhitespaceAndComments();
+				this.EatWhitespaceAndComments();
 				
 				stacked<TerminalNode> name = opNode::Expect<TerminalNode>(T_ID);
 				
-				EatWhitespaceAndComments();
+				this.EatWhitespaceAndComments();
 				
-				if(IsCurrent(T_ASSIGN))
+				if(this.IsCurrent(T_ASSIGN))
 				{
 					//create an alias instead (transform and set...)
 					stackedcontext<NamespaceAliasNode> alias = opNode::Transform<NamespaceAliasNode>(newNode);
@@ -60,26 +65,26 @@ public:
 					alias->SetName(*name);
 					alias->AppendNode(name);
 
-					Erase(T_ASSIGN);
+					this.Erase(T_ASSIGN);
 					
-					EatWhitespaceAndComments();
+					this.EatWhitespaceAndComments();
 
-					while(IsCurrent(T_ID))
+					while(this.IsCurrent(T_ID))
 					{
 						stacked<TerminalNode> scope = opNode::Expect<TerminalNode>(T_ID);
 						
 						alias->AddScope(*scope);
 						alias->AppendNode(scope);
 						
-						if(IsCurrent(T_SCOPE_RESOLUTION))
-							Erase(T_SCOPE_RESOLUTION);
+						if(this.IsCurrent(T_SCOPE_RESOLUTION))
+							this.Erase(T_SCOPE_RESOLUTION);
 					}
 					
-					EatWhitespaceAndComments();
+					this.EatWhitespaceAndComments();
 					
-					Erase(T_SEMICOLON);
+					this.Erase(T_SEMICOLON);
 
-					InsertNodeAtCurrent(alias);
+					this.InsertNodeAtCurrent(alias);
 				}
 				else
 				{
@@ -204,7 +209,7 @@ public:
 	void FindMatching()
 	{
 		//change the throw mode
-		setexceptionmode mode(opException::ParseException);//TEST: I don't know that we actually want this :)
+		setexceptionmode mode(opException::ParseException);
 
 		iterator end = GetEnd();
 		
@@ -252,10 +257,10 @@ public:
 				leftnode.Delete();
 
 				// we must delete the current node (Right)
-				DeleteCurrentNode();
+				this.DeleteCurrentNode();
 				
 				// add the new node
-				InsertNodeAtCurrent(newNode);
+				this.InsertNodeAtCurrent(newNode);
 			}
 		}
 		LOOP_END;
@@ -443,7 +448,7 @@ public:
 				Erase(T_OPERATOR);
 				
 				//operator ()() special case
-				if(IsCurrent(G_PAREN_BLOCK))
+				if(this.IsCurrent(G_PAREN_BLOCK))
 				{
 					//NOTE: we dont support templated operator()() : P
 					stacked<ParenBlockNode> paren = opNode::Expect<ParenBlockNode>(G_PAREN_BLOCK);
@@ -454,7 +459,7 @@ public:
 				}
 				else
 				{
-					PushUntilAdd(*newNode,G_PAREN_BLOCK);
+					this.PushUntilAdd(*newNode,G_PAREN_BLOCK);
 					//just to be safe?
 					//Check(G_PAREN_BLOCK);
 				}

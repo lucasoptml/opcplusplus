@@ -40,7 +40,7 @@ opString OPObjectBodyNode::ErrorName()
 		name += "Name";
 	}
 
-	name += " {"LCHEV" ... "RCHEV"};";
+	name += " {" LCHEV " ... " RCHEV "};";
 
 	return name;		
 }
@@ -95,9 +95,9 @@ opString OPObjectInheritanceNode::ErrorName()
 	}
 
 	//TODO: could improve this
-	name += " "LCHEV" [: ";
+	name += " " LCHEV " [: ";
 
- 	name += "Parent] "RCHEV" { ... };";
+ 	name += "Parent] " RCHEV " { ... };";
 
 	return name;
 }
@@ -322,7 +322,7 @@ opString NamespaceBlockNode::ErrorName()
 		//parent->GetDecl()->GetName()->PrintString(name);
 		parent->GetName()->PrintString(name);
 
-		name += " {"LCHEV" ... "RCHEV"}";
+		name += " {" LCHEV " ... " RCHEV "}";
 
 		return name;
 	}
@@ -359,7 +359,7 @@ opString OPEnumBodyNode::ErrorName()
 		
 		opString name = "openum ";
 		name += parent->GetName()->GetValue();
-		name += " {"LCHEV" ... "RCHEV"};";
+		name += " {" LCHEV " ... " RCHEV "};";
 		
 		return name;
 	}
@@ -556,7 +556,7 @@ opString StateBlockNode::ErrorName()
 		opString name = "state ";
 		name += parent->GetName()->GetValue();
 		name += " ";
-		name += "{"LCHEV" ... "RCHEV"}";
+		name += "{" LCHEV " ... " RCHEV "}";
 
 		return name;
 	}
@@ -578,7 +578,7 @@ opString TemplateTypeNode::ErrorName()
 	Name->PrintString(name);
 
 	if ( !Braces )
-		name += "<"LCHEV" ... "RCHEV">";
+		name += "<" LCHEV " ... " RCHEV ">";
 	else
 		Braces->PrintString(name);
 
@@ -688,7 +688,7 @@ opString FunctionDefinitionNode::ErrorName()
 	if (Body)
 		name += " { ... }";
 	else
-		name += " "LCHEV" ... "RCHEV" { ... }";
+		name += " " LCHEV " ... " RCHEV " { ... }";
 
 	return name;
 }
@@ -735,7 +735,7 @@ opString FunctionArgumentListNode::ErrorName()
 		opString name;
 		parent->GetName()->PrintString(name);
 
-		name += "("LCHEV" ... "RCHEV")";
+		name += "(" LCHEV " ... " RCHEV ")";
 
 		if(parent->IsConst())
 			name += " const";
@@ -820,7 +820,7 @@ opString ValuedModifierArgumentNode::ErrorName()
 		opString name;
 		name = parent->GetModifier()->GetValue();
 		
-		name += "("LCHEV" ... "RCHEV")";
+		name += "(" LCHEV " ... " RCHEV ")";
 		
 		return name;
 	}
@@ -1023,7 +1023,7 @@ opString ConstructorInitializerListNode::ErrorName()
 		if(!errorname.Length())
 			return "";
 		
-		opString name = errorname + " : "LCHEV" ... "RCHEV;
+		opString name = errorname + " : " LCHEV " ... " RCHEV;
 		
 		return name;
 	}
@@ -1044,7 +1044,7 @@ opString ConstructorInitializerArgumentNode::ErrorName()
 		
 		opString name;
 		parent->GetName()->PrintString(name);
-		name += "("LCHEV" ... "RCHEV")";
+		name += "(" LCHEV " ... " RCHEV ")";
 
 		return name;
 	}
@@ -1099,7 +1099,7 @@ opString OPDefineBodyNode::ErrorName()
 		if(parent->GetArguments())
 			name += " ( ... )";
 		
-		name += " {"LCHEV" ... "RCHEV"}";
+		name += " {" LCHEV " ... " RCHEV "}";
 
 		return name;
 	}
@@ -1152,7 +1152,7 @@ opString OPMacroBodyNode::ErrorName()
 		if(parent->GetArguments())
 			name += " ( ... )";
 
-		name += " {"LCHEV" ... "RCHEV"}";
+		name += " {" LCHEV " ... " RCHEV "}";
 
 		return name;
 	}
@@ -1174,7 +1174,7 @@ opString OPMacroArgumentListNode::ErrorName()
 		name += "opmacro ";
 		name += parent->GetName()->GetValue();
 
-		name += " ("LCHEV" ... "RCHEV")";
+		name += " (" LCHEV " ... " RCHEV ")";
 
 		return name;
 	}
@@ -1215,7 +1215,7 @@ opString ExpandCallArgumentListNode::ErrorName()
 
 		opString name = "expand ";
 		parent->GetName()->PrintString(name);
-		name += "("LCHEV" ... "RCHEV")";
+		name += "(" LCHEV " ... " RCHEV ")";
 		
 		return name;
 	}
@@ -1240,7 +1240,7 @@ opString ConcatenationOperatorNode::ErrorName()
 	if (Right)
 		Right->PrintString(name);
 	else
-		name += LCHEV" Identifier "RCHEV;
+		name += LCHEV " Identifier " RCHEV;
 
 	return name;
 }
@@ -1337,7 +1337,7 @@ opString FunctionPointerDeclNode::ErrorName()
 
 		name += " ";
 
-		name += "("LCHEV" Scope::* Name "RCHEV")";
+		name += "(" LCHEV " Scope::* Name " RCHEV ")";
 
 		if(parent->GetArguments())
 			parent->GetArguments()->PrintString(name);
@@ -1955,7 +1955,7 @@ opString CategoryBodyNode::ErrorName()
 		opString name;
 		name = "category ";
 		name += parent->GetName()->GetValue();
-		name += " {"LCHEV" ... "RCHEV"}";
+		name += " {" LCHEV " ... " RCHEV "}";
 
 		return name;
 	}
@@ -2123,7 +2123,7 @@ opString CriteriaArgumentNode::ErrorName()
 	else
 		return "";
 	
-	name += "("LCHEV" \"optional regex pattern\" "RCHEV")";
+	name += "(" LCHEV " \"optional regex pattern\" " RCHEV ")";
 
 	return name;
 }
@@ -2178,7 +2178,7 @@ opString CategoryLocationBodyNode::ErrorName()
 		name += "location ";
 		parent->GetName()->PrintString(name);
 
-		name += " {"LCHEV" ... "RCHEV"}";
+		name += " {" LCHEV " ... " RCHEV "}";
 		return name;
 	}
 
@@ -2221,14 +2221,14 @@ opString ModifierArgumentNode::ErrorName()
 	{
 		opString name;
 		parent->GetName()->PrintString(name);
-		name += "("LCHEV" \"optional regex expression\" "RCHEV")";
+		name += "(" LCHEV " \"optional regex expression\" " RCHEV ")";
 		return name;
 	}
 	else if(FunctionModifierNode* parent = node_cast<FunctionModifierNode>(GetParent()))
 	{
 		opString name;
 		parent->GetName()->PrintString(name);
-		name += "("LCHEV" \"optional regex expression\" "RCHEV")";
+		name += "(" LCHEV " \"optional regex expression\" " RCHEV ")";
 		return name;
 	}
 
@@ -2249,7 +2249,7 @@ opString CategoryMapBodyNode::ErrorName()
 			parent->GetName()->PrintString(name);
 		else
 			name += "Name";
-		name += " {"LCHEV" ... "RCHEV"}";
+		name += " {" LCHEV " ... " RCHEV "}";
 		return name;
 	}
 	else if(CategoryFunctionmapNode* parent = node_cast<CategoryFunctionmapNode>(GetParent()))
@@ -2260,7 +2260,7 @@ opString CategoryMapBodyNode::ErrorName()
 			parent->GetName()->PrintString(name);
 		else
 			name += "Name";
-		name += " {"LCHEV" ... "RCHEV"}";
+		name += " { " LCHEV " ... " RCHEV "}";
 		return name;
 	}
 
@@ -2342,7 +2342,7 @@ opString EnumerationBodyNode::ErrorName()
 		opString name;
 		name = "enumeration ";
 		parent->GetName()->PrintString(name);
-		name += " {"LCHEV" ... "RCHEV"}";
+		name += " {" LCHEV " ... " RCHEV "}";
 
 		return name;
 	}
@@ -2381,7 +2381,7 @@ opString EnumerationLocationBodyNode::ErrorName()
 		opString name;
 		name = "location ";
 		parent->GetName()->PrintString(name);
-		name += " {"LCHEV" ... "RCHEV"}";
+		name += " {" LCHEV " ... " RCHEV "}";
 
 		return name;
 	}
@@ -2438,7 +2438,7 @@ opString DisallowBodyNode::ErrorName()
 		name += "disallow";
 		name += " ";
 		parent->GetName()->PrintString(name);
-		name += " {"LCHEV" ... "RCHEV"}";
+		name += " {" LCHEV " ... " RCHEV "}";
 
 		return name;
 

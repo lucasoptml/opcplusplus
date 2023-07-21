@@ -452,11 +452,8 @@ public:
 
 	//default pipes to heading
 	template<class T> 
-	friend opXmlStream& operator << (opXmlStream& stream, const T& input)
-	{
-		stream.stream << input;
-		return stream;
-	}
+	friend opXmlStream& operator << (opXmlStream& stream, const T& input);
+	
 
 	void StartTag(const opString& tag)
 	{
@@ -510,6 +507,13 @@ private:
 	opString indention;
 	ostream& stream;
 };
+
+template<class T> 
+opXmlStream& operator<< <T>(opXmlStream& stream, const T& input)
+{
+	stream.stream << input;
+	return stream;
+}
 
 template<>
 opXmlStream& operator << <endlinestruct>(opXmlStream& stream, const endlinestruct& input)

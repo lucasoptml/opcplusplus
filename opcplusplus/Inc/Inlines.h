@@ -30,10 +30,12 @@ inline opStringStream& operator << (opStringStream &oin, TerminalNode* node)
 	return oin;
 }
 
+/*
 template<>
-inline FileWriteStream& operator << <endlinestruct> (FileWriteStream& stream, const endlinestruct&)
+FileWriteStream& operator << <endlinestruct> (FileWriteStream& stream, const endlinestruct & )
 {
 	stream.Write('\n');
 
 	return stream;
 }
+*/

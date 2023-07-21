@@ -4,6 +4,9 @@
 	|         Reference, TemplateType, etc.).
 */
 
+#pragma once
+
+
 namespace nodes
 {
 

@@ -81,7 +81,7 @@ void opError::InitParseErrors()
 	ParseErrors[G_CPPFILE] = "C++ File";//ErrorNamed
 	ParseErrors[G_FUNDAMENTAL_TYPE] = "Fundamental-Type";//ErrorNamed
 	ParseErrors[G_NAMESPACE] = "namespace Name { ... }";//ErrorNamed
-	ParseErrors[G_NAMESPACEBLOCK] = "namespace Name {"LCHEV" ... "RCHEV"}";//ErrorNamed
+	ParseErrors[G_NAMESPACEBLOCK] = "namespace Name {" LCHEV " ... " RCHEV "}";//ErrorNamed
 	ParseErrors[G_NAMESPACEDECL] = "namespace Name { ... }";//ErrorNamed
 	ParseErrors[G_NAMESPACE_ALIAS] = "namespace Alias = Name;";
 	ParseErrors[G_BRACE_BLOCK] = "{ ... }";//ok
@@ -91,12 +91,12 @@ void opError::InitParseErrors()
 	ParseErrors[G_POINTER] = "Pointer-Type";//ErrorNamed
 	ParseErrors[G_POINTER_MEMBER] = "Type Scope::*";
 	ParseErrors[G_OPENUM] = "openum Name { ... };";//ErrorNamed
-	ParseErrors[G_OPENUM_BODY] = "openum Name {"LCHEV" ... "RCHEV"};";//ErrorNamed
+	ParseErrors[G_OPENUM_BODY] = "openum Name {" LCHEV " ... " RCHEV "};";//ErrorNamed
 	ParseErrors[G_OPENUM_ELEMENT] = "EnumName [= ... ],";//ErrorNamed
-	ParseErrors[G_OPENUM_INITIALIZATION] = "EnumName = "LCHEV" Value "RCHEV",";//ErrorNamed
+	ParseErrors[G_OPENUM_INITIALIZATION] = "EnumName = " LCHEV " Value " RCHEV ",";//ErrorNamed
 	ParseErrors[G_OPOBJECT_INHERITANCE] = ": Visibility Name";//ErrorNamed
 	ParseErrors[G_STATE] = "state Name { ... }";//ErrorNamed;
-	ParseErrors[G_STATEBLOCK] = "state Name {"LCHEV" ... "RCHEV"}";//ErrorNamed;
+	ParseErrors[G_STATEBLOCK] = "state Name {" LCHEV " ... " RCHEV "}";//ErrorNamed;
 	ParseErrors[G_TEMPLATE_TYPE] = "TemplateName< ... >";//ErrorNamed
 	ParseErrors[G_TEMPLATE_TYPE_BODY] = "< ... >";//ErrorNamed
 	ParseErrors[G_TEMPLATE_DECL] = "template< ... >";//ErrorNamed
@@ -110,9 +110,9 @@ void opError::InitParseErrors()
 	ParseErrors[G_CONSTRUCTOR] = "Constructor( ... )";//ErrorNamed
 	ParseErrors[G_CONSTRUCTOR_PROTOTYPE] = "Constructor( ... )";//ErrorNamed
 	ParseErrors[G_CONSTRUCTOR_DEFINITION] = "Constructor( ... ) { ... }";//ErrorNamed
-	ParseErrors[G_CONSTRUCTOR_INITIALIZER_LIST] = "Constructor( ... ) : "LCHEV" ... "RCHEV;//ErrorNamed
+	ParseErrors[G_CONSTRUCTOR_INITIALIZER_LIST] = "Constructor( ... ) : " LCHEV " ... " RCHEV;//ErrorNamed
 	ParseErrors[G_CONSTRUCTOR_INITIALIZER] = "Initializer( ... )";//ErrorNamed
-	ParseErrors[G_CONSTRUCTOR_INITIALIZER_ARGUMENT] = "Initializer("LCHEV" ... "RCHEV")";//ErrorNamed
+	ParseErrors[G_CONSTRUCTOR_INITIALIZER_ARGUMENT] = "Initializer(" LCHEV " ... " RCHEV ")";//ErrorNamed
 	ParseErrors[G_DESTRUCTOR] = "~Destructor( ... )";
 	ParseErrors[G_DESTRUCTOR_PROTOTYPE] = "~Destructor( ... )";
 	ParseErrors[G_DESTRUCTOR_DEFINITION] = "~Destructor( ... ) { ... }";
@@ -124,14 +124,14 @@ void opError::InitParseErrors()
 	ParseErrors[G_REFERENCE] = "Reference-Type";//ErrorNamed
 	ParseErrors[G_TYPENAME] = "typename Type";//ErrorNamed
 	ParseErrors[G_FUNCTION_POINTER] = "ReturnType ( *Name )( ... )";//ErrorNamed
-	ParseErrors[G_FUNCTION_POINTER_DECL] = "ReturnType ("LCHEV" *Name "RCHEV")( ... )";//ErrorNamed
+	ParseErrors[G_FUNCTION_POINTER_DECL] = "ReturnType (" LCHEV " *Name " RCHEV ")( ... )";//ErrorNamed
 	ParseErrors[G_OPERATOR] = "operator OperatorName";//ErrorNamed
 	ParseErrors[G_OPDEFINE] = "opdefine Name [optional ( ... )] { ... }";//ErrorNamed
-	ParseErrors[G_OPDEFINE_BODY] = "opdefine Name [optional ( ... )] {"LCHEV" ... "RCHEV"}";//ErrorNamed
+	ParseErrors[G_OPDEFINE_BODY] = "opdefine Name [optional ( ... )] {" LCHEV " ... " RCHEV "}";//ErrorNamed
 	ParseErrors[G_OPMACRO] = "opmacro Name [optional ( ... )] { ... }";//ErrorNamed
-	ParseErrors[G_OPMACRO_BODY] = "opmacro Name [optional ( ... )] {"LCHEV" ... "RCHEV"}";//ErrorNamed
+	ParseErrors[G_OPMACRO_BODY] = "opmacro Name [optional ( ... )] {" LCHEV " ... " RCHEV "}";//ErrorNamed
 	ParseErrors[G_OPMACRO_ARGUMENT] = "[optional 'argument'] Name";//ok
-	ParseErrors[G_OPMACRO_ARGUMENT_LIST] = "opmacro Name ("LCHEV" ... "RCHEV")";//ErrorNamed
+	ParseErrors[G_OPMACRO_ARGUMENT_LIST] = "opmacro Name (" LCHEV " ... " RCHEV ")";//ErrorNamed
 	ParseErrors[G_POUND_DEFINE] = "Standard C++ #define Definition";//ErrorNamed
 	ParseErrors[G_POUND_ELIF] = "Standard C++ #elif Definition";//ErrorNamed
 	ParseErrors[G_POUND_ELSE] = "Standard C++ #else Definition";//ErrorNamed
@@ -150,23 +150,23 @@ void opError::InitParseErrors()
 	ParseErrors[G_OPINCLUDE] = "opinclude \"Filename\"";//ErrorNamed
 	ParseErrors[G_OPOBJECT] = "CategoryType Name [ : Visibility Inheritance ] { ... }";//ErrorNamed
 	ParseErrors[G_OPOBJECT_INHERITANCE] = ": Visibility Inheritance";//ErrorNamed
-	ParseErrors[G_OPOBJECT_BODY] = "CategoryType Name {"LCHEV" ... "RCHEV"}";//ErrorNamed
+	ParseErrors[G_OPOBJECT_BODY] = "CategoryType Name {" LCHEV " ... " RCHEV "}";//ErrorNamed
 	ParseErrors[G_EXPAND_CALL] = "expand Name( ... )";//ErrorNamed
-	ParseErrors[G_EXPAND_CALL_ARGUMENT_LIST] = "expand Name("LCHEV" ... "RCHEV")";//ErrorNamed
+	ParseErrors[G_EXPAND_CALL_ARGUMENT_LIST] = "expand Name(" LCHEV " ... " RCHEV ")";//ErrorNamed
 	ParseErrors[G_EXPAND_CALL_ARGUMENT] = ParseErrors[G_EXPAND_CALL_ARGUMENT_LIST];//ok
 	ParseErrors[G_CONCATENATION_OPERATOR] = "Identifier@Identifier";
 	ParseErrors[G_CONCATENATION_ARGUMENT_OPERATOR] = "Identifier";
 	ParseErrors[G_SINGLE_QUOTE_OPERATOR] = "`quoted character`";
 	ParseErrors[G_DOUBLE_QUOTE_OPERATOR] = "``quoted string``";
 	ParseErrors[G_VALUED_MODIFIER] = "Modifier( ... )";//ErrorNamed
-	ParseErrors[G_VALUED_MODIFIER_ARGUMENT] = "Modifier("LCHEV" ... "RCHEV")";//ErrorNamed
+	ParseErrors[G_VALUED_MODIFIER_ARGUMENT] = "Modifier(" LCHEV " ... " RCHEV ")";//ErrorNamed
 	ParseErrors[G_FRIEND] = "friend [optional class/struct] Name or friend FunctionPrototype or friend FunctionDefinition";//ErrorNamed
 	ParseErrors[G_MODIFIERS] = "Modifiers";						//TODO: what does this do? ever get called?
 	ParseErrors[G_AUTO_MODIFIERS] = "Modifiers";				//TODO: what does this do? ever get called?
 	ParseErrors[G_TYPEDEF] = "typedef [optional const/volatile] Type Name";//ErrorNamed
 	ParseErrors[G_DATA_DECLARATION] = "Modifiers Type Name";
 	ParseErrors[G_DATA_INITIALIZATION] = "Modifiers Type Name = ...";
-	ParseErrors[G_DATA_BITS] = " : "LCHEV" Bits "RCHEV;
+	ParseErrors[G_DATA_BITS] = " : " LCHEV " Bits " RCHEV;
 	ParseErrors[G_CPLUSPLUS] = "c++ { ... }";
 	ParseErrors[G_CPLUSPLUS_BODY] = ParseErrors[G_CPLUSPLUS];
 	ParseErrors[G_USING_NAMESPACE_KEYWORD] = "using namespace";
@@ -204,41 +204,41 @@ void opError::InitParseErrors()
 	
 	ParseErrors[G_DIALECTFILE] = "opC++ Dialect File";//ok
 	ParseErrors[G_CATEGORY] = "category Name { ... }";//ErrorNamed
-	ParseErrors[G_CATEGORY_BODY] = "category Name {"LCHEV" ... "RCHEV"}";//ErrorNamed
+	ParseErrors[G_CATEGORY_BODY] = "category Name {" LCHEV " ... " RCHEV "}";//ErrorNamed
 	ParseErrors[G_CATEGORY_DATAMAP] = "datamap Name { ... }";//ErrorNamed
 	ParseErrors[G_CATEGORY_FUNCTIONMAP] = "functionmap Name { ... }";//ErrorNamed
 	ParseErrors[G_DATAMODIFIER] = "datamodifier Name or datamodifier Name()";//ErrorNamed
 	ParseErrors[G_FUNCTIONMODIFIER] = "functionmodifier Name or functionmodifier Name()";//ErrorNamed
 	ParseErrors[G_IS] = "is ModifierExpression";//ErrorNamed
-	ParseErrors[G_IS_BODY] = "is "LCHEV" ModifierExpression "RCHEV;  
+	ParseErrors[G_IS_BODY] = "is " LCHEV " ModifierExpression " RCHEV;  
 	ParseErrors[G_CRITERIA_ARGUMENT] = "\"Criteria Regex Pattern\"";//ErrorNamed
 	ParseErrors[G_CATEGORY_LOCATION] = "location Name { ... }";//ErrorNamed
-	ParseErrors[G_CATEGORY_LOCATION_BODY] = "location Name {"LCHEV" ... "RCHEV"}";//ErrorNamed
+	ParseErrors[G_CATEGORY_LOCATION_BODY] = "location Name {" LCHEV " ... " RCHEV "}";//ErrorNamed
 	ParseErrors[G_NOTE] = "note Name";//ErrorNamed
-	ParseErrors[G_NOTE_BODY] = "note Name {"LCHEV" ... "RCHEV"}";
+	ParseErrors[G_NOTE_BODY] = "note Name {" LCHEV " ... " RCHEV "}";
 	ParseErrors[G_NOTE_DEFINITION] = "note specifier::tag::subtag... ( ... ) { ... }";//ErrorNamed
-	ParseErrors[G_NOTE_DEFINITION_ARGUMENT_LIST] = "note specifier::tag::subtag... ("LCHEV" ... "RCHEV")";//ErrorNamed
+	ParseErrors[G_NOTE_DEFINITION_ARGUMENT_LIST] = "note specifier::tag::subtag... (" LCHEV " ... " RCHEV ")";//ErrorNamed
 	ParseErrors[G_NOTE_DEFINITION_ARGUMENT] = "note argument";//ok
 	ParseErrors[G_EXPANDABLE_ARGUMENT] = "derived note argument";//ok
 	ParseErrors[G_DIALECT_MODIFIERS] = "Modifiers";//ok
-	ParseErrors[G_MODIFIER_ARGUMENT] = "ModifierName("LCHEV" \"optional regex expression\" "RCHEV")";//ErrorNamed
-	ParseErrors[G_CATEGORY_MAP_BODY] = "map Name {"LCHEV" ... "RCHEV"}";//ErrorNamed
+	ParseErrors[G_MODIFIER_ARGUMENT] = "ModifierName(" LCHEV " \"optional regex expression\" " RCHEV ")";//ErrorNamed
+	ParseErrors[G_CATEGORY_MAP_BODY] = "map Name {" LCHEV " ... " RCHEV "}";//ErrorNamed
 	ParseErrors[G_ENUMERATION] = "enumeration Name { ... }";//ErrorNamed
-	ParseErrors[G_ENUMERATION_BODY] = "enumeration Name {"LCHEV" ... "RCHEV"}";//ErrorNamed
+	ParseErrors[G_ENUMERATION_BODY] = "enumeration Name {" LCHEV " ... " RCHEV "}";//ErrorNamed
 	ParseErrors[G_ENUMERATION_LOCATION] = "location Name { ... }";//ErrorNamed
-	ParseErrors[G_ENUMERATION_LOCATION_BODY] = "location Name {"LCHEV" ... "RCHEV"}";//ErrorNamed
+	ParseErrors[G_ENUMERATION_LOCATION_BODY] = "location Name {" LCHEV " ... " RCHEV "}";//ErrorNamed
 	ParseErrors[G_ENUMERATION_MAP] = "enummap Name";//ErrorNamed	
 	ParseErrors[G_DISALLOW] = "disallow Name { ... }";
-	ParseErrors[G_DISALLOW_BODY] = "disallow Name {"LCHEV" ... "RCHEV"}";
+	ParseErrors[G_DISALLOW_BODY] = "disallow Name {" LCHEV " ... " RCHEV "}";
 	ParseErrors[G_CRITERIA_GROUP] = "( ... criteria ... )";
 	ParseErrors[G_CRITERIA_VALUE_MODIFIER] = "Modifier(\"optional regex pattern\")";
 	ParseErrors[G_CODE] = "code Location { ... }";
-	ParseErrors[G_CODE_BODY] = "code Location {"LCHEV" ... "RCHEV"}";
+	ParseErrors[G_CODE_BODY] = "code Location {" LCHEV " ... " RCHEV "}";
 	ParseErrors[G_EXTENSION] = "extension Name";
 	ParseErrors[G_EXTEND_POINT] = "extendpoint Name { ... }";
 	ParseErrors[G_EXTENSION_POINT] = "extensionpoint Name";
 	ParseErrors[G_FILE_DECLARATION] = "file Name { ... }";
-	ParseErrors[G_FILE_DECLARATION_BODY] = "file Name {"LCHEV" ... "RCHEV"}";
+	ParseErrors[G_FILE_DECLARATION_BODY] = "file Name {" LCHEV " ... " RCHEV "}";
 	ParseErrors[G_FILE_DECLARATION_LOCATION] = "location Name";
 	ParseErrors[G_DIALECT_NAMESPACE] = "namespace Name { ... }";
 	ParseErrors[G_ERROR] = "error( ... )";//ErrorNamed
@@ -401,7 +401,7 @@ void opError::Add(FileNode* file, int line, const opString& error)
 	filepath = initial_path() / filepath;
 	filepath.normalize();
 
-	opString nativefile = filepath.native_file_string();
+	opString nativefile = filepath.string();
 
 	newError.Error = nativefile + "(" + line + ") : error :\n" + error;
 

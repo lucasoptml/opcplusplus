@@ -92,7 +92,8 @@
 //NOTE: I had to disable these interfaces for a while :/
 
 #define REQUIRES_INTERFACE(iface)											\
-	enum required_##iface { iface##_requires = iface##_implementation, };
+	
+// removed enum required_##iface { iface##_requires = iface##_implementation };
 
 //void Requires_##iface() { Implements_##iface(); }
 
@@ -101,17 +102,19 @@
 public:													\
 typedef Parent Super;									\
 typedef opList<opNode*>::pointer_iterator iterator;		\
-	enum implements_##iface { iface##_implementation };	\
 iface<Parent>()											\
 {														\
-	Init();												\
+	this.Init();												\
 }
+
+// removed:	enum implements_##iface { iface##_implementation };	\
+
 
 #define PARSE_START							\
 	if(!Super::Parse())						\
 		return false;						\
-	AlterContext newcontext(GetId(),this);	\
-	ResetPosition();						\
+	AlterContext newcontext(this.GetId(),this);	\
+	this.ResetPosition();						\
 	INIT_EXCEPTIONS
 
 #define PARSE_END			\
@@ -173,7 +176,7 @@ AlterContext newcontext(GetId(),this);	\
 //loop macros
 #define LOOP_START(t)								\
 	AlterContext newcontext(t,this);				\
-	ResetPosition();								\
+	this.ResetPosition();							\
 	bool done = false;								\
 	while(!done)									\
 		{											\

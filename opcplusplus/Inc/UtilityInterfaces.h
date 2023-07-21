@@ -35,8 +35,8 @@ public:
 
 	void removeWhitespace()
 	{
-		iterator i   = GetBegin();
-		iterator end = GetEnd();
+		iterator i   = this.GetBegin();
+		iterator end = this.GetEnd();
 
 		while (i != end)
 		{
@@ -46,7 +46,7 @@ public:
 			{
 				iterator newi = i;
 				++i;
-				DeleteNode(newi);
+				this.DeleteNode(newi);
 				continue;
 			}
 
@@ -76,8 +76,8 @@ public:
 
 	void removeComments()
 	{
-		iterator i   = GetBegin();
-		iterator end = GetEnd();
+		iterator i   = this.GetBegin();
+		iterator end = this.GetEnd();
 
 		while (i != end)
 		{
@@ -87,7 +87,7 @@ public:
 			{
 				iterator newi = i;
 				++i;
-				DeleteNode(newi);
+				this.DeleteNode(newi);
 				continue;
 			}
 
@@ -118,8 +118,8 @@ public:
 
 	void CleanAll()
 	{
-		removeComments();
-		removeWhitespace();
+		this.removeComments();
+		this.removeWhitespace();
 	}
 };
 
@@ -133,53 +133,12 @@ class Trim : public Parent
 public:
 	IMPLEMENTS_INTERFACE(Trim)
 
-	bool PreParse()
-	{
-		PREPARSE_START;
-		{
-			DoTrim();
-		}
-		PREPARSE_END;
-	}
-
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			DoTrim();
-		}
-		PARSE_END;
-	}
-
-	void DoTrim()
-	{
-		iterator i   = GetBegin();
-		iterator end = GetEnd();
-
-		// Trim the front.
-		while (i != end
-		&&     i->IsWhitespace())
-		{
-			iterator old = i;
-			++i;
-			DeleteNode(old);
-		}
-
-		if (IsEmpty())
-			return;
-
-		// Trim the end.
-		i   = GetBegin();
-		end = --GetEnd();
-
-		while (end != i
-		&&     end->IsWhitespace())
-		{
-			iterator old = end;
-			--end;
-			DeleteNode(old);
-		}
-	}
+	bool PreParse();
+	
+	bool Parse();
+	
+	void DoTrim();
+	
 };
 
 ///==========================================
@@ -200,9 +159,9 @@ public:
 		if(container.size())
 			return;
 
-		ResetPosition();
+		this.ResetPosition();
 
-		if (!IsEmpty())
+		if (!this.IsEmpty())
 		{
 			while(1)
 			{
@@ -211,9 +170,9 @@ public:
 				if(arg->IsEmpty())
 					arg->CopyBasics(this);
 
-				if(IsCurrent(Delimiter))
+				if(this.IsCurrent(Delimiter))
 				{
-					Erase(Delimiter);
+					this.Erase(Delimiter);
 					container.push_back(*arg);
 				}
 				else
@@ -228,18 +187,18 @@ public:
 			for (int i = 0; i < size; i++)
 			{
 				stacked<opNode> tempstacked = stacked<opNode>::buildstacked(container[i]);
-				AppendNode(tempstacked);
+				this.AppendNode(tempstacked);
 			}
 		}
 
-		ResetPosition();
+		this.ResetPosition();
 	}
 
 	// delimiter specific functions
 	template<class ArgumentType>
 	void MakeCommaList(vector<ArgumentType*>& container)
 	{
-		MakeDelimiterList<T_COMMA>(container);
+		this.MakeDelimiterList<T_COMMA>(container);
 	}
 };
 
@@ -251,10 +210,10 @@ class UnInlineSupport : public Parent
 	bool GetInlineMode()
 	{
 		//if inline, then inline
-		bool binline = HasModifier(T_INLINE);
+		bool binline = this.HasModifier(T_INLINE);
 
 		//if uninline, then uninline
-		bool buninline = HasModifier(T_UNINLINE);
+		bool buninline = this.HasModifier(T_UNINLINE);
 
 		//if inline and uninline, then uninline
 		bool doinline = binline && !buninline;

@@ -1,0 +1,501 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Dialect">
+      <UniqueIdentifier>{ff902da9-6a91-4e35-aa19-c3db91b3a354}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Nodes">
+      <UniqueIdentifier>{2766820e-79c1-451b-b085-40889da2df26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\opC++">
+      <UniqueIdentifier>{e75615aa-3c54-4b93-b034-aedc5ef46444}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Errors">
+      <UniqueIdentifier>{5257c50b-b373-4a53-9a71-db719c69fe3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="Library Files\Boost Filesystem">
+      <UniqueIdentifier>{62229ab2-7006-4723-a0fb-31aac200fe1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library Files\Boost Filesystem\Source">
+      <UniqueIdentifier>{11341e82-f922-4c74-a38e-a2442f591dac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library Files\Boost Filesystem\Headers">
+      <UniqueIdentifier>{a7447747-84d1-43f5-a030-361c2592789c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library Files\Boost">
+      <UniqueIdentifier>{d0c1df6c-86f4-4d74-b7d5-6caf88cf5f92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library Files\opstl">
+      <UniqueIdentifier>{7e511a27-aa4f-4c3f-a991-1f6a72b43d07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Library Files\md5">
+      <UniqueIdentifier>{60ed5360-7d44-4a0e-bf3c-2e91d0fb680b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Globs">
+      <UniqueIdentifier>{8444d649-9404-4958-bab5-66c915ebac98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Dialect">
+      <UniqueIdentifier>{653d1c74-5768-45a6-9998-d5687c317d65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Interfaces">
+      <UniqueIdentifier>{b7f2c80b-609e-4901-8ab3-43b0d4a02feb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Nodes">
+      <UniqueIdentifier>{1fda8d7e-832f-452e-9113-7cbf7eb908ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Errors">
+      <UniqueIdentifier>{38852890-24aa-466f-905f-2b473e6dbbc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\opC++">
+      <UniqueIdentifier>{0bbbaeeb-43d0-4e69-8ae1-1477def2eadc}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Src\DialectModifierNodes.cpp">
+      <Filter>Source Files\Dialect</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\DialectNodes.cpp">
+      <Filter>Source Files\Dialect</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\DialectTracker.cpp">
+      <Filter>Source Files\Dialect</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\PrintDialect.cpp">
+      <Filter>Source Files\Dialect</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\ExtensionNodes.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\FileNodes.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\MacroNodes.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\ModifierNodes.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\opNode.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Parse.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\PostParse.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\PreParse.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Print.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\StatementNodes.cpp">
+      <Filter>Source Files\Nodes</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Beta.cpp">
+      <Filter>Source Files\opC++</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Blacklist.cpp">
+      <Filter>Source Files\opC++</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Demo.cpp">
+      <Filter>Source Files\opC++</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Driver.cpp">
+      <Filter>Source Files\opC++</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Exceptions.cpp">
+      <Filter>Source Files\opC++</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Globber.cpp">
+      <Filter>Source Files\opC++</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\main.cpp">
+      <Filter>Source Files\opC++</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\MemoryTracker.cpp">
+      <Filter>Source Files\opC++</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Modifiers.cpp">
+      <Filter>Source Files\opC++</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Parameters.cpp">
+      <Filter>Source Files\opC++</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Platforms.cpp">
+      <Filter>Source Files\opC++</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\PrintMaps.cpp">
+      <Filter>Source Files\opC++</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\PrintNotes.cpp">
+      <Filter>Source Files\opC++</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Scanner.cpp">
+      <Filter>Source Files\opC++</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\States.cpp">
+      <Filter>Source Files\opC++</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Stream.cpp">
+      <Filter>Source Files\opC++</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\SymbolTracker.cpp">
+      <Filter>Source Files\opC++</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Timer.cpp">
+      <Filter>Source Files\opC++</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Tokens.cpp">
+      <Filter>Source Files\opC++</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Version.cpp">
+      <Filter>Source Files\opC++</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\ErrorNames.cpp">
+      <Filter>Source Files\Errors</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\opError.cpp">
+      <Filter>Source Files\Errors</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Lib\md5\md5.c">
+      <Filter>Library Files\md5</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\opCPPSource.cpp">
+      <Filter>Globs</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\RegexSource.cpp">
+      <Filter>Globs</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\WindowsSource.cpp">
+      <Filter>Globs</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\boost\libs\filesystem\src\directory.cpp">
+      <Filter>Library Files\Boost Filesystem\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\boost\libs\filesystem\src\exception.cpp">
+      <Filter>Library Files\Boost Filesystem\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\boost\libs\filesystem\src\operations.cpp">
+      <Filter>Library Files\Boost Filesystem\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\boost\libs\filesystem\src\path.cpp">
+      <Filter>Library Files\Boost Filesystem\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\boost\libs\filesystem\src\path_traits.cpp">
+      <Filter>Library Files\Boost Filesystem\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\boost\libs\filesystem\src\portability.cpp">
+      <Filter>Library Files\Boost Filesystem\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\boost\libs\filesystem\src\unique_path.cpp">
+      <Filter>Library Files\Boost Filesystem\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\boost\libs\filesystem\src\utf8_codecvt_facet.cpp">
+      <Filter>Library Files\Boost Filesystem\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\boost\libs\filesystem\src\windows_file_codecvt.cpp">
+      <Filter>Library Files\Boost Filesystem\Source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Lib\boost\boost\filesystem\config.hpp">
+      <Filter>Library Files\Boost Filesystem\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lib\boost\boost\filesystem\convenience.hpp">
+      <Filter>Library Files\Boost Filesystem\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lib\boost\boost\filesystem\exception.hpp">
+      <Filter>Library Files\Boost Filesystem\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lib\boost\boost\filesystem\fstream.hpp">
+      <Filter>Library Files\Boost Filesystem\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lib\boost\boost\filesystem\operations.hpp">
+      <Filter>Library Files\Boost Filesystem\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lib\boost\boost\filesystem\path.hpp">
+      <Filter>Library Files\Boost Filesystem\Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lib\boost\boost\xpressive\basic_regex.hpp">
+      <Filter>Library Files\Boost</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lib\boost\boost\xpressive\match_results.hpp">
+      <Filter>Library Files\Boost</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lib\boost\boost\xpressive\regex_algorithms.hpp">
+      <Filter>Library Files\Boost</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lib\boost\boost\xpressive\regex_compiler.hpp">
+      <Filter>Library Files\Boost</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lib\boost\boost\xpressive\regex_constants.hpp">
+      <Filter>Library Files\Boost</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lib\boost\boost\xpressive\regex_error.hpp">
+      <Filter>Library Files\Boost</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lib\boost\boost\xpressive\regex_iterator.hpp">
+      <Filter>Library Files\Boost</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lib\boost\boost\xpressive\regex_primitives.hpp">
+      <Filter>Library Files\Boost</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lib\boost\boost\xpressive\regex_token_iterator.hpp">
+      <Filter>Library Files\Boost</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lib\boost\boost\xpressive\regex_traits.hpp">
+      <Filter>Library Files\Boost</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lib\boost\boost\xpressive\sub_match.hpp">
+      <Filter>Library Files\Boost</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lib\boost\boost\xpressive\xpressive.hpp">
+      <Filter>Library Files\Boost</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lib\boost\boost\xpressive\xpressive_dynamic.hpp">
+      <Filter>Library Files\Boost</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lib\boost\boost\xpressive\xpressive_fwd.hpp">
+      <Filter>Library Files\Boost</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lib\boost\boost\xpressive\xpressive_static.hpp">
+      <Filter>Library Files\Boost</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lib\boost\boost\xpressive\xpressive_typeof.hpp">
+      <Filter>Library Files\Boost</Filter>
+    </ClInclude>
+    <ClInclude Include="..\opSTL\opArray.h">
+      <Filter>Library Files\opstl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\opSTL\opDeque.h">
+      <Filter>Library Files\opstl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\opSTL\opHash.h">
+      <Filter>Library Files\opstl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\opSTL\opInterfaces.h">
+      <Filter>Library Files\opstl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\opSTL\opList.h">
+      <Filter>Library Files\opstl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\opSTL\opMap.h">
+      <Filter>Library Files\opstl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\opSTL\opSet.h">
+      <Filter>Library Files\opstl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\opSTL\opstl.h">
+      <Filter>Library Files\opstl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\opSTL\opstlcommon.h">
+      <Filter>Library Files\opstl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\opSTL\opString.h">
+      <Filter>Library Files\opstl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lib\md5\md5.h">
+      <Filter>Library Files\md5</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Lib\md5\opmd5.h">
+      <Filter>Library Files\md5</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\DialectInterfaces.h">
+      <Filter>Header Files\Dialect</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\DialectModifierNodes.h">
+      <Filter>Header Files\Dialect</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\DialectNodes.h">
+      <Filter>Header Files\Dialect</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\DialectStatementInterfaces.h">
+      <Filter>Header Files\Dialect</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\DialectStatementNodes.h">
+      <Filter>Header Files\Dialect</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\DialectTracker.h">
+      <Filter>Header Files\Dialect</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\DialectVisitors.h">
+      <Filter>Header Files\Dialect</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\InterfaceInlines.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Interfaces.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\MacroInterfaces.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\StatementInterfaces.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\UtilityInterfaces.h">
+      <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\BasicNodes.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\ExtensionNodes.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\FileNodes.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\MacroNodes.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\ModifierNodes.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\opNode.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\opNodeInlines.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\StatementNodes.h">
+      <Filter>Header Files\Nodes</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\opError.h">
+      <Filter>Header Files\Errors</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Beta.h">
+      <Filter>Header Files\opC++</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\CodeVisitors.h">
+      <Filter>Header Files\opC++</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Config.h">
+      <Filter>Header Files\opC++</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Contexts.h">
+      <Filter>Header Files\opC++</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Delegates.h">
+      <Filter>Header Files\opC++</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Demo.h">
+      <Filter>Header Files\opC++</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Driver.h">
+      <Filter>Header Files\opC++</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\ErrorTracker.h">
+      <Filter>Header Files\opC++</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Exceptions.h">
+      <Filter>Header Files\opC++</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\File.h">
+      <Filter>Header Files\opC++</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Globber.h">
+      <Filter>Header Files\opC++</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Inlines.h">
+      <Filter>Header Files\opC++</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Macros.h">
+      <Filter>Header Files\opC++</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Mappings.h">
+      <Filter>Header Files\opC++</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\MemoryTracker.h">
+      <Filter>Header Files\opC++</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Modifiers.h">
+      <Filter>Header Files\opC++</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Namespaces.h">
+      <Filter>Header Files\opC++</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\opCPP.h">
+      <Filter>Header Files\opC++</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\opLog.h">
+      <Filter>Header Files\opC++</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\opTime.h">
+      <Filter>Header Files\opC++</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Parameters.h">
+      <Filter>Header Files\opC++</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Paths.h">
+      <Filter>Header Files\opC++</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Platforms.h">
+      <Filter>Header Files\opC++</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\RegexSupport.h">
+      <Filter>Header Files\opC++</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Scanner.h">
+      <Filter>Header Files\opC++</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Stream.h">
+      <Filter>Header Files\opC++</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\SymbolTracker.h">
+      <Filter>Header Files\opC++</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Timer.h">
+      <Filter>Header Files\opC++</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Tokens.h">
+      <Filter>Header Files\opC++</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Version.h">
+      <Filter>Header Files\opC++</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Visitors.h">
+      <Filter>Header Files\opC++</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Walkers.h">
+      <Filter>Header Files\opC++</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\boost\libs\filesystem\src\atomic_ref.hpp">
+      <Filter>Library Files\Boost Filesystem\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\boost\libs\filesystem\src\atomic_tools.hpp">
+      <Filter>Library Files\Boost Filesystem\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\boost\libs\filesystem\src\error_handling.hpp">
+      <Filter>Library Files\Boost Filesystem\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\boost\libs\filesystem\src\platform_config.hpp">
+      <Filter>Library Files\Boost Filesystem\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\boost\libs\filesystem\src\posix_tools.hpp">
+      <Filter>Library Files\Boost Filesystem\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\boost\libs\filesystem\src\private_config.hpp">
+      <Filter>Library Files\Boost Filesystem\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\boost\libs\filesystem\src\windows_file_codecvt.hpp">
+      <Filter>Library Files\Boost Filesystem\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\boost\libs\filesystem\src\windows_tools.hpp">
+      <Filter>Library Files\Boost Filesystem\Source</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

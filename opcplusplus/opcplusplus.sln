@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33815.320
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "opcplusplus", "opCPP.vcxproj", "{3C7EADEC-DC02-4F50-B142-4A95AFDFEBFE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3C7EADEC-DC02-4F50-B142-4A95AFDFEBFE}.Debug|Win32.ActiveCfg = Debug|Win32
+		{3C7EADEC-DC02-4F50-B142-4A95AFDFEBFE}.Debug|Win32.Build.0 = Debug|Win32
+		{3C7EADEC-DC02-4F50-B142-4A95AFDFEBFE}.Release|Win32.ActiveCfg = Release|Win32
+		{3C7EADEC-DC02-4F50-B142-4A95AFDFEBFE}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		AMDCaProjectFile = C:\Spheroid\opCPP\CodeAnalyst\opCPP.caw
+		SolutionGuid = {336B8CE2-A976-4A39-BAAC-E62FA9601514}
+	EndGlobalSection
+EndGlobal

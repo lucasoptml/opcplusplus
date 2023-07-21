@@ -11,6 +11,8 @@
 /// Globbing.
 ///****************************************************************
 
+using boost::filesystem::path;
+
 class Globber
 {
 public:
@@ -28,18 +30,24 @@ private:
 	struct ohfileinfo
 	{
 		ohfileinfo(const path& inohfilepath, const path& inoohfilepath, const path& inocppfilepath)
+			: 
+			ohfilepath(inohfilepath),
+			oohfilepath(inoohfilepath),
+			ocppfilepath(inocppfilepath),
+			ohfilename(inohfilepath.leaf().string())
+
 		{
-			ohfilepath = inohfilepath;
-			oohfilepath = inoohfilepath;
-			ocppfilepath = inocppfilepath;
-			ohfilename = ohfilepath.leaf();
+			//ohfilepath = inohfilepath;
+			//oohfilepath = inoohfilepath;
+			//ocppfilepath = inocppfilepath;
+			//ohfilename = inohfilepath.leaf();
 		}
 		
-		path ohfilepath;
-		path oohfilepath;
-		path ocppfilepath;
+		const path ohfilepath;
+		const path oohfilepath;
+		const path ocppfilepath;
 
-		opString ohfilename;
+		const opString ohfilename;
 	};
 
 	//try to update indexes potentially
