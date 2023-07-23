@@ -390,6 +390,16 @@ inline bool interfaces::BasicStatementsBase<Parent>::TemplateStatement(stacked<o
 //
 
 template<class Parent>
+inline bool BasicStatements<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		FindBasicStatements();
+	}
+	PARSE_END;
+}
+
+template<class Parent>
 inline bool BasicStatements<Parent>::PostParse()
 {
 	POSTPARSE_START;
@@ -511,6 +521,16 @@ inline void BasicStateStatements<Parent>::AllowOnlyStateStatements()
 //
 
 template<class Parent>
+inline bool interfaces::UsingStatements<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		FindUsingStatements();
+	}
+	PARSE_END;
+}
+
+template<class Parent>
 inline bool UsingStatements<Parent>::FindUsingStatements()
 {
 	INSPECT_START(G_USING_STATEMENT);
@@ -530,6 +550,16 @@ inline bool UsingStatements<Parent>::FindUsingStatements()
 // NullStatements
 //
 
+
+template<class Parent>
+inline bool interfaces::NullStatements<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		FindNullStatements();
+	}
+	PARSE_END;
+}
 
 template<class Parent>
 inline bool NullStatements<Parent>::FindNullStatements()
@@ -555,6 +585,16 @@ inline bool NullStatements<Parent>::FindNullStatements()
 // FunctionPointerStatements
 //
 
+
+template<class Parent>
+inline bool interfaces::FuncPointerStatements<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		FindFuncPointerStatements();
+	}
+	PARSE_END;
+}
 
 template<class Parent>
 inline bool FuncPointerStatements<Parent>::FindFuncPointerStatements()
@@ -594,6 +634,15 @@ inline bool FuncPointerStatements<Parent>::FindFuncPointerStatements()
 // Function Prototype Statements
 //
 
+template<class Parent>
+inline bool interfaces::FuncPrototypeStatements<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		FindFuncPrototypeStatements();
+	}
+	PARSE_END;
+}
 
 template<class Parent>
 inline bool FuncPrototypeStatements<Parent>::FindFuncPrototypeStatements()
@@ -749,4 +798,18 @@ inline void ConditionalPreprocessorStatements<Parent>::FindConditionalPreprocess
 		}
 	}
 	LOOP_END;
+}
+
+//
+// ConditionalPreprocessorStatements
+//
+
+template<class Parent>
+inline bool ConditionalPreprocessorStatements<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		FindConditionalPreprocessorStatements();
+	}
+	PARSE_END;
 }

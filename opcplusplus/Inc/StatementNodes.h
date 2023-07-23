@@ -10,6 +10,13 @@
 ///
 ///****************************************************************
 
+#pragma once
+
+#include "opNode.h"
+#include "ModifierNodes.h"
+#include "ExtensionNodes.h"
+#include "ModifierSupport.h"
+
 namespace nodes
 {
 
@@ -29,7 +36,7 @@ public:
 	DECLARE_NODE(StatementBase,ConditionalSupport< opNode >,T_UNKNOWN);
 	
 	//ToStatementBase conversion
-	virtual StatementBase* ToStatementBase() { return this; }
+	virtual StatementBase* ToStatementBase() override { return this; }
 	virtual class VisibilityStatementNode* ToVisibilityStatementNode() { return NULL; }
 	
 	VisibilityMode GetVisibilityMode()
@@ -138,6 +145,14 @@ public:
 
 	void FetchAllModifiers() {}
 };
+
+
+
+
+} // end of namespace nodes
+
+namespace nodes
+{
 
 typedef ModifierSupport< StatementBase > StatementModifierBaseParent;
 

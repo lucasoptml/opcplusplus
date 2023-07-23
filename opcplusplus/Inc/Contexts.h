@@ -17,6 +17,7 @@
 #include "UtilityInterfaces.h"
 #include "StatementInterfaces.h"
 #include "DialectStatementInterfaces.h"
+#include "DialectInterfaces.h"
 
 ///==========================================
 /// Context interfaces
@@ -53,14 +54,7 @@ namespace context
 	public:
 		IMPLEMENTS_INTERFACE(BasicTypes)
 		
-		bool Parse()
-		{
-			PARSE_START;
-			{
-				FindBasicTypes();
-			}
-			PARSE_END;
-		}
+		bool Parse();
 		
 		void FindBasicTypes();
 	};
@@ -118,14 +112,7 @@ namespace context
 		IMPLEMENTS_INTERFACE(Argument)
 		REQUIRES_INTERFACE(Blocks)
 
-		bool Parse()
-		{
-			PARSE_START;
-			{
-				this.FindBasicTypes();
-			}
-			PARSE_END;
-		}
+		bool Parse();
 	};
 
 	///==========================================
@@ -273,50 +260,11 @@ namespace context
 	public:
 		IMPLEMENTS_INTERFACE(Dialect)
 
-		bool PreParse()
-		{
-			PREPARSE_START;
-			{
-				FindCodeLocations();
-				FindOPIncludes();
-			}
-			PREPARSE_END;
-		}
+		bool PreParse();
 
-		bool Parse()
-		{
-			PARSE_START;
-			{
-				CleanAll();	
-				FindOPDefines();
-				FindScopes();
-				FindDialectNamespaces();
-				FindEnumerations();
-				FindCategories();
-				FindNoteDefinitions();
-				FindFileDeclarations();
-				FindExtensions();
-				FindExtendPoints();
+		bool Parse();
 
-				// look for extensionpoint's (everywhere)
-				{
-					ExtensionPointWalker walker(this);
-				}
-
-				// parse global dialect statements
-				FindGlobalDialectStatements();
-			}
-			PARSE_END;
-		}
-
-		bool PostParse()
-		{
-			POSTPARSE_START;
-			{
-				AllowOnlyGlobalDialectStatements();
-			}
-			POSTPARSE_END;
-		}
+		bool PostParse();
 	};
 
 	///==========================================
@@ -336,29 +284,9 @@ namespace context
 	public:
 		IMPLEMENTS_INTERFACE(Category);
 		
-		bool Parse()
-		{
-			PARSE_START;
-			{
-				CleanAll();
-				FindDataModifiers();
-				FindFunctionModifiers();
-				FindCategoryLocations();
-				FindDisallows();
+		bool Parse();
 
-				FindDialectCategoryStatements();
-			}
-			PARSE_END;
-		}
-
-		bool PostParse()
-		{
-			POSTPARSE_START;
-			{
-				AllowOnlyDialectCategoryStatements();
-			}
-			POSTPARSE_END;
-		}
+		bool PostParse();
 	};
 
 	///==========================================
@@ -376,29 +304,9 @@ namespace context
 	public:
 		IMPLEMENTS_INTERFACE(CategoryLocation);
 		
-		bool Parse()
-		{
-			PARSE_START;
-			{
-				CleanAll();
-				FindNotes();
-				FindCategoryMaps();
+		bool Parse();
 
-				// parse category location statements, then 
-				// do an appropriate allow only
-				FindCategoryLocationStatements();
-			}
-			PARSE_END;
-		}
-
-		bool PostParse()
-		{
-			POSTPARSE_START;
-			{
-				AllowOnlyCategoryLocationStatements();
-			}
-			POSTPARSE_END;
-		}
+		bool PostParse();
 	};
 
 	///==========================================
@@ -415,28 +323,9 @@ namespace context
 	public:
 		IMPLEMENTS_INTERFACE(CategoryMap);
 
-		bool Parse()
-		{
-			PARSE_START;
-			{
-				CleanAll();
-				FindCriteriaExpressions();
+		bool Parse();
 
-				// parse category map criteria expressions, and 
-				// do the correct allowonly
-				FindCriteriaStatements();
-			}
-			PARSE_END;
-		}
-
-		bool PostParse()
-		{
-			POSTPARSE_START;
-			{
-				AllowOnlyDialectCriteriaStatements();
-			}
-			POSTPARSE_END;
-		}
+		bool PostParse();
 	};
 
 	///==========================================
@@ -454,27 +343,9 @@ namespace context
 	public:
 		IMPLEMENTS_INTERFACE(Enumeration);
 		
-		bool Parse()
-		{
-			PARSE_START;
-			{
-				CleanAll();
-				FindEnumerationLocations();
-				FindDisallows();
+		bool Parse();
 
-				FindDialectEnumStatements();
-			}
-			PARSE_END;
-		}
-
-		bool PostParse()
-		{
-			POSTPARSE_START;
-			{
-				AllowOnlyDialectEnumStatements();
-			}
-			POSTPARSE_END;
-		}
+		bool PostParse();
 	};
 
 	///==========================================
@@ -492,28 +363,9 @@ namespace context
 	public:
 		IMPLEMENTS_INTERFACE(EnumerationLocation);
 
-		bool Parse()
-		{
-			PARSE_START;
-			{
-				CleanAll();
-				FindNotes();
-				FindEnumerationMaps();
+		bool Parse();
 
-				// parse statements
-				FindEnumerationLocationStatements();
-			}
-			PARSE_END;
-		}
-
-		bool PostParse()
-		{
-			POSTPARSE_START;
-			{
-				AllowOnlyEnumerationLocationStatements();
-			}
-			POSTPARSE_END;
-		}
+		bool PostParse();
 	};
 
 	//==========================================
@@ -530,27 +382,9 @@ namespace context
 	public:
 		IMPLEMENTS_INTERFACE(FileDeclaration);
 
-		bool Parse()
-		{
-			PARSE_START;
-			{
-				CleanAll();
-				FindFileDeclarationLocations();
+		bool Parse();
 
-				// parse into statements
-				FindFileDeclarationLocationStatements();
-			}
-			PARSE_END;
-		}
-
-		bool PostParse()
-		{
-			POSTPARSE_START;
-			{
-				AllowOnlyFileDeclarationLocationStatements();
-			}
-			POSTPARSE_END;
-		}
+		bool PostParse();
 	};
 
 	//==========================================
@@ -567,18 +401,13 @@ namespace context
 	public:
 		IMPLEMENTS_INTERFACE(TemplateType)
 
-		bool Parse()
-		{
-			PARSE_START;
-			{
-				CleanAll();
-				
-				FindTemplateTypes();
-				FindScopes();
-			}
-			PARSE_END;
-		}
+		bool Parse();
 	};
+
+
+
+
+
 
 
 

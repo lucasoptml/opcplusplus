@@ -26,14 +26,7 @@ class RemoveWhitespace : public Parent
 public:
 	IMPLEMENTS_INTERFACE(RemoveWhitespace)
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			removeWhitespace();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
 	void removeWhitespace()
 	{
@@ -67,14 +60,7 @@ class RemoveComments : public Parent
 public:
 	IMPLEMENTS_INTERFACE(RemoveComments)
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			removeComments();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
 	void removeComments()
 	{
@@ -109,14 +95,7 @@ class Clean : public RemoveWhitespace< RemoveComments< Parent > >
 public:
 	IMPLEMENTS_INTERFACE(Clean)
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			CleanAll();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
 	void CleanAll()
 	{
@@ -227,6 +206,9 @@ class UnInlineSupport : public Parent
 		return doinline;
 	}
 };
+
+
+
 
 } // end namespace interfaces
 

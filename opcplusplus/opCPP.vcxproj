@@ -120,6 +120,7 @@
     <ClCompile Include="..\lib\boost\libs\filesystem\src\utf8_codecvt_facet.cpp" />
     <ClCompile Include="..\lib\boost\libs\filesystem\src\windows_file_codecvt.cpp" />
     <ClCompile Include="..\Lib\md5\md5.c" />
+    <ClCompile Include="Inc\BasicNodes.cpp" />
     <ClCompile Include="Src\Beta.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -317,14 +318,18 @@
     <ClInclude Include="Inc\BasicNodes.h" />
     <ClInclude Include="Inc\Beta.h" />
     <ClInclude Include="Inc\CodeVisitors.h" />
+    <ClInclude Include="Inc\Concepts.h" />
     <ClInclude Include="Inc\Config.h" />
     <ClInclude Include="Inc\ContextInlines.h" />
     <ClInclude Include="Inc\Contexts.h" />
+    <ClInclude Include="Inc\Declarations.h" />
     <ClInclude Include="Inc\Delegates.h" />
     <ClInclude Include="Inc\Demo.h" />
     <ClInclude Include="Inc\DialectInterfaces.h" />
+    <ClInclude Include="Inc\DialectInterfacesInlines.h" />
     <ClInclude Include="Inc\DialectModifierNodes.h" />
     <ClInclude Include="Inc\DialectNodes.h" />
+    <ClInclude Include="Inc\DialectStatementInlines.h" />
     <ClInclude Include="Inc\DialectStatementInterfaces.h" />
     <ClInclude Include="Inc\DialectStatementNodes.h" />
     <ClInclude Include="Inc\DialectTracker.h" />
@@ -346,6 +351,7 @@
     <ClInclude Include="Inc\MemoryTracker.h" />
     <ClInclude Include="Inc\ModifierNodes.h" />
     <ClInclude Include="Inc\Modifiers.h" />
+    <ClInclude Include="Inc\ModifierSupport.h" />
     <ClInclude Include="Inc\Namespaces.h" />
     <ClInclude Include="Inc\opCPP.h" />
     <ClInclude Include="Inc\opError.h" />

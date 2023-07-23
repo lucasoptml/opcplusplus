@@ -37,6 +37,7 @@ using boost::filesystem::path;
 #include "opmd5.h"
 
 // opCPP includes
+#include "Declarations.h"
 #include "opTime.h"
 #include "Macros.h"
 #include "Platforms.h"
@@ -56,6 +57,7 @@ using boost::filesystem::path;
 #include "Scanner.h"
 #include "Visitors.h"
 #include "opNode.h"
+#include "Concepts.h"
 #include "BasicNodes.h"
 #include "StatementNodes.h"
 #include "UtilityInterfaces.h"
@@ -84,6 +86,8 @@ using boost::filesystem::path;
 #include "InterfaceInlines.h"
 #include "ContextInlines.h"
 #include "StatementInlines.h"
+#include "DialectInterfacesInlines.h"
+#include "DialectStatementInlines.h"
 #include "RegexSupport.h"
 #include "MacroInterfaces.h"
 #include "Walkers.h"

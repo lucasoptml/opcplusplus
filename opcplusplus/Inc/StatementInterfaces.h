@@ -145,14 +145,7 @@ public:
 	REQUIRES_INTERFACE(OPObjects)
 	REQUIRES_INTERFACE(OPEnums)
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindBasicStatements();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
 	bool PostParse();
 	
@@ -255,14 +248,7 @@ class UsingStatements : public Parent
 public:
 	IMPLEMENTS_INTERFACE(UsingStatements)
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindUsingStatements();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
 	bool FindUsingStatements();
 };
@@ -277,14 +263,7 @@ class NullStatements : public Parent
 public:
 	IMPLEMENTS_INTERFACE(NullStatements)
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindNullStatements();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
 	bool FindNullStatements();
 };
@@ -335,14 +314,7 @@ class FuncPointerStatements : public Parent
 public:
 	IMPLEMENTS_INTERFACE(FuncPointerStatements)
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindFuncPointerStatements();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
 	bool FindFuncPointerStatements();
 };
@@ -357,14 +329,7 @@ class FuncPrototypeStatements : public Parent
 public:
 	IMPLEMENTS_INTERFACE(FuncPrototypeStatements)
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindFuncPrototypeStatements();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
 	bool FindFuncPrototypeStatements();
 };
@@ -451,21 +416,14 @@ class DataStatements : public Parent
 public:
 	IMPLEMENTS_INTERFACE(DataStatements)
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindDataStatements();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
 	bool FindDataStatements();
 
 	bool FindDataStatementOnly();
 };
 
-template<class Parent>
+template<NodeType Parent>
 class DataStatementOnly : public DataStatements<Parent>
 {
 public:
@@ -484,14 +442,7 @@ class ConditionalPreprocessorStatements : public Parent
 public:
 	IMPLEMENTS_INTERFACE(ConditionalPreprocessorStatements)
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindConditionalPreprocessorStatements();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
 	void FindConditionalPreprocessorStatements()
 	{
@@ -506,6 +457,8 @@ public:
 	template<Token hittoken>
 	void FindConditionalPreprocessorStatement();
 };
+
+
 
 
 

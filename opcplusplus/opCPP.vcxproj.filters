@@ -210,6 +210,9 @@
     <ClCompile Include="..\lib\boost\libs\filesystem\src\windows_file_codecvt.cpp">
       <Filter>Library Files\Boost Filesystem\Source</Filter>
     </ClCompile>
+    <ClCompile Include="Inc\BasicNodes.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Lib\boost\boost\filesystem\config.hpp">
@@ -502,6 +505,21 @@
     </ClInclude>
     <ClInclude Include="Inc\StatementInlines.h">
       <Filter>Header Files\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Declarations.h">
+      <Filter>Header Files\opC++</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\DialectStatementInlines.h">
+      <Filter>Header Files\Dialect</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\DialectInterfacesInlines.h">
+      <Filter>Header Files\Dialect</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\Concepts.h">
+      <Filter>Header Files\opC++</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\ModifierSupport.h">
+      <Filter>Header Files\opC++</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

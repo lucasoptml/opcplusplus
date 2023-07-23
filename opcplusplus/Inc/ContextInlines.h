@@ -7,6 +7,16 @@
 //
 
 template<class Parent>
+inline bool context::BasicTypes<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		FindBasicTypes();
+	}
+	PARSE_END;
+}
+
+template<class Parent>
 inline void BasicTypes<Parent>::FindBasicTypes()
 {
 	FindAngles();
@@ -283,3 +293,262 @@ inline bool Operator<Parent>::Parse()
 	PARSE_END;
 }
 
+
+//
+// Dialect
+//
+
+template<class Parent>
+inline bool Dialect<Parent>::PreParse()
+{
+	PREPARSE_START;
+	{
+		FindCodeLocations();
+		FindOPIncludes();
+	}
+	PREPARSE_END;
+}
+
+template<class Parent>
+inline bool context::Dialect<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		CleanAll();
+		FindOPDefines();
+		FindScopes();
+		FindDialectNamespaces();
+		FindEnumerations();
+		FindCategories();
+		FindNoteDefinitions();
+		FindFileDeclarations();
+		FindExtensions();
+		FindExtendPoints();
+
+		// look for extensionpoint's (everywhere)
+		{
+			ExtensionPointWalker walker(this);
+		}
+
+		// parse global dialect statements
+		FindGlobalDialectStatements();
+	}
+	PARSE_END;
+}
+
+template<class Parent>
+inline bool context::Dialect<Parent>::PostParse()
+{
+	POSTPARSE_START;
+	{
+		AllowOnlyGlobalDialectStatements();
+	}
+	POSTPARSE_END;
+}
+
+//
+// Category
+//
+
+template<class Parent>
+inline bool Category<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		CleanAll();
+		FindDataModifiers();
+		FindFunctionModifiers();
+		FindCategoryLocations();
+		FindDisallows();
+
+		FindDialectCategoryStatements();
+	}
+	PARSE_END;
+}
+
+template<class Parent>
+inline bool context::Category<Parent>::PostParse()
+{
+	POSTPARSE_START;
+	{
+		AllowOnlyDialectCategoryStatements();
+	}
+	POSTPARSE_END;
+}
+
+//
+// CategoryLocation
+//
+
+template<class Parent>
+inline bool CategoryLocation<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		CleanAll();
+		FindNotes();
+		FindCategoryMaps();
+
+		// parse category location statements, then 
+		// do an appropriate allow only
+		FindCategoryLocationStatements();
+	}
+	PARSE_END;
+}
+
+template<class Parent>
+inline bool context::CategoryLocation<Parent>::PostParse()
+{
+	POSTPARSE_START;
+	{
+		AllowOnlyCategoryLocationStatements();
+	}
+	POSTPARSE_END;
+}
+
+//
+// CategoryMap
+//
+
+
+template<class Parent>
+inline bool CategoryMap<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		CleanAll();
+		FindCriteriaExpressions();
+
+		// parse category map criteria expressions, and 
+		// do the correct allowonly
+		FindCriteriaStatements();
+	}
+	PARSE_END;
+}
+
+template<class Parent>
+inline bool context::CategoryMap<Parent>::PostParse()
+{
+	POSTPARSE_START;
+	{
+		AllowOnlyDialectCriteriaStatements();
+	}
+	POSTPARSE_END;
+}
+
+//
+// Enumeration 
+//
+
+template<class Parent>
+inline bool Enumeration<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		CleanAll();
+		FindEnumerationLocations();
+		FindDisallows();
+
+		FindDialectEnumStatements();
+	}
+	PARSE_END;
+}
+
+template<class Parent>
+inline bool context::Enumeration<Parent>::PostParse()
+{
+	POSTPARSE_START;
+	{
+		AllowOnlyDialectEnumStatements();
+	}
+	POSTPARSE_END;
+}
+
+//
+// EnumerationLocation
+//
+
+template<class Parent>
+inline bool EnumerationLocation<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		CleanAll();
+		FindNotes();
+		FindEnumerationMaps();
+
+		// parse statements
+		FindEnumerationLocationStatements();
+	}
+	PARSE_END;
+}
+
+template<class Parent>
+inline bool context::EnumerationLocation<Parent>::PostParse()
+{
+	POSTPARSE_START;
+	{
+		AllowOnlyEnumerationLocationStatements();
+	}
+	POSTPARSE_END;
+}
+
+//
+// FileDeclaration
+//
+
+template<class Parent>
+inline bool FileDeclaration<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		CleanAll();
+		FindFileDeclarationLocations();
+
+		// parse into statements
+		FindFileDeclarationLocationStatements();
+	}
+	PARSE_END;
+}
+
+template<class Parent>
+inline bool context::FileDeclaration<Parent>::PostParse()
+{
+	POSTPARSE_START;
+	{
+		AllowOnlyFileDeclarationLocationStatements();
+	}
+	POSTPARSE_END;
+}
+
+//
+// TemplateType
+//
+
+template<class Parent>
+inline bool TemplateType<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		CleanAll();
+
+		FindTemplateTypes();
+		FindScopes();
+	}
+	PARSE_END;
+}
+
+//
+// Argument
+//
+
+
+template<class Parent>
+inline bool Argument<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		this.FindBasicTypes();
+	}
+	PARSE_END;
+}

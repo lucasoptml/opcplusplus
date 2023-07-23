@@ -12,6 +12,9 @@
 /// represents an extended grammar in the opC++ syntax.
 ///****************************************************************
 
+#include "ModifierSupport.h"
+#include "DialectNodes.h"
+
 namespace nodes
 {
 

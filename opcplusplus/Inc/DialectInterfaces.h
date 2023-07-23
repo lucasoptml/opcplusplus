@@ -11,6 +11,8 @@
 /// Interfaces for dialect nodes.
 ///****************************************************************
 
+#pragma once
+
 namespace interfaces
 {
 
@@ -24,45 +26,9 @@ class Categories : public Parent
 public:
 	IMPLEMENTS_INTERFACE(Categories);
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindCategories();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
-	void FindCategories()
-	{
-		LOOP_START(G_CATEGORY)
-		{
-			HIT(T_CATEGORY)
-			{
-				stackedcontext<CategoryNode> newNode = opNode::Make<CategoryNode>(T_CATEGORY);
-				
-				Erase(T_CATEGORY);
-
-				EatWhitespaceAndComments();
-				
-				stacked<TerminalNode> name = opNode::Expect<TerminalNode>(T_ID);
-
-				EatWhitespaceAndComments();
-				
-				newNode->SetName(*name);
-				newNode->AppendNode(name);
-				
-				stacked<BraceBlockNode>   bbn  = opNode::Expect<BraceBlockNode>(G_BRACE_BLOCK);
-				stacked<CategoryBodyNode> body = opNode::Transform<CategoryBodyNode>(bbn);
-				
-				newNode->SetBody(*body);
-				newNode->AppendNode(body);
-				
-				InsertNodeAtCurrent(newNode);
-			}
-		}
-		LOOP_END;
-	}
+	void FindCategories();
 };
 
 ///==========================================
@@ -75,45 +41,9 @@ class CodeLocations : public Parent
 public:
 	IMPLEMENTS_INTERFACE(CodeLocations);
 
-	bool PreParse()
-	{
-		PREPARSE_START;
-		{
-			FindCodeLocations();
-		}
-		PREPARSE_END;
-	}
+	bool PreParse();
 
-	void FindCodeLocations()
-	{
-		LOOP_START(G_CODE)
-		{
-			HIT(T_CODE)
-			{
-				stackedcontext<CodeNode> newNode = opNode::Make<CodeNode>(T_CODE);
-
-				Erase(T_CODE);
-
-				EatWhitespaceAndComments();
-
-				stacked<TerminalNode> name = opNode::Expect<TerminalNode>(T_ID);
-
-				EatWhitespaceAndComments();
-
-				newNode->SetName(*name);
-				newNode->AppendNode(name);
-
-				stacked<BraceBlockNode> bbn = opNode::Expect<BraceBlockNode>(G_BRACE_BLOCK);
-				stacked<CodeBodyNode> body = opNode::Transform<CodeBodyNode>(bbn);
-
-				newNode->SetBody(*body);
-				newNode->AppendNode(body);
-
-				InsertNodeAtCurrent(newNode);
-			}
-		}
-		LOOP_END;
-	}
+	void FindCodeLocations();
 };
 
 ///==========================================
@@ -127,41 +57,9 @@ public:
 	IMPLEMENTS_INTERFACE(CategoryLocations);
 	REQUIRES_INTERFACE(Clean);
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindCategoryLocations();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
-	void FindCategoryLocations()
-	{
-		LOOP_START(G_CATEGORY_LOCATION)
-		{
-			HIT(T_LOCATION)
-			{
-				stackedcontext<CategoryLocationNode> newNode = opNode::Make<CategoryLocationNode>(T_LOCATION);
-				
-				Erase(T_LOCATION);
-				
-				stacked<TerminalNode> name = opNode::Expect<TerminalNode>(T_ID);
-
-				newNode->SetName(*name);
-				newNode->AppendNode(name);
-				
-				stacked<BraceBlockNode> bbn = opNode::Expect<BraceBlockNode>(G_BRACE_BLOCK);
-				stacked<CategoryLocationBodyNode> body = opNode::Transform<CategoryLocationBodyNode>(bbn);
-				
-				newNode->SetBody(*body);
-				newNode->AppendNode(body);
-				
-				InsertNodeAtCurrent(newNode);
-			}
-		}
-		LOOP_END
-	}
+	void FindCategoryLocations();
 };
 
 
@@ -176,41 +74,9 @@ public:
 	IMPLEMENTS_INTERFACE(Disallows);
 	REQUIRES_INTERFACE(Clean);
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindDisallows();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
-	void FindDisallows()
-	{
-		LOOP_START(G_DISALLOW)
-		{
-			HIT(T_DISALLOW)
-			{
-				stackedcontext<DisallowNode> newNode = opNode::Make<DisallowNode>(T_DISALLOW);
-
-				Erase(T_DISALLOW);
-
-				stacked<TerminalNode> name = opNode::Expect<TerminalNode>(T_ID);
-
-				newNode->SetName(*name);
-				newNode->AppendNode(name);
-
-				stacked<BraceBlockNode> bbn = opNode::Expect<BraceBlockNode>(G_BRACE_BLOCK);
-				stacked<DisallowBodyNode> body = opNode::Transform<DisallowBodyNode>(bbn);
-
-				newNode->SetBody(*body);
-				newNode->AppendNode(body);
-
-				InsertNodeAtCurrent(newNode);
-			}
-		}
-		LOOP_END
-	}
+	void FindDisallows();
 };
 
 ///==========================================
@@ -223,52 +89,12 @@ class CategoryMaps : public Parent
 public:
 	IMPLEMENTS_INTERFACE(CategoryMaps);
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindCategoryMaps();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
-	void FindCategoryMaps()
-	{
-		FindCategoryMap<G_CATEGORY_DATAMAP,     T_DATAMAP,     CategoryDatamapNode>();
-		FindCategoryMap<G_CATEGORY_FUNCTIONMAP, T_FUNCTIONMAP, CategoryFunctionmapNode>();
-	}
+	void FindCategoryMaps();
 	
 	template<Token grammar, Token token, class NodeClass>
-	void FindCategoryMap()
-	{
-		LOOP_START(grammar)
-		{
-			HIT(token)
-			{
-				stackedcontext<NodeClass> newNode = opNode::Make<NodeClass>(token);
-				
-				Erase(token);
-				
-				stacked<TerminalNode>        name = opNode::Expect<TerminalNode>(T_ID);
-				
-				newNode->SetName(*name);
-				newNode->AppendNode(name);
-				
-				if(IsCurrent(G_BRACE_BLOCK))
-				{
-					stacked<BraceBlockNode>      bbn  = opNode::Expect<BraceBlockNode>(G_BRACE_BLOCK);
-					stacked<CategoryMapBodyNode> body = opNode::Transform<CategoryMapBodyNode>(bbn);
-
-					newNode->SetBody(*body);
-					newNode->AppendNode(body);
-				}
-
-
-				InsertNodeAtCurrent(newNode);
-			}
-		}
-		LOOP_END;
-	}
+	void FindCategoryMap();
 };
 
 ///==========================================
@@ -281,46 +107,9 @@ class DataModifiers : public Parent
 public:
 	IMPLEMENTS_INTERFACE(DataModifiers);
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindDataModifiers();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
-	void FindDataModifiers()
-	{
-		LOOP_START(G_DATAMODIFIER)
-		{
-			HIT(T_DATAMODIFIER)
-			{
-				stackedcontext<DataModifierNode> newNode = opNode::Make<DataModifierNode>(T_DATAMODIFIER);
-				
-				Erase(T_DATAMODIFIER);
-
-				stacked<TerminalNode> name = opNode::Expect<TerminalNode>(T_ID);
-				
-				newNode->SetName(*name);
-				newNode->AppendNode(name);
-
-				if(IsCurrent(G_PAREN_BLOCK))
-				{
-					stacked<ParenBlockNode> paren = opNode::Expect<ParenBlockNode>(G_PAREN_BLOCK);
-					stacked<ModifierArgumentNode> args = opNode::Transform<ModifierArgumentNode>(paren);
-
-					newNode->SetArgument(*args);
-					newNode->AppendNode(args);
-				}
-
-				Erase(T_SEMICOLON);
-
-				InsertNodeAtCurrent(newNode);
-			}
-		}
-		LOOP_END;
-	}
+	void FindDataModifiers();
 };
 
 
@@ -334,46 +123,9 @@ class FunctionModifiers : public Parent
 public:
 	IMPLEMENTS_INTERFACE(FunctionModifiers);
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindFunctionModifiers();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
-	void FindFunctionModifiers()
-	{
-		LOOP_START(G_FUNCTIONMODIFIER)
-		{
-			HIT(T_FUNCTIONMODIFIER)
-			{
-				stackedcontext<FunctionModifierNode> newNode = opNode::Make<FunctionModifierNode>(T_FUNCTIONMODIFIER);
-
-				Erase(T_FUNCTIONMODIFIER);
-
-				stacked<TerminalNode> name = opNode::Expect<TerminalNode>(T_ID);
-
-				newNode->SetName(*name);
-				newNode->AppendNode(name);
-
-				if(IsCurrent(G_PAREN_BLOCK))
-				{
-					stacked<ParenBlockNode> paren = opNode::Expect<ParenBlockNode>(G_PAREN_BLOCK);
-					stacked<ModifierArgumentNode> args = opNode::Transform<ModifierArgumentNode>(paren);
-
-					newNode->SetArgument(*args);
-					newNode->AppendNode(args);
-				}
-				
-				Erase(T_SEMICOLON);
-
-				InsertNodeAtCurrent(newNode);
-			}
-		}
-		LOOP_END;
-	}
+	void FindFunctionModifiers();
 };
 
 ///==========================================
@@ -387,45 +139,12 @@ public:
 	IMPLEMENTS_INTERFACE(CriteriaExpressions);
 	REQUIRES_INTERFACE(Clean);
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindCriteriaExpressions();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
-	void FindCriteriaExpressions()
-	{
-		FindIs<G_IS, T_IS, IsNode, IsBodyNode>();
-//		FindIs<G_ISNOT, T_ISNOT, IsnotNode, IsnotBodyNode>();
-//		FindEverything();
-	}
+	void FindCriteriaExpressions();
 
 	template<Token grammar, Token token, class NodeClass, class NodeBodyClass>
-	void FindIs()
-	{
-		LOOP_START(grammar)
-		{
-			HIT(token)
-			{
-				stackedcontext<NodeClass> newNode = opNode::Make<NodeClass>(token);
-				
-				Erase(token);
-
-				stacked<NodeBodyClass> body = opNode::PushUntil<NodeBodyClass>(T_SEMICOLON);
-
-				newNode->SetBody(*body);
-				newNode->AppendNode(body);
-
-				Erase(T_SEMICOLON);
-				
-				InsertNodeAtCurrent(newNode);
-			}
-		}
-		LOOP_END
-	}
+	void FindIs();
 };
 
 ///==========================================
@@ -438,46 +157,9 @@ class Notes : public Parent
 public:
 	IMPLEMENTS_INTERFACE(Notes);
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindNotes();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
-	void FindNotes()
-	{
-		LOOP_START(G_NOTE)
-		{
-			HIT(T_NOTE)
-			{
-				stackedcontext<NoteNode> newNode = opNode::Make<NoteNode>(T_NOTE);
-
-				Erase(T_NOTE);
-
-				stacked<TerminalNode> name = opNode::Expect<TerminalNode>(T_ID);
-
-				newNode->SetName(*name);
-				newNode->AppendNode(name);
-
-				if(IsCurrent(G_BRACE_BLOCK))
-				{
-					stacked<BraceBlockNode> bbn = opNode::Expect<BraceBlockNode>(G_BRACE_BLOCK);
-					stacked<NoteBodyNode> body = opNode::Transform<NoteBodyNode>(bbn);
-
-					newNode->SetBody(*body);
-					newNode->AppendNode(body);
-				}
-				else
-					Erase(T_SEMICOLON);
-
-				InsertNodeAtCurrent(newNode);
-			}
-		}
-		LOOP_END;
-	}
+	void FindNotes();
 };
 
 ///==========================================
@@ -490,52 +172,9 @@ class NoteDefinitions : public Parent
 public:
 	IMPLEMENTS_INTERFACE(NoteDefinitions);
 	
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindNoteDefinitions();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
-	void FindNoteDefinitions()
-	{
-		LOOP_START(G_NOTE_DEFINITION)
-		{
-			HIT(T_NOTE)
-			{
-				stackedcontext<NoteDefinitionNode> newNode = opNode::Make<NoteDefinitionNode>(T_NOTE);
-				
-				Erase(T_NOTE);
-
-				EatWhitespaceAndComments();
-
-				stacked<ScopeNode> pathnode = opNode::Expect<ScopeNode>(G_SCOPE);
-
-				newNode->SetPath(*pathnode);
-				newNode->AppendNode(pathnode);
-
-				EatWhitespaceAndComments();
-
-				stacked<ParenBlockNode>       ppn  = opNode::Expect<ParenBlockNode>(G_PAREN_BLOCK);
-				stacked<NoteArgumentListNode> args = opNode::Transform<NoteArgumentListNode>(ppn);
-
-				newNode->SetArguments(*args);
-				newNode->AppendNode(args);
-
-				EatWhitespaceAndComments();
-
-				stacked<BraceBlockNode> body = opNode::Expect<BraceBlockNode>(G_BRACE_BLOCK);
-				
-				newNode->SetBody(*body);
-				newNode->AppendNode(body);
-				
-				InsertNodeAtCurrent(newNode);
-			}
-		}
-		LOOP_END;
-	}
+	void FindNoteDefinitions();
 };
 
 ///==========================================
@@ -548,45 +187,9 @@ class Enumerations : public Parent
 public:
 	IMPLEMENTS_INTERFACE(Enumerations);
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindEnumerations();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
-	void FindEnumerations()
-	{
-		LOOP_START(G_ENUMERATION)
-		{
-			HIT(T_ENUMERATION)
-			{
-				stackedcontext<EnumerationNode> newNode = opNode::Make<EnumerationNode>(T_ENUMERATION);
-
-				Erase(T_ENUMERATION);
-
-				EatWhitespaceAndComments();
-
-				stacked<TerminalNode> name = opNode::Expect<TerminalNode>(T_ID);
-
-				EatWhitespaceAndComments();
-
-				newNode->SetName(*name);
-				newNode->AppendNode(name);
-
-				stacked<BraceBlockNode>      bbn  = opNode::Expect<BraceBlockNode>(G_BRACE_BLOCK);
-				stacked<EnumerationBodyNode> body = opNode::Transform<EnumerationBodyNode>(bbn);
-
-				newNode->SetBody(*body);
-				newNode->AppendNode(body);
-
-				InsertNodeAtCurrent(newNode);
-			}
-		}
-		LOOP_END;
-	}
+	void FindEnumerations();
 };
 
 ///==========================================
@@ -600,41 +203,9 @@ public:
 	IMPLEMENTS_INTERFACE(EnumerationLocations);
 	REQUIRES_INTERFACE(Clean);
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindEnumerationLocations();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
-	void FindEnumerationLocations()
-	{
-		LOOP_START(G_ENUMERATION_LOCATION)
-		{
-			HIT(T_LOCATION)
-			{
-				stackedcontext<EnumerationLocationNode> newNode = opNode::Make<EnumerationLocationNode>(T_LOCATION);
-
-				Erase(T_LOCATION);
-
-				stacked<TerminalNode> name = opNode::Expect<TerminalNode>(T_ID);
-
-				newNode->SetName(*name);
-				newNode->AppendNode(name);
-
-				stacked<BraceBlockNode>              bbn  = opNode::Expect<BraceBlockNode>(G_BRACE_BLOCK);
-				stacked<EnumerationLocationBodyNode> body = opNode::Transform<EnumerationLocationBodyNode>(bbn);
-
-				newNode->SetBody(*body);
-				newNode->AppendNode(body);
-
-				InsertNodeAtCurrent(newNode);
-			}
-		}
-		LOOP_END
-	}
+	void FindEnumerationLocations();
 };
 
 ///==========================================
@@ -647,35 +218,9 @@ class EnumerationMaps : public Parent
 public:
 	IMPLEMENTS_INTERFACE(EnumerationMaps);
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindEnumerationMaps();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
-	void FindEnumerationMaps()
-	{
-		LOOP_START(G_ENUMERATION_MAP)
-		{
-			HIT(T_ENUMMAP)
-			{
-				stackedcontext<EnumerationMapNode> newNode = opNode::Make<EnumerationMapNode>(T_ENUMMAP);
-
-				opNode::Erase(T_ENUMMAP);
-
-				stacked<TerminalNode> name = opNode::Expect<TerminalNode>(T_ID);
-
-				newNode->SetName(*name);
-				newNode->AppendNode(name);
-
-				InsertNodeAtCurrent(newNode);
-			}
-		}
-		LOOP_END;
-	}
+	void FindEnumerationMaps();
 };
 
 ///==========================================
@@ -689,57 +234,10 @@ public:
 	IMPLEMENTS_INTERFACE(DialectModifiers);
 
 	template<Token grammar, class ModifierClass>
-	void FindDialectModifier()
-	{
-		LOOP_START(grammar)
-		{
-			HIT(T_ID)
-			{
-				TerminalNode* t = node_cast<TerminalNode>(CurrentNode());
-
-				if (t->GetValue() == ModifierClass::StaticModifierName())
-				{
-					stackedcontext<ModifierClass> newNode = opNode::Make<ModifierClass>(T_ID);
-
-					Erase(T_ID);
-					
-					InsertNodeAtCurrent(newNode);
-				}
-				else
-					IncrementPosition();
-			}
-		}
-		LOOP_END;
-	}
+	void FindDialectModifier();
 
 	template<Token grammar, class ModifierClass>
-	void FindValuedDialectModifier()
-	{
-		LOOP_START(grammar)
-		{
-			HIT(T_ID)
-			{
-				TerminalNode* t = node_cast<TerminalNode>(CurrentNode());
-
-				if (t->GetValue() == ModifierClass::StaticModifierName())
-				{
-					stackedcontext<ModifierClass> newNode = opNode::Make<ModifierClass>(T_ID);
-
-					Erase(T_ID);
-
-					stacked<ParenBlockNode> value = opNode::Expect<ParenBlockNode>(G_PAREN_BLOCK);
-
-					newNode->SetValue(*value);
-					newNode->AppendNode(value);
-
-					InsertNodeAtCurrent(newNode);
-				}
-				else
-					IncrementPosition();
-			}
-		}
-		LOOP_END;
-	}
+	void FindValuedDialectModifier();
 };
 
 ///==========================================
@@ -752,47 +250,9 @@ class CriteriaValueModifiers : public Parent
 public:
 	IMPLEMENTS_INTERFACE(CriteriaValueModifiers);
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindCriteriaValueModifiers();
-		}	
-		PARSE_END;
-	}
+	bool Parse();
 
-	void FindCriteriaValueModifiers()
-	{
-		LOOP_START(G_CRITERIA_VALUE_MODIFIER)
-		{
-			HIT(G_PAREN_BLOCK)
-			{
-				if (IsPrevious(T_ID))
-				{
-					stackedcontext<CriteriaValueModifierNode> newNode = opNode::Make<CriteriaValueModifierNode>(G_PAREN_BLOCK);
-
-					stacked<ParenBlockNode>		  paren = opNode::Expect<ParenBlockNode>(G_PAREN_BLOCK);
-					stacked<CriteriaArgumentNode> arg   = opNode::Transform<CriteriaArgumentNode>(paren);
-
-					newNode->SetArgument(*arg);
-
-					stacked<TerminalNode> id = opNode::ReverseExpect<TerminalNode>(T_ID, *arg);
-
-					// Grab basics from the id.
-					newNode->CopyBasics(*id);
-					newNode->SetName(*id);
-
-					newNode->AppendNode(id);
-					newNode->AppendNode(arg);
-
-					InsertNodeAtCurrent(newNode);
-				}
-				else
-					IncrementPosition();
-			}
-		}
-		LOOP_END;
-	}
+	void FindCriteriaValueModifiers();
 };
 
 ///==========================================
@@ -805,28 +265,9 @@ class CriteriaGroups : public Parent
 public:
 	IMPLEMENTS_INTERFACE(CriteriaGroups);
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindCriteriaGroups();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
-	void FindCriteriaGroups()
-	{
-		LOOP_START(G_CRITERIA_GROUP)
-		{
-			HIT(G_PAREN_BLOCK)
-			{
-				stacked<ParenBlockNode> paren = opNode::Expect<ParenBlockNode>(G_PAREN_BLOCK);
-				stacked<CriteriaGroupNode> newNode = opNode::Transform<CriteriaGroupNode>(paren);
-				InsertNodeAtCurrent(newNode);
-			}
-		}
-		LOOP_END;
-	}
+	void FindCriteriaGroups();
 };
 
 //==========================================
@@ -839,41 +280,9 @@ class Extensions : public Parent
 public:
 	IMPLEMENTS_INTERFACE(Extensions);
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindExtensions();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
-	void FindExtensions()
-	{
-		LOOP_START(G_EXTENSION)
-		{
-			HIT(T_EXTENSION)
-			{
-				stackedcontext<ExtensionNode> newNode = opNode::Make<ExtensionNode>(T_EXTENSION);
-
-				Erase(T_EXTENSION);
-
-				EatWhitespaceAndComments();
-
-				stacked<TerminalNode> name = opNode::Expect<TerminalNode>(T_ID);
-
-				EatWhitespaceAndComments();
-
-				newNode->SetName(*name);
-				newNode->AppendNode(name);
-
-				Erase(T_SEMICOLON);
-
-				InsertNodeAtCurrent(newNode);
-			}
-		}
-		LOOP_END;
-	}
+	void FindExtensions();
 };
 
 //==========================================
@@ -886,44 +295,9 @@ class ExtendPoints : public Parent
 public:
 	IMPLEMENTS_INTERFACE(ExtendPoints);
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindExtendPoints();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
-	void FindExtendPoints()
-	{
-		LOOP_START(G_EXTEND_POINT)
-		{
-			HIT(T_EXTEND_POINT)
-			{
-				stackedcontext<ExtendPointNode> newNode = opNode::Make<ExtendPointNode>(T_EXTEND_POINT);
-
-				Erase(T_EXTEND_POINT);
-
-				EatWhitespaceAndComments();
-
-				stacked<TerminalNode> name = opNode::Expect<TerminalNode>(T_ID);
-
-				EatWhitespaceAndComments();
-
-				newNode->SetName(*name);
-				newNode->AppendNode(name);
-
-				stacked<BraceBlockNode> body = opNode::Expect<BraceBlockNode>(G_BRACE_BLOCK);
-
-				newNode->SetBody(*body);
-				newNode->AppendNode(body);
-
-				InsertNodeAtCurrent(newNode);
-			}
-		}
-		LOOP_END;
-	}
+	void FindExtendPoints();
 };
 
 //==========================================
@@ -936,37 +310,9 @@ class ExtensionPoints : public Parent
 public:
 	IMPLEMENTS_INTERFACE(ExtensionPoints);
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindExtensionPoints();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
-	void FindExtensionPoints()
-	{
-		LOOP_START(G_EXTENSION_POINT)
-		{
-			HIT(T_EXTENSION_POINT)
-			{
-				stackedcontext<ExtensionPointNode> newNode = opNode::Make<ExtensionPointNode>(T_EXTENSION_POINT);
-
-				Erase(T_EXTENSION_POINT);
-
-				EatWhitespaceAndComments();
-
-				stacked<TerminalNode> name = opNode::Expect<TerminalNode>(T_ID);
-
-				newNode->SetName(*name);
-				newNode->AppendNode(name);
-
-				InsertNodeAtCurrent(newNode);
-			}
-		}
-		LOOP_END;
-	}
+	void FindExtensionPoints();
 };
 
 //==========================================
@@ -979,35 +325,9 @@ class FileDeclarationLocations : public Parent
 public:
 	IMPLEMENTS_INTERFACE(FileDeclarationLocations);
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindFileDeclarationLocations();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
-	void FindFileDeclarationLocations()
-	{
-		LOOP_START(G_FILE_DECLARATION_LOCATION)
-		{
-			HIT(T_LOCATION)
-			{
-				stackedcontext<FileDeclarationLocationNode> newNode = opNode::Make<FileDeclarationLocationNode>(T_LOCATION);
-
-				Erase(T_LOCATION);
-
-				stacked<TerminalNode> name = opNode::Expect<TerminalNode>(T_ID);
-
-				newNode->SetName(*name);
-				newNode->AppendNode(name);
-
-				InsertNodeAtCurrent(newNode);
-			}
-		}
-		LOOP_END
-	}
+	void FindFileDeclarationLocations();
 };
 
 //==========================================
@@ -1020,45 +340,9 @@ class FileDeclarations : public Parent
 public:
 	IMPLEMENTS_INTERFACE(FileDeclarations);
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindFileDeclarations();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
-	void FindFileDeclarations()
-	{
-		LOOP_START(G_FILE_DECLARATION)
-		{
-			HIT(T_FILE_DECLARATION)
-			{
-				stackedcontext<FileDeclarationNode> newNode = opNode::Make<FileDeclarationNode>(T_FILE_DECLARATION);
-
-				Erase(T_FILE_DECLARATION);
-
-				EatWhitespaceAndComments();
-
-				stacked<TerminalNode> name = opNode::Expect<TerminalNode>(T_ID);
-
-				newNode->SetName(*name);
-				newNode->AppendNode(name);
-
-				EatWhitespaceAndComments();
-
-				stacked<BraceBlockNode>          bbn  = opNode::Expect<BraceBlockNode>(G_BRACE_BLOCK);
-				stacked<FileDeclarationBodyNode> body = opNode::Transform<FileDeclarationBodyNode>(bbn);
-
-				newNode->SetBody(*body);
-				newNode->AppendNode(body);
-
-				InsertNodeAtCurrent(newNode);
-			}
-		}
-		LOOP_END;
-	}
+	void FindFileDeclarations();
 };
 
 //==========================================
@@ -1071,44 +355,19 @@ class DialectNamespaces : public Parent
 public:
 	IMPLEMENTS_INTERFACE(DialectNamespaces)
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindDialectNamespaces();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
-	void FindDialectNamespaces()
-	{
-		LOOP_START(G_DIALECT_NAMESPACE)
-		{
-			HIT(T_NAMESPACE)
-			{
-				stackedcontext<DialectNamespaceNode> newNode = opNode::Make<DialectNamespaceNode>(T_NAMESPACE);
-
-				Erase(T_NAMESPACE);
-
-				EatWhitespaceAndComments();
-
-				stacked<TerminalNode> name = opNode::Expect<TerminalNode>(T_ID);
-
-				newNode->SetName(*name);
-				newNode->AppendNode(name);
-
-				EatWhitespaceAndComments();
-
-				stacked<BraceBlockNode> body = opNode::Expect<BraceBlockNode>(G_BRACE_BLOCK);
-
-				newNode->SetBody(*body);
-				newNode->AppendNode(body);
-
-				InsertNodeAtCurrent(newNode);
-			}
-		}
-		LOOP_END;
-	}
+	void FindDialectNamespaces();
 };
+
+
+
+
+
+
+
+
+
+
 
 } // end namespace interfaces

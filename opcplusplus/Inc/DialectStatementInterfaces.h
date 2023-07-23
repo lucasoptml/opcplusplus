@@ -30,7 +30,7 @@ public:
 	template<Token grammar, class StatementNodeClass, class NodeClass>
 	bool HandleStatement(stacked<opNode>& stuff)
 	{
-		if (IsCurrent(grammar))
+		if (this.IsCurrent(grammar))
 		{
 			stackedcontext<StatementNodeClass> statement = opNode::Make<StatementNodeClass>(grammar);
 			stacked<NodeClass>                 node      = opNode::Expect<NodeClass>(grammar);
@@ -58,136 +58,70 @@ public:
 	}
 
 	// Is the current statement a datamodifier statement?
-	bool DataModifierStatement(stacked<opNode>& stuff)
-	{
-		return HandleStatement<G_DATAMODIFIER, DataModifierStatementNode, DataModifierNode>(stuff);
-	}
+	bool DataModifierStatement(stacked<opNode>& stuff);
 
 	// Is the current statement a functionmodifier statement?
-	bool FunctionModifierStatement(stacked<opNode>& stuff)
-	{
-		return HandleStatement<G_FUNCTIONMODIFIER, FunctionModifierStatementNode, FunctionModifierNode>(stuff);
-	}
+	bool FunctionModifierStatement(stacked<opNode>& stuff);
 
 	// Is the current statement a category location statement?
-	bool CategoryLocationStatement(stacked<opNode>& stuff)
-	{
-		return HandleStatement<G_CATEGORY_LOCATION, CategoryLocationStatementNode, CategoryLocationNode>(stuff);
-	}
+	bool CategoryLocationStatement(stacked<opNode>& stuff);
 
 	// Is the current statement a note statement?
-	bool NoteStatement(stacked<opNode>& stuff)
-	{
-		return HandleStatement<G_NOTE, NoteStatementNode, NoteNode>(stuff);
-	}
+	bool NoteStatement(stacked<opNode>& stuff);
 
 	// Is the current statement a datamap statement?
-	bool DatamapStatement(stacked<opNode>& stuff)
-	{
-		return HandleStatement<G_CATEGORY_DATAMAP, CategoryDatamapStatementNode, CategoryDatamapNode>(stuff);
-	}
+	bool DatamapStatement(stacked<opNode>& stuff);
 
 	// Is the current statement a functionmap statement?
-	bool FunctionmapStatement(stacked<opNode>& stuff)
-	{
-		return HandleStatement<G_CATEGORY_FUNCTIONMAP, CategoryFunctionmapStatementNode, CategoryFunctionmapNode>(stuff);
-	}
+	bool FunctionmapStatement(stacked<opNode>& stuff);
 
 	// Is the current statement a disallow statement?
-	bool DisallowStatement(stacked<opNode>& stuff)
-	{
-		return HandleStatement<G_DISALLOW, DisallowStatementNode, DisallowNode>(stuff);
-	}
+	bool DisallowStatement(stacked<opNode>& stuff);
 
 	// Is the current statement an is statement?
-	bool IsStatement(stacked<opNode>& stuff)
-	{
-		return HandleStatement<G_IS, IsStatementNode, IsNode>(stuff);
-	}
+	bool IsStatement(stacked<opNode>& stuff);
 
 	// Is the current statement an enum location statement?
-	bool EnumLocationStatement(stacked<opNode>& stuff)
-	{
-		return HandleStatement<G_ENUMERATION_LOCATION, EnumerationLocationStatementNode, EnumerationLocationNode>(stuff);
-	}
+	bool EnumLocationStatement(stacked<opNode>& stuff);
 
 	// Is the current statement an enummap statement?
-	bool EnumMapStatement(stacked<opNode>& stuff)
-	{
-		return HandleStatement<G_ENUMERATION_MAP, EnumerationMapStatementNode, EnumerationMapNode>(stuff);
-	}
+	bool EnumMapStatement(stacked<opNode>& stuff);
 
 	// Is the current statement a file declaration location statement?
-	bool FileDeclarationLocationStatement(stacked<opNode>& stuff)
-	{
-		return HandleStatement<G_FILE_DECLARATION_LOCATION, FileDeclarationLocationStatementNode, FileDeclarationLocationNode>(stuff);
-	}
+	bool FileDeclarationLocationStatement(stacked<opNode>& stuff);
 
 	// Is the current statement a note definition statement?
-	bool NoteDefinitionStatement(stacked<opNode>& stuff)
-	{
-		return HandleStatement<G_NOTE_DEFINITION, NoteDefinitionStatementNode, NoteDefinitionNode>(stuff);
-	}
+	bool NoteDefinitionStatement(stacked<opNode>& stuff);
 
 	// Is the current statement an opmacro statement?
-	bool OPMacroStatement(stacked<opNode>& stuff)
-	{
-		return HandleStatement<G_OPMACRO, DialectOPMacroStatementNode, OPMacroNode>(stuff);
-	}
+	bool OPMacroStatement(stacked<opNode>& stuff);
 
 	// Is the current statement a category statement?
-	bool CategoryStatement(stacked<opNode>& stuff)
-	{
-		return HandleStatement<G_CATEGORY, CategoryStatementNode, CategoryNode>(stuff);
-	}
+	bool CategoryStatement(stacked<opNode>& stuff);
 
 	// Is the current statement a dialect namespace statement?
-	bool DialectNamespaceStatement(stacked<opNode>& stuff)
-	{
-		return HandleStatement<G_DIALECT_NAMESPACE, DialectNamespaceStatementNode, DialectNamespaceNode>(stuff);
-	}
+	bool DialectNamespaceStatement(stacked<opNode>& stuff);
 
 	// Is the current statement an opinclude statement?
-	bool OPIncludeStatement(stacked<opNode>& stuff)
-	{
-		return HandleStatement<G_OPINCLUDE, DialectOPIncludeStatementNode, OPIncludeNode>(stuff);
-	}
+	bool OPIncludeStatement(stacked<opNode>& stuff);
 
 	// Is the current statement a code statement?
-	bool CodeStatement(stacked<opNode>& stuff)
-	{
-		return HandleStatement<G_CODE, CodeStatementNode, CodeNode>(stuff);
-	}
+	bool CodeStatement(stacked<opNode>& stuff);
 
 	// Is the current statement an enumeration statement?
-	bool EnumerationStatement(stacked<opNode>& stuff)
-	{
-		return HandleStatement<G_ENUMERATION, EnumerationStatementNode, EnumerationNode>(stuff);
-	}
+	bool EnumerationStatement(stacked<opNode>& stuff);
 
 	// Is the current statement a file declaration statement?
-	bool FileDeclarationStatement(stacked<opNode>& stuff)
-	{
-		return HandleStatement<G_FILE_DECLARATION, FileDeclarationStatementNode, FileDeclarationNode>(stuff);
-	}
+	bool FileDeclarationStatement(stacked<opNode>& stuff);
 
 	// Is the current statement an extension statement?
-	bool ExtensionStatement(stacked<opNode>& stuff)
-	{
-		return HandleStatement<G_EXTENSION, ExtensionStatementNode, ExtensionNode>(stuff);
-	}
+	bool ExtensionStatement(stacked<opNode>& stuff);
 
 	// Is the current statement an extend point statement?
-	bool ExtendPointStatement(stacked<opNode>& stuff)
-	{
-		return HandleStatement<G_EXTEND_POINT, ExtendPointStatementNode, ExtendPointNode>(stuff);
-	}
+	bool ExtendPointStatement(stacked<opNode>& stuff);
 
 	// Is the current statement an opdefine statement?
-	bool OPDefineStatement(stacked<opNode>& stuff)
-	{
-		return HandleStatement<G_OPDEFINE, DialectOPDefineStatementNode, OPDefineNode>(stuff);
-	}
+	bool OPDefineStatement(stacked<opNode>& stuff);
 
 protected:
 	/*=== data ===*/
@@ -206,70 +140,16 @@ public:
 	IMPLEMENTS_INTERFACE(DialectCategoryStatements)
 	REQUIRES_INTERFACE(DialectStatementsBase)
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindDialectCategoryStatements();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
-	bool PostParse()
-	{
-		POSTPARSE_START;
-		{
-			AllowOnlyDialectCategoryStatements();
-		}
-		POSTPARSE_END;
-	}
+	bool PostParse();
 
 	// Finds dialect category statements.
-	void FindDialectCategoryStatements()
-	{
-		bool bFinished = false;
-
-		while (!bFinished)
-		{
-			stacked<opNode> stuff = opNode::PushUntilOr<opNode>(T_SEMICOLON,
-																G_DATAMODIFIER,
-																G_FUNCTIONMODIFIER,
-																G_CATEGORY_LOCATION,
-																G_DISALLOW,
-																false);
-
-			bFinished = !(*stuff);
-
-			if (bFinished)
-				break;
-
-			if      (DataModifierStatement(stuff));
-			else if (FunctionModifierStatement(stuff));
-			else if (CategoryLocationStatement(stuff));
-			else if (DisallowStatement(stuff));
-			else if (IsCurrent(T_SEMICOLON))
-			{
-				Erase(T_SEMICOLON);
-				CollapseNodeAtCurrent(stuff);
-			}
-			else
-			{
-				CollapseNodeAtCurrent(stuff);
-
-				bFinished = true;
-			}
-		}
-	}
+	void FindDialectCategoryStatements();
 
 	// Makes sure that only valid dialect category statements
 	// remain after statement parsing.
-	void AllowOnlyDialectCategoryStatements()
-	{
-		AllowOnly( G_DATAMODIFIER_STATEMENT,
-				   G_FUNCTIONMODIFIER_STATEMENT,
-				   G_CATEGORY_LOCATION_STATEMENT,
-				   G_DISALLOW_STATEMENT );
-	}
+	void AllowOnlyDialectCategoryStatements();
 };
 
 ///==========================================
@@ -283,64 +163,16 @@ public:
 	IMPLEMENTS_INTERFACE(DialectEnumerationStatements)
 	REQUIRES_INTERFACE(DialectStatementsBase)
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindDialectEnumStatements();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
-	bool PostParse()
-	{
-		POSTPARSE_START;
-		{
-			AllowOnlyDialectEnumStatements();
-		}
-		POSTPARSE_END;
-	}
+	bool PostParse();
 
 	// Finds dialect category statements.
-	void FindDialectEnumStatements()
-	{
-		bool bFinished = false;
-
-		while (!bFinished)
-		{
-			stacked<opNode> stuff = opNode::PushUntilOr<opNode>(T_SEMICOLON,
-																G_ENUMERATION_LOCATION,
-																G_DISALLOW,
-																false);
-
-			bFinished = !(*stuff);
-
-			if (bFinished)
-				break;
-
-			if      (EnumLocationStatement(stuff));
-			else if (DisallowStatement(stuff));
-			else if (IsCurrent(T_SEMICOLON))
-			{
-				Erase(T_SEMICOLON);
-				CollapseNodeAtCurrent(stuff);
-			}
-			else
-			{
-				CollapseNodeAtCurrent(stuff);
-
-				bFinished = true;
-			}
-		}
-	}
+	void FindDialectEnumStatements();
 
 	// Makes sure that only valid dialect category statements
 	// remain after statement parsing.
-	void AllowOnlyDialectEnumStatements()
-	{
-		AllowOnly( G_ENUMERATION_LOCATION_STATEMENT,
-			       G_DISALLOW_STATEMENT );
-	}
+	void AllowOnlyDialectEnumStatements();
 };
 
 ///==========================================
@@ -354,64 +186,16 @@ public:
 	IMPLEMENTS_INTERFACE(EnumerationLocationStatements)
 	REQUIRES_INTERFACE(DialectStatementsBase)
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindEnumerationLocationStatements();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
-	bool PostParse()
-	{
-		POSTPARSE_START;
-		{
-			AllowOnlyEnumerationLocationStatements();
-		}
-		POSTPARSE_END;
-	}
+	bool PostParse();
 
 	// Finds dialect category statements.
-	void FindEnumerationLocationStatements()
-	{
-		bool bFinished = false;
-
-		while (!bFinished)
-		{
-			stacked<opNode> stuff = opNode::PushUntilOr<opNode>(T_SEMICOLON,
-																G_ENUMERATION_MAP,
-																G_NOTE,
-																false);
-
-			bFinished = !(*stuff);
-
-			if (bFinished)
-				break;
-
-			if      (EnumMapStatement(stuff));
-			else if (NoteStatement(stuff));
-			else if (IsCurrent(T_SEMICOLON))
-			{
-				Erase(T_SEMICOLON);
-				CollapseNodeAtCurrent(stuff);
-			}
-			else
-			{
-				CollapseNodeAtCurrent(stuff);
-
-				bFinished = true;
-			}
-		}
-	}
+	void FindEnumerationLocationStatements();
 
 	// Makes sure that only valid dialect category statements
 	// remain after statement parsing.
-	void AllowOnlyEnumerationLocationStatements()
-	{
-		AllowOnly( G_ENUMERATIONMAP_STATEMENT,
-			       G_NOTE_STATEMENT );
-	}
+	void AllowOnlyEnumerationLocationStatements();
 };
 
 ///==========================================
@@ -425,67 +209,16 @@ public:
 	IMPLEMENTS_INTERFACE(CategoryLocationStatements)
 	REQUIRES_INTERFACE(DialectStatementsBase)
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindCategoryLocationStatements();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
-	bool PostParse()
-	{
-		POSTPARSE_START;
-		{
-			AllowOnlyCategoryLocationStatements();
-		}
-		POSTPARSE_END;
-	}
+	bool PostParse();
 
 	// Finds dialect location statements.
-	void FindCategoryLocationStatements()
-	{
-		bool bFinished = false;
-
-		while (!bFinished)
-		{
-			stacked<opNode> stuff = opNode::PushUntilOr<opNode>(T_SEMICOLON,
-																G_NOTE,
-																G_CATEGORY_DATAMAP,
-																G_CATEGORY_FUNCTIONMAP,
-																false);
-
-			bFinished = !(*stuff);
-
-			if (bFinished)
-				break;
-
-			if      (NoteStatement(stuff));
-			else if (DatamapStatement(stuff));
-			else if (FunctionmapStatement(stuff));
-			else if (IsCurrent(T_SEMICOLON))
-			{
-				Erase(T_SEMICOLON);
-				CollapseNodeAtCurrent(stuff);
-			}
-			else
-			{
-				CollapseNodeAtCurrent(stuff);
-				
-				bFinished = true;
-			}
-		}
-	}
+	void FindCategoryLocationStatements();
 
 	// Makes sure that only valid dialect location statements
 	// remain after statement parsing.
-	void AllowOnlyCategoryLocationStatements()
-	{
-		AllowOnly( G_NOTE_STATEMENT,
-				   G_CATEGORY_DATAMAP_STATEMENT,
-				   G_CATEGORY_FUNCTIONMAP_STATEMENT );
-	}
+	void AllowOnlyCategoryLocationStatements();
 };
 
 ///==========================================
@@ -499,61 +232,16 @@ public:
 	IMPLEMENTS_INTERFACE(DialectCriteriaStatements)
 	REQUIRES_INTERFACE(DialectStatementsBase)
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindCriteriaStatements();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
-	bool PostParse()
-	{
-		POSTPARSE_START;
-		{
-			AllowOnlyDialectCriteriaStatements();
-		}
-		POSTPARSE_END;
-	}
+	bool PostParse();
 
 	// Finds dialect criteria statements.
-	void FindCriteriaStatements()
-	{
-		bool bFinished = false;
-
-		while (!bFinished)
-		{
-			stacked<opNode> stuff = opNode::PushUntilOr<opNode>(T_SEMICOLON,
-																G_IS,
-																false);
-
-			bFinished = !(*stuff);
-
-			if (bFinished)
-				break;
-
-			if      (IsStatement(stuff));
-			else if (IsCurrent(T_SEMICOLON))
-			{
-				Erase(T_SEMICOLON);
-				CollapseNodeAtCurrent(stuff);
-			}
-			else
-			{
-				CollapseNodeAtCurrent(stuff);
-
-				bFinished = true;
-			}
-		}
-	}
+	void FindCriteriaStatements();
 
 	// Makes sure that only valid dialect criteria statements
 	// remain after statement parsing.
-	void AllowOnlyDialectCriteriaStatements()
-	{
-		AllowOnly( G_IS_STATEMENT );
-	}
+	void AllowOnlyDialectCriteriaStatements();
 };
 
 //==========================================
@@ -567,61 +255,16 @@ public:
 	IMPLEMENTS_INTERFACE(FileDeclarationLocationStatements)
 	REQUIRES_INTERFACE(DialectStatementsBase)
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindFileDeclarationLocationStatements();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
-	bool PostParse()
-	{
-		POSTPARSE_START;
-		{
-			AllowOnlyFileDeclarationLocationStatements();
-		}
-		POSTPARSE_END;
-	}
+	bool PostParse();
 
 	// Finds dialect location statements.
-	void FindFileDeclarationLocationStatements()
-	{
-		bool bFinished = false;
-
-		while (!bFinished)
-		{
-			stacked<opNode> stuff = opNode::PushUntilOr<opNode>(T_SEMICOLON,
-																G_FILE_DECLARATION_LOCATION,
-																false);
-
-			bFinished = !(*stuff);
-
-			if (bFinished)
-				break;
-
-			if (FileDeclarationLocationStatement(stuff));
-			else if (IsCurrent(T_SEMICOLON))
-			{
-				Erase(T_SEMICOLON);
-				CollapseNodeAtCurrent(stuff);
-			}
-			else
-			{
-				CollapseNodeAtCurrent(stuff);
-
-				bFinished = true;
-			}
-		}
-	}
+	void FindFileDeclarationLocationStatements();
 
 	// Makes sure that only valid dialect location statements
 	// remain after statement parsing.
-	void AllowOnlyFileDeclarationLocationStatements()
-	{
-		AllowOnly( G_FILE_DECLARATION_LOCATION_STATEMENT );
-	}
+	void AllowOnlyFileDeclarationLocationStatements();
 };
 
 ///==========================================
@@ -635,90 +278,22 @@ public:
 	IMPLEMENTS_INTERFACE(GlobalDialectStatements)
 	REQUIRES_INTERFACE(DialectStatementsBase)
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindGlobalDialectStatements();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
-	bool PostParse()
-	{
-		POSTPARSE_START;
-		{
-			AllowOnlyGlobalDialectStatements();
-		}
-		POSTPARSE_END;
-	}
+	bool PostParse();
 
 	// Finds statements in the global dialect context.
-	void FindGlobalDialectStatements()
-	{
-		bool bFinished = false;
-
-		while (!bFinished)
-		{
-			stacked<opNode> stuff = opNode::PushUntilOr<opNode>( T_SEMICOLON,
-				                                                 G_NOTE_DEFINITION,
-																 G_OPMACRO,
-																 G_CATEGORY,
-																 G_DIALECT_NAMESPACE,
-																 G_OPINCLUDE,
-																 G_CODE,
-																 G_ENUMERATION,
-																 G_FILE_DECLARATION,
-																 G_EXTENSION,
-																 G_EXTEND_POINT,
-																 G_OPDEFINE,
-																 false);
-
-			bFinished = !(*stuff);
-
-			if (bFinished)
-				break;
-
-			if      (NoteDefinitionStatement(stuff));
-			else if (OPMacroStatement(stuff));
-			else if (CategoryStatement(stuff));
-			else if (DialectNamespaceStatement(stuff));
-			else if (OPIncludeStatement(stuff));
-			else if (CodeStatement(stuff));
-			else if (EnumerationStatement(stuff));
-			else if (FileDeclarationStatement(stuff));
-			else if (ExtensionStatement(stuff));
-			else if (ExtendPointStatement(stuff));
-			else if (OPDefineStatement(stuff));
-			else if (IsCurrent(T_SEMICOLON))
-			{
-				Erase(T_SEMICOLON);
-				CollapseNodeAtCurrent(stuff);
-			}
-			else
-			{
-				CollapseNodeAtCurrent(stuff);
-
-				bFinished = true;
-			}
-		}
-	}
+	void FindGlobalDialectStatements();
 
 	// Makes sure that only valid global dialect statements are allowed.
-	void AllowOnlyGlobalDialectStatements()
-	{
-		AllowOnly( G_NOTE_DEFINITION_STATEMENT,
-				   G_DIALECT_OPMACRO_STATEMENT,
-				   G_CATEGORY_STATEMENT,
-				   G_DIALECT_NAMESPACE_STATEMENT,
-				   G_DIALECT_OPINCLUDE_STATEMENT,
-				   G_CODE_STATEMENT,
-				   G_ENUMERATION_STATEMENT,
-				   G_FILE_DECLARATION_STATEMENT,
-				   G_EXTENSION_STATEMENT,
-				   G_EXTEND_POINT_STATEMENT,
-				   G_DIALECT_OPDEFINE_STATEMENT );
-	}
+	void AllowOnlyGlobalDialectStatements();
 };
+
+
+
+
+
+
+
 
 } // end namespace interfaces

@@ -1,5 +1,10 @@
+
+#pragma once
+
 #include "Interfaces.h"
 #include "StatementInterfaces.h"
+#include "StatementNodes.h"
+
 ///****************************************************************
 /// Copyright © 2008 opGames LLC - All Rights Reserved
 ///
@@ -16,6 +21,16 @@
 ///
 /// DataStatements
 ///
+
+template<class Parent>
+inline bool interfaces::DataStatements<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		FindDataStatements();
+	}
+	PARSE_END;
+}
 
 template<class Parent>
 inline bool interfaces::DataStatements<Parent>::FindDataStatements()
@@ -117,6 +132,16 @@ void Trim<Parent>::DoTrim()
 //
 
 template<class Parent>
+inline bool interfaces::Namespaces<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		FindNamespaces();
+	}
+	PARSE_END;
+}
+
+template<class Parent>
 inline void Namespaces<Parent>::FindNamespaces()
 {
 	LOOP_START(G_NAMESPACE);
@@ -186,6 +211,16 @@ inline void Namespaces<Parent>::FindNamespaces()
 //
 
 template<class Parent>
+inline bool interfaces::UsingNamespaceKeywords<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		FindUsingNamespaceKeywords();
+	}
+	PARSE_END;
+}
+
+template<class Parent>
 inline void UsingNamespaceKeywords<Parent>::FindUsingNamespaceKeywords()
 {
 	LOOP_START(G_USING_NAMESPACE_KEYWORD)
@@ -215,6 +250,16 @@ inline void UsingNamespaceKeywords<Parent>::FindUsingNamespaceKeywords()
 // Usings
 //
 
+
+template<class Parent>
+inline bool interfaces::Usings<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		FindUsings();
+	}
+	PARSE_END;
+}
 
 template<class Parent>
 inline void Usings<Parent>::FindUsings()
@@ -340,6 +385,16 @@ inline void Blocks<Parent>::FindAngles()
 
 
 template<class Parent>
+inline bool interfaces::Pointers<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		FindPointers();
+	}
+	PARSE_END;
+}
+
+template<class Parent>
 inline void Pointers<Parent>::FindPointers()
 {
 	LOOP_START(G_POINTER);
@@ -414,6 +469,16 @@ inline void Pointers<Parent>::FindPointers()
 //
 
 template<class Parent>
+inline bool interfaces::MemberPointers<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		FindMemberPointers();
+	}
+	PARSE_END;
+}
+
+template<class Parent>
 inline void MemberPointers<Parent>::FindMemberPointers()
 {
 	LOOP_START(G_POINTER_MEMBER);
@@ -438,6 +503,16 @@ inline void MemberPointers<Parent>::FindMemberPointers()
 // Operators
 //
 
+
+template<class Parent>
+inline bool interfaces::Operators<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		FindOperators();
+	}
+	PARSE_END;
+}
 
 template<class Parent>
 inline void Operators<Parent>::FindOperators()
@@ -481,6 +556,16 @@ inline void Operators<Parent>::FindOperators()
 
 
 template<class Parent>
+inline bool interfaces::Modifiers<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		FindModifiers();
+	}
+	PARSE_END;
+}
+
+template<class Parent>
 inline void Modifiers<Parent>::FindModifiers()
 {
 	OPObjectNode* parent = opNode::FindParent<OPObjectNode>();
@@ -507,6 +592,16 @@ inline void Modifiers<Parent>::FindModifiers()
 // ValuedModifiers
 //
 
+
+template<class Parent>
+inline bool interfaces::ValuedModifiers<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		FindValuedModifiers();
+	}
+	PARSE_END;
+}
 
 template<class Parent>
 inline void ValuedModifiers<Parent>::FindValuedModifiers()
@@ -549,6 +644,16 @@ inline void ValuedModifiers<Parent>::FindValuedModifiers()
 // Functions
 //
 
+
+template<class Parent>
+inline bool interfaces::Functions<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		FindFunctions();
+	}
+	PARSE_END;
+}
 
 template<class Parent>
 inline void Functions<Parent>::FindFunctions()
@@ -603,6 +708,16 @@ inline void Functions<Parent>::FindFunctions()
 //
 // FunctionDefinitions
 //
+
+template<class Parent>
+inline bool interfaces::FunctionDefinitions<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		FindFunctionDefinitions();
+	}
+	PARSE_END;
+}
 
 template<class Parent>
 inline void FunctionDefinitions<Parent>::FindFunctionDefinitions()
@@ -682,6 +797,16 @@ inline stacked<opNode> interfaces::FunctionDefinitions<Parent>::GetReturnType(op
 
 
 template<class Parent>
+inline bool interfaces::ConstructorDefinitions<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		FindConstructorDefinitions();
+	}
+	PARSE_END;
+}
+
+template<class Parent>
 inline void ConstructorDefinitions<Parent>::FindConstructorDefinitions()
 {
 	LOOP_START(G_CONSTRUCTOR_DEFINITION);
@@ -745,6 +870,16 @@ inline void ConstructorDefinitions<Parent>::FindConstructorDefinitions()
 
 
 template<class Parent>
+inline bool interfaces::DestructorDefinitions<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		FindDestructorDefinitions();
+	}
+	PARSE_END;
+}
+
+template<class Parent>
 inline void DestructorDefinitions<Parent>::FindDestructorDefinitions()
 {
 	LOOP_START(G_DESTRUCTOR_DEFINITION);
@@ -799,6 +934,16 @@ inline void DestructorDefinitions<Parent>::FindDestructorDefinitions()
 
 
 template<class Parent>
+inline bool interfaces::OPEnums<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		FindOPEnums();
+	}
+	PARSE_END;
+}
+
+template<class Parent>
 inline void OPEnums<Parent>::FindOPEnums()
 {
 	LOOP_START(G_OPENUM);
@@ -837,6 +982,16 @@ inline void OPEnums<Parent>::FindOPEnums()
 // opObjects
 //
 
+
+template<class Parent>
+inline bool interfaces::OPObjects<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		FindOPObjects();
+	}
+	PARSE_END;
+}
 
 template<class Parent>
 inline void OPObjects<Parent>::FindOPObjects()
@@ -917,6 +1072,16 @@ inline void OPObjects<Parent>::FindOPObjects()
 
 
 template<class Parent>
+inline bool interfaces::States<Parent>::Parse()
+{
+	PARSE_START;
+
+	FindStates();
+
+	PARSE_END;
+}
+
+template<class Parent>
 inline void States<Parent>::FindStates()
 {
 	LOOP_START(G_STATE);
@@ -955,6 +1120,16 @@ inline void States<Parent>::FindStates()
 
 
 template<class Parent>
+inline bool interfaces::TemplateTypes<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		FindTemplateTypes();
+	}
+	PARSE_END;
+}
+
+template<class Parent>
 inline void TemplateTypes<Parent>::FindTemplateTypes()
 {
 	LOOP_START(G_TEMPLATE_TYPE);
@@ -991,6 +1166,16 @@ inline void TemplateTypes<Parent>::FindTemplateTypes()
 
 
 template<class Parent>
+inline bool interfaces::References<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		FindReferences();
+	}
+	PARSE_END;
+}
+
+template<class Parent>
 inline void References<Parent>::FindReferences()
 {
 	LOOP_START(G_REFERENCE)
@@ -1024,6 +1209,16 @@ inline void References<Parent>::FindReferences()
 // Arrays
 //
 
+
+template<class Parent>
+inline bool interfaces::Arrays<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		FindArrays();
+	}
+	PARSE_END;
+}
 
 template<class Parent>
 inline void Arrays<Parent>::FindArrays()
@@ -1128,7 +1323,15 @@ inline void VisibilityLabels<Parent>::FindVisibilityLabel()
 // Scopes
 //
 
-
+template<class Parent>
+inline bool interfaces::Scopes<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		FindScopes();
+	}
+	PARSE_END;
+}
 
 template<class Parent>
 inline void Scopes<Parent>::FindScopes()
@@ -1253,6 +1456,15 @@ inline bool interfaces::Scopes<Parent>::CheckScopePointer(stacked<ScopeNode>& sc
 // PointerMembers
 //
 
+template<class Parent>
+inline bool interfaces::PointerMembers<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		FindPointerMembers();
+	}
+	PARSE_END;
+}
 
 template<class Parent>
 inline void PointerMembers<Parent>::FindPointerMembers()
@@ -1291,7 +1503,15 @@ inline void PointerMembers<Parent>::FindPointerMembers()
 // Typenames
 //
 
-
+template<class Parent>
+inline bool interfaces::Typenames<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		FindTypenames();
+	}
+	PARSE_END;
+}
 
 template<class Parent>
 inline void Typenames<Parent>::FindTypenames()
@@ -1318,6 +1538,16 @@ inline void Typenames<Parent>::FindTypenames()
 //
 // FunctionPointers
 //
+
+template<class Parent>
+inline bool interfaces::FunctionPointers<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		FindFunctionPointers();
+	}
+	PARSE_END;
+}
 
 template<class Parent>
 inline void FunctionPointers<Parent>::FindFunctionPointers()
@@ -1372,6 +1602,15 @@ inline void FunctionPointers<Parent>::FindFunctionPointers()
 // opDefines
 //
 
+template<class Parent>
+inline bool interfaces::OPDefines<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		FindOPDefines();
+	}
+	PARSE_END;
+}
 
 template<class Parent>
 inline void OPDefines<Parent>::FindOPDefines()
@@ -1471,6 +1710,16 @@ inline void Preprocessors<Parent>::FindDirective(const string& directivename)
 		}
 	}
 	LOOP_END;
+}
+
+template<class Parent>
+inline bool interfaces::Preprocessors<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		FindAllPounds();
+	}
+	PARSE_END;
 }
 
 template<class Parent>
@@ -1710,6 +1959,16 @@ inline void interfaces::OPMacros<Parent>::FindOPMacros()
 
 
 template<class Parent>
+inline bool interfaces::CPlusPluses<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		FindCPlusPluses();
+	}
+	PARSE_END;
+}
+
+template<class Parent>
 inline void CPlusPluses<Parent>::FindCPlusPluses()
 {
 	LOOP_START(G_CPLUSPLUS)
@@ -1888,6 +2147,16 @@ inline void Destructors<Parent>::FindDestructors(const opString& classname)
 //
 
 template<class Parent>
+inline bool interfaces::Friends<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		FindFriends();
+	}
+	PARSE_END;
+}
+
+template<class Parent>
 inline void Friends<Parent>::FindFriends()
 {
 	LOOP_START(G_FRIEND);
@@ -1961,6 +2230,16 @@ inline void Friends<Parent>::FindFriends()
 
 
 template<class Parent>
+inline bool interfaces::Typedefs<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		FindTypedefs();
+	}
+	PARSE_END;
+}
+
+template<class Parent>
 inline void Typedefs<Parent>::FindTypedefs()
 {
 	LOOP_START(G_TYPEDEF);
@@ -2013,6 +2292,16 @@ inline void Typedefs<Parent>::FindTypedefs()
 
 
 template<class Parent>
+inline bool interfaces::TemplateDecls<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		FindTemplateDecls();
+	}
+	PARSE_END;
+}
+
+template<class Parent>
 inline void TemplateDecls<Parent>::FindTemplateDecls()
 {
 	LOOP_START(G_TEMPLATE_DECL);
@@ -2036,6 +2325,16 @@ inline void TemplateDecls<Parent>::FindTemplateDecls()
 //
 // CPPConstructs
 //
+
+template<class Parent>
+inline bool interfaces::CPPConstructs<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		FindCPPConstructs();
+	}
+	PARSE_END;
+}
 
 template<class Parent>
 inline void CPPConstructs<Parent>::FindCPPConstructs()
@@ -2137,6 +2436,16 @@ inline void interfaces::CPPConstructs<Parent>::FindCPPConstructObjects()
 
 
 template<class Parent>
+inline bool interfaces::Templated<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		FindTemplated();
+	}
+	PARSE_END;
+}
+
+template<class Parent>
 inline void Templated<Parent>::FindTemplated()
 {
 	LOOP_START(G_TEMPLATED);
@@ -2165,4 +2474,170 @@ inline void Templated<Parent>::FindTemplated()
 		}
 	}
 	LOOP_END;
+}
+
+//
+// VisibilityLabels
+//
+
+template<class Parent>
+inline bool VisibilityLabels<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		FindVisibilityLabels();
+	}
+	PARSE_END;
+}
+
+//
+// RemoveWhitespace
+//
+
+template<class Parent>
+inline bool RemoveWhitespace<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		removeWhitespace();
+	}
+	PARSE_END;
+}
+
+//
+// RemoveComments
+//
+
+template<class Parent>
+inline bool RemoveComments<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		removeComments();
+	}
+	PARSE_END;
+}
+
+//
+// Clean
+//
+
+template<class Parent>
+inline bool Clean<Parent>::Parse()
+{
+	PARSE_START;
+	{
+		CleanAll();
+	}
+	PARSE_END;
+}
+
+//
+// ModifierSupport
+//
+
+// looks at auto and specified modifiers
+template<NodeType Parent>
+inline bool ModifierSupport<Parent>::HasModifier(const opString& modifiername)
+{
+	if (TerminalNode* node = FetchBasicModifier(modifiername))
+	{
+		return true;
+	}
+
+	if (modifiers)
+	{
+		if (modifiers->HasModifier(modifiername))
+			return true;
+	}
+
+	if (GetVisibility(modifiername))
+		return true;
+
+	//TODO: should we maybe add these modifiers to this node?
+
+	//handle parent modifiers...
+	if (!node_cast<OPObjectNode>(this))
+	{
+		if (OPObjectNode* p = FindParent<OPObjectNode>())
+		{
+			if (p->HasModifier(modifiername))
+				return true;
+		}
+	}
+
+	return false;
+}
+
+// only looks at special modifiers
+template<NodeType Parent>
+inline bool interfaces::ModifierSupport<Parent>::HasModifier(Token modifiertoken)
+{
+	if (modifiers)
+	{
+		if (modifiers->HasModifier(modifiertoken))
+			return true;
+	}
+
+	//this handles visibility...
+	if (automodifiers)
+	{
+		if (automodifiers->HasModifier(modifiertoken))
+			return true;
+	}
+
+	//handle parent modifiers...
+	if (!node_cast<OPObjectNode>(this))
+	{
+		if (OPObjectNode* p = FindParent<OPObjectNode>())
+		{
+			if (p->HasModifier(modifiertoken))
+				return true;
+		}
+	}
+
+	return false;
+}
+
+// calls to GetValuedModifier will look at current modifiers, but also
+// attempt to fetch automatically generated modifiers
+template<NodeType Parent>
+inline ValuedModifierNode* interfaces::ModifierSupport<Parent>::GetValuedModifier(const opString& modifiername)
+{
+	if (ValuedModifierNode* node = FetchValueModifier(modifiername))
+	{
+		return node;
+	}
+
+	if (modifiers)
+	{
+		if (ValuedModifierNode* node = modifiers->GetValuedModifier(modifiername))
+			return node;
+	}
+
+	//handle parent modifiers...
+	if (!node_cast<OPObjectNode>(this))
+	{
+		if (OPObjectNode* p = FindParent<OPObjectNode>())
+		{
+			return p->GetValuedModifier(modifiername);
+		}
+	}
+
+	return NULL;
+}
+
+template<NodeType Parent>
+inline void interfaces::ModifierSupport<Parent>::CreateModifiersNode()
+{
+	if (automodifiers)
+		return;
+
+	stacked<AutoModifiersNode> modnode = NEWNODE(AutoModifiersNode);
+
+	modnode->CopyBasics(this);
+
+	automodifiers = *modnode;
+
+	AppendNode(modnode);
 }

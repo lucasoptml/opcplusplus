@@ -113,8 +113,8 @@ iface<Parent>()											\
 #define PARSE_START							\
 	if(!Super::Parse())						\
 		return false;						\
-	AlterContext newcontext(this.GetId(),this);	\
-	this.ResetPosition();						\
+	AlterContext newcontext( this->GetId(), this);	\
+	this->ResetPosition();						\
 	INIT_EXCEPTIONS
 
 #define PARSE_END			\

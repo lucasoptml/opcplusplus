@@ -32,14 +32,7 @@ class Namespaces : public Parent
 public:
 	IMPLEMENTS_INTERFACE(Namespaces)
 	
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindNamespaces();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
 	void FindNamespaces();
 };
@@ -54,14 +47,7 @@ class UsingNamespaceKeywords : public Parent
 public:
 	IMPLEMENTS_INTERFACE(UsingNamespaceKeywords)
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindUsingNamespaceKeywords();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
 	void FindUsingNamespaceKeywords();
 };
@@ -77,14 +63,7 @@ public:
 	IMPLEMENTS_INTERFACE(Usings)
 	REQUIRES_INTERFACE(Scopes)
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindUsings();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
 	void FindUsings();
 };
@@ -124,14 +103,7 @@ class Pointers : public Parent
 public:
 	IMPLEMENTS_INTERFACE(Pointers)
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindPointers();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
 	void FindPointers();
 };
@@ -146,14 +118,7 @@ class MemberPointers : public Parent
 public:
 	IMPLEMENTS_INTERFACE(MemberPointers);
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindMemberPointers();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
 	void FindMemberPointers();
 };
@@ -168,14 +133,7 @@ class Operators : public Parent
 public:
 	IMPLEMENTS_INTERFACE(Operators)
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindOperators();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
 	void FindOperators();
 };
@@ -190,14 +148,7 @@ class Modifiers : public Parent
 public:
 	IMPLEMENTS_INTERFACE(Modifiers)
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindModifiers();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
 	void FindModifiers();
 };
@@ -212,14 +163,7 @@ class ValuedModifiers : public Parent
 public:
 	IMPLEMENTS_INTERFACE(ValuedModifiers)
 	
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindValuedModifiers();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 	
 	void FindValuedModifiers();
 };
@@ -234,14 +178,7 @@ class Functions : public Parent
 public:
 	IMPLEMENTS_INTERFACE(Functions)
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindFunctions();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
 	void FindFunctions();
 };
@@ -257,14 +194,7 @@ public:
 	IMPLEMENTS_INTERFACE(FunctionDefinitions)
 	REQUIRES_INTERFACE(Clean)
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindFunctionDefinitions();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
 	void FindFunctionDefinitions();
 
@@ -283,14 +213,7 @@ public:
 	IMPLEMENTS_INTERFACE(ConstructorDefinitions)
 	REQUIRES_INTERFACE(Clean)
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindConstructorDefinitions();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
 	void FindConstructorDefinitions();
 };
@@ -306,14 +229,7 @@ public:
 	IMPLEMENTS_INTERFACE(DestructorDefinitions);
 	REQUIRES_INTERFACE(Clean)
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindDestructorDefinitions();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
 	void FindDestructorDefinitions();
 };
@@ -329,14 +245,7 @@ class OPEnums : public Parent
 public:
 	IMPLEMENTS_INTERFACE(OPEnums)
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindOPEnums();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
 	void FindOPEnums();
 };
@@ -351,14 +260,7 @@ class OPObjects : public Parent
 public:
 	IMPLEMENTS_INTERFACE(OPObjects)
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindOPObjects();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
 	void FindOPObjects();
 };
@@ -373,14 +275,7 @@ class States : public Parent
 public:
 	IMPLEMENTS_INTERFACE(States)
 
-	bool Parse()
-	{
-		PARSE_START;
-
-		FindStates();
-
-		PARSE_END;
-	}
+	bool Parse();
 
 	void FindStates();
 };
@@ -395,14 +290,7 @@ class TemplateTypes : public Parent
 public:
 	IMPLEMENTS_INTERFACE(TemplateTypes)
 	
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindTemplateTypes();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
 	void FindTemplateTypes();
 };
@@ -417,14 +305,7 @@ class References : public Parent
 public:
 	IMPLEMENTS_INTERFACE(References)
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindReferences();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
 	void FindReferences();
 };
@@ -439,14 +320,7 @@ class Arrays : public Parent
 public:
 	IMPLEMENTS_INTERFACE(Arrays)
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindArrays();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
 	void FindArrays();
 
@@ -473,14 +347,7 @@ public:
 	IMPLEMENTS_INTERFACE(VisibilityLabels)
 	REQUIRES_INTERFACE(Clean)
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindVisibilityLabels();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
 	void FindVisibilityLabels()
 	{
@@ -503,14 +370,7 @@ class Scopes : public Parent
 public:
 	IMPLEMENTS_INTERFACE(Scopes)
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindScopes();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
 	void FindScopes();
 
@@ -527,14 +387,7 @@ class PointerMembers : public Parent
 public:
 	IMPLEMENTS_INTERFACE(PointerMembers);
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindPointerMembers();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
 	void FindPointerMembers();
 
@@ -550,14 +403,7 @@ class Typenames : public Parent
 public:
 	IMPLEMENTS_INTERFACE(Typenames)
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindTypenames();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
 	void FindTypenames();
 };
@@ -572,14 +418,7 @@ class FunctionPointers : public Parent
 public:
 	IMPLEMENTS_INTERFACE(FunctionPointers)
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindFunctionPointers();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
 	void FindFunctionPointers();
 };
@@ -594,14 +433,7 @@ class OPDefines : public Parent
 public: 
 	IMPLEMENTS_INTERFACE(OPDefines)
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindOPDefines();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
 	void FindOPDefines();
 };
@@ -616,14 +448,7 @@ class Preprocessors : public Parent
 public:
 	IMPLEMENTS_INTERFACE(Preprocessors)
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindAllPounds();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
 	void FindAllPounds()
 	{
@@ -736,14 +561,7 @@ class CPlusPluses : public Parent
 public: 
 	IMPLEMENTS_INTERFACE(CPlusPluses)
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindCPlusPluses();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
 	void FindCPlusPluses();
 };
@@ -802,14 +620,7 @@ class Friends : public Parent
 public:
 	IMPLEMENTS_INTERFACE(Friends);
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindFriends();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
 	void FindFriends();
 };
@@ -824,14 +635,7 @@ class Typedefs : public Parent
 public:
 	IMPLEMENTS_INTERFACE(Typedefs);
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindTypedefs();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
 	void FindTypedefs();
 };
@@ -846,14 +650,7 @@ class TemplateDecls : public Parent
 public:
 	IMPLEMENTS_INTERFACE(TemplateDecls);
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindTemplateDecls();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
 	void FindTemplateDecls();
 };
@@ -868,14 +665,7 @@ class CPPConstructs : public Parent
 public:
 	IMPLEMENTS_INTERFACE(CPPConstructs);
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindCPPConstructs();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
 	void FindCPPConstructs();
 
@@ -898,16 +688,49 @@ class Templated : public Parent
 public:
 	IMPLEMENTS_INTERFACE(Templated);
 
-	bool Parse()
-	{
-		PARSE_START;
-		{
-			FindTemplated();
-		}
-		PARSE_END;
-	}
+	bool Parse();
 
 	void FindTemplated();
+};
+
+
+template<NodeType Parent>
+class ConditionalSupport : public Parent
+{
+public:
+	IMPLEMENTS_INTERFACE(ConditionalSupport);
+
+	void Init()
+	{
+		Condition = NULL;
+	}
+
+	//returns how many levels printed
+	int PrintConditions(opSectionStream& section)
+	{
+		if (Condition)
+			return Condition->PrintCondition(section);
+		return 0;
+	}
+
+	void PrintConditionEnd(int number, opSectionStream& stream)
+	{
+		if (!number)
+			return;
+
+		stream << endl;
+
+		for (int i = 0; i < number; i++)
+			stream << "#endif" << endl;
+	}
+
+	void SetCondition(PreprocessorStatementNode* condition)
+	{
+		Condition = condition;
+	}
+
+private:
+	PreprocessorStatementNode* Condition;
 };
 
 
