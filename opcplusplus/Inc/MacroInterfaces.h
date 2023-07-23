@@ -11,6 +11,8 @@
 /// Macro interfaces.
 ///****************************************************************
 
+#pragma once
+
 ///==========================================
 /// MacroConcatenations
 ///==========================================
@@ -52,7 +54,7 @@ public:
 				newNode->SetRight(*rightop);
 				newNode->AppendNode(rightop);
 				
-				InsertNodeAtCurrent(newNode);
+				opNode::InsertNodeAtCurrent(newNode);
 			}
 		}
 		LOOP_END;
@@ -78,13 +80,13 @@ public:
 			{
 				stackedcontext<SingleQuoteOperatorNode> newNode = opNode::Make<SingleQuoteOperatorNode>(T_ACCENT);
 
-				Erase(T_ACCENT);
+				opNode::Erase(T_ACCENT);
 
 				opNode::PushUntilAdd(*newNode, T_ACCENT);
 
-				Erase(T_ACCENT);
+				opNode::Erase(T_ACCENT);
 
-				InsertNodeAtCurrent(newNode);
+				opNode::InsertNodeAtCurrent(newNode);
 			}
 		}
 		LOOP_END;
@@ -110,13 +112,13 @@ public:
 			{
 				stackedcontext<DoubleQuoteOperatorNode> newNode = opNode::Make<DoubleQuoteOperatorNode>(T_DOUBLE_ACCENT);
 
-				Erase(T_DOUBLE_ACCENT);
+				opNode::Erase(T_DOUBLE_ACCENT);
 
 				opNode::PushUntilAdd(*newNode, T_DOUBLE_ACCENT);
 
-				Erase(T_DOUBLE_ACCENT);
+				opNode::Erase(T_DOUBLE_ACCENT);
 
-				InsertNodeAtCurrent(newNode);
+				opNode::InsertNodeAtCurrent(newNode);
 			}
 		}
 		LOOP_END;

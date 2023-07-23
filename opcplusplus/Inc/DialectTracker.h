@@ -11,6 +11,8 @@
 /// Dialect Settings Tracker
 ///****************************************************************
 
+#pragma once
+
 namespace dialect
 {
 

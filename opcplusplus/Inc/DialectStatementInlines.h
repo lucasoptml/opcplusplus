@@ -204,18 +204,18 @@ inline void interfaces::DialectCategoryStatements<Parent>::FindDialectCategorySt
 		if (bFinished)
 			break;
 
-		if (DataModifierStatement(stuff));
-		else if (FunctionModifierStatement(stuff));
-		else if (CategoryLocationStatement(stuff));
-		else if (DisallowStatement(stuff));
-		else if (IsCurrent(T_SEMICOLON))
+		if (this->DataModifierStatement(stuff));
+		else if (this->FunctionModifierStatement(stuff));
+		else if (this->CategoryLocationStatement(stuff));
+		else if (this->DisallowStatement(stuff));
+		else if (opNode::IsCurrent(T_SEMICOLON))
 		{
-			Erase(T_SEMICOLON);
-			CollapseNodeAtCurrent(stuff);
+			opNode::Erase(T_SEMICOLON);
+			opNode::CollapseNodeAtCurrent(stuff);
 		}
 		else
 		{
-			CollapseNodeAtCurrent(stuff);
+			opNode::CollapseNodeAtCurrent(stuff);
 
 			bFinished = true;
 		}
@@ -227,7 +227,7 @@ inline void interfaces::DialectCategoryStatements<Parent>::FindDialectCategorySt
 template<class Parent>
 inline void interfaces::DialectCategoryStatements<Parent>::AllowOnlyDialectCategoryStatements()
 {
-	AllowOnly(G_DATAMODIFIER_STATEMENT,
+	opNode::AllowOnly(G_DATAMODIFIER_STATEMENT,
 		G_FUNCTIONMODIFIER_STATEMENT,
 		G_CATEGORY_LOCATION_STATEMENT,
 		G_DISALLOW_STATEMENT);
@@ -275,16 +275,16 @@ inline void interfaces::DialectEnumerationStatements<Parent>::FindDialectEnumSta
 		if (bFinished)
 			break;
 
-		if (EnumLocationStatement(stuff));
-		else if (DisallowStatement(stuff));
-		else if (IsCurrent(T_SEMICOLON))
+		if (this->EnumLocationStatement(stuff));
+		else if (this->DisallowStatement(stuff));
+		else if (opNode::IsCurrent(T_SEMICOLON))
 		{
-			Erase(T_SEMICOLON);
-			CollapseNodeAtCurrent(stuff);
+			opNode::Erase(T_SEMICOLON);
+			opNode::CollapseNodeAtCurrent(stuff);
 		}
 		else
 		{
-			CollapseNodeAtCurrent(stuff);
+			opNode::CollapseNodeAtCurrent(stuff);
 
 			bFinished = true;
 		}
@@ -296,7 +296,7 @@ inline void interfaces::DialectEnumerationStatements<Parent>::FindDialectEnumSta
 template<class Parent>
 inline void interfaces::DialectEnumerationStatements<Parent>::AllowOnlyDialectEnumStatements()
 {
-	AllowOnly(G_ENUMERATION_LOCATION_STATEMENT,
+	opNode::AllowOnly(G_ENUMERATION_LOCATION_STATEMENT,
 			  G_DISALLOW_STATEMENT);
 }
 
@@ -342,16 +342,16 @@ inline void interfaces::EnumerationLocationStatements<Parent>::FindEnumerationLo
 		if (bFinished)
 			break;
 
-		if (EnumMapStatement(stuff));
-		else if (NoteStatement(stuff));
-		else if (IsCurrent(T_SEMICOLON))
+		if (this->EnumMapStatement(stuff));
+		else if (this->NoteStatement(stuff));
+		else if (opNode::IsCurrent(T_SEMICOLON))
 		{
-			Erase(T_SEMICOLON);
-			CollapseNodeAtCurrent(stuff);
+			opNode::Erase(T_SEMICOLON);
+			opNode::CollapseNodeAtCurrent(stuff);
 		}
 		else
 		{
-			CollapseNodeAtCurrent(stuff);
+			opNode::CollapseNodeAtCurrent(stuff);
 
 			bFinished = true;
 		}
@@ -363,7 +363,7 @@ inline void interfaces::EnumerationLocationStatements<Parent>::FindEnumerationLo
 template<class Parent>
 inline void interfaces::EnumerationLocationStatements<Parent>::AllowOnlyEnumerationLocationStatements()
 {
-	AllowOnly(G_ENUMERATIONMAP_STATEMENT,
+	opNode::AllowOnly(G_ENUMERATIONMAP_STATEMENT,
 			  G_NOTE_STATEMENT);
 }
 
@@ -411,17 +411,17 @@ inline void interfaces::CategoryLocationStatements<Parent>::FindCategoryLocation
 		if (bFinished)
 			break;
 
-		if (NoteStatement(stuff));
-		else if (DatamapStatement(stuff));
-		else if (FunctionmapStatement(stuff));
-		else if (IsCurrent(T_SEMICOLON))
+		if (this->NoteStatement(stuff));
+		else if (this->DatamapStatement(stuff));
+		else if (this->FunctionmapStatement(stuff));
+		else if (opNode::IsCurrent(T_SEMICOLON))
 		{
-			Erase(T_SEMICOLON);
-			CollapseNodeAtCurrent(stuff);
+			opNode::Erase(T_SEMICOLON);
+			opNode::CollapseNodeAtCurrent(stuff);
 		}
 		else
 		{
-			CollapseNodeAtCurrent(stuff);
+			opNode::CollapseNodeAtCurrent(stuff);
 
 			bFinished = true;
 		}
@@ -433,7 +433,7 @@ inline void interfaces::CategoryLocationStatements<Parent>::FindCategoryLocation
 template<class Parent>
 inline void interfaces::CategoryLocationStatements<Parent>::AllowOnlyCategoryLocationStatements()
 {
-	AllowOnly(G_NOTE_STATEMENT,
+	opNode::AllowOnly(G_NOTE_STATEMENT,
 		G_CATEGORY_DATAMAP_STATEMENT,
 		G_CATEGORY_FUNCTIONMAP_STATEMENT);
 }
@@ -479,15 +479,15 @@ inline void interfaces::DialectCriteriaStatements<Parent>::FindCriteriaStatement
 		if (bFinished)
 			break;
 
-		if (IsStatement(stuff));
-		else if (IsCurrent(T_SEMICOLON))
+		if (opNode::IsStatement(stuff));
+		else if (opNode::IsCurrent(T_SEMICOLON))
 		{
-			Erase(T_SEMICOLON);
-			CollapseNodeAtCurrent(stuff);
+			opNode::Erase(T_SEMICOLON);
+			opNode::CollapseNodeAtCurrent(stuff);
 		}
 		else
 		{
-			CollapseNodeAtCurrent(stuff);
+			opNode::CollapseNodeAtCurrent(stuff);
 
 			bFinished = true;
 		}
@@ -499,7 +499,7 @@ inline void interfaces::DialectCriteriaStatements<Parent>::FindCriteriaStatement
 template<class Parent>
 inline void interfaces::DialectCriteriaStatements<Parent>::AllowOnlyDialectCriteriaStatements()
 {
-	AllowOnly(G_IS_STATEMENT);
+	opNode::AllowOnly(G_IS_STATEMENT);
 }
 
 //
@@ -543,15 +543,15 @@ inline void interfaces::FileDeclarationLocationStatements<Parent>::FindFileDecla
 		if (bFinished)
 			break;
 
-		if (FileDeclarationLocationStatement(stuff));
-		else if (IsCurrent(T_SEMICOLON))
+		if (this->FileDeclarationLocationStatement(stuff));
+		else if (opNode::IsCurrent(T_SEMICOLON))
 		{
-			Erase(T_SEMICOLON);
-			CollapseNodeAtCurrent(stuff);
+			opNode::Erase(T_SEMICOLON);
+			opNode::CollapseNodeAtCurrent(stuff);
 		}
 		else
 		{
-			CollapseNodeAtCurrent(stuff);
+			opNode::CollapseNodeAtCurrent(stuff);
 
 			bFinished = true;
 		}
@@ -563,7 +563,7 @@ inline void interfaces::FileDeclarationLocationStatements<Parent>::FindFileDecla
 template<class Parent>
 inline void interfaces::FileDeclarationLocationStatements<Parent>::AllowOnlyFileDeclarationLocationStatements()
 {
-	AllowOnly(G_FILE_DECLARATION_LOCATION_STATEMENT);
+	opNode::AllowOnly(G_FILE_DECLARATION_LOCATION_STATEMENT);
 }
 
 //
@@ -617,25 +617,25 @@ inline void interfaces::GlobalDialectStatements<Parent>::FindGlobalDialectStatem
 		if (bFinished)
 			break;
 
-		if (NoteDefinitionStatement(stuff));
-		else if (OPMacroStatement(stuff));
-		else if (CategoryStatement(stuff));
-		else if (DialectNamespaceStatement(stuff));
-		else if (OPIncludeStatement(stuff));
-		else if (CodeStatement(stuff));
-		else if (EnumerationStatement(stuff));
-		else if (FileDeclarationStatement(stuff));
-		else if (ExtensionStatement(stuff));
-		else if (ExtendPointStatement(stuff));
-		else if (OPDefineStatement(stuff));
-		else if (IsCurrent(T_SEMICOLON))
+		if (this->NoteDefinitionStatement(stuff));
+		else if (this->OPMacroStatement(stuff));
+		else if (this->CategoryStatement(stuff));
+		else if (this->DialectNamespaceStatement(stuff));
+		else if (this->OPIncludeStatement(stuff));
+		else if (this->CodeStatement(stuff));
+		else if (this->EnumerationStatement(stuff));
+		else if (this->FileDeclarationStatement(stuff));
+		else if (this->ExtensionStatement(stuff));
+		else if (this->ExtendPointStatement(stuff));
+		else if (this->OPDefineStatement(stuff));
+		else if (opNode::IsCurrent(T_SEMICOLON))
 		{
-			Erase(T_SEMICOLON);
-			CollapseNodeAtCurrent(stuff);
+			opNode::Erase(T_SEMICOLON);
+			opNode::CollapseNodeAtCurrent(stuff);
 		}
 		else
 		{
-			CollapseNodeAtCurrent(stuff);
+			opNode::CollapseNodeAtCurrent(stuff);
 
 			bFinished = true;
 		}
@@ -646,7 +646,7 @@ inline void interfaces::GlobalDialectStatements<Parent>::FindGlobalDialectStatem
 template<class Parent>
 inline void interfaces::GlobalDialectStatements<Parent>::AllowOnlyGlobalDialectStatements()
 {
-	AllowOnly(G_NOTE_DEFINITION_STATEMENT,
+	opNode::AllowOnly(G_NOTE_DEFINITION_STATEMENT,
 		G_DIALECT_OPMACRO_STATEMENT,
 		G_CATEGORY_STATEMENT,
 		G_DIALECT_NAMESPACE_STATEMENT,

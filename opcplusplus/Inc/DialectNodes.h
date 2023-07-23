@@ -11,6 +11,11 @@
 /// Dialect nodes header.
 ///****************************************************************
 
+#pragma once
+
+#include "FileNodes.h"
+#include "DialectTracker.h"
+
 namespace dialect_nodes
 {
 

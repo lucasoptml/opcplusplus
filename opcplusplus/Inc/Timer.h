@@ -11,6 +11,8 @@
 /// Timer-related code.
 ///****************************************************************
 
+#pragma once
+
 //Lucas: Special Timer Code
 
 namespace timing

@@ -12,6 +12,10 @@
 //            implement them as visitors.
 ///****************************************************************
 
+#pragma once
+
+#include "MacroInterfaces.h"
+
 namespace walkers
 {
 

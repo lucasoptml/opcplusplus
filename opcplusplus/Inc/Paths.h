@@ -14,6 +14,8 @@
 /// 
 ///****************************************************************
 
+#pragma once
+
 using namespace boost::filesystem;
 
 inline bool paths_match(const path& a, const path& b)

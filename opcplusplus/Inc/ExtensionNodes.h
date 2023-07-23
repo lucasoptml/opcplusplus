@@ -12,6 +12,8 @@
 /// represents an extended grammar in the opC++ syntax.
 ///****************************************************************
 
+#pragma once
+
 #include "ModifierSupport.h"
 #include "DialectNodes.h"
 

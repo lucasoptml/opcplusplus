@@ -11,6 +11,8 @@
 /// This file contains nodes for parsing files.
 ///****************************************************************
 
+#pragma once 
+
 namespace nodes
 {
 

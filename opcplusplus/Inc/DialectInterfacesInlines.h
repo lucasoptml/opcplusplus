@@ -26,13 +26,13 @@ inline void Categories<Parent>::FindCategories()
 		{
 			stackedcontext<CategoryNode> newNode = opNode::Make<CategoryNode>(T_CATEGORY);
 
-			Erase(T_CATEGORY);
+			opNode::Erase(T_CATEGORY);
 
-			EatWhitespaceAndComments();
+			opNode::EatWhitespaceAndComments();
 
 			stacked<TerminalNode> name = opNode::Expect<TerminalNode>(T_ID);
 
-			EatWhitespaceAndComments();
+			opNode::EatWhitespaceAndComments();
 
 			newNode->SetName(*name);
 			newNode->AppendNode(name);
@@ -43,7 +43,7 @@ inline void Categories<Parent>::FindCategories()
 			newNode->SetBody(*body);
 			newNode->AppendNode(body);
 
-			InsertNodeAtCurrent(newNode);
+			opNode::InsertNodeAtCurrent(newNode);
 		}
 	}
 	LOOP_END;
@@ -72,13 +72,13 @@ inline void interfaces::CodeLocations<Parent>::FindCodeLocations()
 		{
 			stackedcontext<CodeNode> newNode = opNode::Make<CodeNode>(T_CODE);
 
-			Erase(T_CODE);
+			opNode::Erase(T_CODE);
 
-			EatWhitespaceAndComments();
+			opNode::EatWhitespaceAndComments();
 
 			stacked<TerminalNode> name = opNode::Expect<TerminalNode>(T_ID);
 
-			EatWhitespaceAndComments();
+			opNode::EatWhitespaceAndComments();
 
 			newNode->SetName(*name);
 			newNode->AppendNode(name);
@@ -89,7 +89,7 @@ inline void interfaces::CodeLocations<Parent>::FindCodeLocations()
 			newNode->SetBody(*body);
 			newNode->AppendNode(body);
 
-			InsertNodeAtCurrent(newNode);
+			opNode::InsertNodeAtCurrent(newNode);
 		}
 	}
 	LOOP_END;
@@ -118,7 +118,7 @@ inline void CategoryLocations<Parent>::FindCategoryLocations()
 		{
 			stackedcontext<CategoryLocationNode> newNode = opNode::Make<CategoryLocationNode>(T_LOCATION);
 
-			Erase(T_LOCATION);
+			opNode::Erase(T_LOCATION);
 
 			stacked<TerminalNode> name = opNode::Expect<TerminalNode>(T_ID);
 
@@ -131,7 +131,7 @@ inline void CategoryLocations<Parent>::FindCategoryLocations()
 			newNode->SetBody(*body);
 			newNode->AppendNode(body);
 
-			InsertNodeAtCurrent(newNode);
+			opNode::InsertNodeAtCurrent(newNode);
 		}
 	}
 	LOOP_END
@@ -160,7 +160,7 @@ inline void Disallows<Parent>::FindDisallows()
 		{
 			stackedcontext<DisallowNode> newNode = opNode::Make<DisallowNode>(T_DISALLOW);
 
-			Erase(T_DISALLOW);
+			opNode::Erase(T_DISALLOW);
 
 			stacked<TerminalNode> name = opNode::Expect<TerminalNode>(T_ID);
 
@@ -173,7 +173,7 @@ inline void Disallows<Parent>::FindDisallows()
 			newNode->SetBody(*body);
 			newNode->AppendNode(body);
 
-			InsertNodeAtCurrent(newNode);
+			opNode::InsertNodeAtCurrent(newNode);
 		}
 	}
 	LOOP_END
@@ -211,14 +211,14 @@ inline void CategoryMaps<Parent>::FindCategoryMap()
 		{
 			stackedcontext<NodeClass> newNode = opNode::Make<NodeClass>(token);
 
-			Erase(token);
+			opNode::Erase(token);
 
 			stacked<TerminalNode>        name = opNode::Expect<TerminalNode>(T_ID);
 
 			newNode->SetName(*name);
 			newNode->AppendNode(name);
 
-			if (IsCurrent(G_BRACE_BLOCK))
+			if (opNode::IsCurrent(G_BRACE_BLOCK))
 			{
 				stacked<BraceBlockNode>      bbn = opNode::Expect<BraceBlockNode>(G_BRACE_BLOCK);
 				stacked<CategoryMapBodyNode> body = opNode::Transform<CategoryMapBodyNode>(bbn);
@@ -228,7 +228,7 @@ inline void CategoryMaps<Parent>::FindCategoryMap()
 			}
 
 
-			InsertNodeAtCurrent(newNode);
+			opNode::InsertNodeAtCurrent(newNode);
 		}
 	}
 	LOOP_END;
@@ -257,14 +257,14 @@ inline void DataModifiers<Parent>::FindDataModifiers()
 		{
 			stackedcontext<DataModifierNode> newNode = opNode::Make<DataModifierNode>(T_DATAMODIFIER);
 
-			Erase(T_DATAMODIFIER);
+			opNode::Erase(T_DATAMODIFIER);
 
 			stacked<TerminalNode> name = opNode::Expect<TerminalNode>(T_ID);
 
 			newNode->SetName(*name);
 			newNode->AppendNode(name);
 
-			if (IsCurrent(G_PAREN_BLOCK))
+			if (opNode::IsCurrent(G_PAREN_BLOCK))
 			{
 				stacked<ParenBlockNode> paren = opNode::Expect<ParenBlockNode>(G_PAREN_BLOCK);
 				stacked<ModifierArgumentNode> args = opNode::Transform<ModifierArgumentNode>(paren);
@@ -273,9 +273,9 @@ inline void DataModifiers<Parent>::FindDataModifiers()
 				newNode->AppendNode(args);
 			}
 
-			Erase(T_SEMICOLON);
+			opNode::Erase(T_SEMICOLON);
 
-			InsertNodeAtCurrent(newNode);
+			opNode::InsertNodeAtCurrent(newNode);
 		}
 	}
 	LOOP_END;
@@ -304,14 +304,14 @@ inline void FunctionModifiers<Parent>::FindFunctionModifiers()
 		{
 			stackedcontext<FunctionModifierNode> newNode = opNode::Make<FunctionModifierNode>(T_FUNCTIONMODIFIER);
 
-			Erase(T_FUNCTIONMODIFIER);
+			opNode::Erase(T_FUNCTIONMODIFIER);
 
 			stacked<TerminalNode> name = opNode::Expect<TerminalNode>(T_ID);
 
 			newNode->SetName(*name);
 			newNode->AppendNode(name);
 
-			if (IsCurrent(G_PAREN_BLOCK))
+			if (opNode::IsCurrent(G_PAREN_BLOCK))
 			{
 				stacked<ParenBlockNode> paren = opNode::Expect<ParenBlockNode>(G_PAREN_BLOCK);
 				stacked<ModifierArgumentNode> args = opNode::Transform<ModifierArgumentNode>(paren);
@@ -320,9 +320,9 @@ inline void FunctionModifiers<Parent>::FindFunctionModifiers()
 				newNode->AppendNode(args);
 			}
 
-			Erase(T_SEMICOLON);
+			opNode::Erase(T_SEMICOLON);
 
-			InsertNodeAtCurrent(newNode);
+			opNode::InsertNodeAtCurrent(newNode);
 		}
 	}
 	LOOP_END;
@@ -360,16 +360,16 @@ inline void CriteriaExpressions<Parent>::FindIs()
 		{
 			stackedcontext<NodeClass> newNode = opNode::Make<NodeClass>(token);
 
-			Erase(token);
+			opNode::Erase(token);
 
 			stacked<NodeBodyClass> body = opNode::PushUntil<NodeBodyClass>(T_SEMICOLON);
 
 			newNode->SetBody(*body);
 			newNode->AppendNode(body);
 
-			Erase(T_SEMICOLON);
+			opNode::Erase(T_SEMICOLON);
 
-			InsertNodeAtCurrent(newNode);
+			opNode::InsertNodeAtCurrent(newNode);
 		}
 	}
 	LOOP_END
@@ -398,14 +398,14 @@ inline void Notes<Parent>::FindNotes()
 		{
 			stackedcontext<NoteNode> newNode = opNode::Make<NoteNode>(T_NOTE);
 
-			Erase(T_NOTE);
+			opNode::Erase(T_NOTE);
 
 			stacked<TerminalNode> name = opNode::Expect<TerminalNode>(T_ID);
 
 			newNode->SetName(*name);
 			newNode->AppendNode(name);
 
-			if (IsCurrent(G_BRACE_BLOCK))
+			if (opNode::IsCurrent(G_BRACE_BLOCK))
 			{
 				stacked<BraceBlockNode> bbn = opNode::Expect<BraceBlockNode>(G_BRACE_BLOCK);
 				stacked<NoteBodyNode> body = opNode::Transform<NoteBodyNode>(bbn);
@@ -414,9 +414,9 @@ inline void Notes<Parent>::FindNotes()
 				newNode->AppendNode(body);
 			}
 			else
-				Erase(T_SEMICOLON);
+				opNode::Erase(T_SEMICOLON);
 
-			InsertNodeAtCurrent(newNode);
+			opNode::InsertNodeAtCurrent(newNode);
 		}
 	}
 	LOOP_END;
@@ -445,16 +445,16 @@ inline void NoteDefinitions<Parent>::FindNoteDefinitions()
 		{
 			stackedcontext<NoteDefinitionNode> newNode = opNode::Make<NoteDefinitionNode>(T_NOTE);
 
-			Erase(T_NOTE);
+			opNode::Erase(T_NOTE);
 
-			EatWhitespaceAndComments();
+			opNode::EatWhitespaceAndComments();
 
 			stacked<ScopeNode> pathnode = opNode::Expect<ScopeNode>(G_SCOPE);
 
 			newNode->SetPath(*pathnode);
 			newNode->AppendNode(pathnode);
 
-			EatWhitespaceAndComments();
+			opNode::EatWhitespaceAndComments();
 
 			stacked<ParenBlockNode>       ppn = opNode::Expect<ParenBlockNode>(G_PAREN_BLOCK);
 			stacked<NoteArgumentListNode> args = opNode::Transform<NoteArgumentListNode>(ppn);
@@ -462,14 +462,14 @@ inline void NoteDefinitions<Parent>::FindNoteDefinitions()
 			newNode->SetArguments(*args);
 			newNode->AppendNode(args);
 
-			EatWhitespaceAndComments();
+			opNode::EatWhitespaceAndComments();
 
 			stacked<BraceBlockNode> body = opNode::Expect<BraceBlockNode>(G_BRACE_BLOCK);
 
 			newNode->SetBody(*body);
 			newNode->AppendNode(body);
 
-			InsertNodeAtCurrent(newNode);
+			opNode::InsertNodeAtCurrent(newNode);
 		}
 	}
 	LOOP_END;
@@ -498,13 +498,13 @@ inline void Enumerations<Parent>::FindEnumerations()
 		{
 			stackedcontext<EnumerationNode> newNode = opNode::Make<EnumerationNode>(T_ENUMERATION);
 
-			Erase(T_ENUMERATION);
+			opNode::Erase(T_ENUMERATION);
 
-			EatWhitespaceAndComments();
+			opNode::EatWhitespaceAndComments();
 
 			stacked<TerminalNode> name = opNode::Expect<TerminalNode>(T_ID);
 
-			EatWhitespaceAndComments();
+			opNode::EatWhitespaceAndComments();
 
 			newNode->SetName(*name);
 			newNode->AppendNode(name);
@@ -515,7 +515,7 @@ inline void Enumerations<Parent>::FindEnumerations()
 			newNode->SetBody(*body);
 			newNode->AppendNode(body);
 
-			InsertNodeAtCurrent(newNode);
+			opNode::InsertNodeAtCurrent(newNode);
 		}
 	}
 	LOOP_END;
@@ -545,7 +545,7 @@ inline void EnumerationLocations<Parent>::FindEnumerationLocations()
 		{
 			stackedcontext<EnumerationLocationNode> newNode = opNode::Make<EnumerationLocationNode>(T_LOCATION);
 
-			Erase(T_LOCATION);
+			opNode::Erase(T_LOCATION);
 
 			stacked<TerminalNode> name = opNode::Expect<TerminalNode>(T_ID);
 
@@ -558,7 +558,7 @@ inline void EnumerationLocations<Parent>::FindEnumerationLocations()
 			newNode->SetBody(*body);
 			newNode->AppendNode(body);
 
-			InsertNodeAtCurrent(newNode);
+			opNode::InsertNodeAtCurrent(newNode);
 		}
 	}
 	LOOP_END
@@ -594,7 +594,7 @@ inline void EnumerationMaps<Parent>::FindEnumerationMaps()
 			newNode->SetName(*name);
 			newNode->AppendNode(name);
 
-			InsertNodeAtCurrent(newNode);
+			opNode::InsertNodeAtCurrent(newNode);
 		}
 	}
 	LOOP_END;
@@ -612,18 +612,18 @@ inline void DialectModifiers<Parent>::FindDialectModifier()
 	{
 		HIT(T_ID)
 		{
-			TerminalNode* t = node_cast<TerminalNode>(CurrentNode());
+			TerminalNode* t = node_cast<TerminalNode>(opNode::CurrentNode());
 
 			if (t->GetValue() == ModifierClass::StaticModifierName())
 			{
 				stackedcontext<ModifierClass> newNode = opNode::Make<ModifierClass>(T_ID);
 
-				Erase(T_ID);
+				opNode::Erase(T_ID);
 
-				InsertNodeAtCurrent(newNode);
+				opNode::InsertNodeAtCurrent(newNode);
 			}
 			else
-				IncrementPosition();
+				opNode::IncrementPosition();
 		}
 	}
 	LOOP_END;
@@ -637,23 +637,23 @@ inline void interfaces::DialectModifiers<Parent>::FindValuedDialectModifier()
 	{
 		HIT(T_ID)
 		{
-			TerminalNode* t = node_cast<TerminalNode>(CurrentNode());
+			TerminalNode* t = node_cast<TerminalNode>(opNode::CurrentNode());
 
 			if (t->GetValue() == ModifierClass::StaticModifierName())
 			{
 				stackedcontext<ModifierClass> newNode = opNode::Make<ModifierClass>(T_ID);
 
-				Erase(T_ID);
+				opNode::Erase(T_ID);
 
 				stacked<ParenBlockNode> value = opNode::Expect<ParenBlockNode>(G_PAREN_BLOCK);
 
 				newNode->SetValue(*value);
 				newNode->AppendNode(value);
 
-				InsertNodeAtCurrent(newNode);
+				opNode::InsertNodeAtCurrent(newNode);
 			}
 			else
-				IncrementPosition();
+				opNode::IncrementPosition();
 		}
 	}
 	LOOP_END;
@@ -680,7 +680,7 @@ inline void CriteriaValueModifiers<Parent>::FindCriteriaValueModifiers()
 	{
 		HIT(G_PAREN_BLOCK)
 		{
-			if (IsPrevious(T_ID))
+			if (opNode::IsPrevious(T_ID))
 			{
 				stackedcontext<CriteriaValueModifierNode> newNode = opNode::Make<CriteriaValueModifierNode>(G_PAREN_BLOCK);
 
@@ -698,10 +698,10 @@ inline void CriteriaValueModifiers<Parent>::FindCriteriaValueModifiers()
 				newNode->AppendNode(id);
 				newNode->AppendNode(arg);
 
-				InsertNodeAtCurrent(newNode);
+				opNode::InsertNodeAtCurrent(newNode);
 			}
 			else
-				IncrementPosition();
+				opNode::IncrementPosition();
 		}
 	}
 	LOOP_END;
@@ -730,7 +730,7 @@ inline void CriteriaGroups<Parent>::FindCriteriaGroups()
 		{
 			stacked<ParenBlockNode> paren = opNode::Expect<ParenBlockNode>(G_PAREN_BLOCK);
 			stacked<CriteriaGroupNode> newNode = opNode::Transform<CriteriaGroupNode>(paren);
-			InsertNodeAtCurrent(newNode);
+			opNode::InsertNodeAtCurrent(newNode);
 		}
 	}
 	LOOP_END;
@@ -759,20 +759,20 @@ inline void Extensions<Parent>::FindExtensions()
 		{
 			stackedcontext<ExtensionNode> newNode = opNode::Make<ExtensionNode>(T_EXTENSION);
 
-			Erase(T_EXTENSION);
+			opNode::Erase(T_EXTENSION);
 
-			EatWhitespaceAndComments();
+			opNode::EatWhitespaceAndComments();
 
 			stacked<TerminalNode> name = opNode::Expect<TerminalNode>(T_ID);
 
-			EatWhitespaceAndComments();
+			opNode::EatWhitespaceAndComments();
 
 			newNode->SetName(*name);
 			newNode->AppendNode(name);
 
-			Erase(T_SEMICOLON);
+			opNode::Erase(T_SEMICOLON);
 
-			InsertNodeAtCurrent(newNode);
+			opNode::InsertNodeAtCurrent(newNode);
 		}
 	}
 	LOOP_END;
@@ -801,13 +801,13 @@ inline void ExtendPoints<Parent>::FindExtendPoints()
 		{
 			stackedcontext<ExtendPointNode> newNode = opNode::Make<ExtendPointNode>(T_EXTEND_POINT);
 
-			Erase(T_EXTEND_POINT);
+			opNode::Erase(T_EXTEND_POINT);
 
-			EatWhitespaceAndComments();
+			opNode::EatWhitespaceAndComments();
 
 			stacked<TerminalNode> name = opNode::Expect<TerminalNode>(T_ID);
 
-			EatWhitespaceAndComments();
+			opNode::EatWhitespaceAndComments();
 
 			newNode->SetName(*name);
 			newNode->AppendNode(name);
@@ -817,7 +817,7 @@ inline void ExtendPoints<Parent>::FindExtendPoints()
 			newNode->SetBody(*body);
 			newNode->AppendNode(body);
 
-			InsertNodeAtCurrent(newNode);
+			opNode::InsertNodeAtCurrent(newNode);
 		}
 	}
 	LOOP_END;
@@ -846,16 +846,16 @@ inline void ExtensionPoints<Parent>::FindExtensionPoints()
 		{
 			stackedcontext<ExtensionPointNode> newNode = opNode::Make<ExtensionPointNode>(T_EXTENSION_POINT);
 
-			Erase(T_EXTENSION_POINT);
+			opNode::Erase(T_EXTENSION_POINT);
 
-			EatWhitespaceAndComments();
+			opNode::EatWhitespaceAndComments();
 
 			stacked<TerminalNode> name = opNode::Expect<TerminalNode>(T_ID);
 
 			newNode->SetName(*name);
 			newNode->AppendNode(name);
 
-			InsertNodeAtCurrent(newNode);
+			opNode::InsertNodeAtCurrent(newNode);
 		}
 	}
 	LOOP_END;
@@ -884,14 +884,14 @@ inline void FileDeclarationLocations<Parent>::FindFileDeclarationLocations()
 		{
 			stackedcontext<FileDeclarationLocationNode> newNode = opNode::Make<FileDeclarationLocationNode>(T_LOCATION);
 
-			Erase(T_LOCATION);
+			opNode::Erase(T_LOCATION);
 
 			stacked<TerminalNode> name = opNode::Expect<TerminalNode>(T_ID);
 
 			newNode->SetName(*name);
 			newNode->AppendNode(name);
 
-			InsertNodeAtCurrent(newNode);
+			opNode::InsertNodeAtCurrent(newNode);
 		}
 	}
 	LOOP_END
@@ -921,16 +921,16 @@ inline void FileDeclarations<Parent>::FindFileDeclarations()
 		{
 			stackedcontext<FileDeclarationNode> newNode = opNode::Make<FileDeclarationNode>(T_FILE_DECLARATION);
 
-			Erase(T_FILE_DECLARATION);
+			opNode::Erase(T_FILE_DECLARATION);
 
-			EatWhitespaceAndComments();
+			opNode::EatWhitespaceAndComments();
 
 			stacked<TerminalNode> name = opNode::Expect<TerminalNode>(T_ID);
 
 			newNode->SetName(*name);
 			newNode->AppendNode(name);
 
-			EatWhitespaceAndComments();
+			opNode::EatWhitespaceAndComments();
 
 			stacked<BraceBlockNode>          bbn = opNode::Expect<BraceBlockNode>(G_BRACE_BLOCK);
 			stacked<FileDeclarationBodyNode> body = opNode::Transform<FileDeclarationBodyNode>(bbn);
@@ -938,7 +938,7 @@ inline void FileDeclarations<Parent>::FindFileDeclarations()
 			newNode->SetBody(*body);
 			newNode->AppendNode(body);
 
-			InsertNodeAtCurrent(newNode);
+			opNode::InsertNodeAtCurrent(newNode);
 		}
 	}
 	LOOP_END;
@@ -967,23 +967,23 @@ inline void DialectNamespaces<Parent>::FindDialectNamespaces()
 		{
 			stackedcontext<DialectNamespaceNode> newNode = opNode::Make<DialectNamespaceNode>(T_NAMESPACE);
 
-			Erase(T_NAMESPACE);
+			opNode::Erase(T_NAMESPACE);
 
-			EatWhitespaceAndComments();
+			opNode::EatWhitespaceAndComments();
 
 			stacked<TerminalNode> name = opNode::Expect<TerminalNode>(T_ID);
 
 			newNode->SetName(*name);
 			newNode->AppendNode(name);
 
-			EatWhitespaceAndComments();
+			opNode::EatWhitespaceAndComments();
 
 			stacked<BraceBlockNode> body = opNode::Expect<BraceBlockNode>(G_BRACE_BLOCK);
 
 			newNode->SetBody(*body);
 			newNode->AppendNode(body);
 
-			InsertNodeAtCurrent(newNode);
+			opNode::InsertNodeAtCurrent(newNode);
 		}
 	}
 	LOOP_END;

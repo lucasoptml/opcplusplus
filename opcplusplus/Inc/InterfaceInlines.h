@@ -22,7 +22,7 @@
 /// DataStatements
 ///
 
-template<class Parent>
+template<NodeType Parent>
 inline bool interfaces::DataStatements<Parent>::Parse()
 {
 	PARSE_START;
@@ -32,7 +32,7 @@ inline bool interfaces::DataStatements<Parent>::Parse()
 	PARSE_END;
 }
 
-template<class Parent>
+template<NodeType Parent>
 inline bool interfaces::DataStatements<Parent>::FindDataStatements()
 {
 	INSPECT_START(G_DATA_STATEMENT);
@@ -42,31 +42,31 @@ inline bool interfaces::DataStatements<Parent>::FindDataStatements()
 	INSPECT_END;
 }
 
-template<class Parent>
+template<NodeType Parent>
 inline bool DataStatements<Parent>::FindDataStatementOnly()
 {
-	if (!HasNumChildren(2))
+	if (!this->HasNumChildren(2))
 		return false;
 
 	stackedcontext<DataStatementNode> newNode = NEWNODE(DataStatementNode());
-	newNode->CopyBasics(FirstChild());
+	newNode->CopyBasics(this->FirstChild());
 	
 	stacked<DataDeclarationNode> declaration = opNode::PushUntil<DataDeclarationNode>(T_ASSIGN,false);
 
 	newNode->SetDeclaration(*declaration);
 	newNode->AppendNode(declaration);
 
-	if(IsCurrent(T_ASSIGN))
+	if(this->IsCurrent(T_ASSIGN))
 	{
-		Erase(T_ASSIGN);
+		this->Erase(T_ASSIGN);
 		stacked<DataInitializationNode> initialization = opNode::PushUntilEnd<DataInitializationNode>();
 		
 		newNode->SetInitialization(*initialization);
 		newNode->AppendNode(initialization);
 	}
 	
-	SetInnerStatement(*newNode);
-	AppendNode(newNode);
+	this->SetInnerStatement(*newNode);
+	this->AppendNode(newNode);
 	
 	return true;
 }
@@ -76,7 +76,7 @@ inline bool DataStatements<Parent>::FindDataStatementOnly()
 //
 
 
-template<class Parent>
+template<NodeType Parent>
 bool Trim<Parent>::PreParse()
 {
 	PREPARSE_START;
@@ -86,7 +86,7 @@ bool Trim<Parent>::PreParse()
 	PREPARSE_END;
 }
 
-template<class Parent>
+template<NodeType Parent>
 bool Trim<Parent>::Parse()
 {
 	PARSE_START;
@@ -96,7 +96,7 @@ bool Trim<Parent>::Parse()
 	PARSE_END;
 }
 
-template<class Parent>
+template<NodeType Parent>
 void Trim<Parent>::DoTrim()
 {
 	iterator i = this.GetBegin();
@@ -192,14 +192,14 @@ inline void Namespaces<Parent>::FindNamespaces()
 				newNode->SetName(*name);
 				newNode->AppendNode(name);
 
-				EatWhitespaceAndComments();
+				this->EatWhitespaceAndComments();
 
 				stacked<BraceBlockNode>     bbn = opNode::Expect<BraceBlockNode>(G_BRACE_BLOCK);
 				stacked<NamespaceBlockNode> nbn = opNode::Transform<NamespaceBlockNode>(bbn);
 				newNode->SetBody(*nbn);
 				newNode->AppendNode(nbn);
 
-				InsertNodeAtCurrent(newNode);
+				this->InsertNodeAtCurrent(newNode);
 			}
 		}
 	}
@@ -227,20 +227,20 @@ inline void UsingNamespaceKeywords<Parent>::FindUsingNamespaceKeywords()
 	{
 		HIT(T_USING)
 		{
-			if (this.PeekUncleaned(T_NAMESPACE))
+			if (this->PeekUncleaned(T_NAMESPACE))
 			{
 				stackedcontext<UsingNamespaceKeywordNode> newNode = opNode::Make<UsingNamespaceKeywordNode>(T_USING);
 
-				Erase(T_USING);
+				this->Erase(T_USING);
 
-				EatWhitespaceAndComments();
+				this->EatWhitespaceAndComments();
 
-				Erase(T_NAMESPACE);
+				this->Erase(T_NAMESPACE);
 
-				InsertNodeAtCurrent(newNode);
+				this->InsertNodeAtCurrent(newNode);
 			}
 			else
-				IncrementPosition();
+				this->IncrementPosition();
 		}
 	}
 	LOOP_END
@@ -270,14 +270,14 @@ inline void Usings<Parent>::FindUsings()
 		{
 			stackedcontext<UsingNode> newNode = opNode::Make<UsingNode>(T_USING);
 
-			Erase(T_USING);
+			this->Erase(T_USING);
 
 			stacked<ScopeNode> scope = opNode::Expect<ScopeNode>(G_SCOPE);
 
 			newNode->SetScope(*scope);
 			newNode->AppendNode(scope);
 
-			InsertNodeAtCurrent(newNode);
+			this->InsertNodeAtCurrent(newNode);
 		}
 	}
 	LOOP_END
@@ -297,7 +297,7 @@ inline void Blocks<Parent>::FindMatching()
 	//change the throw mode
 	setexceptionmode mode(opException::ParseException);
 
-	iterator end = this.GetEnd();
+	iterator end = this->GetEnd();
 
 	LOOP_START(Grammar);
 	{
@@ -313,11 +313,11 @@ inline void Blocks<Parent>::FindMatching()
 
 			Token last = Left;
 
-			while (numLeft && GetPosition() != end)
+			while (numLeft && this->GetPosition() != end)
 			{
 				// now we need to peek at the current position node
 				// if the nodes type is Left
-				Token currentToken = CurrentNode()->GetId();
+				Token currentToken = this->CurrentNode()->GetId();
 
 				last = currentToken;
 
@@ -329,7 +329,7 @@ inline void Blocks<Parent>::FindMatching()
 				// if there are numLeft still, just push this node in
 				if (numLeft)
 				{
-					stacked<opNode> tempstacked = PopCurrentNode();
+					stacked<opNode> tempstacked = this->PopCurrentNode();
 					newNode->AppendNode(tempstacked);
 				}
 			}
@@ -343,10 +343,10 @@ inline void Blocks<Parent>::FindMatching()
 			leftnode.Delete();
 
 			// we must delete the current node (Right)
-			this.DeleteCurrentNode();
+			this->DeleteCurrentNode();
 
 			// add the new node
-			this.InsertNodeAtCurrent(newNode);
+			this->InsertNodeAtCurrent(newNode);
 		}
 	}
 	LOOP_END;
@@ -405,48 +405,48 @@ inline void Pointers<Parent>::FindPointers()
 			stacked<TerminalNode>       firststar;
 
 			//grab all the stars and c/v specifiers
-			while (IsCurrent(T_STAR))
+			while (this->IsCurrent(T_STAR))
 			{
 				// Save off the first star (for error messages).
 				if (firststar.IsValid())
-					Erase(T_STAR);
+					this->Erase(T_STAR);
 				else
 					firststar = opNode::Expect<TerminalNode>(T_STAR);
 
 				PointerNode::StarType type = PointerNode::Plain;
 
 				// const
-				if (IsCurrent(T_CONST))
+				if (this->IsCurrent(T_CONST))
 				{
-					Erase(T_CONST);
+					this->Erase(T_CONST);
 					type = PointerNode::Const;
 				}
 				// volatile
-				else if (IsCurrent(T_VOLATILE))
+				else if (this->IsCurrent(T_VOLATILE))
 				{
-					Erase(T_VOLATILE);
+					this->Erase(T_VOLATILE);
 					type = PointerNode::Volatile;
 				}
 
 				// const volatile
 				if (type == PointerNode::Volatile
-					&& IsCurrent(T_CONST))
+					&& this->IsCurrent(T_CONST))
 				{
-					Erase(T_CONST);
+					this->Erase(T_CONST);
 					type = PointerNode::ConstVolatile;
 				}
 				// volatile const
 				else if (type == PointerNode::Const
-					&& IsCurrent(T_VOLATILE))
+					&& this->IsCurrent(T_VOLATILE))
 				{
-					Erase(T_VOLATILE);
+					this->Erase(T_VOLATILE);
 					type = PointerNode::ConstVolatile;
 				}
 
 				newNode->AddStar(type);
 			}
 
-			stacked<opNode> type = ReverseExpectOr(G_TEMPLATE_TYPE,
+			stacked<opNode> type = this->ReverseExpectOr(G_TEMPLATE_TYPE,
 				G_SCOPE,
 				T_ID,
 				T_BASIC_TYPE,
@@ -458,7 +458,7 @@ inline void Pointers<Parent>::FindPointers()
 
 			firststar.Delete();
 
-			InsertNodeAtCurrent(newNode);
+			this->InsertNodeAtCurrent(newNode);
 		}
 	}
 	LOOP_END;
@@ -491,9 +491,10 @@ inline void MemberPointers<Parent>::FindMemberPointers()
 			//what order? before pointer? scope? or after?
 			//what about G_SCOPE_POINTER? should we do it that way?
 			//scope::*
-			ScopeNode* scope = node_cast<ScopeNode>(CurrentNode());
+			ScopeNode* scope = node_cast<ScopeNode>(this->CurrentNode());
 
-			if (scope->Is)
+			//if (scope->Is)
+			//TODO: seems to be unimplemented.
 		}
 	}
 	LOOP_END;
@@ -523,10 +524,10 @@ inline void Operators<Parent>::FindOperators()
 		{
 			stackedcontext<OperatorNode> newNode = opNode::Make<OperatorNode>(T_OPERATOR);
 
-			Erase(T_OPERATOR);
+			this->Erase(T_OPERATOR);
 
 			//operator ()() special case
-			if (this.IsCurrent(G_PAREN_BLOCK))
+			if (this->IsCurrent(G_PAREN_BLOCK))
 			{
 				//NOTE: we dont support templated operator()() : P
 				stacked<ParenBlockNode> paren = opNode::Expect<ParenBlockNode>(G_PAREN_BLOCK);
@@ -537,14 +538,14 @@ inline void Operators<Parent>::FindOperators()
 			}
 			else
 			{
-				this.PushUntilAdd(*newNode, G_PAREN_BLOCK);
+				this->PushUntilAdd(*newNode, G_PAREN_BLOCK);
 				//just to be safe?
 				//Check(G_PAREN_BLOCK);
 			}
 
 			//opNode* oper = ExpectOverloadableOperator();
 
-			InsertNodeAtCurrent(newNode);
+			this->InsertNodeAtCurrent(newNode);
 		}
 	}
 	LOOP_END;
@@ -571,8 +572,8 @@ inline void Modifiers<Parent>::FindModifiers()
 	OPObjectNode* parent = opNode::FindParent<OPObjectNode>();
 	DialectCategory* category = parent->GetCategorySettings();
 
-	iterator i = GetBegin();
-	iterator end = GetEnd();
+	iterator i   = this->GetBegin();
+	iterator end = this->GetEnd();
 
 	while (i != end)
 	{
@@ -613,9 +614,9 @@ inline void ValuedModifiers<Parent>::FindValuedModifiers()
 	{
 		HIT(T_ID)
 		{
-			TerminalNode* id = node_cast<TerminalNode>(CurrentNode());
+			TerminalNode* id = node_cast<TerminalNode>(this->CurrentNode());
 
-			if (Peek(G_PAREN_BLOCK)
+			if (this->Peek(G_PAREN_BLOCK)
 				&& category->HasValueModifier(id->GetValue()))
 			{
 				stackedcontext<ValuedModifierNode> newNode = opNode::Make<ValuedModifierNode>(T_ID);
@@ -631,10 +632,10 @@ inline void ValuedModifiers<Parent>::FindValuedModifiers()
 				newNode->SetArguments(*arguments);
 				newNode->AppendNode(arguments);
 
-				InsertNodeAtCurrent(newNode);
+				this->InsertNodeAtCurrent(newNode);
 			}
 			else
-				IncrementPosition();
+				this->IncrementPosition();
 		}
 	}
 	LOOP_END;
@@ -670,7 +671,7 @@ inline void Functions<Parent>::FindFunctions()
 			newNode->SetArguments(*Arguments);
 
 			// now look backwards
-			stacked<opNode> Name = ReverseExpectOr(G_OPERATOR,
+			stacked<opNode> Name = this->ReverseExpectOr(G_OPERATOR,
 				G_TEMPLATE_TYPE,
 				T_ID,
 				*Arguments);
@@ -681,17 +682,17 @@ inline void Functions<Parent>::FindFunctions()
 			newNode->AppendNode(Arguments);
 
 			// check for const-ness
-			if (IsCurrent(T_CONST))
+			if (this->IsCurrent(T_CONST))
 			{
-				Erase(T_CONST);
+				this->Erase(T_CONST);
 				newNode->SetConst(true);
 			}
 
 			// check for pure methods
 			// NOTE: we just look for assignment = #, = ID, we dont look for null or anything like that
-			if (IsCurrent(T_ASSIGN))
+			if (this->IsCurrent(T_ASSIGN))
 			{
-				Erase(T_ASSIGN);
+				this->Erase(T_ASSIGN);
 
 				stacked<TerminalNode> assignment = opNode::ExpectOr<TerminalNode>(T_NUMBER, T_ID);
 
@@ -699,7 +700,7 @@ inline void Functions<Parent>::FindFunctions()
 				newNode->AppendNode(assignment);
 			}
 
-			InsertNodeAtCurrent(newNode);
+			this->InsertNodeAtCurrent(newNode);
 		}
 	}
 	LOOP_END;
@@ -731,7 +732,7 @@ inline void FunctionDefinitions<Parent>::FindFunctionDefinitions()
 			//NOTE: this function should be ok, test a while.
 			//TODO: fix this, this function still sucks - might be ok now..
 
-			bool bFunctionDefinition = !IsCurrent(T_SEMICOLON);
+			bool bFunctionDefinition = !this->IsCurrent(T_SEMICOLON);
 
 			//is it a function declaration?
 			if (bFunctionDefinition)
@@ -752,7 +753,7 @@ inline void FunctionDefinitions<Parent>::FindFunctionDefinitions()
 				newNode->AppendNode(Function);
 				newNode->AppendNode(Body);
 
-				InsertNodeAtCurrent(newNode);
+				this->InsertNodeAtCurrent(newNode);
 			}
 			//must be a function prototype
 			else
@@ -769,7 +770,7 @@ inline void FunctionDefinitions<Parent>::FindFunctionDefinitions()
 				newNode->AppendNode(Return);
 				newNode->AppendNode(Function);
 
-				InsertNodeAtCurrent(newNode);
+				this->InsertNodeAtCurrent(newNode);
 			}
 		}
 	}
@@ -780,7 +781,7 @@ template<class Parent>
 inline stacked<opNode> interfaces::FunctionDefinitions<Parent>::GetReturnType(opNode* after)
 {
 	//find the return type
-	return ReverseExpectOr(G_TEMPLATE_TYPE,
+	return this->ReverseExpectOr(G_TEMPLATE_TYPE,
 		G_SCOPE,
 		G_POINTER,
 		G_POINTER_MEMBER,
@@ -821,7 +822,7 @@ inline void ConstructorDefinitions<Parent>::FindConstructorDefinitions()
 			//ctor() {}
 			//ctor()
 
-			bool bdefinition = IsCurrent(T_COLON) || IsCurrent(G_BRACE_BLOCK);
+			bool bdefinition = this->IsCurrent(T_COLON) || this->IsCurrent(G_BRACE_BLOCK);
 
 			if (bdefinition)
 			{
@@ -830,7 +831,7 @@ inline void ConstructorDefinitions<Parent>::FindConstructorDefinitions()
 				newNode->CopyBasics(*Constructor);
 
 				//optional initializer list
-				if (IsCurrent(T_COLON))
+				if (this->IsCurrent(T_COLON))
 				{
 					stacked<ConstructorInitializerListNode> initializers = opNode::PushUntil<ConstructorInitializerListNode>(G_BRACE_BLOCK);
 
@@ -845,7 +846,7 @@ inline void ConstructorDefinitions<Parent>::FindConstructorDefinitions()
 				newNode->AppendNode(Constructor);
 				newNode->AppendNode(Body);
 
-				InsertNodeAtCurrent(newNode);
+				this->InsertNodeAtCurrent(newNode);
 			}
 			//must be a function prototype
 			else
@@ -856,7 +857,7 @@ inline void ConstructorDefinitions<Parent>::FindConstructorDefinitions()
 
 				newNode->SetConstructor(*Constructor);
 				newNode->AppendNode(Constructor);
-				InsertNodeAtCurrent(newNode);
+				this->InsertNodeAtCurrent(newNode);
 			}
 		}
 	}
@@ -893,7 +894,7 @@ inline void DestructorDefinitions<Parent>::FindDestructorDefinitions()
 			//~dtor() {}
 			//~dtor()
 
-			bool bdefinition = IsCurrent(G_BRACE_BLOCK);
+			bool bdefinition = this->IsCurrent(G_BRACE_BLOCK);
 
 			if (bdefinition)
 			{
@@ -908,7 +909,7 @@ inline void DestructorDefinitions<Parent>::FindDestructorDefinitions()
 				newNode->SetBody(*Body);
 				newNode->AppendNode(Body);
 
-				InsertNodeAtCurrent(newNode);
+				this->InsertNodeAtCurrent(newNode);
 			}
 			//must be a function prototype
 			else
@@ -920,7 +921,7 @@ inline void DestructorDefinitions<Parent>::FindDestructorDefinitions()
 				newNode->SetDestructor(*Destructor);
 				newNode->AppendNode(Destructor);
 
-				InsertNodeAtCurrent(newNode);
+				this->InsertNodeAtCurrent(newNode);
 			}
 		}
 	}
@@ -956,23 +957,23 @@ inline void OPEnums<Parent>::FindOPEnums()
 			newNode->SetIdentifier(*identifier);
 			newNode->AppendNode(identifier);
 
-			EatWhitespaceAndComments();
+			this->EatWhitespaceAndComments();
 
 			stacked<TerminalNode> name = opNode::Expect<TerminalNode>(T_ID);
 			newNode->SetName(*name);
 			newNode->AppendNode(name);
 
-			EatWhitespaceAndComments();
+			this->EatWhitespaceAndComments();
 
 			stacked<BraceBlockNode> bbn = opNode::Expect<BraceBlockNode>(G_BRACE_BLOCK);
 			stacked<OPEnumBodyNode> eobn = opNode::Transform<OPEnumBodyNode>(bbn);
 			newNode->SetBody(*eobn);
 			newNode->AppendNode(eobn);
 
-			EatWhitespaceAndComments();
-			Erase(T_SEMICOLON);
+			this->EatWhitespaceAndComments();
+			this->Erase(T_SEMICOLON);
 
-			InsertNodeAtCurrent(newNode);
+			this->InsertNodeAtCurrent(newNode);
 		}
 	}
 	LOOP_END;
@@ -1009,10 +1010,10 @@ inline void OPObjects<Parent>::FindOPObjects()
 			//I don't want to save this, because untransformed one is disallowed
 			category.Delete();
 
-			EatWhitespaceAndComments();
+			this->EatWhitespaceAndComments();
 
 			// is there middle modifiers?
-			if (IsCurrent(G_CPLUSPLUS))
+			if (this->IsCurrent(G_CPLUSPLUS))
 			{
 				stacked<CPlusPlusNode> middleModifiers = opNode::Expect<CPlusPlusNode>(G_CPLUSPLUS);
 
@@ -1020,14 +1021,14 @@ inline void OPObjects<Parent>::FindOPObjects()
 				newNode->AppendNode(middleModifiers);
 			}
 
-			EatWhitespaceAndComments();
+			this->EatWhitespaceAndComments();
 
 			// add name
 			stacked<TerminalNode> name = opNode::Expect<TerminalNode>(T_ID);
 			newNode->SetName(*name);
 			newNode->AppendNode(name);
 
-			EatWhitespaceAndComments();
+			this->EatWhitespaceAndComments();
 
 			// add inheritance
 			stacked<OPObjectInheritanceNode> i = opNode::PushUntil<OPObjectInheritanceNode>(G_BRACE_BLOCK);
@@ -1052,14 +1053,14 @@ inline void OPObjects<Parent>::FindOPObjects()
 			newNode->AppendNode(ocbn);
 
 			//get rid of trailing semicolon (required now!)
-			EatWhitespaceAndComments();
+			this->EatWhitespaceAndComments();
 
-			Erase(T_SEMICOLON);
+			this->Erase(T_SEMICOLON);
 
 			// 				if(IsCurrent(T_SEMICOLON))
 			// 					Erase(T_SEMICOLON);
 
-			InsertNodeAtCurrent(newNode);
+			this->InsertNodeAtCurrent(newNode);
 		}
 	}
 
@@ -1076,6 +1077,8 @@ inline bool interfaces::States<Parent>::Parse()
 {
 	PARSE_START;
 
+	//NOTE: states are unimplemented.
+
 	FindStates();
 
 	PARSE_END;
@@ -1090,7 +1093,7 @@ inline void States<Parent>::FindStates()
 	{
 		stackedcontext<StateNode> newNode = opNode::Make<StateNode>(T_STATE);
 
-		Erase(T_STATE);
+		this->Erase(T_STATE);
 
 		// add name
 		stacked<TerminalNode> name = opNode::Expect<TerminalNode>(T_ID);
@@ -1104,11 +1107,11 @@ inline void States<Parent>::FindStates()
 		newNode->AppendNode(sbn);
 
 		//get rid of trailing semicolons (which are optional)
-		EatWhitespaceAndComments();
-		if (IsCurrent(T_SEMICOLON))
-			Erase(T_SEMICOLON);
+		this->EatWhitespaceAndComments();
+		if (this->IsCurrent(T_SEMICOLON))
+			this->Erase(T_SEMICOLON);
 
-		InsertNodeAtCurrent(newNode);
+		this->InsertNodeAtCurrent(newNode);
 	}
 
 	LOOP_END;
@@ -1154,7 +1157,7 @@ inline void TemplateTypes<Parent>::FindTemplateTypes()
 			newNode->AppendNode(id);
 			newNode->AppendNode(body);
 
-			InsertNodeAtCurrent(newNode);
+			this->InsertNodeAtCurrent(newNode);
 		}
 	}
 	LOOP_END;
@@ -1186,7 +1189,7 @@ inline void References<Parent>::FindReferences()
 
 			stacked<TerminalNode> ampersand = opNode::Expect<TerminalNode>(T_AMPERSAND);
 
-			stacked<opNode> Type = ReverseExpectOr(G_POINTER,
+			stacked<opNode> Type = this->ReverseExpectOr(G_POINTER,
 				G_SCOPE,
 				G_TEMPLATE_TYPE,
 				T_ID,
@@ -1199,7 +1202,7 @@ inline void References<Parent>::FindReferences()
 
 			ampersand.Delete();
 
-			InsertNodeAtCurrent(newNode);
+			this->InsertNodeAtCurrent(newNode);
 		}
 	}
 	LOOP_END;
@@ -1235,18 +1238,18 @@ inline void Arrays<Parent>::FindArrays()
 
 			opArray< stacked<BracketBlockNode> > brackets;
 
-			while (this.IsCurrent(G_BRACKET_BLOCK))
+			while (this->IsCurrent(G_BRACKET_BLOCK))
 			{
 				stacked<BracketBlockNode> b = opNode::Expect<BracketBlockNode>(G_BRACKET_BLOCK);
 				brackets.push_back(b);
 			}
 
-			if (IsPrevious(G_FUNDAMENTAL_TYPE) ||
-				IsPrevious(T_BASIC_TYPE) ||
-				IsPrevious(G_POINTER) ||
-				IsPrevious(G_REFERENCE) ||
-				IsPrevious(G_TEMPLATE_TYPE) ||
-				IsPrevious(G_SCOPE))
+			if (this->IsPrevious(G_FUNDAMENTAL_TYPE) ||
+				this->IsPrevious(T_BASIC_TYPE) ||
+				this->IsPrevious(G_POINTER) ||
+				this->IsPrevious(G_REFERENCE) ||
+				this->IsPrevious(G_TEMPLATE_TYPE) ||
+				this->IsPrevious(G_SCOPE))
 			{
 				stackedcontext<TypeArrayNode> node = opNode::Transform<TypeArrayNode>(newNode);
 
@@ -1262,8 +1265,8 @@ inline void Arrays<Parent>::FindArrays()
 				node->SetType(*Type);
 				node->AppendNode(Type);
 
-				AppendBrackets(brackets, *node);
-				InsertNodeAtCurrent(node);
+				this->AppendBrackets(brackets, *node);
+				this->InsertNodeAtCurrent(node);
 			}
 			else
 			{
@@ -1276,8 +1279,8 @@ inline void Arrays<Parent>::FindArrays()
 				node->SetName(*Name);
 				node->AppendNode(Name);
 
-				AppendBrackets(brackets, *node);
-				InsertNodeAtCurrent(node);
+				this->AppendBrackets(brackets, *node);
+				this->InsertNodeAtCurrent(node);
 			}
 		}
 	}
@@ -1297,22 +1300,22 @@ inline void VisibilityLabels<Parent>::FindVisibilityLabel()
 	{
 		HIT(token)
 		{
-			if (this.IsCurrent(token) && this.Peek(T_COLON))
+			if (this->IsCurrent(token) && this->Peek(T_COLON))
 			{
 				stackedcontext<VisibilityLabelNode> newNode = opNode::Make<VisibilityLabelNode>(token);
 
 				stacked<TerminalNode> Label = opNode::Expect<TerminalNode>(token);
-				Erase(T_COLON);
+				this->Erase(T_COLON);
 
 				newNode->SetLabel(*Label);
 
 				Label.Delete();
 
-				InsertNodeAtCurrent(newNode);
+				this->InsertNodeAtCurrent(newNode);
 			}
 			else
 			{
-				IncrementPosition();
+				this->IncrementPosition();
 			}
 		}
 	}
@@ -1356,10 +1359,10 @@ inline void Scopes<Parent>::FindScopes()
 			opArray< stacked<opNode> > scopes;
 
 			//is it a global scope or not?
-			if (IsPrevious(T_ID) || IsPrevious(G_TEMPLATE_TYPE))
+			if (this->IsPrevious(T_ID) || this->IsPrevious(G_TEMPLATE_TYPE))
 			{
 				// get the name/initial scope
-				stacked<opNode> name = ReverseExpectOr(T_ID, G_TEMPLATE_TYPE, *scoperesolution);
+				stacked<opNode> name = this->ReverseExpectOr(T_ID, G_TEMPLATE_TYPE, *scoperesolution);
 				scopes.PushBack(name);
 			}
 			else
@@ -1384,12 +1387,12 @@ inline void Scopes<Parent>::FindScopes()
 			while (bContinue)
 			{
 				//grab first forward scope
-				stacked<opNode> name = ExpectOr(T_ID, G_TEMPLATE_TYPE);
+				stacked<opNode> name = this->ExpectOr(T_ID, G_TEMPLATE_TYPE);
 				scopes.PushBack(name);
 
-				if (IsCurrent(T_SCOPE_RESOLUTION))
+				if (this->IsCurrent(T_SCOPE_RESOLUTION))
 				{
-					Erase(T_SCOPE_RESOLUTION);
+					this->Erase(T_SCOPE_RESOLUTION);
 
 					//check for ...::*
 					if (CheckScopePointer(scope, scopes, bGlobal))
@@ -1411,7 +1414,7 @@ inline void Scopes<Parent>::FindScopes()
 						scope->AppendNode(scopes[i]);
 					}
 
-					InsertNodeAtCurrent(scope);
+					this->InsertNodeAtCurrent(scope);
 					bContinue = false;
 				}
 			}
@@ -1423,14 +1426,14 @@ inline void Scopes<Parent>::FindScopes()
 template<class Parent>
 inline bool interfaces::Scopes<Parent>::CheckScopePointer(stacked<ScopeNode>& scope, opArray<stacked<opNode>>& scopes, bool bGlobal)
 {
-	if (IsCurrent(T_STAR))
+	if (this->IsCurrent(T_STAR))
 	{
 		stacked<ScopePointerNode> scopepointer = opNode::Transform<ScopePointerNode>(scope);
 
 		int numstars = 0;
-		while (IsCurrent(T_STAR))
+		while (this->IsCurrent(T_STAR))
 		{
-			Erase(T_STAR);
+			this->Erase(T_STAR);
 			numstars++;
 		}
 
@@ -1445,7 +1448,7 @@ inline bool interfaces::Scopes<Parent>::CheckScopePointer(stacked<ScopeNode>& sc
 			scopepointer->AppendNode(scopes[i]);
 		}
 
-		InsertNodeAtCurrent(scopepointer);
+		this->InsertNodeAtCurrent(scopepointer);
 		return true;
 	}
 
@@ -1493,7 +1496,7 @@ inline void PointerMembers<Parent>::FindPointerMembers()
 			newNode->SetType(*type);
 			newNode->AppendNode(type);
 
-			InsertNodeAtCurrent(newNode);
+			this->InsertNodeAtCurrent(newNode);
 		}
 	}
 	LOOP_END;
@@ -1522,14 +1525,14 @@ inline void Typenames<Parent>::FindTypenames()
 		{
 			stackedcontext<TypenameNode> newNode = opNode::Make<TypenameNode>(T_TYPENAME);
 
-			Erase(T_TYPENAME);
+			this->Erase(T_TYPENAME);
 
-			opNode* name = ExpectOr(T_ID, G_TEMPLATE_TYPE, G_SCOPE, G_POINTER, G_REFERENCE);
+			opNode* name = this->ExpectOr(T_ID, G_TEMPLATE_TYPE, G_SCOPE, G_POINTER, G_REFERENCE);
 
 			newNode->SetName(name);
 			newNode->AppendNode(name);
 
-			InsertNodeAtCurrent(newNode);
+			this->InsertNodeAtCurrent(newNode);
 		}
 	}
 	LOOP_END;
@@ -1557,10 +1560,10 @@ inline void FunctionPointers<Parent>::FindFunctionPointers()
 		HIT(G_PAREN_BLOCK)
 		{
 			//function pointers are always double paren blocks
-			if (!this.Peek(G_PAREN_BLOCK))
+			if (!this->Peek(G_PAREN_BLOCK))
 			{
 				//not a function pointer, move past it
-				IncrementPosition();
+				this->IncrementPosition();
 				continue;
 			}
 
@@ -1575,10 +1578,10 @@ inline void FunctionPointers<Parent>::FindFunctionPointers()
 			newNode->SetArguments(*Args);
 			newNode->AppendNode(Args);
 
-			DecrementPosition();
+			this->DecrementPosition();
 
 			//TODO: we will want to have G_CONST_TYPE maybe
-			stacked<opNode> ReturnType = ExpectOr(G_SCOPE,
+			stacked<opNode> ReturnType = this->ExpectOr(G_SCOPE,
 				G_TEMPLATE_TYPE,
 				G_POINTER,
 				G_REFERENCE,
@@ -1592,7 +1595,7 @@ inline void FunctionPointers<Parent>::FindFunctionPointers()
 			newNode->SetReturn(*ReturnType);
 			newNode->PrependNode(ReturnType);
 
-			InsertNodeAtCurrent(newNode);
+			this->InsertNodeAtCurrent(newNode);
 		}
 	}
 	LOOP_END;
@@ -1621,31 +1624,31 @@ inline void OPDefines<Parent>::FindOPDefines()
 		{
 			stackedcontext<OPDefineNode> newNode = opNode::Make<OPDefineNode>(T_OPDEFINE);
 
-			Erase(T_OPDEFINE);
+			this->Erase(T_OPDEFINE);
 
-			EatWhitespaceAndComments();
+			this->EatWhitespaceAndComments();
 
 			stacked<TerminalNode> name = opNode::Expect<TerminalNode>(T_ID);
 			newNode->SetName(*name);
 			newNode->AppendNode(name);
 
-			EatWhitespaceAndComments();
+			this->EatWhitespaceAndComments();
 
-			if (IsCurrent(G_PAREN_BLOCK))
+			if (this->IsCurrent(G_PAREN_BLOCK))
 			{
 				stacked<ParenBlockNode> arguments = opNode::Expect<ParenBlockNode>(G_PAREN_BLOCK);
 				newNode->SetArguments(*arguments);
 				newNode->AppendNode(arguments);
 			}
 
-			EatWhitespaceAndComments();
+			this->EatWhitespaceAndComments();
 
 			stacked<BraceBlockNode> bbn = opNode::Expect<BraceBlockNode>(G_BRACE_BLOCK);
 			stacked<OPDefineBodyNode> body = opNode::Transform<OPDefineBodyNode>(bbn);
 			newNode->SetBody(*body);
 			newNode->AppendNode(body);
 
-			InsertNodeAtCurrent(newNode);
+			this->InsertNodeAtCurrent(newNode);
 		}
 	}
 	LOOP_END;
@@ -1675,10 +1678,10 @@ inline void Preprocessors<Parent>::FindDirective(const string& directivename)
 
 			// check and see that this #____ token is the first thing
 			// on the line (except for whitespace) and error if not
-			if (this.IsPrevious(T_WHITESPACE))
-				ReverseErase(T_WHITESPACE);
+			if (this->IsPrevious(T_WHITESPACE))
+				this->ReverseErase(T_WHITESPACE);
 
-			if (!IsPrevious(T_NEWLINE) && GetPosition() != GetBegin())
+			if (!this->IsPrevious(T_NEWLINE) && this->GetPosition() != this->GetBegin())
 				opError::MessageError(*newNode, "Preprocessor definitions must not be preceeded by any tokens on a line except whitespace.");
 
 			newNode->SetDirectiveName(directivename);
@@ -1687,14 +1690,14 @@ inline void Preprocessors<Parent>::FindDirective(const string& directivename)
 
 			while (!bDone)
 			{
-				PushUntilOrAdd(*newNode, T_NEWLINE, T_COMMENT, T_CCOMMENT, T_EOF, T_CONTINUELINE);
+				this->PushUntilOrAdd(*newNode, T_NEWLINE, T_COMMENT, T_CCOMMENT, T_EOF, T_CONTINUELINE);
 
-				if (CurrentNode())
+				if (this->CurrentNode())
 				{
-					if (CurrentNode()->GetId() == T_NEWLINE
-						|| CurrentNode()->GetId() == T_COMMENT
-						|| CurrentNode()->GetId() == T_CCOMMENT
-						|| CurrentNode()->GetId() == T_EOF)
+					if (this->CurrentNode()->GetId() == T_NEWLINE
+						|| this->CurrentNode()->GetId() == T_COMMENT
+						|| this->CurrentNode()->GetId() == T_CCOMMENT
+						|| this->CurrentNode()->GetId() == T_EOF)
 						bDone = true;
 					else
 					{
@@ -1706,7 +1709,7 @@ inline void Preprocessors<Parent>::FindDirective(const string& directivename)
 					bDone = true;
 			}
 
-			InsertNodeAtCurrent(newNode);
+			this->InsertNodeAtCurrent(newNode);
 		}
 	}
 	LOOP_END;
@@ -1830,9 +1833,9 @@ inline void OPIncludes<Parent>::FindOPIncludes()
 		{
 			stackedcontext<OPIncludeNode> newNode = opNode::Make<OPIncludeNode>(T_OPINCLUDE);
 
-			Erase(T_OPINCLUDE);
+			this->Erase(T_OPINCLUDE);
 
-			EatWhitespaceAndComments();
+			this->EatWhitespaceAndComments();
 
 			stacked<TerminalNode> FileName = opNode::Expect<TerminalNode>(T_STRING);
 
@@ -1840,7 +1843,7 @@ inline void OPIncludes<Parent>::FindOPIncludes()
 			newNode->AppendNode(FileName);
 
 			OPIncludeNode* node = *newNode;
-			InsertNodeAtCurrent(newNode);
+			this->InsertNodeAtCurrent(newNode);
 		}
 	}
 	LOOP_END;
@@ -1871,18 +1874,18 @@ inline void interfaces::ExpandCalls<Parent>::FindExpandCalls()
 		{
 			stackedcontext<ExpandCallNode> newNode = opNode::Make<ExpandCallNode>(T_EXPAND);
 
-			Erase(T_EXPAND);
+			this->Erase(T_EXPAND);
 
-			EatWhitespaceAndComments();
+			this->EatWhitespaceAndComments();
 
-			stacked<opNode> name = Expect(T_ID);
+			stacked<opNode> name = this->Expect(T_ID);
 
 			newNode->SetName(*name);
 			newNode->AppendNode(name);
 
-			EatWhitespaceAndComments();
+			this->EatWhitespaceAndComments();
 
-			if (IsCurrent(G_PAREN_BLOCK))
+			if (this->IsCurrent(G_PAREN_BLOCK))
 			{
 				stacked<ParenBlockNode> args = opNode::Expect<ParenBlockNode>(G_PAREN_BLOCK);
 				stacked<ExpandCallArgumentListNode> arguments = opNode::Transform<ExpandCallArgumentListNode>(args);
@@ -1891,7 +1894,7 @@ inline void interfaces::ExpandCalls<Parent>::FindExpandCalls()
 				newNode->AppendNode(arguments);
 			}
 
-			InsertNodeAtCurrent(newNode);
+			this->InsertNodeAtCurrent(newNode);
 		}
 	}
 	LOOP_END;
@@ -1921,17 +1924,17 @@ inline void interfaces::OPMacros<Parent>::FindOPMacros()
 		{
 			stackedcontext<OPMacroNode> newNode = opNode::Make<OPMacroNode>(T_OPMACRO);
 
-			Erase(T_OPMACRO);
+			this->Erase(T_OPMACRO);
 
-			EatWhitespaceAndComments();
+			this->EatWhitespaceAndComments();
 
 			stacked<TerminalNode> name = opNode::Expect<TerminalNode>(T_ID);
 			newNode->SetName(*name);
 			newNode->AppendNode(name);
 
-			EatWhitespaceAndComments();
+			this->EatWhitespaceAndComments();
 
-			if (IsCurrent(G_PAREN_BLOCK))
+			if (this->IsCurrent(G_PAREN_BLOCK))
 			{
 				stacked<ParenBlockNode> args = opNode::Expect<ParenBlockNode>(G_PAREN_BLOCK);
 				stacked<OPMacroArgumentListNode> arguments = opNode::Transform<OPMacroArgumentListNode>(args);
@@ -1940,14 +1943,14 @@ inline void interfaces::OPMacros<Parent>::FindOPMacros()
 				newNode->AppendNode(arguments);
 			}
 
-			EatWhitespaceAndComments();
+			this->EatWhitespaceAndComments();
 
 			stacked<BraceBlockNode> bbn = opNode::Expect<BraceBlockNode>(G_BRACE_BLOCK);
 			stacked<OPMacroBodyNode> body = opNode::Transform<OPMacroBodyNode>(bbn);
 			newNode->SetBody(*body);
 			newNode->AppendNode(body);
 
-			InsertNodeAtCurrent(newNode);
+			this->InsertNodeAtCurrent(newNode);
 		}
 	}
 	LOOP_END;
@@ -1977,9 +1980,9 @@ inline void CPlusPluses<Parent>::FindCPlusPluses()
 		{
 			stackedcontext<CPlusPlusNode> newNode = opNode::Make<CPlusPlusNode>(T_CPLUSPLUS);
 
-			Erase(T_CPLUSPLUS);
+			this->Erase(T_CPLUSPLUS);
 
-			EatWhitespaceAndComments();
+			this->EatWhitespaceAndComments();
 
 			stacked<BraceBlockNode>    bbn = opNode::Expect<BraceBlockNode>(G_BRACE_BLOCK);
 			stacked<CPlusPlusBodyNode> body = opNode::Transform<CPlusPlusBodyNode>(bbn);
@@ -1987,7 +1990,7 @@ inline void CPlusPluses<Parent>::FindCPlusPluses()
 			newNode->SetBody(*body);
 			newNode->AppendNode(body);
 
-			InsertNodeAtCurrent(newNode);
+			this->InsertNodeAtCurrent(newNode);
 		}
 	}
 	LOOP_END;
@@ -2018,7 +2021,7 @@ inline void interfaces::FundamentalTypes<Parent>::FindSigned()
 		{
 			stackedcontext<FundamentalTypeNode> newNode = opNode::Make<FundamentalTypeNode>(T_SIGNED);
 
-			Erase(T_SIGNED);
+			this->Erase(T_SIGNED);
 
 			stacked<TerminalNode> type = opNode::Expect<TerminalNode>(T_BASIC_TYPE);
 
@@ -2033,7 +2036,7 @@ inline void interfaces::FundamentalTypes<Parent>::FindSigned()
 
 			newNode->SetIsSigned(true);
 
-			InsertNodeAtCurrent(newNode);
+			this->InsertNodeAtCurrent(newNode);
 		}
 	}
 	LOOP_END;
@@ -2048,7 +2051,7 @@ inline void interfaces::FundamentalTypes<Parent>::FindUnsigned()
 		{
 			stackedcontext<FundamentalTypeNode> newNode = opNode::Make<FundamentalTypeNode>(T_UNSIGNED);
 
-			Erase(T_UNSIGNED);
+			opNode::Erase(T_UNSIGNED);
 
 			stacked<TerminalNode> type = opNode::Expect<TerminalNode>(T_BASIC_TYPE);
 
@@ -2059,7 +2062,7 @@ inline void interfaces::FundamentalTypes<Parent>::FindUnsigned()
 			newNode->SetType(*type);
 			newNode->AppendNode(type);
 
-			InsertNodeAtCurrent(newNode);
+			opNode::InsertNodeAtCurrent(newNode);
 		}
 	}
 	LOOP_END;
@@ -2077,7 +2080,7 @@ inline void Constructors<Parent>::FindConstructors(const opString& classname)
 	{
 		HIT(G_FUNCTION)
 		{
-			FunctionNode* function = node_cast<FunctionNode>(CurrentNode());
+			FunctionNode* function = node_cast<FunctionNode>(opNode::CurrentNode());
 			TerminalNode* fname = node_cast<TerminalNode>(function->GetName());
 
 			if (fname && fname->GetValue() == classname)
@@ -2088,10 +2091,10 @@ inline void Constructors<Parent>::FindConstructors(const opString& classname)
 				ctor->SetFunction(*f);
 				ctor->AppendNode(f);
 
-				InsertNodeAtCurrent(ctor);
+				opNode::InsertNodeAtCurrent(ctor);
 			}
 			else
-				IncrementPosition();
+				opNode::IncrementPosition();
 		}
 	}
 	LOOP_END
@@ -2109,18 +2112,18 @@ inline void Destructors<Parent>::FindDestructors(const opString& classname)
 	{
 		HIT(G_FUNCTION)
 		{
-			FunctionNode* function = node_cast<FunctionNode>(CurrentNode());
+			FunctionNode* function = node_cast<FunctionNode>(opNode::CurrentNode());
 			TerminalNode* fname = node_cast<TerminalNode>(function->GetName());
 
 			if (fname
 				&& fname->GetValue() == classname
-				&& IsPrevious(T_BITWISE_COMPLEMENT))
+				&& opNode::IsPrevious(T_BITWISE_COMPLEMENT))
 			{
 				stackedcontext<DestructorNode> dtor = opNode::Make<DestructorNode>(G_FUNCTION);
 				stacked<FunctionNode> f = opNode::Expect<FunctionNode>(G_FUNCTION);
 				dtor->SetFunction(*f);
 
-				ReverseErase(T_BITWISE_COMPLEMENT);
+				opNode::ReverseErase(T_BITWISE_COMPLEMENT);
 
 				//do we want ~ in the member name or not?
 				//fname->PrependValue("~");
@@ -2133,10 +2136,10 @@ inline void Destructors<Parent>::FindDestructors(const opString& classname)
 
 				dtor->AppendNode(f);
 
-				InsertNodeAtCurrent(dtor);
+				opNode::InsertNodeAtCurrent(dtor);
 			}
 			else
-				IncrementPosition();
+				opNode::IncrementPosition();
 		}
 	}
 	LOOP_END
@@ -2165,7 +2168,7 @@ inline void Friends<Parent>::FindFriends()
 		{
 			stackedcontext<FriendNode> newNode = opNode::Make<FriendNode>(T_FRIEND);
 
-			Erase(T_FRIEND);
+			opNode::Erase(T_FRIEND);
 
 			stacked<opNode> first = opNode::ExpectOr(T_ID,
 				G_SCOPE,
@@ -2194,7 +2197,7 @@ inline void Friends<Parent>::FindFriends()
 				newNode->SetFriend(*name);
 				newNode->AppendNode(name);
 
-				Erase(T_SEMICOLON);
+				opNode::Erase(T_SEMICOLON);
 
 				newNode->SetSemicolon(true);
 			}
@@ -2207,7 +2210,7 @@ inline void Friends<Parent>::FindFriends()
 				newNode->SetFriend(*first);
 				newNode->AppendNode(first);
 
-				Erase(T_SEMICOLON);
+				opNode::Erase(T_SEMICOLON);
 
 				newNode->SetSemicolon(true);
 			}
@@ -2218,7 +2221,7 @@ inline void Friends<Parent>::FindFriends()
 				newNode->AppendNode(first);
 			}
 
-			InsertNodeAtCurrent(newNode);
+			opNode::InsertNodeAtCurrent(newNode);
 		}
 	}
 	LOOP_END;
@@ -2248,10 +2251,10 @@ inline void Typedefs<Parent>::FindTypedefs()
 		{
 			stackedcontext<TypedefNode> newNode = opNode::Make<TypedefNode>(T_TYPEDEF);
 
-			Erase(T_TYPEDEF);
+			opNode::Erase(T_TYPEDEF);
 
-			if (IsCurrent(T_VOLATILE)
-				|| IsCurrent(T_CONST))
+			if (opNode::IsCurrent(T_VOLATILE)
+				|| opNode::IsCurrent(T_CONST))
 			{
 				stacked<TerminalNode> modifier = opNode::ExpectOr<TerminalNode>(T_VOLATILE, T_CONST);
 
@@ -2278,9 +2281,9 @@ inline void Typedefs<Parent>::FindTypedefs()
 			newNode->AppendNode(name);
 
 			// eat the semicolon
-			Erase(T_SEMICOLON);
+			opNode::Erase(T_SEMICOLON);
 
-			InsertNodeAtCurrent(newNode);
+			opNode::InsertNodeAtCurrent(newNode);
 		}
 	}
 	LOOP_END;
@@ -2309,14 +2312,14 @@ inline void TemplateDecls<Parent>::FindTemplateDecls()
 		HIT(T_TEMPLATE)
 		{
 			stackedcontext<TemplateDeclNode> newNode = opNode::Make<TemplateDeclNode>(T_TEMPLATE);
-			Erase(T_TEMPLATE);
+			opNode::Erase(T_TEMPLATE);
 
 			stacked<AngledBlockNode> braces = opNode::Expect<AngledBlockNode>(G_ANGLED_BLOCK);
 
 			newNode->SetBraces(*braces);
 			newNode->AppendNode(braces);
 
-			InsertNodeAtCurrent(newNode);
+			opNode::InsertNodeAtCurrent(newNode);
 		}
 	}
 	LOOP_END;
@@ -2358,10 +2361,10 @@ inline void CPPConstructs<Parent>::FindCPPConstructs()
 		{
 			stackedcontext<NodeClass> newNode = opNode::Make<NodeClass>(Hit);
 
-			Erase(Hit);
+			opNode::Erase(Hit);
 
 			// If we have a name, parse it.
-			if (IsCurrent(T_ID))
+			if (opNode::IsCurrent(T_ID))
 			{
 				stacked<TerminalNode> name = opNode::Expect<TerminalNode>(T_ID);
 
@@ -2375,10 +2378,10 @@ inline void CPPConstructs<Parent>::FindCPPConstructs()
 			newNode->SetBody(*bbn);
 			newNode->AppendNode(bbn);
 
-			EatWhitespaceAndComments();
-			Erase(T_SEMICOLON);
+			opNode::EatWhitespaceAndComments();
+			opNode::Erase(T_SEMICOLON);
 
-			InsertNodeAtCurrent(newNode);
+			opNode::InsertNodeAtCurrent(newNode);
 		}
 	}
 	LOOP_END;
@@ -2395,11 +2398,11 @@ inline void interfaces::CPPConstructs<Parent>::FindCPPConstructObjects()
 		{
 			stackedcontext<NodeClass> newNode = opNode::Make<NodeClass>(Hit);
 
-			Erase(Hit);
+			opNode::Erase(Hit);
 
 			// If we have a name, parse it.
 			// Also, if we have a name, look for inheritance.
-			if (IsCurrent(T_ID))
+			if (opNode::IsCurrent(T_ID))
 			{
 				stacked<TerminalNode> name = opNode::Expect<TerminalNode>(T_ID);
 
@@ -2424,7 +2427,7 @@ inline void interfaces::CPPConstructs<Parent>::FindCPPConstructObjects()
 			newNode->SetBody(*bbn);
 			newNode->AppendNode(bbn);
 
-			InsertNodeAtCurrent(newNode);
+			opNode::InsertNodeAtCurrent(newNode);
 		}
 	}
 	LOOP_END;
@@ -2470,7 +2473,7 @@ inline void Templated<Parent>::FindTemplated()
 			newNode->SetTemplated(*templated);
 			newNode->AppendNode(templated);
 
-			InsertNodeAtCurrent(newNode);
+			opNode::InsertNodeAtCurrent(newNode);
 		}
 	}
 	LOOP_END;
@@ -2559,7 +2562,7 @@ inline bool ModifierSupport<Parent>::HasModifier(const opString& modifiername)
 	//handle parent modifiers...
 	if (!node_cast<OPObjectNode>(this))
 	{
-		if (OPObjectNode* p = FindParent<OPObjectNode>())
+		if (OPObjectNode* p = opNode::FindParent<OPObjectNode>())
 		{
 			if (p->HasModifier(modifiername))
 				return true;
@@ -2589,7 +2592,7 @@ inline bool interfaces::ModifierSupport<Parent>::HasModifier(Token modifiertoken
 	//handle parent modifiers...
 	if (!node_cast<OPObjectNode>(this))
 	{
-		if (OPObjectNode* p = FindParent<OPObjectNode>())
+		if (OPObjectNode* p = opNode::FindParent<OPObjectNode>())
 		{
 			if (p->HasModifier(modifiertoken))
 				return true;
@@ -2618,7 +2621,7 @@ inline ValuedModifierNode* interfaces::ModifierSupport<Parent>::GetValuedModifie
 	//handle parent modifiers...
 	if (!node_cast<OPObjectNode>(this))
 	{
-		if (OPObjectNode* p = FindParent<OPObjectNode>())
+		if (OPObjectNode* p = opNode::FindParent<OPObjectNode>())
 		{
 			return p->GetValuedModifier(modifiername);
 		}
@@ -2639,5 +2642,5 @@ inline void interfaces::ModifierSupport<Parent>::CreateModifiersNode()
 
 	automodifiers = *modnode;
 
-	AppendNode(modnode);
+	opNode::AppendNode(modnode);
 }

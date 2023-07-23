@@ -108,7 +108,7 @@ public:
 /// Trim
 ///==========================================
 
-template<class Parent>
+template<NodeType Parent>
 class Trim : public Parent
 {
 public:

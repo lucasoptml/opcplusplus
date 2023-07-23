@@ -1,6 +1,8 @@
-#include "Contexts.h"
 
 #pragma once
+
+#include "Walkers.h"
+#include "Contexts.h"
 
 //
 // BasicTypes
@@ -17,31 +19,31 @@ inline bool context::BasicTypes<Parent>::Parse()
 }
 
 template<class Parent>
-inline void BasicTypes<Parent>::FindBasicTypes()
+inline void context::BasicTypes<Parent>::FindBasicTypes()
 {
-	FindAngles();
+	this->FindAngles();
 
-	CleanAll();
+	this->CleanAll();
 
 	//NOTE: we want standalone angles anytime we can have expressions.
-	Disallow(T_LESS_THAN);//??
-	Disallow(T_GREATER_THAN);
+	opNode::Disallow(T_LESS_THAN);//??
+	opNode::Disallow(T_GREATER_THAN);
 
-	FindTemplateTypes();
+	this->FindTemplateTypes();
 
-	FindScopes(); // id::id
+	this->FindScopes(); // id::id
 
-	FindSigned();
-	FindUnsigned();
+	this->FindSigned();
+	this->FindUnsigned();
 
-	FindArrays(); // id[...][...]
+	this->FindArrays(); // id[...][...]
 
-	FindPointers();
-	FindReferences();
+	this->FindPointers();
+	this->FindReferences();
 
-	FindFunctionPointers();
+	this->FindFunctionPointers();
 
-	FindPointerMembers();
+	this->FindPointerMembers();
 }
 
 //
@@ -49,71 +51,71 @@ inline void BasicTypes<Parent>::FindBasicTypes()
 //
 
 template<class Parent>
-inline bool Declaration<Parent>::Parse()
+inline bool context::Declaration<Parent>::Parse()
 {
 	PARSE_START;
 
-	CleanAll();
+	this->CleanAll();
 
 	//needs to be before arrays
-	FindOperators();	 // operator ... [(...)]
+	this->FindOperators();	 // operator ... [(...)]
 
-	FindAngles();
+	this->FindAngles();
 
 	ConcatenationWalker performconcat(this);
 
-	FindCPlusPluses();
+	this->FindCPlusPluses();
 
-	FindTemplateDecls(); // template< ... >
+	this->FindTemplateDecls(); // template< ... >
 
-	FindTemplateTypes();
+	this->FindTemplateTypes();
 
-	FindSigned();
-	FindUnsigned();
+	this->FindSigned();
+	this->FindUnsigned();
 
-	FindModifiers();
-	FindValuedModifiers();
+	this->FindModifiers();
+	this->FindValuedModifiers();
 
-	FindScopes(); // id::id
+	this->FindScopes(); // id::id
 
-	FindArrays(); // id[...][...]
+	this->FindArrays(); // id[...][...]
 
-	FindPointers();
+	this->FindPointers();
 
-	FindReferences();
+	this->FindReferences();
 
-	FindFunctionPointers();
+	this->FindFunctionPointers();
 
-	FindPointerMembers();
+	this->FindPointerMembers();
 
-	FindFunctions();
+	this->FindFunctions();
 
-	FindDestructors(GetClassName());
+	this->FindDestructors(GetClassName());
 
-	FindConstructors(GetClassName());
+	this->FindConstructors(GetClassName());
 
-	FindDestructorDefinitions();
+	this->FindDestructorDefinitions();
 
-	FindConstructorDefinitions();
+	this->FindConstructorDefinitions();
 
-	FindFunctionDefinitions();
+	this->FindFunctionDefinitions();
 
-	FindFriends();
+	this->FindFriends();
 
-	FindUsings();
+	this->FindUsings();
 
-	FindTypedefs();
+	this->FindTypedefs();
 
-	FindVisibilityLabels();
+	this->FindVisibilityLabels();
 
-	FindCPPConstructs();
+	this->FindCPPConstructs();
 
-	FindOPEnums();
-	FindOPObjects();
+	this->FindOPEnums();
+	this->FindOPObjects();
 
-	FindTemplated();
+	this->FindTemplated();
 
-	FindBasicStatements();
+	this->FindBasicStatements();
 
 	PARSE_END;
 }
@@ -123,7 +125,7 @@ inline bool context::Declaration<Parent>::PostParse()
 {
 	POSTPARSE_START;
 	{
-		AllowOnlyBasicStatements();
+		this->AllowOnlyBasicStatements();
 	}
 	POSTPARSE_END;
 }
@@ -134,37 +136,37 @@ inline bool context::Declaration<Parent>::PostParse()
 
 
 template<class Parent>
-inline bool State<Parent>::Parse()
+inline bool context::State<Parent>::Parse()
 {
 	PARSE_START;
 
 	//TODO: definitely should group these things... (share between stuff...)
-	FindAngles();
+	this->FindAngles();
 
-	CleanAll();
+	this->CleanAll();
 
-	Disallow(T_LESS_THAN);
-	Disallow(T_GREATER_THAN);
+	opNode::Disallow(T_LESS_THAN);
+	opNode::Disallow(T_GREATER_THAN);
 
-	FindTemplateTypes();
+	this->FindTemplateTypes();
 
-	FindScopes();
+	this->FindScopes();
 
-	FindArrays();
+	this->FindArrays();
 
-	FindPointers();
-	FindReferences();
+	this->FindPointers();
+	this->FindReferences();
 
-	FindFunctionPointers();
+	this->FindFunctionPointers();
 
-	FindFunctions();
-	FindFunctionDefinitions();
+	this->FindFunctions();
+	this->FindFunctionDefinitions();
 
-	FindStates();
+	this->FindStates();
 
-	FindVisibilityLabels();
+	this->FindVisibilityLabels();
 
-	FindStateStatements();
+	this->FindStateStatements();
 
 	PARSE_END;
 }
@@ -174,7 +176,7 @@ inline bool context::State<Parent>::PostParse()
 {
 	POSTPARSE_START;
 	{
-		AllowOnlyStateStatements();
+		this->AllowOnlyStateStatements();
 	}
 	POSTPARSE_END;
 }
@@ -189,15 +191,15 @@ inline bool context::Inheritance<Parent>::Parse()
 {
 	PARSE_START;
 
-	FindAngles();
+	this->FindAngles();
 
-	CleanAll();
+	this->CleanAll();
 
-	Disallow(T_LESS_THAN);
-	Disallow(T_GREATER_THAN);
+	this->Disallow(T_LESS_THAN);
+	this->Disallow(T_GREATER_THAN);
 
-	FindTemplateTypes();
-	FindScopes();
+	this->FindTemplateTypes();
+	this->FindScopes();
 
 	PARSE_END;
 }
@@ -211,9 +213,9 @@ inline bool context::NamespaceDecl<Parent>::Parse()
 {
 	PARSE_START;
 
-	CleanAll();
+	this->CleanAll();
 
-	FindScopes();
+	this->FindScopes();
 
 	PARSE_END;
 }
@@ -228,7 +230,7 @@ inline bool context::Global<Parent>::PreParse()
 {
 	PREPARSE_START;
 	{
-		FindOPIncludes();
+		this->FindOPIncludes();
 	}
 	PREPARSE_END;
 }
@@ -240,13 +242,13 @@ inline bool context::Global<Parent>::Parse()
 	{
 		ConcatenationWalker performconcat(this);
 
-		FindOPDefines();
-		FindUsingNamespaceKeywords();
-		FindNamespaces();
-		FindCPlusPluses();
-		FindOPEnums();
-		FindOPObjects();
-		FindConditionalPreprocessorStatements();
+		this->FindOPDefines();
+		this->FindUsingNamespaceKeywords();
+		this->FindNamespaces();
+		this->FindCPlusPluses();
+		this->FindOPEnums();
+		this->FindOPObjects();
+		this->FindConditionalPreprocessorStatements();
 	}
 	PARSE_END;
 }
@@ -266,29 +268,29 @@ inline bool context::Global<Parent>::PostParse()
 //
 
 template<class Parent>
-inline bool Operator<Parent>::Parse()
+inline bool context::Operator<Parent>::Parse()
 {
 	PARSE_START;
 
 	//TODO: validate this, its probably wrong.
-	FindScopes();
+	opNode::FindScopes();
 
-	if (!IsCurrent(T_STAR))
-		FindPointers();
+	if (!opNode::IsCurrent(T_STAR))
+		opNode::FindPointers();
 
-	if (!IsCurrent(T_AMPERSAND))
-		FindReferences();
+	if (!opNode::IsCurrent(T_AMPERSAND))
+		opNode::FindReferences();
 
-	if (IsCurrent(G_POINTER) || IsCurrent(T_ID) || IsCurrent(G_REFERENCE) || IsCurrent(G_SCOPE))
+	if (opNode::IsCurrent(G_POINTER) || opNode::IsCurrent(T_ID) || opNode::IsCurrent(G_REFERENCE) || opNode::IsCurrent(G_SCOPE))
 	{
 		bCastOperator = true;
-		OperatorType = CurrentNode();
-		IncrementPosition();
+		OperatorType = opNode::CurrentNode();
+		opNode::IncrementPosition();
 	}
 	else
-		OperatorType = CheckOverloadableOperator();
+		OperatorType = opNode::CheckOverloadableOperator();
 
-	CheckNone();
+	opNode::CheckNone();
 
 	PARSE_END;
 }
@@ -299,12 +301,12 @@ inline bool Operator<Parent>::Parse()
 //
 
 template<class Parent>
-inline bool Dialect<Parent>::PreParse()
+inline bool context::Dialect<Parent>::PreParse()
 {
 	PREPARSE_START;
 	{
-		FindCodeLocations();
-		FindOPIncludes();
+		this->FindCodeLocations();
+		this->FindOPIncludes();
 	}
 	PREPARSE_END;
 }
@@ -314,16 +316,16 @@ inline bool context::Dialect<Parent>::Parse()
 {
 	PARSE_START;
 	{
-		CleanAll();
-		FindOPDefines();
-		FindScopes();
-		FindDialectNamespaces();
-		FindEnumerations();
-		FindCategories();
-		FindNoteDefinitions();
-		FindFileDeclarations();
-		FindExtensions();
-		FindExtendPoints();
+		this->CleanAll();
+		this->FindOPDefines();
+		this->FindScopes();
+		this->FindDialectNamespaces();
+		this->FindEnumerations();
+		this->FindCategories();
+		this->FindNoteDefinitions();
+		this->FindFileDeclarations();
+		this->FindExtensions();
+		this->FindExtendPoints();
 
 		// look for extensionpoint's (everywhere)
 		{
@@ -331,7 +333,7 @@ inline bool context::Dialect<Parent>::Parse()
 		}
 
 		// parse global dialect statements
-		FindGlobalDialectStatements();
+		this->FindGlobalDialectStatements();
 	}
 	PARSE_END;
 }
@@ -341,7 +343,7 @@ inline bool context::Dialect<Parent>::PostParse()
 {
 	POSTPARSE_START;
 	{
-		AllowOnlyGlobalDialectStatements();
+		this->AllowOnlyGlobalDialectStatements();
 	}
 	POSTPARSE_END;
 }
@@ -351,17 +353,17 @@ inline bool context::Dialect<Parent>::PostParse()
 //
 
 template<class Parent>
-inline bool Category<Parent>::Parse()
+inline bool context::Category<Parent>::Parse()
 {
 	PARSE_START;
 	{
-		CleanAll();
-		FindDataModifiers();
-		FindFunctionModifiers();
-		FindCategoryLocations();
-		FindDisallows();
+		this->CleanAll();
+		this->FindDataModifiers();
+		this->FindFunctionModifiers();
+		this->FindCategoryLocations();
+		this->FindDisallows();
 
-		FindDialectCategoryStatements();
+		this->FindDialectCategoryStatements();
 	}
 	PARSE_END;
 }
@@ -371,7 +373,7 @@ inline bool context::Category<Parent>::PostParse()
 {
 	POSTPARSE_START;
 	{
-		AllowOnlyDialectCategoryStatements();
+		this->AllowOnlyDialectCategoryStatements();
 	}
 	POSTPARSE_END;
 }
@@ -381,17 +383,17 @@ inline bool context::Category<Parent>::PostParse()
 //
 
 template<class Parent>
-inline bool CategoryLocation<Parent>::Parse()
+inline bool context::CategoryLocation<Parent>::Parse()
 {
 	PARSE_START;
 	{
-		CleanAll();
-		FindNotes();
-		FindCategoryMaps();
+		this->CleanAll();
+		this->FindNotes();
+		this->FindCategoryMaps();
 
 		// parse category location statements, then 
 		// do an appropriate allow only
-		FindCategoryLocationStatements();
+		this->FindCategoryLocationStatements();
 	}
 	PARSE_END;
 }
@@ -401,7 +403,7 @@ inline bool context::CategoryLocation<Parent>::PostParse()
 {
 	POSTPARSE_START;
 	{
-		AllowOnlyCategoryLocationStatements();
+		this->AllowOnlyCategoryLocationStatements();
 	}
 	POSTPARSE_END;
 }
@@ -412,16 +414,16 @@ inline bool context::CategoryLocation<Parent>::PostParse()
 
 
 template<class Parent>
-inline bool CategoryMap<Parent>::Parse()
+inline bool context::CategoryMap<Parent>::Parse()
 {
 	PARSE_START;
 	{
-		CleanAll();
-		FindCriteriaExpressions();
+		this->CleanAll();
+		this->FindCriteriaExpressions();
 
 		// parse category map criteria expressions, and 
 		// do the correct allowonly
-		FindCriteriaStatements();
+		this->FindCriteriaStatements();
 	}
 	PARSE_END;
 }
@@ -431,7 +433,7 @@ inline bool context::CategoryMap<Parent>::PostParse()
 {
 	POSTPARSE_START;
 	{
-		AllowOnlyDialectCriteriaStatements();
+		this->AllowOnlyDialectCriteriaStatements();
 	}
 	POSTPARSE_END;
 }
@@ -441,15 +443,15 @@ inline bool context::CategoryMap<Parent>::PostParse()
 //
 
 template<class Parent>
-inline bool Enumeration<Parent>::Parse()
+inline bool context::Enumeration<Parent>::Parse()
 {
 	PARSE_START;
 	{
-		CleanAll();
-		FindEnumerationLocations();
-		FindDisallows();
+		this->CleanAll();
+		this->FindEnumerationLocations();
+		this->FindDisallows();
 
-		FindDialectEnumStatements();
+		this->FindDialectEnumStatements();
 	}
 	PARSE_END;
 }
@@ -459,7 +461,7 @@ inline bool context::Enumeration<Parent>::PostParse()
 {
 	POSTPARSE_START;
 	{
-		AllowOnlyDialectEnumStatements();
+		this->AllowOnlyDialectEnumStatements();
 	}
 	POSTPARSE_END;
 }
@@ -469,16 +471,16 @@ inline bool context::Enumeration<Parent>::PostParse()
 //
 
 template<class Parent>
-inline bool EnumerationLocation<Parent>::Parse()
+inline bool context::EnumerationLocation<Parent>::Parse()
 {
 	PARSE_START;
 	{
-		CleanAll();
-		FindNotes();
-		FindEnumerationMaps();
+		this->CleanAll();
+		this->FindNotes();
+		this->FindEnumerationMaps();
 
 		// parse statements
-		FindEnumerationLocationStatements();
+		this->FindEnumerationLocationStatements();
 	}
 	PARSE_END;
 }
@@ -488,7 +490,7 @@ inline bool context::EnumerationLocation<Parent>::PostParse()
 {
 	POSTPARSE_START;
 	{
-		AllowOnlyEnumerationLocationStatements();
+		this->AllowOnlyEnumerationLocationStatements();
 	}
 	POSTPARSE_END;
 }
@@ -498,15 +500,15 @@ inline bool context::EnumerationLocation<Parent>::PostParse()
 //
 
 template<class Parent>
-inline bool FileDeclaration<Parent>::Parse()
+inline bool context::FileDeclaration<Parent>::Parse()
 {
 	PARSE_START;
 	{
-		CleanAll();
-		FindFileDeclarationLocations();
+		this->CleanAll();
+		this->FindFileDeclarationLocations();
 
 		// parse into statements
-		FindFileDeclarationLocationStatements();
+		this->FindFileDeclarationLocationStatements();
 	}
 	PARSE_END;
 }
@@ -516,7 +518,7 @@ inline bool context::FileDeclaration<Parent>::PostParse()
 {
 	POSTPARSE_START;
 	{
-		AllowOnlyFileDeclarationLocationStatements();
+		this->AllowOnlyFileDeclarationLocationStatements();
 	}
 	POSTPARSE_END;
 }
@@ -526,14 +528,14 @@ inline bool context::FileDeclaration<Parent>::PostParse()
 //
 
 template<class Parent>
-inline bool TemplateType<Parent>::Parse()
+inline bool context::TemplateType<Parent>::Parse()
 {
 	PARSE_START;
 	{
-		CleanAll();
+		this->CleanAll();
 
-		FindTemplateTypes();
-		FindScopes();
+		this->FindTemplateTypes();
+		this->FindScopes();
 	}
 	PARSE_END;
 }
@@ -544,11 +546,11 @@ inline bool TemplateType<Parent>::Parse()
 
 
 template<class Parent>
-inline bool Argument<Parent>::Parse()
+inline bool context::Argument<Parent>::Parse()
 {
 	PARSE_START;
 	{
-		this.FindBasicTypes();
+		this->FindBasicTypes();
 	}
 	PARSE_END;
 }

@@ -10,6 +10,8 @@
 ///
 ///****************************************************************
 
+#pragma once
+
 namespace interfaces
 {
 
@@ -410,7 +412,7 @@ public:
 /// DataStatements
 ///
 
-template<class Parent>
+template<NodeType Parent>
 class DataStatements : public Parent
 {
 public:

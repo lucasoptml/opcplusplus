@@ -11,6 +11,8 @@
 /// Time-related stuff (not to be confused with timers).
 ///****************************************************************
 
+#pragma once
+
 class opTimeUtility
 {
 public:
