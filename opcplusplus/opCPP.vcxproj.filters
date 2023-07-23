@@ -213,14 +213,8 @@
     <ClCompile Include="..\lib\boost\libs\filesystem\src\windows_file_codecvt.cpp">
       <Filter>Library Files\Boost Filesystem\Source</Filter>
     </ClCompile>
-    <ClCompile Include="Inc\BasicNodes.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\lib\boost\libs\system\src\error_code.cpp">
       <Filter>Library Files\Boost\System</Filter>
-    </ClCompile>
-    <ClCompile Include="Src\Boost.cpp">
-      <Filter>Source Files\opC++</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

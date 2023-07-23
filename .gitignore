@@ -4,3 +4,5 @@ opcplusplus/Dox/
 opcplusplus/.vs/
 *.pdb
 *.exe
+opcplusplus/Generated/
+opcplusplus/Release/

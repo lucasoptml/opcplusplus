@@ -1,1 +1,1 @@
-Distribution\bin\win32\release\opcpp.exe -oh Oh/HugeCollada.oh -vdm xml -verbose -force
+Distribution\bin\win32\release\opcpp.exe -oh Oh/HugeCollada.oh -doh Distribution\opcpp\dialects\opc++dialect.doh -printxml -verbose -force
