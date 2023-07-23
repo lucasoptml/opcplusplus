@@ -876,7 +876,7 @@ private:
 		else if (TypedefStatementNode* typedefnode = node_cast<TypedefStatementNode>(node))
 			name = typedefnode->GetTypedef()->GetName()->GetValue();
 
-		if (name != ""
+		if (name.GetString() != ""
 		&&  MemberMatchesCategory(name, node))
 		{
 			return true;

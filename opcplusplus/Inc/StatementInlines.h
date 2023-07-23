@@ -539,7 +539,7 @@ inline bool UsingStatements<Parent>::FindUsingStatements()
 		{
 			stacked<UsingStatementNode> newNode = opNode::PushUntilEnd<UsingStatementNode>();
 
-			opNode::SetInnerStatement(*newNode);
+			this->SetInnerStatement(*newNode);
 			opNode::AppendNode(newNode);
 		}
 	}
@@ -572,7 +572,7 @@ inline bool NullStatements<Parent>::FindNullStatements()
 
 			newNode->CopyBasics(this);
 
-			opNode::SetInnerStatement(*newNode);
+			this->SetInnerStatement(*newNode);
 			opNode::AppendNode(newNode);
 
 			return true;
@@ -621,7 +621,7 @@ inline bool FuncPointerStatements<Parent>::FindFuncPointerStatements()
 			newNode->SetFunctionPointer(*fpn);
 			newNode->AppendNode(fpn);
 
-			opNode::SetInnerStatement(*newNode);
+			this->SetInnerStatement(*newNode);
 			opNode::AppendNode(newNode);
 
 			return true;
@@ -669,7 +669,7 @@ inline bool FuncPrototypeStatements<Parent>::FindFuncPrototypeStatements()
 			newNode->SetFunctionPrototype(*fpn);
 			newNode->AppendNode(fpn);
 
-			opNode::SetInnerStatement(*newNode);
+			this->SetInnerStatement(*newNode);
 			opNode::AppendNode(newNode);
 
 			return true;
@@ -708,7 +708,7 @@ inline bool ConstructorPrototypeStatements<Parent>::FindConstructorPrototypeStat
 			newNode->SetConstructorPrototype(*cpn);
 			newNode->AppendNode(cpn);
 
-			opNode::SetInnerStatement(*newNode);
+			this->SetInnerStatement(*newNode);
 			opNode::AppendNode(newNode);
 
 			return true;
@@ -747,7 +747,7 @@ inline bool DestructorPrototypeStatements<Parent>::FindDestructorPrototypeStatem
 			newNode->SetDestructorPrototype(*cpn);
 			newNode->AppendNode(cpn);
 
-			opNode::SetInnerStatement(*newNode);
+			this->SetInnerStatement(*newNode);
 			opNode::AppendNode(newNode);
 
 			return true;

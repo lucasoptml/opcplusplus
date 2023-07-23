@@ -28,7 +28,7 @@
 
 //special library settings
 #ifdef PLATFORM_WINDOWS
-	#define BOOST_FILESYSTEM_NO_LIB
+//	#define BOOST_FILESYSTEM_NO_LIB
 #endif
 
 

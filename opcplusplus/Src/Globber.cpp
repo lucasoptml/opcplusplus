@@ -111,7 +111,7 @@ bool Globber::Glob(const opParameters& p)
 				//found a valid oh file!
 				if(exists(ohpath))
 				{
-					if( opString(ohpath.leaf()).Right('.') == extension)
+					if( opString(ohpath.leaf().string()).Right('.') == extension)
 						validohfiles.push_back(ohfileinfo(ohpath,oohpath,ocpppath));
 				}
 			}

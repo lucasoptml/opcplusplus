@@ -87,14 +87,14 @@ public:
 	// utility functions
 public:
 	
-	static opString GetOutputPath(const opParameters& p, const path& inputpath);
+	static string GetOutputPath(const opParameters& p, const path& inputpath);
 	
 	// get path relative to another path
-	static opString GetRelativePath(const opString& targetpath, const opString& basepath);
+	static string GetRelativePath(const opString& targetpath, const opString& basepath);
 	
 	// convert to and from generated paths
-	static opString ToGeneratedPath(const opString& inputpath);
-	static opString FromGeneratedPath(const opString& inputpath);
+	static string ToGeneratedPath(const opString& inputpath);
+	static string FromGeneratedPath(const opString& inputpath);
 	
 private:
 	// private control

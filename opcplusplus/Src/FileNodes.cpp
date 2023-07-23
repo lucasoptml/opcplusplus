@@ -234,7 +234,7 @@ void FileNode::AddDependency(const opString& filepath)
 
 void FileNode::SaveDependencies(const opString& filepath)
 {
-	std::ofstream ofs(filepath);
+	std::ofstream ofs(filepath.GetString());
 
 	opSet<opString>::iterator it = Dependencies.begin();
 	opSet<opString>::iterator end = Dependencies.end();
@@ -248,7 +248,7 @@ void FileNode::SaveDependencies(const opString& filepath)
 
 bool FileNode::LoadDependencies(const opString& filepath)
 {
-	std::ifstream     ifs(filepath, ios::in);
+	std::ifstream     ifs(filepath.GetString(), ios::in);
 	opString          file;
 	opArray<opString> files;
 	int               size;

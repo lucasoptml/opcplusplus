@@ -137,7 +137,7 @@ public:
 	{
 		//no dispatch
 		//TODO: add file and line
-		throw opCPP_AssertException(assertstring);
+		throw opCPP_AssertException(assertstring.GetString());
 	}
 
 	enum ExceptionType

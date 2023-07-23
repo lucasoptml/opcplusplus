@@ -81,7 +81,7 @@ bool Trim<Parent>::PreParse()
 {
 	PREPARSE_START;
 	{
-		this.DoTrim();
+		this->DoTrim();
 	}
 	PREPARSE_END;
 }
@@ -91,7 +91,7 @@ bool Trim<Parent>::Parse()
 {
 	PARSE_START;
 	{
-		this.DoTrim();
+		this->DoTrim();
 	}
 	PARSE_END;
 }
@@ -99,8 +99,8 @@ bool Trim<Parent>::Parse()
 template<NodeType Parent>
 void Trim<Parent>::DoTrim()
 {
-	iterator i = this.GetBegin();
-	iterator end = this.GetEnd();
+	iterator i = this->GetBegin();
+	iterator end = this->GetEnd();
 
 	// Trim the front.
 	while (i != end
@@ -108,22 +108,22 @@ void Trim<Parent>::DoTrim()
 	{
 		iterator old = i;
 		++i;
-		this.DeleteNode(old);
+		this->DeleteNode(old);
 	}
 
-	if (this.IsEmpty())
+	if (this->IsEmpty())
 		return;
 
 	// Trim the end.
-	i = this.GetBegin();
-	end = --this.GetEnd();
+	i = this->GetBegin();
+	end = --this->GetEnd();
 
 	while (end != i
 		&& end->IsWhitespace())
 	{
 		iterator old = end;
 		--end;
-		this.DeleteNode(old);
+		this->DeleteNode(old);
 	}
 }
 
@@ -136,29 +136,30 @@ inline bool interfaces::Namespaces<Parent>::Parse()
 {
 	PARSE_START;
 	{
-		FindNamespaces();
+		this->FindNamespaces();
 	}
 	PARSE_END;
 }
 
 template<class Parent>
-inline void Namespaces<Parent>::FindNamespaces()
+inline void interfaces::Namespaces<Parent>::FindNamespaces()
 {
+	
 	LOOP_START(G_NAMESPACE);
 	{
 		HIT(T_NAMESPACE)
 		{
 			stackedcontext<nodes::NamespaceNode> newNode = opNode::Make<nodes::NamespaceNode>(T_NAMESPACE);
 
-			this.Erase(T_NAMESPACE);
+			this->Erase(T_NAMESPACE);
 
-			this.EatWhitespaceAndComments();
+			this->EatWhitespaceAndComments();
 
 			stacked<TerminalNode> name = opNode::Expect<TerminalNode>(T_ID);
 
-			this.EatWhitespaceAndComments();
+			this->EatWhitespaceAndComments();
 
-			if (this.IsCurrent(T_ASSIGN))
+			if (this->IsCurrent(T_ASSIGN))
 			{
 				//create an alias instead (transform and set...)
 				stackedcontext<NamespaceAliasNode> alias = opNode::Transform<NamespaceAliasNode>(newNode);
@@ -166,26 +167,26 @@ inline void Namespaces<Parent>::FindNamespaces()
 				alias->SetName(*name);
 				alias->AppendNode(name);
 
-				this.Erase(T_ASSIGN);
+				this->Erase(T_ASSIGN);
 
-				this.EatWhitespaceAndComments();
+				this->EatWhitespaceAndComments();
 
-				while (this.IsCurrent(T_ID))
+				while (this->IsCurrent(T_ID))
 				{
 					stacked<TerminalNode> scope = opNode::Expect<TerminalNode>(T_ID);
 
 					alias->AddScope(*scope);
 					alias->AppendNode(scope);
 
-					if (this.IsCurrent(T_SCOPE_RESOLUTION))
-						this.Erase(T_SCOPE_RESOLUTION);
+					if (this->IsCurrent(T_SCOPE_RESOLUTION))
+						this->Erase(T_SCOPE_RESOLUTION);
 				}
 
-				this.EatWhitespaceAndComments();
+				this->EatWhitespaceAndComments();
 
-				this.Erase(T_SEMICOLON);
+				this->Erase(T_SEMICOLON);
 
-				this.InsertNodeAtCurrent(alias);
+				this->InsertNodeAtCurrent(alias);
 			}
 			else
 			{
@@ -204,6 +205,7 @@ inline void Namespaces<Parent>::FindNamespaces()
 		}
 	}
 	LOOP_END;
+	
 }
 
 //
@@ -1674,7 +1676,7 @@ inline void Preprocessors<Parent>::FindDirective(const string& directivename)
 		{
 			stackedcontext<NodeType> newNode = opNode::Make<NodeType>(HitToken);
 
-			Erase(HitToken);
+			opNode::Erase(HitToken);
 
 			// check and see that this #____ token is the first thing
 			// on the line (except for whitespace) and error if not
@@ -2644,3 +2646,4 @@ inline void interfaces::ModifierSupport<Parent>::CreateModifiersNode()
 
 	opNode::AppendNode(modnode);
 }
+

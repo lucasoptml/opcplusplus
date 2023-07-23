@@ -21,7 +21,7 @@
 
 void errors::opLog::DebugLog(const opString& s)
 {
-	OutputDebugString(s);
+	OutputDebugString(s.GetString().c_str());
 }
 
 /*=== platform ===*/

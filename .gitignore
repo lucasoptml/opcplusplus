@@ -2,3 +2,5 @@ opcplusplus/.vs/opcplusplus/FileContentIndex/8c8a4015-5e45-4eaa-b6ff-3144697f792
 opcplusplus/Debug/
 opcplusplus/Dox/
 opcplusplus/.vs/
+*.pdb
+*.exe

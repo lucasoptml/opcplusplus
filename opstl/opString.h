@@ -93,10 +93,10 @@ public:
 	}
 
 	// Initialize a string given a wide string.
-	opString(const wstring& _s)
-	{
-		s = string_type( _s.begin(), _s.end() );
-	}
+	//opString(const wstring& _s)
+	//{
+	//	s = string_type( _s.begin(), _s.end() );
+	//}
 
 	opString(const vector<char>& _s)
 	{
@@ -975,23 +975,6 @@ public:
 
 	/**** operator overloads ****/
 
-	// weird overloads for functions that take const string&,
-	// string&, and const char*
-	operator const string_type& () const
-	{
-		return s;
-	}
-
-	operator string_type& ()
-	{
-		return s;
-	}
-
-	operator const char* () const
-	{
-		return s.c_str();
-	}
-
 	// indexing
 	char& operator[] (int i)
 	{
@@ -1365,21 +1348,21 @@ private:
 
 // Specialize for ints.
 template<>
-int opString::StringTo<int>(const opString& _s)
+inline int opString::StringTo<int>(const opString& _s)
 {
 	return _s.ToInt();
 }
 
 // Specialize for floats.
 template<>
-float opString::StringTo<float>(const opString& _s)
+inline float opString::StringTo<float>(const opString& _s)
 {
 	return _s.ToFloat();
 }
 
 // Specialize for doubles.
 template<>
-double opString::StringTo<double>(const opString& _s)
+inline double opString::StringTo<double>(const opString& _s)
 {
 	return _s.ToDouble();
 }

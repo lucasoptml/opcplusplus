@@ -30,8 +30,8 @@ public:
 
 	void removeWhitespace()
 	{
-		iterator i   = this.GetBegin();
-		iterator end = this.GetEnd();
+		iterator i   = this->GetBegin();
+		iterator end = this->GetEnd();
 
 		while (i != end)
 		{
@@ -41,7 +41,7 @@ public:
 			{
 				iterator newi = i;
 				++i;
-				this.DeleteNode(newi);
+				this->DeleteNode(newi);
 				continue;
 			}
 
@@ -64,8 +64,8 @@ public:
 
 	void removeComments()
 	{
-		iterator i   = this.GetBegin();
-		iterator end = this.GetEnd();
+		iterator i   = this->GetBegin();
+		iterator end = this->GetEnd();
 
 		while (i != end)
 		{
@@ -75,7 +75,7 @@ public:
 			{
 				iterator newi = i;
 				++i;
-				this.DeleteNode(newi);
+				this->DeleteNode(newi);
 				continue;
 			}
 
@@ -99,8 +99,8 @@ public:
 
 	void CleanAll()
 	{
-		this.removeComments();
-		this.removeWhitespace();
+		this->removeComments();
+		this->removeWhitespace();
 	}
 };
 
@@ -140,9 +140,9 @@ public:
 		if(container.size())
 			return;
 
-		this.ResetPosition();
+		this->ResetPosition();
 
-		if (!this.IsEmpty())
+		if (!this->IsEmpty())
 		{
 			while(1)
 			{
@@ -151,9 +151,9 @@ public:
 				if(arg->IsEmpty())
 					arg->CopyBasics(this);
 
-				if(this.IsCurrent(Delimiter))
+				if(this->IsCurrent(Delimiter))
 				{
-					this.Erase(Delimiter);
+					this->Erase(Delimiter);
 					container.push_back(*arg);
 				}
 				else
@@ -168,18 +168,18 @@ public:
 			for (int i = 0; i < size; i++)
 			{
 				stacked<opNode> tempstacked = stacked<opNode>::buildstacked(container[i]);
-				this.AppendNode(tempstacked);
+				this->AppendNode(tempstacked);
 			}
 		}
 
-		this.ResetPosition();
+		this->ResetPosition();
 	}
 
 	// delimiter specific functions
 	template<class ArgumentType>
 	void MakeCommaList(vector<ArgumentType*>& container)
 	{
-		this.MakeDelimiterList<T_COMMA>(container);
+		this->MakeDelimiterList<T_COMMA>(container);
 	}
 };
 
@@ -191,10 +191,10 @@ class UnInlineSupport : public Parent
 	bool GetInlineMode()
 	{
 		//if inline, then inline
-		bool binline = this.HasModifier(T_INLINE);
+		bool binline = this->HasModifier(T_INLINE);
 
 		//if uninline, then uninline
-		bool buninline = this.HasModifier(T_UNINLINE);
+		bool buninline = this->HasModifier(T_UNINLINE);
 
 		//if inline and uninline, then uninline
 		bool doinline = binline && !buninline;

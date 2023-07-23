@@ -355,7 +355,7 @@ bool opParameters::Parse()
 			opOption* option = GetOption(optionstring);
 
 			// check for beta build
-			if ( optionstring == "beta" && opBetaSupport::IsBetaBuild() )
+			if ( optionstring.GetString() == "beta" && opBetaSupport::IsBetaBuild())
 				continue;
 
 			// if this is an invalid option and it's not the 
@@ -363,7 +363,7 @@ bool opParameters::Parse()
 			if ( !option )
 			{
 				//not an option, error
-				if ( optionstring != "beta" )
+				if ( optionstring.GetString() != "beta" )
 				{
 					Log(opString("Unknown Argument : ") + optionstring);
 					Log("");

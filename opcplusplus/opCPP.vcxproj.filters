@@ -61,6 +61,9 @@
     <Filter Include="Header Files\opC++">
       <UniqueIdentifier>{0bbbaeeb-43d0-4e69-8ae1-1477def2eadc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Library Files\Boost\System">
+      <UniqueIdentifier>{c3808510-98c0-4b73-a55c-2e9962bbc2c3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Src\DialectModifierNodes.cpp">
@@ -212,6 +215,12 @@
     </ClCompile>
     <ClCompile Include="Inc\BasicNodes.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\boost\libs\system\src\error_code.cpp">
+      <Filter>Library Files\Boost\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Boost.cpp">
+      <Filter>Source Files\opC++</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

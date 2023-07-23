@@ -273,13 +273,13 @@ inline bool context::Operator<Parent>::Parse()
 	PARSE_START;
 
 	//TODO: validate this, its probably wrong.
-	opNode::FindScopes();
+	this->FindScopes();
 
 	if (!opNode::IsCurrent(T_STAR))
-		opNode::FindPointers();
+		this->FindPointers();
 
 	if (!opNode::IsCurrent(T_AMPERSAND))
-		opNode::FindReferences();
+		this->FindReferences();
 
 	if (opNode::IsCurrent(G_POINTER) || opNode::IsCurrent(T_ID) || opNode::IsCurrent(G_REFERENCE) || opNode::IsCurrent(G_SCOPE))
 	{

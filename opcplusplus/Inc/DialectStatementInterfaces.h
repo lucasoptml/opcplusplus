@@ -30,7 +30,7 @@ public:
 	template<Token grammar, class StatementNodeClass, class NodeClass>
 	bool HandleStatement(stacked<opNode>& stuff)
 	{
-		if (this.IsCurrent(grammar))
+		if (this->IsCurrent(grammar))
 		{
 			stackedcontext<StatementNodeClass> statement = opNode::Make<StatementNodeClass>(grammar);
 			stacked<NodeClass>                 node      = opNode::Expect<NodeClass>(grammar);
@@ -49,7 +49,7 @@ public:
 			statement->AppendNode(node);
 
 			Statements.push_back(*statement);
-			InsertNodeAtCurrent(statement);
+			opNode::InsertNodeAtCurrent(statement);
 
 			return true;
 		}

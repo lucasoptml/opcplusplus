@@ -479,7 +479,7 @@ inline void interfaces::DialectCriteriaStatements<Parent>::FindCriteriaStatement
 		if (bFinished)
 			break;
 
-		if (opNode::IsStatement(stuff));
+		if (this->IsStatement(stuff));
 		else if (opNode::IsCurrent(T_SEMICOLON))
 		{
 			opNode::Erase(T_SEMICOLON);

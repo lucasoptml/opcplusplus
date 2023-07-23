@@ -151,7 +151,8 @@ bool opDriver::Convert(const opParameters &p)
 	catch( boost::filesystem::filesystem_error& fe )
 	{
 		opString errorstr = fe.what();
-		errorstr.Replace(fe.who(),"Error: Improper path detected ");
+		//TODO: this may be incorrect (was fe.who() replace)
+		errorstr.Replace(fe.path1().string(), "Error: Improper path detected ");
 		Log(errorstr);
 		Log(opParameters::Get().GetCommandLineString());
 	}
@@ -187,7 +188,7 @@ bool opDriver::CheckDependencies()
 		
 		if(exists(filepath))
 		{
-			opString targetfile = filepath.leaf();
+			opString targetfile = filepath.leaf().string();
 			
 			targetfile += ".target";
 			
@@ -409,7 +410,7 @@ bool opDriver::NormalMode(const opParameters &p)
 	return bResult;
 }
 
-opString opDriver::ToGeneratedPath(const opString& inpath)
+string opDriver::ToGeneratedPath(const opString& inpath)
 {
 	const opParameters& p = opParameters::Get();
 	
@@ -450,7 +451,7 @@ opString opDriver::ToGeneratedPath(const opString& inpath)
 	return newpath.string();
 }
 
-opString opDriver::GetRelativePath(const opString& targetfile, const opString& basefile)
+string opDriver::GetRelativePath(const opString& targetfile, const opString& basefile)
 {
 	//return to_relative_path(targetpath.GetString(),basepath.GetString()).string();
 	//targetpath = Oh/Types.oh <- this must be the real path!
@@ -487,7 +488,7 @@ opString opDriver::GetRelativePath(const opString& targetfile, const opString& b
 	return newpath.string();
 }
 
-opString opDriver::FromGeneratedPath(const opString& inputpath)
+string opDriver::FromGeneratedPath(const opString& inputpath)
 {
 	const opParameters& p = opParameters::Get();
 	
@@ -514,13 +515,13 @@ opString opDriver::FromGeneratedPath(const opString& inputpath)
 		newpath = "/" + newpath.Right(4);
 	}
 	
-	return newpath;
+	return newpath.GetString();
 }
 
-opString opDriver::GetOutputPath(const opParameters& p, const path& inputpath)
+string opDriver::GetOutputPath(const opParameters& p, const path& inputpath)
 {
 	// convert the input path to the associated generated path
-	path adjustedpath = ToGeneratedPath(inputpath.string()).GetString();
+	path adjustedpath = ToGeneratedPath(inputpath.string());
 
 	return adjustedpath.string();
 }
@@ -1170,7 +1171,7 @@ bool opDriver::CleanMode(const opParameters& p)
 	{
 		opString filestring = p.Depend[i];
 		path     filepath   = filestring.GetString();
-		opString targetfile = filepath.leaf();
+		opString targetfile = filepath.leaf().string();
 
 		targetfile += ".target";
 
@@ -1213,7 +1214,8 @@ bool opDriver::GlobMode(const opParameters& p)
 	catch( boost::filesystem::filesystem_error& fe )
 	{
 		opString errorstr = fe.what();
-		errorstr.Replace(fe.who(),"Error: Improper path detected when globbing.");
+		//TODO: may be incorrect, was fe.what()
+		errorstr.Replace(fe.path1().string(), "Error: Improper path detected when globbing.");
 		Log(errorstr);
 	}
 	catch (...)

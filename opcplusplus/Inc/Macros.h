@@ -104,7 +104,7 @@ typedef Parent Super;									\
 typedef opList<opNode*>::pointer_iterator iterator;		\
 iface<Parent>()											\
 {														\
-	this.Init();												\
+	this->Init();												\
 }
 
 // removed:	enum implements_##iface { iface##_implementation };	\

@@ -281,7 +281,7 @@ bool opDemoSupport::ValidateLicense(opParameters& params)
 	opString hash = lines[2].RemoveWhitespace();
 
 	// If the hash of the key does not match the hash in the file, we're in demo mode.
-	if (md5Encode(key) != hash)
+	if (md5Encode(key.GetString()) != hash)
 	{
 		DemoMode = true;
 		return false;

@@ -16,7 +16,7 @@
 
 #include <stdio.h>
 
-#define BOOST_FILESYSTEM_NO_LIB
+//#define BOOST_FILESYSTEM_NO_LIB
 #include <boost/filesystem/operations.hpp>
 
 class FileReadStream

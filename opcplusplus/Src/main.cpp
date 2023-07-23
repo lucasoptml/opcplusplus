@@ -47,7 +47,10 @@ int main(int argc, char** argv)
 
 	// setup boost filesystem's behavior 
 	// (native instead of portable, so windows paths are allowed)
-	path::default_name_check(boost::filesystem::native);
+	
+	//TODO: this might be needed, but moved?
+	//path::default_name_check(boost::filesystem::native);
+	
 	boost::filesystem::initial_path();
 
 	/*=== parse the executable location ===*/

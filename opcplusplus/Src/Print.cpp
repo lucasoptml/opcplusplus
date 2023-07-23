@@ -373,7 +373,7 @@ void DialectFileNode::PrintHighlighting(opSectionStream& stream)
 		Token    t    = (Token) i;
 		opString name = opTokenMap::GetString(t);
 
-		if (name != "@")
+		if (name.GetString() != "@")
 			HighlightKeyword(stream, name);
 	}
 
@@ -387,7 +387,7 @@ void DialectFileNode::PrintHighlighting(opSectionStream& stream)
 		Token    t    = (Token) i;
 		opString name = opTokenMap::GetString(t);
 
-		if (name != "c++")
+		if (name.GetString() != "c++")
 			HighlightKeyword(stream, name);
 	}
 
@@ -2211,7 +2211,7 @@ void ModifiersNode::PrintBuiltIn(opSectionStream& stream)
 		}
 		//NOTE: special case for opstatic, need to add transforms!
 		else if ( token == T_MODIFIER 
-		&&        node_cast<TerminalNode>( *i )->GetValue() == "opstatic" )
+		&&        node_cast<TerminalNode>( *i )->GetValue().GetString() == "opstatic")
 		{
 			stream << "static ";
 		}
