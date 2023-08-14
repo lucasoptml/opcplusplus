@@ -162,9 +162,6 @@
     <ClCompile Include="Src\opError.cpp">
       <Filter>Source Files\Errors</Filter>
     </ClCompile>
-    <ClCompile Include="..\Lib\md5\md5.c">
-      <Filter>Library Files\md5</Filter>
-    </ClCompile>
     <ClCompile Include="Src\opCPPSource.cpp">
       <Filter>Globs</Filter>
     </ClCompile>
@@ -174,14 +171,11 @@
     <ClCompile Include="Src\WindowsSource.cpp">
       <Filter>Globs</Filter>
     </ClCompile>
+    <ClCompile Include="inc\md5\md5.c">
+      <Filter>Library Files\md5</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Lib\md5\md5.h">
-      <Filter>Library Files\md5</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Lib\md5\opmd5.h">
-      <Filter>Library Files\md5</Filter>
-    </ClInclude>
     <ClInclude Include="Inc\DialectInterfaces.h">
       <Filter>Header Files\Dialect</Filter>
     </ClInclude>
@@ -394,6 +388,12 @@
     </ClInclude>
     <ClInclude Include="inc\fastdelegate\FastDelegate.h">
       <Filter>Library Files\fastdelegate</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\md5\md5.h">
+      <Filter>Library Files\md5</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\md5\opmd5.h">
+      <Filter>Library Files\md5</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

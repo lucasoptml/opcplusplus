@@ -7,20 +7,19 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "opcplusplus", "opCPP.vcxpro
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Win32 = Debug|Win32
-		Release|Win32 = Release|Win32
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{3C7EADEC-DC02-4F50-B142-4A95AFDFEBFE}.Debug|Win32.ActiveCfg = Debug|Win32
-		{3C7EADEC-DC02-4F50-B142-4A95AFDFEBFE}.Debug|Win32.Build.0 = Debug|Win32
-		{3C7EADEC-DC02-4F50-B142-4A95AFDFEBFE}.Release|Win32.ActiveCfg = Release|Win32
-		{3C7EADEC-DC02-4F50-B142-4A95AFDFEBFE}.Release|Win32.Build.0 = Release|Win32
+		{3C7EADEC-DC02-4F50-B142-4A95AFDFEBFE}.Debug|x86.ActiveCfg = Debug|Win32
+		{3C7EADEC-DC02-4F50-B142-4A95AFDFEBFE}.Debug|x86.Build.0 = Debug|Win32
+		{3C7EADEC-DC02-4F50-B142-4A95AFDFEBFE}.Release|x86.ActiveCfg = Release|Win32
+		{3C7EADEC-DC02-4F50-B142-4A95AFDFEBFE}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		AMDCaProjectFile = C:\Spheroid\opCPP\CodeAnalyst\opCPP.caw
-		SolutionGuid = {336B8CE2-A976-4A39-BAAC-E62FA9601514}
+		SolutionGuid = {464D5C74-F6AD-4657-A3B3-E8EA7BDE1774}
 	EndGlobalSection
 EndGlobal

@@ -112,7 +112,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\Lib\md5\md5.c" />
+    <ClCompile Include="inc\md5\md5.c" />
     <ClCompile Include="Src\Beta.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -265,8 +265,6 @@
     <ClCompile Include="Src\WindowsSource.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Lib\md5\md5.h" />
-    <ClInclude Include="..\Lib\md5\opmd5.h" />
     <ClInclude Include="Inc\BasicNodes.h" />
     <ClInclude Include="Inc\Beta.h" />
     <ClInclude Include="Inc\CodeVisitors.h" />
@@ -301,6 +299,8 @@
     <ClInclude Include="Inc\MacroNodes.h" />
     <ClInclude Include="Inc\Macros.h" />
     <ClInclude Include="Inc\Mappings.h" />
+    <ClInclude Include="inc\md5\md5.h" />
+    <ClInclude Include="inc\md5\opmd5.h" />
     <ClInclude Include="Inc\MemoryTracker.h" />
     <ClInclude Include="Inc\ModifierNodes.h" />
     <ClInclude Include="Inc\Modifiers.h" />
