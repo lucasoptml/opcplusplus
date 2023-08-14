@@ -112,15 +112,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\lib\boost\libs\filesystem\src\directory.cpp" />
-    <ClCompile Include="..\lib\boost\libs\filesystem\src\exception.cpp" />
-    <ClCompile Include="..\lib\boost\libs\filesystem\src\operations.cpp" />
-    <ClCompile Include="..\lib\boost\libs\filesystem\src\path.cpp" />
-    <ClCompile Include="..\lib\boost\libs\filesystem\src\path_traits.cpp" />
-    <ClCompile Include="..\lib\boost\libs\filesystem\src\portability.cpp" />
-    <ClCompile Include="..\lib\boost\libs\filesystem\src\unique_path.cpp" />
-    <ClCompile Include="..\lib\boost\libs\filesystem\src\utf8_codecvt_facet.cpp" />
-    <ClCompile Include="..\lib\boost\libs\filesystem\src\windows_file_codecvt.cpp" />
     <ClCompile Include="..\Lib\md5\md5.c" />
     <ClCompile Include="Src\Beta.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -274,32 +265,8 @@
     <ClCompile Include="Src\WindowsSource.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Lib\boost\boost\filesystem\config.hpp" />
-    <ClInclude Include="..\Lib\boost\boost\filesystem\convenience.hpp" />
-    <ClInclude Include="..\Lib\boost\boost\filesystem\exception.hpp" />
-    <ClInclude Include="..\Lib\boost\boost\filesystem\fstream.hpp" />
-    <ClInclude Include="..\Lib\boost\boost\filesystem\operations.hpp" />
-    <ClInclude Include="..\Lib\boost\boost\filesystem\path.hpp" />
-    <ClInclude Include="..\lib\boost\libs\filesystem\src\atomic_ref.hpp" />
-    <ClInclude Include="..\lib\boost\libs\filesystem\src\atomic_tools.hpp" />
-    <ClInclude Include="..\lib\boost\libs\filesystem\src\error_handling.hpp" />
-    <ClInclude Include="..\lib\boost\libs\filesystem\src\platform_config.hpp" />
-    <ClInclude Include="..\lib\boost\libs\filesystem\src\posix_tools.hpp" />
-    <ClInclude Include="..\lib\boost\libs\filesystem\src\private_config.hpp" />
-    <ClInclude Include="..\lib\boost\libs\filesystem\src\windows_file_codecvt.hpp" />
-    <ClInclude Include="..\lib\boost\libs\filesystem\src\windows_tools.hpp" />
     <ClInclude Include="..\Lib\md5\md5.h" />
     <ClInclude Include="..\Lib\md5\opmd5.h" />
-    <ClInclude Include="..\opSTL\opArray.h" />
-    <ClInclude Include="..\opSTL\opDeque.h" />
-    <ClInclude Include="..\opSTL\opHash.h" />
-    <ClInclude Include="..\opSTL\opInterfaces.h" />
-    <ClInclude Include="..\opSTL\opList.h" />
-    <ClInclude Include="..\opSTL\opMap.h" />
-    <ClInclude Include="..\opSTL\opSet.h" />
-    <ClInclude Include="..\opSTL\opstl.h" />
-    <ClInclude Include="..\opSTL\opstlcommon.h" />
-    <ClInclude Include="..\opSTL\opString.h" />
     <ClInclude Include="Inc\BasicNodes.h" />
     <ClInclude Include="Inc\Beta.h" />
     <ClInclude Include="Inc\CodeVisitors.h" />
@@ -323,6 +290,7 @@
     <ClInclude Include="Inc\ErrorTracker.h" />
     <ClInclude Include="Inc\Exceptions.h" />
     <ClInclude Include="Inc\ExtensionNodes.h" />
+    <ClInclude Include="inc\fastdelegate\FastDelegate.h" />
     <ClInclude Include="Inc\File.h" />
     <ClInclude Include="Inc\FileNodes.h" />
     <ClInclude Include="Inc\Globber.h" />
@@ -343,6 +311,16 @@
     <ClInclude Include="Inc\opLog.h" />
     <ClInclude Include="Inc\opNode.h" />
     <ClInclude Include="Inc\opNodeInlines.h" />
+    <ClInclude Include="Inc\opstl\opArray.h" />
+    <ClInclude Include="Inc\opstl\opDeque.h" />
+    <ClInclude Include="Inc\opstl\opHash.h" />
+    <ClInclude Include="Inc\opstl\opInterfaces.h" />
+    <ClInclude Include="Inc\opstl\opList.h" />
+    <ClInclude Include="Inc\opstl\opMap.h" />
+    <ClInclude Include="Inc\opstl\opSet.h" />
+    <ClInclude Include="Inc\opstl\opstl.h" />
+    <ClInclude Include="Inc\opstl\opstlcommon.h" />
+    <ClInclude Include="Inc\opstl\opString.h" />
     <ClInclude Include="Inc\opTime.h" />
     <ClInclude Include="Inc\Parameters.h" />
     <ClInclude Include="Inc\Paths.h" />

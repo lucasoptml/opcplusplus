@@ -46,12 +46,13 @@ int main(int argc, char** argv)
 	std::ios::sync_with_stdio(false);
 
 	// setup boost filesystem's behavior 
+	// FIXME: verify
 	// (native instead of portable, so windows paths are allowed)
 	
 	//TODO: this might be needed, but moved?
 	//path::default_name_check(boost::filesystem::native);
 	
-	boost::filesystem::initial_path();
+	std::filesystem::current_path();
 
 	/*=== parse the executable location ===*/
 

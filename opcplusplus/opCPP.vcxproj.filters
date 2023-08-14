@@ -21,18 +21,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
     </Filter>
-    <Filter Include="Library Files\Boost Filesystem">
-      <UniqueIdentifier>{62229ab2-7006-4723-a0fb-31aac200fe1a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Library Files\Boost Filesystem\Source">
-      <UniqueIdentifier>{11341e82-f922-4c74-a38e-a2442f591dac}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Library Files\Boost Filesystem\Headers">
-      <UniqueIdentifier>{a7447747-84d1-43f5-a030-361c2592789c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Library Files\Boost">
-      <UniqueIdentifier>{d0c1df6c-86f4-4d74-b7d5-6caf88cf5f92}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Library Files\opstl">
       <UniqueIdentifier>{7e511a27-aa4f-4c3f-a991-1f6a72b43d07}</UniqueIdentifier>
     </Filter>
@@ -61,8 +49,8 @@
     <Filter Include="Header Files\opC++">
       <UniqueIdentifier>{0bbbaeeb-43d0-4e69-8ae1-1477def2eadc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Library Files\Boost\System">
-      <UniqueIdentifier>{c3808510-98c0-4b73-a55c-2e9962bbc2c3}</UniqueIdentifier>
+    <Filter Include="Library Files\fastdelegate">
+      <UniqueIdentifier>{abf1f2f6-b160-45cc-80b7-45feb199202a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -186,83 +174,8 @@
     <ClCompile Include="Src\WindowsSource.cpp">
       <Filter>Globs</Filter>
     </ClCompile>
-    <ClCompile Include="..\lib\boost\libs\filesystem\src\directory.cpp">
-      <Filter>Library Files\Boost Filesystem\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\boost\libs\filesystem\src\exception.cpp">
-      <Filter>Library Files\Boost Filesystem\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\boost\libs\filesystem\src\operations.cpp">
-      <Filter>Library Files\Boost Filesystem\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\boost\libs\filesystem\src\path.cpp">
-      <Filter>Library Files\Boost Filesystem\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\boost\libs\filesystem\src\path_traits.cpp">
-      <Filter>Library Files\Boost Filesystem\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\boost\libs\filesystem\src\portability.cpp">
-      <Filter>Library Files\Boost Filesystem\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\boost\libs\filesystem\src\unique_path.cpp">
-      <Filter>Library Files\Boost Filesystem\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\boost\libs\filesystem\src\utf8_codecvt_facet.cpp">
-      <Filter>Library Files\Boost Filesystem\Source</Filter>
-    </ClCompile>
-    <ClCompile Include="..\lib\boost\libs\filesystem\src\windows_file_codecvt.cpp">
-      <Filter>Library Files\Boost Filesystem\Source</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Lib\boost\boost\filesystem\config.hpp">
-      <Filter>Library Files\Boost Filesystem\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Lib\boost\boost\filesystem\convenience.hpp">
-      <Filter>Library Files\Boost Filesystem\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Lib\boost\boost\filesystem\exception.hpp">
-      <Filter>Library Files\Boost Filesystem\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Lib\boost\boost\filesystem\fstream.hpp">
-      <Filter>Library Files\Boost Filesystem\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Lib\boost\boost\filesystem\operations.hpp">
-      <Filter>Library Files\Boost Filesystem\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Lib\boost\boost\filesystem\path.hpp">
-      <Filter>Library Files\Boost Filesystem\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\opSTL\opArray.h">
-      <Filter>Library Files\opstl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\opSTL\opDeque.h">
-      <Filter>Library Files\opstl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\opSTL\opHash.h">
-      <Filter>Library Files\opstl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\opSTL\opInterfaces.h">
-      <Filter>Library Files\opstl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\opSTL\opList.h">
-      <Filter>Library Files\opstl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\opSTL\opMap.h">
-      <Filter>Library Files\opstl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\opSTL\opSet.h">
-      <Filter>Library Files\opstl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\opSTL\opstl.h">
-      <Filter>Library Files\opstl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\opSTL\opstlcommon.h">
-      <Filter>Library Files\opstl</Filter>
-    </ClInclude>
-    <ClInclude Include="..\opSTL\opString.h">
-      <Filter>Library Files\opstl</Filter>
-    </ClInclude>
     <ClInclude Include="..\Lib\md5\md5.h">
       <Filter>Library Files\md5</Filter>
     </ClInclude>
@@ -428,30 +341,6 @@
     <ClInclude Include="Inc\Walkers.h">
       <Filter>Header Files\opC++</Filter>
     </ClInclude>
-    <ClInclude Include="..\lib\boost\libs\filesystem\src\atomic_ref.hpp">
-      <Filter>Library Files\Boost Filesystem\Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\boost\libs\filesystem\src\atomic_tools.hpp">
-      <Filter>Library Files\Boost Filesystem\Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\boost\libs\filesystem\src\error_handling.hpp">
-      <Filter>Library Files\Boost Filesystem\Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\boost\libs\filesystem\src\platform_config.hpp">
-      <Filter>Library Files\Boost Filesystem\Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\boost\libs\filesystem\src\posix_tools.hpp">
-      <Filter>Library Files\Boost Filesystem\Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\boost\libs\filesystem\src\private_config.hpp">
-      <Filter>Library Files\Boost Filesystem\Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\boost\libs\filesystem\src\windows_file_codecvt.hpp">
-      <Filter>Library Files\Boost Filesystem\Source</Filter>
-    </ClInclude>
-    <ClInclude Include="..\lib\boost\libs\filesystem\src\windows_tools.hpp">
-      <Filter>Library Files\Boost Filesystem\Source</Filter>
-    </ClInclude>
     <ClInclude Include="Inc\ContextInlines.h">
       <Filter>Header Files\opC++</Filter>
     </ClInclude>
@@ -472,6 +361,39 @@
     </ClInclude>
     <ClInclude Include="Inc\ModifierSupport.h">
       <Filter>Header Files\opC++</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\opstl\opArray.h">
+      <Filter>Library Files\opstl</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\opstl\opDeque.h">
+      <Filter>Library Files\opstl</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\opstl\opHash.h">
+      <Filter>Library Files\opstl</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\opstl\opInterfaces.h">
+      <Filter>Library Files\opstl</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\opstl\opList.h">
+      <Filter>Library Files\opstl</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\opstl\opMap.h">
+      <Filter>Library Files\opstl</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\opstl\opSet.h">
+      <Filter>Library Files\opstl</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\opstl\opstl.h">
+      <Filter>Library Files\opstl</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\opstl\opstlcommon.h">
+      <Filter>Library Files\opstl</Filter>
+    </ClInclude>
+    <ClInclude Include="Inc\opstl\opString.h">
+      <Filter>Library Files\opstl</Filter>
+    </ClInclude>
+    <ClInclude Include="inc\fastdelegate\FastDelegate.h">
+      <Filter>Library Files\fastdelegate</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -877,8 +877,8 @@ private:
 	//register dependencies
 	void RegisterDependency(const opString& filename);
 
-	boost::filesystem::path validpath;
-	boost::filesystem::path generatedpath;
+	std::filesystem::path validpath;
+	std::filesystem::path generatedpath;
 	
 	TerminalNode* FileName;
 	FileNode* IncludedFile;

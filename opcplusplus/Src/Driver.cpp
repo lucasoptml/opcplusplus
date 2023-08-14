@@ -148,7 +148,7 @@ bool opDriver::Convert(const opParameters &p)
 	{
 		opError::ExceptionError("Assert Failed (" + e.exceptionstring + ")");
 	}
-	catch( boost::filesystem::filesystem_error& fe )
+	catch( std::filesystem::filesystem_error& fe )
 	{
 		opString errorstr = fe.what();
 		//TODO: this may be incorrect (was fe.who() replace)
@@ -1211,7 +1211,7 @@ bool opDriver::GlobMode(const opParameters& p)
 	{
 		bResult = Globberobj.Glob(p);
 	}
-	catch( boost::filesystem::filesystem_error& fe )
+	catch( std::filesystem::filesystem_error& fe )
 	{
 		opString errorstr = fe.what();
 		//TODO: may be incorrect, was fe.what()

@@ -16,8 +16,8 @@
 
 #include <stdio.h>
 
-//#define BOOST_FILESYSTEM_NO_LIB
-#include <boost/filesystem/operations.hpp>
+#include <filesystem>
+
 
 class FileReadStream
 {
@@ -40,7 +40,7 @@ public:
 	template<class type>
 	void ReadToContainer(type& c)
 	{
-		int size = (int)boost::filesystem::file_size(name.GetString());
+		int size = (int)std::filesystem::file_size(name.GetString());
 		
 		c.Resize(size);
 		

@@ -12,7 +12,7 @@
 ///****************************************************************
 
 //include fast delegate
-#include "../../Lib/FastDelegate/FastDelegate.h"
+#include "FastDelegate.h"
 
 namespace delegates
 {
