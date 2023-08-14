@@ -48,10 +48,10 @@ private:
 	static bool ValidateDialectFiles(const opParameters& p);
 
 	// get the latest timestamp of all dialects used
-	static time_t GetDialectTimestamp(const opParameters& p);
+	static std::filesystem::file_time_type GetDialectTimestamp(const opParameters& p);
 
 	// get the latest timestamp of all generated dialects used
-	static time_t GetGeneratedDialectTimestamp(const opParameters& p);
+	static std::filesystem::file_time_type GetGeneratedDialectTimestamp(const opParameters& p);
 
 	// is an additional dependency out of date?
 	// if so update it and return true

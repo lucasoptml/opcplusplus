@@ -188,11 +188,11 @@ bool opDriver::CheckDependencies()
 		
 		if(exists(filepath))
 		{
-			opString targetfile = filepath.leaf().string();
+			opString targetfile = filepath.filename().string();
 			
 			targetfile += ".target";
 			
-			path targetpath = p.GeneratedDirectory.GetString() / targetfile.GetString();
+			path targetpath = path(p.GeneratedDirectory.GetString()) / targetfile.GetString();
 			
 			// if it doesn't exist we need to create it
 			if(!exists(targetpath))
@@ -200,20 +200,20 @@ bool opDriver::CheckDependencies()
 				create_directories(p.GeneratedDirectory.GetString());
 
 				//just create a new empty target file
-				boost::filesystem::ofstream target(targetpath);
+				std::ofstream target(targetpath);
 				target << "target file used for opC++ -dependencies";
 				bResult = true;
 				continue;
 			}
 			
 			//now check for the time
-			time_t filetime = last_write_time(filepath);
-			time_t targettime = last_write_time(targetpath);
+			auto filetime = last_write_time(filepath);
+			auto targettime = last_write_time(targetpath);
 			
 			if(filetime > targettime)
 			{
 				//just create a new empty target file
-				boost::filesystem::ofstream target(targetpath);
+				std::ofstream target(targetpath);
 				target << "target file used for opC++ -dependencies";
 				bResult = true;
 				continue;
@@ -241,7 +241,7 @@ void opDriver::FindFilesInDirectory(const opString& directory, const string& ext
 			path path_found = *itr;
 			
 			//does the extension match?
-			if(extension(path_found) == ext)
+			if(path_found.extension() == ext)
 				foundfiles.insert(path_found);
 		}
 	}
@@ -446,7 +446,7 @@ string opDriver::ToGeneratedPath(const opString& inpath)
 	adjustedstring.Replace("../","_/");
 	
 	// 3. if it's a complete network path, I need to handle the root
-	path newpath = p.GeneratedDirectory.GetString() / adjustedstring.GetString();
+	path newpath = path(p.GeneratedDirectory.GetString()) / adjustedstring.GetString();
 	
 	return newpath.string();
 }
@@ -464,7 +464,7 @@ string opDriver::GetRelativePath(const opString& targetfile, const opString& bas
 	path basepath   = basefile.GetString();
 
 	//absolute case
-	if(targetpath.is_complete())
+	if(targetpath.is_absolute())
 		return targetpath.string();
 
 	path::iterator pathend = basepath.end();
@@ -483,7 +483,7 @@ string opDriver::GetRelativePath(const opString& targetfile, const opString& bas
 
 	newpath /= targetpath;
 
-	newpath.normalize();
+	//FIXME: newpath.normalize();
 
 	return newpath.string();
 }
@@ -538,7 +538,7 @@ bool opDriver::NormalModeFile(const opParameters& p, const path& filename)
 	path oohpath  = (sfile + ".ooh").GetString();
 	path ocpppath = (sfile + ".ocpp").GetString();
 
-	path outputpath = oohpath.branch_path();
+	path outputpath = oohpath.parent_path();
 
 	if(!exists(outputpath))
 		create_directories(outputpath);
@@ -546,17 +546,17 @@ bool opDriver::NormalModeFile(const opParameters& p, const path& filename)
 	//lets check the timestamp...
 	if(!p.Force)
 	{
-		time_t ohtime = last_write_time(filename);
+		std::filesystem::file_time_type ohtime = last_write_time(filename);
 		
 		//we want to rebuild upon upgrades / new builds
-		time_t opcpptime = opPlatform::GetOpCppTimeStamp();
+		std::filesystem::file_time_type opcpptime = opPlatform::GetOpCppTimeStamp();
 		
 		if (exists(oohpath) && exists(ocpppath))
 		{
-			time_t oohtime  = last_write_time(oohpath);
-			time_t ocpptime = last_write_time(ocpppath);
+			std::filesystem::file_time_type oohtime  = last_write_time(oohpath);
+			std::filesystem::file_time_type ocpptime = last_write_time(ocpppath);
 			
-			time_t dohtime = GetGeneratedDialectTimestamp(p);
+			std::filesystem::file_time_type dohtime = GetGeneratedDialectTimestamp(p);
 			
 			FileNode tempfile;
 			tempfile.LoadDependencies(sfile + ".depend");
@@ -664,7 +664,7 @@ bool opDriver::NormalModeFile(const opParameters& p, const path& filename)
 			path xmlpath = (sfile + ".xml").GetString();
 
 			// open the output files for the generated code...
-			boost::filesystem::ofstream xfile(xmlpath);
+			std::ofstream xfile(xmlpath);
 
 			if(xfile.is_open())
 			{
@@ -787,10 +787,10 @@ bool opDriver::ValidateDialectFiles(const opParameters& p)
 	return true;
 }
 
-time_t opDriver::GetDialectTimestamp(const opParameters& p)
+std::filesystem::file_time_type opDriver::GetDialectTimestamp(const opParameters& p)
 {
 	//find the maximum timestamp on the dialects (input dialects, since we output every time)
-	time_t maxtime = 0;
+	std::filesystem::file_time_type maxtime; //FIXME: = 0;
 
 	for(int i = 0; i < p.Dialects.size(); i++)
 	{
@@ -807,10 +807,10 @@ time_t opDriver::GetDialectTimestamp(const opParameters& p)
 	return maxtime;
 }
 
-time_t opDriver::GetGeneratedDialectTimestamp(const opParameters& p)
+std::filesystem::file_time_type opDriver::GetGeneratedDialectTimestamp(const opParameters& p)
 {
 	//find the maximum timestamp on the dialects (input dialects, since we output every time)
-	time_t maxtime = 0;
+	std::filesystem::file_time_type maxtime;//FIXME:  = 0;
 
 	for(int i = 0; i < p.Dialects.size(); i++)
 	{
@@ -953,7 +953,7 @@ bool opDriver::DialectModeFile(const opParameters& p, const path& filename)
 	opString spath = GetOutputPath(p,filename);
 	path oohpath  = (spath + ".ooh").GetString();
 	path ocpppath  = (spath + ".ocpp").GetString();
-	path outputpath = oohpath.branch_path();
+	path outputpath = oohpath.parent_path();
 	
 	if(!exists(outputpath))
 		create_directories(outputpath);
@@ -966,9 +966,9 @@ bool opDriver::DialectModeFile(const opParameters& p, const path& filename)
 		//we want to rebuild upon upgrades / new builds
 		if (exists(oohpath) && exists(filename))
 		{
-			time_t oohtime  = last_write_time(oohpath);
-			time_t opcpptime = opPlatform::GetOpCppTimeStamp();
-			time_t dohtime = GetDialectTimestamp(p);
+			auto oohtime  = last_write_time(oohpath);
+			auto opcpptime = opPlatform::GetOpCppTimeStamp();
+			auto dohtime = GetDialectTimestamp(p);
 			
 			filenode->LoadDependencies(spath + ".depend");
 			bool bNewDepend = filenode->IsDependencyNewer(oohtime);
@@ -1051,7 +1051,7 @@ bool opDriver::DialectModeFile(const opParameters& p, const path& filename)
 				path xmlpath = (spath + ".xml").GetString();
 				
 				// open the output files for the generated code...
-				boost::filesystem::ofstream xfile(xmlpath);
+				std::ofstream xfile(xmlpath);
 				
 				if(xfile.is_open())
 				{
@@ -1171,11 +1171,11 @@ bool opDriver::CleanMode(const opParameters& p)
 	{
 		opString filestring = p.Depend[i];
 		path     filepath   = filestring.GetString();
-		opString targetfile = filepath.leaf().string();
+		opString targetfile = filepath.filename().string();
 
 		targetfile += ".target";
 
-		path targetpath = p.GeneratedDirectory.GetString() / targetfile.GetString();
+		path targetpath = path(p.GeneratedDirectory.GetString()) / targetfile.GetString();
 
 		if (exists(targetpath))
 			remove(targetpath);
@@ -1246,7 +1246,7 @@ bool opDriver::CodeCurrent()
 	opSet<path>::iterator it  = OhFiles.begin();
 	opSet<path>::iterator end = OhFiles.end();
 
-	time_t opcpptime = opPlatform::GetOpCppTimeStamp();
+	auto opcpptime = opPlatform::GetOpCppTimeStamp();
 
 	while( it != end )
 	{
@@ -1264,9 +1264,9 @@ bool opDriver::CodeCurrent()
 		if(!exists(ocppfilepath))
 			return false;
 		
-		time_t ohtime  = last_write_time(ohfilepath);
-		time_t oohtime  = last_write_time(oohfilepath);
-		time_t ocpptime = last_write_time(ocppfilepath);
+		auto ohtime  = last_write_time(ohfilepath);
+		auto oohtime  = last_write_time(oohfilepath);
+		auto ocpptime = last_write_time(ocppfilepath);
 		
 		if(ohtime > oohtime
 		|| ohtime > ocpptime
@@ -1294,7 +1294,7 @@ bool opDriver::DialectsCurrent()
 	opSet<path>::iterator it  = DohFiles.begin();
 	opSet<path>::iterator end = DohFiles.end();
 
-	time_t opcpptime = opPlatform::GetOpCppTimeStamp();
+	auto opcpptime = opPlatform::GetOpCppTimeStamp();
 
 	while( it != end )
 	{
@@ -1312,9 +1312,9 @@ bool opDriver::DialectsCurrent()
 		if(!exists(ocppfilepath))
 			return false;
 		
-		time_t dohtime  = last_write_time(dohfilepath);
-		time_t oohtime  = last_write_time(oohfilepath);
-		time_t ocpptime = last_write_time(ocppfilepath);
+		auto dohtime  = last_write_time(dohfilepath);
+		auto oohtime  = last_write_time(oohfilepath);
+		auto ocpptime = last_write_time(ocppfilepath);
 		
 		if(dohtime > oohtime
 		|| dohtime > ocpptime

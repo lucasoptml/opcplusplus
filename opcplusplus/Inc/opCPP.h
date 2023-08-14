@@ -26,12 +26,16 @@
 #include "opstl.h"
 
 // boost
-#include "boost/filesystem/path.hpp"
-#include "boost/filesystem/operations.hpp"
-#include "boost/filesystem/exception.hpp"
-#include "boost/filesystem/convenience.hpp"
-#include "boost/filesystem/fstream.hpp"
-using boost::filesystem::path;
+//#include "boost/filesystem/path.hpp"
+//#include "boost/filesystem/operations.hpp"
+//#include "boost/filesystem/exception.hpp"
+//#include "boost/filesystem/convenience.hpp"
+//#include "boost/filesystem/fstream.hpp"
+//using boost::filesystem::path;
+
+//filesystem
+#include <filesystem>
+using filesystem::path;
 
 // md5 stuff..
 #include "opmd5.h"

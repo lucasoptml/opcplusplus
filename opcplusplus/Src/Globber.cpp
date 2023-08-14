@@ -111,7 +111,7 @@ bool Globber::Glob(const opParameters& p)
 				//found a valid oh file!
 				if(exists(ohpath))
 				{
-					if( opString(ohpath.leaf().string()).Right('.') == extension)
+					if( opString(ohpath.filename().string()).Right('.') == extension)
 						validohfiles.push_back(ohfileinfo(ohpath,oohpath,ocpppath));
 				}
 			}
@@ -170,14 +170,14 @@ void Globber::UpdateIndex(const vector<ohfileinfo>& files, const path& indexpath
 	bool bNewer = false;
 	if(!bForce)
 	{
-		time_t indextime = last_write_time(indexpath);
-		time_t opcpptime = opPlatform::GetOpCppTimeStamp();
+		auto indextime = last_write_time(indexpath);
+		auto opcpptime = opPlatform::GetOpCppTimeStamp();
 
 		for(size_t i = 0; i < files.size(); i++)
 		{
-			time_t ohtime = last_write_time(files[i].ohfilepath);
+			auto ohtime = last_write_time(files[i].ohfilepath);
 			
-			time_t generatedtime = bheader? 
+			auto generatedtime = bheader? 
 								   last_write_time(files[i].oohfilepath):
 								   last_write_time(files[i].ocppfilepath);
 
@@ -420,9 +420,9 @@ void Globber::FindFilesInDirectoryRecursive(const path& directory, const opStrin
 		{
 			//get the path opstring..
 			path path_found = *itr;
-
+			
 			//does the extension match?
-			if(extension(path_found) == ext)
+			if(path_found.extension() == ext.GetString())
 				foundfiles.insert(path_found);
 		}
 	}}

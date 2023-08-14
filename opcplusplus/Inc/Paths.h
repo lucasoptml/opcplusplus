@@ -16,7 +16,8 @@
 
 #pragma once
 
-using namespace boost::filesystem;
+//using namespace boost::filesystem;
+using namespace filesystem;
 
 inline bool paths_match(const path& a, const path& b)
 {
@@ -38,7 +39,7 @@ inline bool paths_match(const path& a, const path& b)
 
 inline path to_relative_path(path p, path basepath)
 {
-	if(p.is_complete())
+	if(p.is_absolute())
 	{
 		//we need to convert this path, since its complete
 		path workingpath = basepath;
@@ -93,7 +94,7 @@ inline path to_relative_path(path p, path basepath)
 
 inline path to_relative_path(path p)
 {
-	return to_relative_path(p,boost::filesystem::initial_path());
+	return to_relative_path(p,std::filesystem::current_path());
 
 }
 

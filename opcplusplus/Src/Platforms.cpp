@@ -40,9 +40,9 @@ opString opPlatform::GetOpCppDirectory()
 }
 
 // Returns the timestamp on the executable.
-time_t opPlatform::GetOpCppTimeStamp()
+std::filesystem::file_time_type opPlatform::GetOpCppTimeStamp()
 {
-	boost::filesystem::path opcpppath = GetOpCppPath().GetString();	
+	std::filesystem::path opcpppath = GetOpCppPath().GetString();	
 
 	return last_write_time(opcpppath);
 }

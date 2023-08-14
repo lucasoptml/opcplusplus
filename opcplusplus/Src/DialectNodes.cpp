@@ -662,7 +662,7 @@ bool CriteriaBodyNode::ValidateOperand(opNode* operand, DialectExpressionMap* ma
 			
 			pattern = pattern.Substring(1,pattern.Length()-1);
 			
-			regex::Match("",pattern,valuemod);
+			opregex::Match("",pattern,valuemod);
 			
 			return true;
 		}
@@ -757,7 +757,7 @@ bool CriteriaBodyNode::EvaluateOperand(opNode* operand, ModifierSupportBase* sta
 		
 		pattern = pattern.Substring(1,pattern.Length()-1);
 		
-		return regex::Match(modifiervalue,pattern,valuemod);
+		return opregex::Match(modifiervalue,pattern,valuemod);
 	}
 	else if(CriteriaGroupNode* group = node_cast<CriteriaGroupNode>(operand))
 	{
@@ -855,7 +855,7 @@ void ModifierNodeBase::Validate()
 
 		pattern = pattern.Substring(1,pattern.Length()-1);
 
-		regex::Match("",pattern,this);
+		opregex::Match("",pattern,this);
 	}
 }
 

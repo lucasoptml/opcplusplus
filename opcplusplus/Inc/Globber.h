@@ -11,7 +11,7 @@
 /// Globbing.
 ///****************************************************************
 
-using boost::filesystem::path;
+using filesystem::path;
 
 class Globber
 {
@@ -34,7 +34,7 @@ private:
 			ohfilepath(inohfilepath),
 			oohfilepath(inoohfilepath),
 			ocppfilepath(inocppfilepath),
-			ohfilename(inohfilepath.leaf().string())
+			ohfilename(inohfilepath.filename().string())
 
 		{
 			//ohfilepath = inohfilepath;

@@ -110,7 +110,7 @@ opString OPIncludeNode::GetFullFileString()
 	//attempt to use the current file path
 	path currentpath = GetFile()->GetInputName().GetString();
 	currentpath = FindIncludedFile(currentpath);
-	currentpath = currentpath.branch_path();
+	currentpath = currentpath.parent_path();
 
 	path currentcombined = currentpath / filepath;
 	if(exists(currentcombined))
@@ -269,7 +269,7 @@ bool FileNode::LoadDependencies(const opString& filepath)
 	return false;
 }
 
-bool FileNode::IsDependencyNewer(time_t timestamp)
+bool FileNode::IsDependencyNewer(std::filesystem::file_time_type timestamp)
 {
 	//if we find a newer one, return true
 	opSet<opString>::iterator it  = Dependencies.begin();
@@ -283,7 +283,7 @@ bool FileNode::IsDependencyNewer(time_t timestamp)
 		path dependpath = filepath.GetString();
 		if(exists(dependpath))
 		{
-			time_t dependtime = last_write_time(dependpath);
+			auto dependtime = last_write_time(dependpath);
 			
 			if(dependtime > timestamp)
 				return true;

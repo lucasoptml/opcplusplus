@@ -398,8 +398,8 @@ void opError::Add(FileNode* file, int line, const opString& error)
 
 	//NOTE: using absolute paths for errors now.
 	path filepath = file->GetInputName().GetString();
-	filepath = initial_path() / filepath;
-	filepath.normalize();
+	filepath = std::filesystem::current_path() / filepath;
+	//FIXME: filepath.normalize();
 
 	opString nativefile = filepath.string();
 

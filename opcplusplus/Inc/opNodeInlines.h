@@ -3392,17 +3392,17 @@ inline T* FileNode::Load(const opString& file, opScanner::ScanMode scanmode, boo
 	
 	//fix up the inputname
 	path filepath = file.GetString();
-	filepath.normalize();
+	//FIXME: filepath.normalize();
 	rootNode->InputName = to_relative_path(filepath).string();
 	
 	path inputpath = rootNode->InputName.GetString();
-	rootNode->bAbsolutePath = inputpath.is_complete();
+	rootNode->bAbsolutePath = inputpath.is_absolute();
 	
 	//TODO: probably not correct - this is really ugly too.
 	if(!rootNode->bAbsolutePath)
 	{
-		path abspath = initial_path() / rootNode->InputName.GetString();
-		abspath.normalize();
+		path abspath = std::filesystem::current_path() / rootNode->InputName.GetString();
+		//FIXME: abspath.normalize();
 
 		rootNode->AbsoluteFileName = abspath.string();
 	}

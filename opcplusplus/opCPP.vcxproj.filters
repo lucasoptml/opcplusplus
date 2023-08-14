@@ -213,9 +213,6 @@
     <ClCompile Include="..\lib\boost\libs\filesystem\src\windows_file_codecvt.cpp">
       <Filter>Library Files\Boost Filesystem\Source</Filter>
     </ClCompile>
-    <ClCompile Include="..\lib\boost\libs\system\src\error_code.cpp">
-      <Filter>Library Files\Boost\System</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Lib\boost\boost\filesystem\config.hpp">
@@ -235,54 +232,6 @@
     </ClInclude>
     <ClInclude Include="..\Lib\boost\boost\filesystem\path.hpp">
       <Filter>Library Files\Boost Filesystem\Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Lib\boost\boost\xpressive\basic_regex.hpp">
-      <Filter>Library Files\Boost</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Lib\boost\boost\xpressive\match_results.hpp">
-      <Filter>Library Files\Boost</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Lib\boost\boost\xpressive\regex_algorithms.hpp">
-      <Filter>Library Files\Boost</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Lib\boost\boost\xpressive\regex_compiler.hpp">
-      <Filter>Library Files\Boost</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Lib\boost\boost\xpressive\regex_constants.hpp">
-      <Filter>Library Files\Boost</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Lib\boost\boost\xpressive\regex_error.hpp">
-      <Filter>Library Files\Boost</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Lib\boost\boost\xpressive\regex_iterator.hpp">
-      <Filter>Library Files\Boost</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Lib\boost\boost\xpressive\regex_primitives.hpp">
-      <Filter>Library Files\Boost</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Lib\boost\boost\xpressive\regex_token_iterator.hpp">
-      <Filter>Library Files\Boost</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Lib\boost\boost\xpressive\regex_traits.hpp">
-      <Filter>Library Files\Boost</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Lib\boost\boost\xpressive\sub_match.hpp">
-      <Filter>Library Files\Boost</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Lib\boost\boost\xpressive\xpressive.hpp">
-      <Filter>Library Files\Boost</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Lib\boost\boost\xpressive\xpressive_dynamic.hpp">
-      <Filter>Library Files\Boost</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Lib\boost\boost\xpressive\xpressive_fwd.hpp">
-      <Filter>Library Files\Boost</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Lib\boost\boost\xpressive\xpressive_static.hpp">
-      <Filter>Library Files\Boost</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Lib\boost\boost\xpressive\xpressive_typeof.hpp">
-      <Filter>Library Files\Boost</Filter>
     </ClInclude>
     <ClInclude Include="..\opSTL\opArray.h">
       <Filter>Library Files\opstl</Filter>

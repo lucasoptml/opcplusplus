@@ -121,7 +121,6 @@
     <ClCompile Include="..\lib\boost\libs\filesystem\src\unique_path.cpp" />
     <ClCompile Include="..\lib\boost\libs\filesystem\src\utf8_codecvt_facet.cpp" />
     <ClCompile Include="..\lib\boost\libs\filesystem\src\windows_file_codecvt.cpp" />
-    <ClCompile Include="..\lib\boost\libs\system\src\error_code.cpp" />
     <ClCompile Include="..\Lib\md5\md5.c" />
     <ClCompile Include="Src\Beta.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -281,22 +280,6 @@
     <ClInclude Include="..\Lib\boost\boost\filesystem\fstream.hpp" />
     <ClInclude Include="..\Lib\boost\boost\filesystem\operations.hpp" />
     <ClInclude Include="..\Lib\boost\boost\filesystem\path.hpp" />
-    <ClInclude Include="..\Lib\boost\boost\xpressive\basic_regex.hpp" />
-    <ClInclude Include="..\Lib\boost\boost\xpressive\match_results.hpp" />
-    <ClInclude Include="..\Lib\boost\boost\xpressive\regex_algorithms.hpp" />
-    <ClInclude Include="..\Lib\boost\boost\xpressive\regex_compiler.hpp" />
-    <ClInclude Include="..\Lib\boost\boost\xpressive\regex_constants.hpp" />
-    <ClInclude Include="..\Lib\boost\boost\xpressive\regex_error.hpp" />
-    <ClInclude Include="..\Lib\boost\boost\xpressive\regex_iterator.hpp" />
-    <ClInclude Include="..\Lib\boost\boost\xpressive\regex_primitives.hpp" />
-    <ClInclude Include="..\Lib\boost\boost\xpressive\regex_token_iterator.hpp" />
-    <ClInclude Include="..\Lib\boost\boost\xpressive\regex_traits.hpp" />
-    <ClInclude Include="..\Lib\boost\boost\xpressive\sub_match.hpp" />
-    <ClInclude Include="..\Lib\boost\boost\xpressive\xpressive.hpp" />
-    <ClInclude Include="..\Lib\boost\boost\xpressive\xpressive_dynamic.hpp" />
-    <ClInclude Include="..\Lib\boost\boost\xpressive\xpressive_fwd.hpp" />
-    <ClInclude Include="..\Lib\boost\boost\xpressive\xpressive_static.hpp" />
-    <ClInclude Include="..\Lib\boost\boost\xpressive\xpressive_typeof.hpp" />
     <ClInclude Include="..\lib\boost\libs\filesystem\src\atomic_ref.hpp" />
     <ClInclude Include="..\lib\boost\libs\filesystem\src\atomic_tools.hpp" />
     <ClInclude Include="..\lib\boost\libs\filesystem\src\error_handling.hpp" />

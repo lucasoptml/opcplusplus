@@ -157,7 +157,7 @@ void ModifiersNode::CheckDataModifiers()
 				pattern = pattern.Substring(1,pattern.Size()-1);
 
 				//check regex pattern!
-				if(!regex::Match(stringvalue,pattern,modifier))
+				if(!opregex::Match(stringvalue,pattern,modifier))
 				{
 					//GenericError("Invalid data modifier value, pattern mismatch (" + pattern + ")");
 					opError::InvalidValueError(newnode,modifier);
@@ -216,7 +216,7 @@ void ModifiersNode::CheckFunctionModifiers()
 				pattern = pattern.Substring(1,pattern.Size()-1);
 
 				//check regex pattern!
-				if(!regex::Match(stringvalue,pattern,modifier))
+				if(!opregex::Match(stringvalue,pattern,modifier))
 				{
 					opError::InvalidValueError(newnode,modifier);
 				}

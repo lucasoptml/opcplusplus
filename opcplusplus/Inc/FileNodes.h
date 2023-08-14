@@ -131,7 +131,7 @@ public:
 	void SaveDependencies(const opString& filepath);
 	bool LoadDependencies(const opString& filepath);
 
-	bool IsDependencyNewer(time_t timestamp);
+	bool IsDependencyNewer(std::filesystem::file_time_type timestamp);
 
 private:
 	opSet<opString> Dependencies;
