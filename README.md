@@ -1,5 +1,8 @@
 # opcplusplus
 
+<img width="1024" height="1024" alt="opcplusplus-github-logo" src="https://github.com/user-attachments/assets/e219d10c-30c1-4edf-b971-44773ad636b3" />
+
+
 compiler for c++ headers with custom attributes/modifiers via language extension dialects: outputs generated src/h, xml definitions.
 
 default extension dialect generates mirrored reflection structure, fast dynamic casts, stack memory only, no heap allocations.
