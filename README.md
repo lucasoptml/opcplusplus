@@ -1,7 +1,7 @@
 # opcplusplus
 <p style="text-align: center;">
   
-<img width="1024" height="744" alt="opcplusplus-github-logo2" src="https://github.com/user-attachments/assets/00d4bfe3-9c19-4309-a891-0ee968dcc7c0" />
+<img width="512" alt="opcplusplus-github-logo2" src="https://github.com/user-attachments/assets/00d4bfe3-9c19-4309-a891-0ee968dcc7c0" />
 
 </p>
 
